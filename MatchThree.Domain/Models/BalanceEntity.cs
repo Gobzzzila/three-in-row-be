@@ -1,0 +1,11 @@
+﻿using MatchThree.Shared.Enums;
+
+namespace MatchThree.Domain.Models;
+
+public class BalanceEntity
+{
+    public long Id { get; set; }
+    public uint Balance { get; set; }
+    public LeagueTypes League { get; set; }
+    public ushort TopSpot { get; set; }
+}
