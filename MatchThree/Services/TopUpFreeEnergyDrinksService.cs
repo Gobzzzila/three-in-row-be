@@ -40,7 +40,7 @@ public class TopUpFreeEnergyDrinksService : IHostedService, IDisposable
     {
         try
         {
-            //test
+            
         }
         catch (Exception)
         {
