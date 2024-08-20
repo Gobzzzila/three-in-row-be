@@ -35,7 +35,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
             if (value is 0 or 1)
                 continue;
 
-            await UpdateLeagueLeaderboard((LeagueTypes)value);
+            await UpdateLeaderboardByLeague((LeagueTypes)value);
         }
         
         _timer = new Timer(async state => await UpdateLeaderboard(state),
@@ -49,7 +49,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
         try
         {
             var currentLeague = LeagueConfiguration.GetNextLeagueLooped(_lastProcessedLeague);
-            await UpdateLeagueLeaderboard(currentLeague);
+            await UpdateLeaderboardByLeague(currentLeague);
             _lastProcessedLeague = currentLeague;
         }
         catch (Exception)
@@ -58,7 +58,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
         }
     }
 
-    private async Task UpdateLeagueLeaderboard(LeagueTypes currentLeague)
+    private async Task UpdateLeaderboardByLeague(LeagueTypes currentLeague)
     {
         await _deleteLeaderboardMemberService.DeleteByLeagueTypeAsync(currentLeague);
         await _createLeaderboardMemberService.CreateByLeagueTypeAsync(currentLeague);

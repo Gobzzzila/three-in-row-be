@@ -5,11 +5,11 @@ namespace MatchThree.Domain.Models.Configuration;
 
 public static class LeagueConfiguration
 {
-    private static readonly Dictionary<LeagueTypes, LeagueParameters> LeagueRanges;
+    private static readonly Dictionary<LeagueTypes, LeagueParameters> LeaguesParams;
 
     static LeagueConfiguration()
     {
-        LeagueRanges = new Dictionary<LeagueTypes, LeagueParameters>
+        LeaguesParams = new Dictionary<LeagueTypes, LeagueParameters>
         {
             {
                 LeagueTypes.Shrimp, new LeagueParameters
@@ -85,38 +85,30 @@ public static class LeagueConfiguration
         };
     }
 
-    public static LeagueTypes CalculateLeague(ulong balance)
+    public static LeagueTypes CalculateLeague(ulong overallBalance)
     {
-        return (from leagueRange in LeagueRanges
-            where balance >= leagueRange.Value.MinValue && balance < leagueRange.Value.MaxValue
+        return (from leagueRange in LeaguesParams
+            where overallBalance >= leagueRange.Value.MinValue && overallBalance < leagueRange.Value.MaxValue
             select leagueRange.Key).FirstOrDefault();
     }
     
-    public static (bool isUpped, uint rewardForReferrer) IsLeagueUpped (ulong balance, uint amountToAdd)
+    public static (bool isUpped, uint rewardForReferrer) IsLeagueUpped (ulong overallBalance, uint amountToAdd)
     {
-        var oldLeague = CalculateLeague(balance);
-        var newLeague = CalculateLeague(balance + amountToAdd);
+        var oldLeague = CalculateLeague(overallBalance);
+        var newLeague = CalculateLeague(overallBalance + amountToAdd);
 
-        return (oldLeague < newLeague, LeagueRanges[newLeague].RewardForReferrer);
+        return (oldLeague < newLeague, LeaguesParams[newLeague].RewardForReferrer);
     }
     
     public static LeagueParameters GetParamsByType(LeagueTypes league)
     {
-        return LeagueRanges[league];
+        return LeaguesParams[league];
     }
     
     public static LeagueTypes GetNextLeagueLooped(LeagueTypes league)
     {
-        return LeagueRanges.TryGetValue(league, out var leagueParams)
+        return LeaguesParams.TryGetValue(league, out var leagueParams)
             ? leagueParams.NextLeague ?? LeagueTypes.Shrimp
             : LeagueTypes.Shrimp;
-    }
-    
-    public record LeagueParameters
-    {
-        public ulong MinValue { get; init; }
-        public ulong MaxValue { get; init; }
-        public uint RewardForReferrer { get; init; }
-        public LeagueTypes? NextLeague { get; init; }
     }
 }

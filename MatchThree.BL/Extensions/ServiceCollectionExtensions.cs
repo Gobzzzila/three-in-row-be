@@ -1,10 +1,12 @@
 ﻿using MatchThree.BL.Services;
 using MatchThree.BL.Services.Balance;
+using MatchThree.BL.Services.Energy;
 using MatchThree.BL.Services.LeaderboardMember;
 using MatchThree.BL.Services.Referral;
 using MatchThree.BL.Services.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
+using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
@@ -39,6 +41,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICreateLeaderboardMemberService, CreateLeaderboardMemberService>();
         services.AddScoped<IReadLeaderboardMemberService, ReadLeaderboardMemberService>();
         
+        //Energy
+        services.AddScoped<ICreateEnergyService, CreateEnergyService>();
+        services.AddScoped<IEnergyDrinkRefillsService, EnergyDrinkRefillsService>();
 
         return services;
     }

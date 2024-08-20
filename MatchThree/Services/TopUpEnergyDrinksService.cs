@@ -1,25 +1,26 @@
 ﻿using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Interfaces.Energy;
 
 namespace MatchThree.API.Services;
 
-public class TopUpFreeEnergyDrinksService : IHostedService, IDisposable
+public class TopUpEnergyDrinksService : IHostedService, IDisposable
 {
     private Timer? _timer;
     private bool _disposed;
     
     private readonly IServiceScope _scope;
-    // private readonly IDeleteLeaderboardMemberService _deleteLeaderboardMemberService;
+    private readonly IEnergyDrinkRefillsService _energyDrinkRefillsService;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly ILogger<CalculateLeaderboardService> _logger;
     
-    public TopUpFreeEnergyDrinksService(IServiceProvider serviceProvider,
+    public TopUpEnergyDrinksService(IServiceProvider serviceProvider,
         ILogger<CalculateLeaderboardService> logger)
     {
         _logger = logger;
         _scope = serviceProvider.CreateScope();
         var provider = _scope.ServiceProvider;
         _dateTimeProvider = provider.GetRequiredService<IDateTimeProvider>();
-        // _deleteLeaderboardMemberService = provider.GetRequiredService<IDeleteLeaderboardMemberService>();
+        _energyDrinkRefillsService = provider.GetRequiredService<IEnergyDrinkRefillsService>();
     }
     
     public Task StartAsync(CancellationToken cancellationToken)
@@ -40,7 +41,8 @@ public class TopUpFreeEnergyDrinksService : IHostedService, IDisposable
     {
         try
         {
-            
+            await _energyDrinkRefillsService.RefillFreeEnergyDrinks();
+            await _energyDrinkRefillsService.RefillPurchasableEnergyDrinks();
         }
         catch (Exception)
         {
@@ -74,7 +76,7 @@ public class TopUpFreeEnergyDrinksService : IHostedService, IDisposable
         _disposed = true;
     }
 
-    ~TopUpFreeEnergyDrinksService()
+    ~TopUpEnergyDrinksService()
     {
         Dispose(false);
     }

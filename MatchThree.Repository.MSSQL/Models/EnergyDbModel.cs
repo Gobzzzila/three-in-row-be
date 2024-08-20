@@ -7,11 +7,11 @@ namespace MatchThree.Repository.MSSQL.Models;
 [Table("Energies")]
 public class EnergyDbModel : DbModel
 {
-    public ushort CurrentReserve { get; set; }
+    public int CurrentReserve { get; set; }
     public EnergyReserveLevels MaxReserve { get; set; }
     public EnergyRecoveryLevels RecoveryLevel { get; set; }
-    public ushort AvailableEnergyDrinkAmount { get; set; }
-    public ushort PurchasableEnergyDrinkAmount { get; set; }
+    public int AvailableEnergyDrinkAmount { get; set; }
+    public int PurchasableEnergyDrinkAmount { get; set; }
     public DateTime? LastRecoveryStartTime { get; set; }
     public UserDbModel? User { get; set; }
 }

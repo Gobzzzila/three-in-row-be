@@ -22,7 +22,7 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         return mapper.Map<IReadOnlyCollection<LeaderboardMemberEntity>>(dbModels);
     }
     
-    public async Task<ushort> GetTopSpotByUserId(long userId)
+    public async Task<int> GetTopSpotByUserId(long userId)
     {
         var dbModel = await context.Set<LeaderboardMemberDbModel>().AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == userId);

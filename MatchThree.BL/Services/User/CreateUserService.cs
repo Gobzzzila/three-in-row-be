@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
+using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
@@ -14,6 +15,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     IMapper mapper, 
     ICreateReferralService createReferralService, 
     ICreateBalanceService createBalanceService,
+    ICreateEnergyService createEnergyService,
     IDateTimeProvider dateTimeProvider) 
     : ICreateUserService
 {
@@ -35,6 +37,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
         }
         
         await createBalanceService.CreateAsync(result.Id, initBalance);
+        await createEnergyService.CreateAsync(result.Id);
         
         return result;
     }

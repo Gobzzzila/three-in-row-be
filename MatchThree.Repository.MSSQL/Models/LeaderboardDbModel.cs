@@ -8,7 +8,7 @@ namespace MatchThree.Repository.MSSQL.Models;
 public class LeaderboardMemberDbModel : DbModel
 {
     public LeagueTypes League { get; set; }
-    public ushort TopSpot { get; set; }
+    public int TopSpot { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public ulong OverallBalance { get; set; }
 }

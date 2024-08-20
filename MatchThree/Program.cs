@@ -27,7 +27,7 @@ namespace MatchThree.API
                     options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext))));
 
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
-                builder.Services.AddHostedService<TopUpFreeEnergyDrinksService>();
+                builder.Services.AddHostedService<TopUpEnergyDrinksService>();
                 builder.Services.AddDomainServices();
 
                 var autoMapperProfileAssemblies =

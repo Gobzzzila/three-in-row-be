@@ -35,7 +35,7 @@ public class CreateLeaderboardMemberService(MatchThreeDbContext context)
         var i = 1;
         foreach (var dbModel in dbModelsToAdd)
         {
-            dbModel.TopSpot = (ushort)i;
+            dbModel.TopSpot = i;
             i++;
         }
         
