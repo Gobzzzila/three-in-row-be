@@ -16,7 +16,7 @@ namespace MatchThree.BL.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddDomainServices(this IServiceCollection services)
+    public static void AddDomainServices(this IServiceCollection services)
     {
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         services.AddScoped<ITransactionService, TransactionService>();
@@ -44,7 +44,7 @@ public static class ServiceCollectionExtensions
         //Energy
         services.AddScoped<ICreateEnergyService, CreateEnergyService>();
         services.AddScoped<IEnergyDrinkRefillsService, EnergyDrinkRefillsService>();
-
-        return services;
+        services.AddScoped<IReadEnergyService, ReadEnergyService>();
+        services.AddScoped<ISynchronizationEnergyService, SynchronizationEnergyService>();
     }
 }

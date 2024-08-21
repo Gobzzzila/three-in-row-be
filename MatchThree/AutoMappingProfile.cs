@@ -14,24 +14,17 @@ public class AutoMappingProfile : Profile
 
     private void DtoToEntityConfigurations()
     {
-        UserMapping();
-        BalanceMapping();
-        LeaderboardMemberMapping();
-    }
-
-    private void UserMapping()
-    {
+        //UserMapping
         CreateMap<UserCreateDto, UserEntity>();
         CreateMap<UserDto, UserEntity>().ReverseMap();
-    }
-    
-    private void BalanceMapping()
-    {
+        
+        //BalanceMapping
         CreateMap<BalanceEntity, BalanceDto>();
-    }
-    
-    private void LeaderboardMemberMapping()
-    {
+
+        //LeaderboardMemberMapping
         CreateMap<LeaderboardMemberEntity, LeaderboardMemberDto>();
+        
+        //Energy
+        CreateMap<EnergyEntity, EnergyDto>();
     }
 }

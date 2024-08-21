@@ -60,4 +60,9 @@ public static class EnergyRecoveryConfiguration
     {
         return EnergyRecoveryLevels.Level1;
     }
+    
+    public static TimeSpan GetRecoveryTime(EnergyRecoveryLevels energyRecoveryLevel)
+    {
+        return EnergyRecoveryParams[energyRecoveryLevel].RecoveryTime;
+    }
 }

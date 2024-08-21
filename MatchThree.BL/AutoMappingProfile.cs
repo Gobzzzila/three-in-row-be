@@ -24,5 +24,14 @@ public class AutoMappingProfile : Profile
         
         //LeaderboardMember
         CreateMap<LeaderboardMemberDbModel, LeaderboardMemberEntity>();
+        
+        //Energy 
+        CreateMap<EnergyDbModel, EnergyEntity>()
+            .ForMember(x => x.MaxReserve, 
+                o => o.MapFrom(s => EnergyReserveConfiguration.GetReserveMaxValue(s.MaxReserve)))
+            .ForMember(x => x.RecoveryTime,
+                o => o.MapFrom(s => EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel)))
+            .ForMember(x => x.NearbyEnergyRecoveryAt,
+                o => o.MapFrom(s => s.LastRecoveryStartTime + EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel)));
     }
 }

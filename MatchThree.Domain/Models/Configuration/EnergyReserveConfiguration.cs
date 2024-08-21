@@ -124,4 +124,9 @@ public static class EnergyReserveConfiguration
     {
         return (EnergyReserveLevels.Level1, EnergyReservesParams[EnergyReserveLevels.Level1].MaxValue);
     }
+    
+    public static int GetReserveMaxValue(EnergyReserveLevels energyReserveLevel)
+    {
+        return EnergyReservesParams[energyReserveLevel].MaxValue;
+    }
 }

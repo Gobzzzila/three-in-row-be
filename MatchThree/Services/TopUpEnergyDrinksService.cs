@@ -42,11 +42,19 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         try
         {
             await _energyDrinkRefillsService.RefillFreeEnergyDrinks();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Cannot top up free energy drinks, {ex}");
+        }
+        
+        try
+        {
             await _energyDrinkRefillsService.RefillPurchasableEnergyDrinks();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            _logger.LogError("Cannot top up free energy drinks");
+            _logger.LogError($"Cannot top up purchasable energy drinks, {ex}");
         }
     }
 
