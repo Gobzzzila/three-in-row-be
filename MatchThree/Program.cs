@@ -49,7 +49,8 @@ namespace MatchThree.API
                         });
                 });
 
-                builder.Services.AddExceptionHandler<DefaultExceptionHandler>();
+                builder.Services.AddExceptionHandler<NoDataFoundExceptionHandler>()
+                    .AddExceptionHandler<DefaultExceptionHandler>();
             }
 
             void Configure()
