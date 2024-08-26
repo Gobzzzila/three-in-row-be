@@ -18,7 +18,7 @@ public class SynchronizationEnergyService (IDateTimeProvider dateTimeProvider) :
             return;
         
         var recoveryTime = EnergyRecoveryConfiguration.GetRecoveryTime(dbModel.RecoveryLevel);
-        var recoveredEnergy = (int)(timePass / recoveryTime)!;
+        var recoveredEnergy = (int)(timePass / recoveryTime);
         
         if (recoveredEnergy == 0)
             return;
