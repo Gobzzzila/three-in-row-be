@@ -3,4 +3,5 @@
 public interface IUpdateEnergyService
 {
     Task UpgradeReserveAsync(long id);
+    Task UpgradeRecoveryAsync(long id);
 }

@@ -1,6 +1,6 @@
-﻿using MatchThree.Domain.Interfaces;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Energy;
-using MatchThree.Domain.Models.Configuration;
 using MatchThree.Repository.MSSQL.Models;
 
 namespace MatchThree.BL.Services.Energy;

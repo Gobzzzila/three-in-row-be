@@ -45,4 +45,10 @@ public static class EnergyConstants
     public static readonly TimeSpan Level4EnergyRecovery = TimeSpan.FromMinutes(2.5);
     public static readonly TimeSpan Level5EnergyRecovery = TimeSpan.FromMinutes(2);
     public static readonly TimeSpan Level6EnergyRecovery = TimeSpan.FromMinutes(1.75);
+    
+    public const int Level2EnergyRecoveryCost = 1_000;
+    public const int Level3EnergyRecoveryCost = 1_000;
+    public const int Level4EnergyRecoveryCost = 1_000;
+    public const int Level5EnergyRecoveryCost = 1_000;
+    public const int Level6EnergyRecoveryCost = 1_000;
 }

@@ -1,6 +1,6 @@
 ﻿using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Models.Configuration;
+namespace MatchThree.Domain.Configuration;
 
 public record LeagueParameters
 {

@@ -1,5 +1,5 @@
-﻿using MatchThree.Domain.Interfaces.Energy;
-using MatchThree.Domain.Models.Configuration;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Constants;

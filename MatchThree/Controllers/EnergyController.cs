@@ -39,4 +39,19 @@ public class EnergyController (IReadEnergyService energyReadService,
         await transactionService.Commit();
         return Results.Ok();
     }
+    
+    /// <summary>
+    /// Upgrade reserve by user identifier 
+    /// </summary>
+    [HttpPost("{id:long}/upgrade-recovery")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    public async Task<IResult> UpgradeRecovery(long id, CancellationToken cancellationToken = new())
+    {
+        await updateEnergyService.UpgradeRecoveryAsync(id);
+        await transactionService.Commit();
+        return Results.Ok();
+    }
 }

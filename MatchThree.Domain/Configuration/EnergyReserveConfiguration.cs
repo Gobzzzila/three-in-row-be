@@ -1,7 +1,7 @@
 ﻿using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Models.Configuration;
+namespace MatchThree.Domain.Configuration;
 
 public static class EnergyReserveConfiguration
 {
@@ -17,9 +17,9 @@ public static class EnergyReserveConfiguration
         return EnergyReservesParams[energyReserveLevel].MaxReserve;
     }
     
-    public static EnergyReserveParameters GetParamsByLevel(EnergyReserveLevels league)
+    public static EnergyReserveParameters GetParamsByLevel(EnergyReserveLevels energyReserveLevel)
     {
-        return EnergyReservesParams[league];
+        return EnergyReservesParams[energyReserveLevel];
     }
     
     //ctor

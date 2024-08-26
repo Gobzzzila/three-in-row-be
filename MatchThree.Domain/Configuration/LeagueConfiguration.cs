@@ -1,7 +1,7 @@
 ﻿using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Models.Configuration;
+namespace MatchThree.Domain.Configuration;
 
 public static class LeagueConfiguration
 {

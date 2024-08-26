@@ -1,6 +1,6 @@
-﻿using MatchThree.Domain.Interfaces.Balance;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
-using MatchThree.Domain.Models.Configuration;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
@@ -29,6 +29,25 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         var newMaxReserve = EnergyReserveConfiguration.GetReserveMaxValue(reserveParams.NextLevel.Value);
         dbModel.CurrentReserve += (newMaxReserve - reserveParams.MaxReserve);
         
+        context.Set<EnergyDbModel>().Update(dbModel);
+    }
+
+    public async Task UpgradeRecoveryAsync(long id)
+    {
+        var dbModel = await context.Set<EnergyDbModel>().FindAsync(id);
+        if (dbModel is null)
+            throw new NoDataFoundException();
+        
+        var recoveryParams = EnergyRecoveryConfiguration.GetParamsByLevel(dbModel!.RecoveryLevel);
+        if (!recoveryParams.NextLevel.HasValue)
+            throw new MaxLevelReachedException();
+        
+        await updateBalanceService.SpentBalanceAsync(id, recoveryParams.NextLevelCost!.Value);
+        
+        synchronizationEnergyService.SynchronizeModel(dbModel);
+        dbModel.RecoveryLevel = recoveryParams.NextLevel.Value;
+        synchronizationEnergyService.SynchronizeModel(dbModel);
+
         context.Set<EnergyDbModel>().Update(dbModel);
     }
 }

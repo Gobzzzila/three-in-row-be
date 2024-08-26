@@ -1,6 +1,6 @@
-﻿using MatchThree.Domain.Interfaces;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
-using MatchThree.Domain.Models.Configuration;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.API.Services;

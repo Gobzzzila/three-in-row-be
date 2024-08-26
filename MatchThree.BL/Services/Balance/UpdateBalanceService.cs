@@ -1,6 +1,6 @@
-﻿using MatchThree.Domain.Interfaces.Balance;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Referral;
-using MatchThree.Domain.Models.Configuration;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
