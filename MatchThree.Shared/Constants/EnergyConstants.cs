@@ -2,9 +2,11 @@
 
 public static class EnergyConstants
 {
+    //Energy drinks
     public const int FreeEnergyDrinksPerDay = 1;
     public const int PurchasableEnergyDrinksPerDay = 3;
     
+    //Energy reserve
     public const int Level1EnergyReserve = 30;
     public const int Level2EnergyReserve = 35;
     public const int Level3EnergyReserve = 40;
@@ -20,7 +22,23 @@ public static class EnergyConstants
     public const int Level13EnergyReserve = 90;
     public const int Level14EnergyReserve = 95;
     public const int Level15EnergyReserve = 100;
+    
+    public const int Level2EnergyReserveCost = 1_000;
+    public const int Level3EnergyReserveCost = 1_000;
+    public const int Level4EnergyReserveCost = 1_000;
+    public const int Level5EnergyReserveCost = 1_000;
+    public const int Level6EnergyReserveCost = 1_000;
+    public const int Level7EnergyReserveCost = 1_000;
+    public const int Level8EnergyReserveCost = 1_000;
+    public const int Level9EnergyReserveCost = 1_000;
+    public const int Level10EnergyReserveCost = 1_000;
+    public const int Level11EnergyReserveCost = 1_000;
+    public const int Level12EnergyReserveCost = 1_000;
+    public const int Level13EnergyReserveCost = 1_000;
+    public const int Level14EnergyReserveCost = 1_000;
+    public const int Level15EnergyReserveCost = 1_000;
 
+    //Energy recovery
     public static readonly TimeSpan Level1EnergyRecovery = TimeSpan.FromMinutes(4);
     public static readonly TimeSpan Level2EnergyRecovery = TimeSpan.FromMinutes(3.5);
     public static readonly TimeSpan Level3EnergyRecovery = TimeSpan.FromMinutes(3);

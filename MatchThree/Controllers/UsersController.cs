@@ -24,7 +24,10 @@ public class UsersController(
     public async Task<IResult> Create([FromBody] UserCreateDto createDto, 
         CancellationToken cancellationToken = new())
     {
-        var createdEntity = await createUserService.CreateAsync(mapper.Map<UserEntity>(createDto), createDto.ReferralId);
+        var entity = mapper.Map<UserEntity>(createDto);
+        var createdEntity = createDto.ReferrerId.HasValue 
+            ? await createUserService.CreateAsync(entity, createDto.ReferrerId.Value)
+            : createUserService.Create(entity);
         await transactionService.Commit();
         return Results.Ok(mapper.Map<UserDto>(createdEntity));
     }

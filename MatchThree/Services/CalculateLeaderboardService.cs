@@ -30,7 +30,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
     
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        foreach (int value in Enum.GetValues(typeof(LeagueTypes))) //mb need to be refactored, cuz this method blocks app
+        foreach (int value in Enum.GetValues(typeof(LeagueTypes))) //TODO need to be refactored, cuz this method blocks app
         {
             if (value is 0 or 1)
                 continue;
@@ -60,7 +60,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
 
     private async Task UpdateLeaderboardByLeague(LeagueTypes currentLeague)
     {
-        await _deleteLeaderboardMemberService.DeleteByLeagueTypeAsync(currentLeague);
+        await _deleteLeaderboardMemberService.DeleteByLeagueTypeAsync(currentLeague); //TODO think about it, this method not part of .Commit()
         await _createLeaderboardMemberService.CreateByLeagueTypeAsync(currentLeague);
         await _transactionService.Commit();
         _transactionService.CleanChangeTracker();

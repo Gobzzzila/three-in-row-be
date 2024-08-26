@@ -2,5 +2,5 @@
 
 public interface ICreateBalanceService
 {
-    Task CreateAsync(long userId, uint initialBalance);
+    void Create(long userId, uint initialBalance);
 }

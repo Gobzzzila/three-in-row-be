@@ -18,8 +18,7 @@ public class ReadEnergyService(MatchThreeDbContext context,
         if (dbModel is null)
             throw new NoDataFoundException();
 
-        if (dbModel.LastRecoveryStartTime is not null)
-            await synchronizationEnergyService.SynchronizeEnergyInScopedContextAsync(dbModel);
+        synchronizationEnergyService.SynchronizeModel(dbModel);
         
         return mapper.Map<EnergyEntity>(dbModel);
     }

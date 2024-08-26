@@ -4,5 +4,5 @@ namespace MatchThree.Domain.Interfaces.Energy;
 
 public interface ISynchronizationEnergyService
 {
-    Task SynchronizeEnergyInScopedContextAsync(EnergyDbModel dbModel);
+    void SynchronizeModel(EnergyDbModel dbModel);
 }

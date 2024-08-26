@@ -12,7 +12,7 @@ public class CreateReferralService (MatchThreeDbContext context,
 {
     public async Task CreateAsync(long referrerId, long referralId, bool isPremium)
     {
-        await context.Set<ReferralDbModel>().AddAsync(new ReferralDbModel
+        context.Set<ReferralDbModel>().Add(new ReferralDbModel
         {
             Id = Guid.NewGuid(),
             ReferralUserId = referralId,

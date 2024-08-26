@@ -8,10 +8,10 @@ namespace MatchThree.BL.Services.Balance;
 public class CreateBalanceService (MatchThreeDbContext context)
     : ICreateBalanceService
 {
-    public async Task CreateAsync(long userId, uint initialBalance)
+    public void Create(long userId, uint initialBalance)
     {
         initialBalance += BalanceConstants.InitialBalanceValue;
-        await context.Set<BalanceDbModel>().AddAsync(new BalanceDbModel
+        context.Set<BalanceDbModel>().Add(new BalanceDbModel
         {
             Id = userId,
             Balance = initialBalance,

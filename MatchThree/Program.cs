@@ -45,11 +45,13 @@ namespace MatchThree.API
                     c.SwaggerDoc("v1",
                         new OpenApiInfo
                         {
-                            Title = "CookBook API"
+                            Title = "Match three API"
                         });
                 });
 
                 builder.Services.AddExceptionHandler<NoDataFoundExceptionHandler>()
+                    .AddExceptionHandler<NotEnoughBalanceExceptionHandler>()
+                    .AddExceptionHandler<MaxLevelReachedExceptionHandler>()
                     .AddExceptionHandler<DefaultExceptionHandler>();
             }
 

@@ -16,29 +16,40 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateReferralService createReferralService, 
     ICreateBalanceService createBalanceService,
     ICreateEnergyService createEnergyService,
-    IDateTimeProvider dateTimeProvider) 
-    : ICreateUserService
+    IDateTimeProvider dateTimeProvider) : ICreateUserService
 {
-    public async Task<UserEntity> CreateAsync(UserEntity userEntity, long? referralId)
+    public UserEntity Create(UserEntity userEntity)
+    {
+        var result = CreateUser(userEntity);
+        CreateSubEntities(result, 0);
+        return result;
+    }
+
+    public async Task<UserEntity> CreateAsync(UserEntity userEntity, long referrerId)
+    {
+        var result = CreateUser(userEntity);
+
+        await createReferralService.CreateAsync(referrerId, result.Id, result.IsPremium);
+        var referralReward = userEntity.IsPremium
+            ? ReferralConstants.RewardPremiumUserForBeingInvited
+            : ReferralConstants.RewardRegularUserForBeingInvited;
+        
+        CreateSubEntities(result, referralReward);
+        return result;
+    }
+
+    private UserEntity CreateUser(UserEntity userEntity)
     {
         var createDbModel = mapper.Map<UserDbModel>(userEntity);
         createDbModel.CreatedAt = dateTimeProvider.GetUtcDateTime();
-        createDbModel = (await context.Set<UserDbModel>().AddAsync(createDbModel)).Entity;
+        createDbModel = (context.Set<UserDbModel>().Add(createDbModel)).Entity;
         var result = mapper.Map<UserEntity>(createDbModel);
-
-        uint initBalance = 0; 
-        if (referralId.HasValue)
-        {
-            await createReferralService.CreateAsync(referralId.Value, result.Id, result.IsPremium);
-
-            initBalance += userEntity.IsPremium
-                ? ReferralConstants.RewardPremiumUserForBeingInvited
-                : ReferralConstants.RewardRegularUserForBeingInvited;
-        }
-        
-        await createBalanceService.CreateAsync(result.Id, initBalance);
-        await createEnergyService.CreateAsync(result.Id);
-        
         return result;
+    }
+    
+    private void CreateSubEntities(UserEntity userEntity, uint referralReward)
+    {
+        createBalanceService.Create(userEntity.Id, referralReward);
+        createEnergyService.Create(userEntity.Id);
     }
 }

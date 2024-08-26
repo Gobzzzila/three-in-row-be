@@ -39,6 +39,6 @@ public class CreateLeaderboardMemberService(MatchThreeDbContext context)
             i++;
         }
         
-        await context.Set<LeaderboardMemberDbModel>().AddRangeAsync(dbModelsToAdd);
+        context.Set<LeaderboardMemberDbModel>().AddRange(dbModelsToAdd);
     }
 }

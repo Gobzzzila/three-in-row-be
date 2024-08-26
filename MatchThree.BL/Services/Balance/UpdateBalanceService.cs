@@ -3,6 +3,7 @@ using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Models.Configuration;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Exceptions;
 
 namespace MatchThree.BL.Services.Balance;
 
@@ -10,6 +11,17 @@ public class UpdateBalanceService (MatchThreeDbContext context,
     IReadReferralService readReferralService) 
     : IUpdateBalanceService
 {
+    public async Task SpentBalanceAsync(long id, uint amount)
+    {
+        var dbModel = (await context.Set<BalanceDbModel>().FindAsync(id))!;
+
+        if (dbModel.Balance < amount)
+            throw new NotEnoughBalanceException();
+        
+        dbModel.Balance -= amount;
+        context.Set<BalanceDbModel>().Update(dbModel);
+    }
+    
     public async Task AddBalanceAsync(long id, uint amount)
     {
         var dbModel = (await context.Set<BalanceDbModel>().FindAsync(id))!;

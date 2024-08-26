@@ -1,20 +1,20 @@
 ﻿using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Models.Configuration;
-using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 
 namespace MatchThree.BL.Services.Energy;
 
-public class SynchronizationEnergyService (MatchThreeDbContext context,
-    IDateTimeProvider dateTimeProvider,
-    ITransactionService transactionService) : ISynchronizationEnergyService
+public class SynchronizationEnergyService (IDateTimeProvider dateTimeProvider) : ISynchronizationEnergyService
 {
-    public async Task SynchronizeEnergyInScopedContextAsync(EnergyDbModel dbModel)
+    public void SynchronizeModel(EnergyDbModel dbModel)
     {
+        if (dbModel.LastRecoveryStartTime is null)
+            return;
+        
         var now = dateTimeProvider.GetUtcDateTime();
         var timePass = now - dbModel.LastRecoveryStartTime;
-        if (timePass < TimeSpan.Zero)
+        if (timePass < TimeSpan.Zero) //TODO mb need extra logic
             return;
         
         var recoveryTime = EnergyRecoveryConfiguration.GetRecoveryTime(dbModel.RecoveryLevel);
@@ -34,8 +34,5 @@ public class SynchronizationEnergyService (MatchThreeDbContext context,
             dbModel.CurrentReserve += recoveredEnergy;        
             dbModel.LastRecoveryStartTime += recoveryTime * recoveredEnergy;
         }
-
-        context.Set<EnergyDbModel>().Update(dbModel);
-        await transactionService.Commit();
     }
 }

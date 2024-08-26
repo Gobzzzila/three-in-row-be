@@ -2,5 +2,5 @@
 
 public interface ICreateEnergyService
 {
-    Task CreateAsync(long userId);
+    void Create(long userId);
 }
