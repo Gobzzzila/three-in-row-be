@@ -52,6 +52,7 @@ namespace MatchThree.API
                 builder.Services.AddExceptionHandler<NoDataFoundExceptionHandler>()
                     .AddExceptionHandler<NotEnoughBalanceExceptionHandler>()
                     .AddExceptionHandler<MaxLevelReachedExceptionHandler>()
+                    .AddExceptionHandler<UpgradeConditionsExceptionHandler>()
                     .AddExceptionHandler<DefaultExceptionHandler>();
             }
 

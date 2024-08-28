@@ -37,6 +37,11 @@ public static class EnergyConstants
     public const int Level13EnergyReserveCost = 1_000;
     public const int Level14EnergyReserveCost = 1_000;
     public const int Level15EnergyReserveCost = 1_000;
+    
+    public const int Level7EnergyReserveReferralAmount = 4;
+    public const int Level10EnergyReserveReferralAmount = 6;
+    public const int Level12EnergyReserveReferralAmount = 7;
+    public const int Level14EnergyReserveReferralAmount = 8;
 
     //Energy recovery
     public static readonly TimeSpan Level1EnergyRecovery = TimeSpan.FromMinutes(4);

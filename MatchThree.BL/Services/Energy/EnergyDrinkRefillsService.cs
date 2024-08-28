@@ -9,9 +9,11 @@ namespace MatchThree.BL.Services.Energy;
 public class EnergyDrinkRefillsService (MatchThreeDbContext context) 
     : IEnergyDrinkRefillsService
 {
+    private readonly MatchThreeDbContext _context = context;
+
     public Task RefillFreeEnergyDrinks()
     {
-        return context.Set<EnergyDbModel>()
+        return _context.Set<EnergyDbModel>()
             .Where(x => x.AvailableEnergyDrinkAmount == 0)
             .ExecuteUpdateAsync(x => 
                 x.SetProperty(v => v.AvailableEnergyDrinkAmount, EnergyConstants.FreeEnergyDrinksPerDay));
@@ -19,7 +21,7 @@ public class EnergyDrinkRefillsService (MatchThreeDbContext context)
 
     public Task RefillPurchasableEnergyDrinks()
     {
-        return context.Set<EnergyDbModel>()
+        return _context.Set<EnergyDbModel>()
             .Where(x => x.PurchasableEnergyDrinkAmount != EnergyConstants.PurchasableEnergyDrinksPerDay)
             .ExecuteUpdateAsync(x => 
                 x.SetProperty(v => v.AvailableEnergyDrinkAmount, EnergyConstants.PurchasableEnergyDrinksPerDay));

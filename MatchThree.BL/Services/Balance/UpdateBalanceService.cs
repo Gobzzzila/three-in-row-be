@@ -11,25 +11,28 @@ public class UpdateBalanceService (MatchThreeDbContext context,
     IReadReferralService readReferralService) 
     : IUpdateBalanceService
 {
+    private readonly MatchThreeDbContext _context = context;
+    private readonly IReadReferralService _readReferralService = readReferralService;
+
     public async Task SpentBalanceAsync(long id, uint amount)
     {
-        var dbModel = (await context.Set<BalanceDbModel>().FindAsync(id))!;
+        var dbModel = (await _context.Set<BalanceDbModel>().FindAsync(id))!;
 
         if (dbModel.Balance < amount)
             throw new NotEnoughBalanceException();
         
         dbModel.Balance -= amount;
-        context.Set<BalanceDbModel>().Update(dbModel);
+        _context.Set<BalanceDbModel>().Update(dbModel);
     }
     
     public async Task AddBalanceAsync(long id, uint amount)
     {
-        var dbModel = (await context.Set<BalanceDbModel>().FindAsync(id))!;
+        var dbModel = (await _context.Set<BalanceDbModel>().FindAsync(id))!;
         await UpdateReferrerBalance(id, dbModel.OverallBalance, amount);
         dbModel.Balance += amount;
         dbModel.OverallBalance += amount;
         
-        context.Set<BalanceDbModel>().Update(dbModel);
+        _context.Set<BalanceDbModel>().Update(dbModel);
     }
 
     private async ValueTask UpdateReferrerBalance(long id, ulong overallBalance, uint amountToAdd)
@@ -38,7 +41,7 @@ public class UpdateBalanceService (MatchThreeDbContext context,
         if (!result.isUpped)
             return;
         
-        var referrerId = await readReferralService.ReferrerIdByReferralIdAsync(id);
+        var referrerId = await _readReferralService.ReferrerIdByReferralIdAsync(id);
         if (!referrerId.HasValue)
             return;
         

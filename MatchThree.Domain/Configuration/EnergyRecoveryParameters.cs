@@ -1,4 +1,5 @@
-﻿using MatchThree.Shared.Enums;
+﻿using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Enums;
 
 namespace MatchThree.Domain.Configuration;
 
@@ -7,4 +8,5 @@ public record EnergyRecoveryParameters
     public TimeSpan RecoveryTime { get; init; }
     public EnergyRecoveryLevels? NextLevel { get; init; }
     public uint? NextLevelCost { get; init; }
+    public Predicate<EnergyDbModel>? UpgradeCondition { get; init; } 
 }

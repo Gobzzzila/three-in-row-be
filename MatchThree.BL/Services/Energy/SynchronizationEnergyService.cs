@@ -7,12 +7,14 @@ namespace MatchThree.BL.Services.Energy;
 
 public class SynchronizationEnergyService (IDateTimeProvider dateTimeProvider) : ISynchronizationEnergyService
 {
+    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+
     public void SynchronizeModel(EnergyDbModel dbModel)
     {
         if (dbModel.LastRecoveryStartTime is null)
             return;
         
-        var now = dateTimeProvider.GetUtcDateTime();
+        var now = _dateTimeProvider.GetUtcDateTime();
         var timePass = now - dbModel.LastRecoveryStartTime;
         if (timePass < TimeSpan.Zero) //TODO mb need extra logic
             return;

@@ -12,14 +12,18 @@ public class DeleteUserService (MatchThreeDbContext context,
     IDeleteBalanceService deleteBalanceService)
     : IDeleteUserService
 {
+    private readonly MatchThreeDbContext _context = context;
+    private readonly IDeleteReferralService _deleteReferralService = deleteReferralService;
+    private readonly IDeleteBalanceService _deleteBalanceService = deleteBalanceService;
+
     public async Task DeleteAsync(long id)
     {
-        var dbModel = await context.Set<UserDbModel>().FindAsync(id);
+        var dbModel = await _context.Set<UserDbModel>().FindAsync(id);
         if (dbModel is null)
             throw new NoDataFoundException();
 
-        await deleteReferralService.DeleteByUserIdAsync(id);
-        await deleteBalanceService.DeleteAsync(id);
-        context.Set<UserDbModel>().Remove(dbModel);
+        await _deleteReferralService.DeleteByUserIdAsync(id);
+        await _deleteBalanceService.DeleteAsync(id);
+        _context.Set<UserDbModel>().Remove(dbModel);
     }
 }

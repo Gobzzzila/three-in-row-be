@@ -9,9 +9,11 @@ namespace MatchThree.BL.Services.LeaderboardMember;
 public class DeleteLeaderboardMemberService(MatchThreeDbContext context)
      : IDeleteLeaderboardMemberService
  {
+     private readonly MatchThreeDbContext _context = context;
+
      public Task DeleteByLeagueTypeAsync(LeagueTypes league)
      {
-         return context.Set<LeaderboardMemberDbModel>()
+         return _context.Set<LeaderboardMemberDbModel>()
              .Where(x => x.League == league)
              .ExecuteDeleteAsync();
      }

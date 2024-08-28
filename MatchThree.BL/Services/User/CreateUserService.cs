@@ -18,6 +18,13 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateEnergyService createEnergyService,
     IDateTimeProvider dateTimeProvider) : ICreateUserService
 {
+    private readonly MatchThreeDbContext _context = context;
+    private readonly IMapper _mapper = mapper;
+    private readonly ICreateReferralService _createReferralService = createReferralService;
+    private readonly ICreateBalanceService _createBalanceService = createBalanceService;
+    private readonly ICreateEnergyService _createEnergyService = createEnergyService;
+    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+
     public UserEntity Create(UserEntity userEntity)
     {
         var result = CreateUser(userEntity);
@@ -29,7 +36,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     {
         var result = CreateUser(userEntity);
 
-        await createReferralService.CreateAsync(referrerId, result.Id, result.IsPremium);
+        await _createReferralService.CreateAsync(referrerId, result.Id, result.IsPremium);
         var referralReward = userEntity.IsPremium
             ? ReferralConstants.RewardPremiumUserForBeingInvited
             : ReferralConstants.RewardRegularUserForBeingInvited;
@@ -40,16 +47,16 @@ public sealed class CreateUserService(MatchThreeDbContext context,
 
     private UserEntity CreateUser(UserEntity userEntity)
     {
-        var createDbModel = mapper.Map<UserDbModel>(userEntity);
-        createDbModel.CreatedAt = dateTimeProvider.GetUtcDateTime();
-        createDbModel = (context.Set<UserDbModel>().Add(createDbModel)).Entity;
-        var result = mapper.Map<UserEntity>(createDbModel);
+        var createDbModel = _mapper.Map<UserDbModel>(userEntity);
+        createDbModel.CreatedAt = _dateTimeProvider.GetUtcDateTime();
+        createDbModel = _context.Set<UserDbModel>().Add(createDbModel).Entity;
+        var result = _mapper.Map<UserEntity>(createDbModel);
         return result;
     }
     
     private void CreateSubEntities(UserEntity userEntity, uint referralReward)
     {
-        createBalanceService.Create(userEntity.Id, referralReward);
-        createEnergyService.Create(userEntity.Id);
+        _createBalanceService.Create(userEntity.Id, referralReward);
+        _createEnergyService.Create(userEntity.Id);
     }
 }

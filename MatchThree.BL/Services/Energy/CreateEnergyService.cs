@@ -9,10 +9,12 @@ namespace MatchThree.BL.Services.Energy;
 public class CreateEnergyService (MatchThreeDbContext context)
     : ICreateEnergyService
 {
+    private readonly MatchThreeDbContext _context = context;
+
     public void Create(long userId)
     {
         var firstLevelParams = EnergyReserveConfiguration.GetStartValue();
-        context.Set<EnergyDbModel>().Add(new EnergyDbModel
+        _context.Set<EnergyDbModel>().Add(new EnergyDbModel
         {
             Id = userId,
             CurrentReserve = firstLevelParams.ReserveValue,

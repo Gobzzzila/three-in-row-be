@@ -10,11 +10,13 @@ namespace MatchThree.BL.Services.LeaderboardMember;
 public class CreateLeaderboardMemberService(MatchThreeDbContext context)
     : ICreateLeaderboardMemberService
 {
+    private readonly MatchThreeDbContext _context = context;
+
     public async Task CreateByLeagueTypeAsync(LeagueTypes league)
     {
         var leagueParam = LeagueConfiguration.GetParamsByType(league);
 
-        var dbModelsToAdd = await context.Set<BalanceDbModel>()
+        var dbModelsToAdd = await _context.Set<BalanceDbModel>()
             .AsNoTracking()
             .Include(x => x.User)
             .Where(x => x.OverallBalance > leagueParam.MinValue && x.OverallBalance <= leagueParam.MaxValue)
@@ -39,6 +41,6 @@ public class CreateLeaderboardMemberService(MatchThreeDbContext context)
             i++;
         }
         
-        context.Set<LeaderboardMemberDbModel>().AddRange(dbModelsToAdd);
+        _context.Set<LeaderboardMemberDbModel>().AddRange(dbModelsToAdd);
     }
 }

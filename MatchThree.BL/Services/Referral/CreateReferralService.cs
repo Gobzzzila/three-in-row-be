@@ -10,9 +10,12 @@ public class CreateReferralService (MatchThreeDbContext context,
     IUpdateBalanceService updateBalanceService)
     : ICreateReferralService
 {
+    private readonly MatchThreeDbContext _context = context;
+    private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
+
     public async Task CreateAsync(long referrerId, long referralId, bool isPremium)
     {
-        context.Set<ReferralDbModel>().Add(new ReferralDbModel
+        _context.Set<ReferralDbModel>().Add(new ReferralDbModel
         {
             Id = Guid.NewGuid(),
             ReferralUserId = referralId,
@@ -23,6 +26,6 @@ public class CreateReferralService (MatchThreeDbContext context,
         var referrerReward = isPremium
             ? ReferralConstants.RewardForInvitePremiumUser
             : ReferralConstants.RewardForInviteRegularUser;
-        await updateBalanceService.AddBalanceAsync(referrerId, referrerReward);
+        await _updateBalanceService.AddBalanceAsync(referrerId, referrerReward);
     }
 }

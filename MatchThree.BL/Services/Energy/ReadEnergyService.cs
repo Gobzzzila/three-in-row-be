@@ -11,15 +11,19 @@ public class ReadEnergyService(MatchThreeDbContext context,
     ISynchronizationEnergyService synchronizationEnergyService,
     IMapper mapper) : IReadEnergyService
 {
+    private readonly MatchThreeDbContext _context = context;
+    private readonly ISynchronizationEnergyService _synchronizationEnergyService = synchronizationEnergyService;
+    private readonly IMapper _mapper = mapper;
+
     public async Task<EnergyEntity> GetByUserIdAsync(long userId)
     {
-        var dbModel = await context.Set<EnergyDbModel>().FindAsync(userId);
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
         
         if (dbModel is null)
             throw new NoDataFoundException();
 
-        synchronizationEnergyService.SynchronizeModel(dbModel);
+        _synchronizationEnergyService.SynchronizeModel(dbModel);
         
-        return mapper.Map<EnergyEntity>(dbModel);
+        return _mapper.Map<EnergyEntity>(dbModel);
     }
 }
