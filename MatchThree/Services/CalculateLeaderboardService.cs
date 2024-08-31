@@ -1,4 +1,4 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Shared.Enums;

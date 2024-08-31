@@ -1,4 +1,4 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;

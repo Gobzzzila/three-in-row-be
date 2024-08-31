@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MatchThree.API.Models;
 using MatchThree.API.Models.User;
-using MatchThree.Domain.Configuration;
+using MatchThree.BL.Configuration;
 using MatchThree.Domain.Models;
 
 namespace MatchThree.API;

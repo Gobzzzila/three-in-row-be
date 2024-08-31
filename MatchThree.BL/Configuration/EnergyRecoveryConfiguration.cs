@@ -1,7 +1,9 @@
-﻿using MatchThree.Shared.Constants;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Configuration;
+namespace MatchThree.BL.Configuration;
 
 public static class EnergyRecoveryConfiguration
 {
@@ -32,7 +34,7 @@ public static class EnergyRecoveryConfiguration
                     RecoveryTime = EnergyConstants.Level1EnergyRecovery,
                     NextLevel = EnergyRecoveryLevels.Level2,
                     NextLevelCost = EnergyConstants.Level2EnergyRecoveryCost,
-                    UpgradeCondition = x => x.MaxReserve >= EnergyReserveLevels.Level2
+                    UpgradeCondition = UpgradeCondition(EnergyReserveLevels.Level2)
                 }
             },
             {
@@ -41,7 +43,7 @@ public static class EnergyRecoveryConfiguration
                     RecoveryTime = EnergyConstants.Level2EnergyRecovery,
                     NextLevel = EnergyRecoveryLevels.Level3,
                     NextLevelCost = EnergyConstants.Level3EnergyRecoveryCost,
-                    UpgradeCondition = x => x.MaxReserve >= EnergyReserveLevels.Level4
+                    UpgradeCondition = UpgradeCondition(EnergyReserveLevels.Level4)
                 }
             },
             {
@@ -50,7 +52,7 @@ public static class EnergyRecoveryConfiguration
                     RecoveryTime = EnergyConstants.Level3EnergyRecovery,
                     NextLevel = EnergyRecoveryLevels.Level4,
                     NextLevelCost = EnergyConstants.Level4EnergyRecoveryCost,
-                    UpgradeCondition = x => x.MaxReserve >= EnergyReserveLevels.Level7
+                    UpgradeCondition = UpgradeCondition(EnergyReserveLevels.Level7)
                 }
             },
             {
@@ -59,7 +61,7 @@ public static class EnergyRecoveryConfiguration
                     RecoveryTime = EnergyConstants.Level4EnergyRecovery,
                     NextLevel = EnergyRecoveryLevels.Level5,
                     NextLevelCost = EnergyConstants.Level5EnergyRecoveryCost,
-                    UpgradeCondition = x => x.MaxReserve >= EnergyReserveLevels.Level11
+                    UpgradeCondition = UpgradeCondition(EnergyReserveLevels.Level11)
                 }
             },
             {
@@ -68,7 +70,7 @@ public static class EnergyRecoveryConfiguration
                     RecoveryTime = EnergyConstants.Level5EnergyRecovery,
                     NextLevel = EnergyRecoveryLevels.Level6,
                     NextLevelCost = EnergyConstants.Level6EnergyRecoveryCost,
-                    UpgradeCondition = x => x.MaxReserve >= EnergyReserveLevels.Level15
+                    UpgradeCondition = UpgradeCondition(EnergyReserveLevels.Level15)
                 }
             },
             {
@@ -81,5 +83,11 @@ public static class EnergyRecoveryConfiguration
                 }
             },
         };
+    }
+    
+    private static Func<IUpgradesRestrictionsService, EnergyReserveLevels, bool> UpgradeCondition(EnergyReserveLevels restrictedLevel)
+    {
+        return (upgradesRestrictionsService, currentLevel) => 
+            upgradesRestrictionsService.ValidateEnergyRecoveryRestrictions(currentLevel, restrictedLevel);
     }
 }

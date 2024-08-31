@@ -1,7 +1,9 @@
-﻿using MatchThree.Shared.Constants;
+﻿using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Configuration;
+namespace MatchThree.BL.Configuration;
 
 public static class EnergyReserveConfiguration
 {
@@ -78,11 +80,7 @@ public static class EnergyReserveConfiguration
                     MaxReserve = EnergyConstants.Level6EnergyReserve,
                     NextLevel = EnergyReserveLevels.Level7,
                     NextLevelCost = EnergyConstants.Level7EnergyReserveCost,
-                    UpgradeCondition = async (readReferralService, userId) =>
-                    {
-                        var referralAmount = await readReferralService.ReferralAmountByReferrerIdAsync(userId);
-                        return referralAmount >= EnergyConstants.Level7EnergyReserveReferralAmount;
-                    }
+                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level7EnergyReserveReferralAmount)
                 }
             },
             {
@@ -110,11 +108,7 @@ public static class EnergyReserveConfiguration
                     MaxReserve = EnergyConstants.Level9EnergyReserve,
                     NextLevel = EnergyReserveLevels.Level10,
                     NextLevelCost = EnergyConstants.Level10EnergyReserveCost,
-                    UpgradeCondition = async (readReferralService, userId) =>
-                    {
-                        var referralAmount = await readReferralService.ReferralAmountByReferrerIdAsync(userId);
-                        return referralAmount >= EnergyConstants.Level10EnergyReserveReferralAmount;
-                    }
+                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level10EnergyReserveReferralAmount)
                 }
             },
             {
@@ -132,11 +126,7 @@ public static class EnergyReserveConfiguration
                     MaxReserve = EnergyConstants.Level11EnergyReserve,
                     NextLevel = EnergyReserveLevels.Level12,
                     NextLevelCost = EnergyConstants.Level12EnergyReserveCost,
-                    UpgradeCondition = async (readReferralService, userId) =>
-                    {
-                        var referralAmount = await readReferralService.ReferralAmountByReferrerIdAsync(userId);
-                        return referralAmount >= EnergyConstants.Level12EnergyReserveReferralAmount;
-                    }
+                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level12EnergyReserveReferralAmount)
                 }
             },
             {
@@ -154,11 +144,7 @@ public static class EnergyReserveConfiguration
                     MaxReserve = EnergyConstants.Level13EnergyReserve,
                     NextLevel = EnergyReserveLevels.Level14,
                     NextLevelCost = EnergyConstants.Level14EnergyReserveCost,
-                    UpgradeCondition = async (readReferralService, userId) =>
-                    {
-                        var referralAmount = await readReferralService.ReferralAmountByReferrerIdAsync(userId);
-                        return referralAmount >= EnergyConstants.Level14EnergyReserveReferralAmount;
-                    }
+                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level14EnergyReserveReferralAmount)
                 }
             },
             {
@@ -180,5 +166,11 @@ public static class EnergyReserveConfiguration
                 }
             }
         };
+    }
+
+    private static Func<IUpgradesRestrictionsService, long, Task<bool>> UpgradeCondition(int requiredReferralsAmount)
+    {
+        return (upgradesRestrictionsService, userId) => 
+            upgradesRestrictionsService.ValidateEnergyReserveRestrictions(userId, requiredReferralsAmount);
     }
 }

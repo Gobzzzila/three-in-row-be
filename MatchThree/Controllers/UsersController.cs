@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MatchThree.API.Models;
 using MatchThree.API.Models.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;

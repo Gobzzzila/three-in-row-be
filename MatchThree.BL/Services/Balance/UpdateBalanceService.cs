@@ -1,4 +1,4 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Repository.MSSQL;

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using MatchThree.Domain.Configuration;
+using MatchThree.BL.Configuration;
+using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
-using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
@@ -13,14 +13,14 @@ namespace MatchThree.BL.Services.Energy;
 public class UpdateEnergyService(MatchThreeDbContext context,
     ISynchronizationEnergyService synchronizationEnergyService,
     IUpdateBalanceService updateBalanceService,
-    IReadReferralService readReferralService,
+    IUpgradesRestrictionsService upgradesRestrictionsService,
     IMapper mapper) 
     : IUpdateEnergyService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly ISynchronizationEnergyService _synchronizationEnergyService = synchronizationEnergyService;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
-    private readonly IReadReferralService _readReferralService = readReferralService;
+    private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
     private readonly IMapper _mapper = mapper;
 
     public async Task UpgradeReserveAsync(long userId)
@@ -34,7 +34,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
             throw new MaxLevelReachedException();
         
         if (reserveParams.UpgradeCondition is not null) 
-            if (!await reserveParams.UpgradeCondition(_readReferralService, userId)) 
+            if (!await reserveParams.UpgradeCondition(_upgradesRestrictionsService, userId)) 
                 throw new UpgradeConditionsException();
         
         await _updateBalanceService.SpentBalanceAsync(userId, reserveParams.NextLevelCost!.Value);
@@ -57,7 +57,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         if (!recoveryParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
 
-        if (!recoveryParams.UpgradeCondition!(dbModel)) 
+        if (!recoveryParams.UpgradeCondition!(_upgradesRestrictionsService, dbModel.MaxReserve)) 
             throw new UpgradeConditionsException();
         
         await _updateBalanceService.SpentBalanceAsync(id, recoveryParams.NextLevelCost!.Value);

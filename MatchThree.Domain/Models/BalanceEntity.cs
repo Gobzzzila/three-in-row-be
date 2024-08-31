@@ -1,6 +1,4 @@
-﻿using MatchThree.Shared.Enums;
-
-namespace MatchThree.Domain.Models;
+﻿namespace MatchThree.Domain.Models;
 
 public class BalanceEntity
 {

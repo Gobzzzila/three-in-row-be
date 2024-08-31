@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         services.AddScoped<ITransactionService, TransactionService>();
+        services.AddScoped<IUpgradesRestrictionsService, UpgradesRestrictionsService>();
         
         //User
         services.AddScoped<ICreateUserService, CreateUserService>();
