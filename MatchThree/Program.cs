@@ -5,7 +5,9 @@ using MatchThree.API.Services;
 using MatchThree.BL.Extensions;
 using MatchThree.Repository.MSSQL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using static MatchThree.API.SwaggerConfiguration;
 
 namespace MatchThree.API
 {
@@ -47,6 +49,7 @@ namespace MatchThree.API
                         {
                             Title = "Match three API"
                         });
+                    c.OperationFilter<AcceptLanguageHeaderParameter>();
                 });
 
                 builder.Services.AddExceptionHandler<NoDataFoundExceptionHandler>()
@@ -54,6 +57,15 @@ namespace MatchThree.API
                     .AddExceptionHandler<MaxLevelReachedExceptionHandler>()
                     .AddExceptionHandler<UpgradeConditionsExceptionHandler>()
                     .AddExceptionHandler<DefaultExceptionHandler>();
+                
+                builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+                builder.Services.Configure<RequestLocalizationOptions>(options =>
+                {
+                    string[] supportedCultures = ["en-US", "ru-RU"];
+                    options.SetDefaultCulture(supportedCultures[0]);
+                    options.AddSupportedCultures(supportedCultures);
+                    options.AddSupportedUICultures(supportedCultures);
+                });
             }
 
             void Configure()
@@ -77,6 +89,9 @@ namespace MatchThree.API
                 app.UseExceptionHandler(opt => { });
 
                 app.UseMiddleware<LoggingMiddleware>();
+                
+                var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+                app.UseRequestLocalization(localizationOptions.Value);
             }
         }
 

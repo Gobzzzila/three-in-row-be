@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MatchThree.API.Controllers;
 
 [ApiController]
-[Route("api/v1/energies")]
+[Route("api/v1/user")]
 public class EnergyController (IReadEnergyService energyReadService,
     IUpdateEnergyService updateEnergyService,
     ITransactionService transactionService,
@@ -16,7 +16,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Get energy by user identifier 
     /// </summary>
-    [HttpGet("{id:long}/")]
+    [HttpGet("{id:long}/energy")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EnergyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     public async Task<IResult> GetById(long id, CancellationToken cancellationToken = new())
