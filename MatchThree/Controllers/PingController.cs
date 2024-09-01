@@ -1,4 +1,3 @@
-using MatchThree.API.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 

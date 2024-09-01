@@ -8,4 +8,5 @@ public record LeagueParameters
     public ulong MaxValue { get; init; }
     public uint RewardForReferrer { get; init; }
     public LeagueTypes? NextLeague { get; init; }
+    public LeagueTypes? PreviousLeague { get; init; }
 }

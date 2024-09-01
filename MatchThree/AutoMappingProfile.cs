@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using MatchThree.API.Mapping;
 using MatchThree.API.Models;
+using MatchThree.API.Models.Leaderboard;
 using MatchThree.API.Models.User;
 using MatchThree.BL.Configuration;
 using MatchThree.Domain.Models;
+using MatchThree.Domain.Models.Leaderboard;
+using MatchThree.Shared.Enums;
 
 namespace MatchThree.API;
 
@@ -26,6 +30,10 @@ public class AutoMappingProfile : Profile
 
         //LeaderboardMemberMapping
         CreateMap<LeaderboardMemberEntity, LeaderboardMemberDto>();
+        CreateMap<LeaderboardEntity, LeaderboardDto>()
+            .ForMember(x => x.LeagueName,
+            o =>
+                o.MapFrom<EnumTranslationResolver<LeagueTypes>, LeagueTypes>(s => s.League));
         
         //Energy
         CreateMap<EnergyEntity, EnergyDto>()

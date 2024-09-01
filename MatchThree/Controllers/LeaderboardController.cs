@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MatchThree.API.Models;
+using MatchThree.API.Models.Leaderboard;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Shared.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +15,10 @@ public class LeaderboardController(IReadLeaderboardMemberService readLeaderboard
     /// Get leaderboard by league 
     /// </summary>
     [HttpGet("leagues/{league:int}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IReadOnlyCollection<LeaderboardMemberDto>))]
-    public async Task<IResult> GetLeagueMembers(int league, CancellationToken cancellationToken = new())
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LeaderboardDto))]
+    public async Task<IResult> GetLeaderboard(int league, CancellationToken cancellationToken = new())
     {
-        var entities = 
-            await readLeaderboardMemberService.GetLeaderboardByLeagueAsync((LeagueTypes)league);
-        return Results.Ok(mapper.Map<IReadOnlyCollection<LeaderboardMemberDto>>(entities));
+        var entity = await readLeaderboardMemberService.GetLeaderboardByLeagueAsync((LeagueTypes)league);
+        return Results.Ok(mapper.Map<LeaderboardDto>(entity));
     }
 }

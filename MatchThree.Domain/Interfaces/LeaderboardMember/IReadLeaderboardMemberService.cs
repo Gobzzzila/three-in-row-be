@@ -1,10 +1,10 @@
-﻿using MatchThree.Domain.Models;
+﻿using MatchThree.Domain.Models.Leaderboard;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.Domain.Interfaces.LeaderboardMember;
 
 public interface IReadLeaderboardMemberService
 {
-    Task<IReadOnlyCollection<LeaderboardMemberEntity>> GetLeaderboardByLeagueAsync(LeagueTypes league);
+    Task<LeaderboardEntity> GetLeaderboardByLeagueAsync(LeagueTypes league);
     Task<int> GetTopSpotByUserId(long userId);
 }

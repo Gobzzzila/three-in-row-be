@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MatchThree.API.Resources;
 using Microsoft.Extensions.Localization;
 
 namespace MatchThree.API.Mapping;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MatchThree.Domain.Models;
+using MatchThree.Domain.Models.Leaderboard;
 using MatchThree.Repository.MSSQL.Models;
 
 namespace MatchThree.BL;

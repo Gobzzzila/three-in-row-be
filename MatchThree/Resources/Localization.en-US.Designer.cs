@@ -60,11 +60,92 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crab.
+        /// </summary>
+        internal static string CrabLeagueKey {
+            get {
+                return ResourceManager.GetString("CrabLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dolphin.
+        /// </summary>
+        internal static string DolphinLeagueKey {
+            get {
+                return ResourceManager.GetString("DolphinLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fish.
+        /// </summary>
+        internal static string FishLeagueKey {
+            get {
+                return ResourceManager.GetString("FishLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Humpback.
+        /// </summary>
+        internal static string HumpbackLeagueKey {
+            get {
+                return ResourceManager.GetString("HumpbackLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Octopus.
+        /// </summary>
+        internal static string OctopusLeagueKey {
+            get {
+                return ResourceManager.GetString("OctopusLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nice ping!.
         /// </summary>
         internal static string PingOk {
             get {
                 return ResourceManager.GetString("PingOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shark.
+        /// </summary>
+        internal static string SharkLeagueKey {
+            get {
+                return ResourceManager.GetString("SharkLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shrimp.
+        /// </summary>
+        internal static string ShrimpLeagueKey {
+            get {
+                return ResourceManager.GetString("ShrimpLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undefined.
+        /// </summary>
+        internal static string UndefinedKey {
+            get {
+                return ResourceManager.GetString("UndefinedKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whale.
+        /// </summary>
+        internal static string WhaleLeagueKey {
+            get {
+                return ResourceManager.GetString("WhaleLeagueKey", resourceCulture);
             }
         }
     }

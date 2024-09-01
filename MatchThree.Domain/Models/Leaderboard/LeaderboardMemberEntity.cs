@@ -1,6 +1,6 @@
 ﻿using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Models;
+namespace MatchThree.Domain.Models.Leaderboard;
 
 public class LeaderboardMemberEntity
 {

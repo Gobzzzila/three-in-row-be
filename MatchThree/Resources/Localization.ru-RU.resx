@@ -21,4 +21,31 @@
     <data name="PingOk" xml:space="preserve">
         <value>Ну пинганул</value>
     </data>
+    <data name="CrabLeagueKey" xml:space="preserve">
+        <value>Краб</value>
+    </data>
+    <data name="DolphinLeagueKey" xml:space="preserve">
+        <value>Дельфин</value>
+    </data>
+    <data name="FishLeagueKey" xml:space="preserve">
+        <value>Рыба</value>
+    </data>
+    <data name="OctopusLeagueKey" xml:space="preserve">
+        <value>Осьминог</value>
+    </data>
+    <data name="SharkLeagueKey" xml:space="preserve">
+        <value>Акула</value>
+    </data>
+    <data name="ShrimpLeagueKey" xml:space="preserve">
+        <value>Креветка</value>
+    </data>
+    <data name="WhaleLeagueKey" xml:space="preserve">
+        <value>Кит</value>
+    </data>
+    <data name="HumpbackLeagueKey" xml:space="preserve">
+        <value>Горбатый кит</value>
+    </data>
+    <data name="UndefinedKey" xml:space="preserve">
+        <value>Не определено</value>
+    </data>
 </root>

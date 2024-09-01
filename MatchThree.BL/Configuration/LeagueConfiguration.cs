@@ -18,7 +18,8 @@ public static class LeagueConfiguration
                     MinValue = 0,
                     MaxValue = LeagueConstants.ShrimpMaxValue,
                     RewardForReferrer = 0,
-                    NextLeague = LeagueTypes.Crab
+                    NextLeague = LeagueTypes.Crab,
+                    PreviousLeague = null
                 }
             },
             {
@@ -27,7 +28,8 @@ public static class LeagueConfiguration
                     MinValue = LeagueConstants.ShrimpMaxValue,
                     MaxValue = LeagueConstants.CrabMaxValue,
                     RewardForReferrer = ReferralConstants.CrabLeagueReferrerReward,
-                    NextLeague = LeagueTypes.Octopus
+                    NextLeague = LeagueTypes.Octopus,
+                    PreviousLeague = LeagueTypes.Shrimp
                 }
             },
             {
@@ -36,7 +38,8 @@ public static class LeagueConfiguration
                     MinValue = LeagueConstants.CrabMaxValue,
                     MaxValue = LeagueConstants.OctopusMaxValue,
                     RewardForReferrer = ReferralConstants.OctopusLeagueReferrerReward,
-                    NextLeague = LeagueTypes.Fish
+                    NextLeague = LeagueTypes.Fish,
+                    PreviousLeague = LeagueTypes.Crab
                 }
             },
             {
@@ -45,7 +48,8 @@ public static class LeagueConfiguration
                     MinValue = LeagueConstants.OctopusMaxValue,
                     MaxValue = LeagueConstants.FishMaxValue,
                     RewardForReferrer = ReferralConstants.FishLeagueReferrerReward,
-                    NextLeague = LeagueTypes.Dolphin
+                    NextLeague = LeagueTypes.Dolphin,
+                    PreviousLeague = LeagueTypes.Octopus
                 }
             },
             {
@@ -54,7 +58,8 @@ public static class LeagueConfiguration
                     MinValue = LeagueConstants.FishMaxValue,
                     MaxValue = LeagueConstants.DolphinMaxValue,
                     RewardForReferrer = ReferralConstants.DolphinLeagueReferrerReward,
-                    NextLeague = LeagueTypes.Shark
+                    NextLeague = LeagueTypes.Shark,
+                    PreviousLeague = LeagueTypes.Fish
                 }
             },
             {
@@ -63,7 +68,8 @@ public static class LeagueConfiguration
                     MinValue = LeagueConstants.DolphinMaxValue,
                     MaxValue = LeagueConstants.SharkMaxValue,
                     RewardForReferrer = ReferralConstants.SharkLeagueReferrerReward,
-                    NextLeague = LeagueTypes.Whale
+                    NextLeague = LeagueTypes.Whale,
+                    PreviousLeague = LeagueTypes.Dolphin
                 }
             },
             {
@@ -72,7 +78,8 @@ public static class LeagueConfiguration
                     MinValue = LeagueConstants.SharkMaxValue,
                     MaxValue = LeagueConstants.WhaleMaxValue,
                     RewardForReferrer = ReferralConstants.WhaleLeagueReferrerReward,
-                    NextLeague = LeagueTypes.Humpback
+                    NextLeague = LeagueTypes.Humpback,
+                    PreviousLeague = LeagueTypes.Shark
                 }
             },
             {
@@ -80,7 +87,9 @@ public static class LeagueConfiguration
                 {
                     MinValue = LeagueConstants.WhaleMaxValue,
                     MaxValue = ulong.MaxValue,
-                    RewardForReferrer = ReferralConstants.HumpbackLeagueReferrerReward
+                    RewardForReferrer = ReferralConstants.HumpbackLeagueReferrerReward,
+                    NextLeague = null,
+                    PreviousLeague = LeagueTypes.Whale
                 }
             }
         };

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
-using MatchThree.Domain.Models;
+using MatchThree.Domain.Models.Leaderboard;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Enums;
@@ -15,14 +16,22 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
     private readonly MatchThreeDbContext _context = context;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<IReadOnlyCollection<LeaderboardMemberEntity>> GetLeaderboardByLeagueAsync(LeagueTypes league)
+    public async Task<LeaderboardEntity> GetLeaderboardByLeagueAsync(LeagueTypes league)
     {
         var dbModels = await _context.Set<LeaderboardMemberDbModel>()
             .AsNoTracking()
             .Where(x => x.League == league)
+            .OrderBy(x => x.TopSpot)
             .ToListAsync();
 
-        return _mapper.Map<IReadOnlyCollection<LeaderboardMemberEntity>>(dbModels);
+        var leagueParams = LeagueConfiguration.GetParamsByType(league);
+        return new LeaderboardEntity
+        {
+            League = league,
+            NextLeague = leagueParams.NextLeague,
+            PreviousLeague = leagueParams.PreviousLeague,
+            Members = _mapper.Map<List<LeaderboardMemberEntity>>(dbModels)
+        };
     }
     
     public async Task<int> GetTopSpotByUserId(long userId)
