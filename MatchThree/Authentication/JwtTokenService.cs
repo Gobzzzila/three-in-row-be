@@ -4,7 +4,7 @@ using System.Text;
 using MatchThree.Domain.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
-namespace MatchThree.API.Services.Authentication;
+namespace MatchThree.API.Authentication;
 
 public class JwtTokenService(IConfiguration configuration) : IJwtTokenService
 {

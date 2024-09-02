@@ -4,7 +4,7 @@ namespace MatchThree.API.Models.User;
 
 public class UserSignInRequestDto
 {
-    [FromRoute(Name = "id")]
+    [FromRoute(Name = "userId")]
     public long Id { get; init; }
     [FromQuery]
     public string? Username { get; init; }

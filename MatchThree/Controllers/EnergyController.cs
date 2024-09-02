@@ -2,6 +2,7 @@
 using MatchThree.API.Models;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Energy;
+using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,28 +23,28 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Get energy by user identifier 
     /// </summary>
-    [HttpGet("{id:long}/energy")]
-    [Authorize]
+    [HttpGet("{userId:long}/energy")]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EnergyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    public async Task<IResult> GetById(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> GetById(long userId, CancellationToken cancellationToken = new())
     {
-        var entity = await _energyReadService.GetByUserIdAsync(id);
+        var entity = await _energyReadService.GetByUserIdAsync(userId);
         return Results.Ok(_mapper.Map<EnergyDto>(entity));
     }
     
     /// <summary>
     /// Upgrade reserve by user identifier 
     /// </summary>
-    [HttpPost("{id:long}/upgrade-reserve")]
-    [Authorize]
+    [HttpPost("{userId:long}/upgrade-reserve")]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
-    public async Task<IResult> UpgradeReserve(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> UpgradeReserve(long userId, CancellationToken cancellationToken = new())
     {
-        await _updateEnergyService.UpgradeReserveAsync(id);
+        await _updateEnergyService.UpgradeReserveAsync(userId);
         await _transactionService.Commit();
         return Results.Ok();
     }
@@ -51,15 +52,15 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Upgrade reserve by user identifier 
     /// </summary>
-    [HttpPost("{id:long}/upgrade-recovery")]
-    [Authorize]
+    [HttpPost("{userId:long}/upgrade-recovery")]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
-    public async Task<IResult> UpgradeRecovery(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> UpgradeRecovery(long userId, CancellationToken cancellationToken = new())
     {
-        await _updateEnergyService.UpgradeRecoveryAsync(id);
+        await _updateEnergyService.UpgradeRecoveryAsync(userId);
         await _transactionService.Commit();
         return Results.Ok();
     }
@@ -67,14 +68,14 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Use an energy drink
     /// </summary>
-    [HttpPost("{id:long}/energy-drink")]
-    [Authorize]
+    [HttpPost("{userId:long}/energy-drink")]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EnergyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
-    public async Task<IResult> UseEnergyDrink(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> UseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {
-        var entity = await _updateEnergyService.UseEnergyDrinkAsync(id);
+        var entity = await _updateEnergyService.UseEnergyDrinkAsync(userId);
         await _transactionService.Commit();
         return Results.Ok(_mapper.Map<EnergyDto>(entity));
     }
@@ -82,14 +83,13 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Purchase an energy drink
     /// </summary>
-    [HttpPost("{id:long}/purchase-energy-drink")]
-    [Authorize]
+    [HttpPost("{userId:long}/purchase-energy-drink")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
-    public async Task<IResult> PurchaseEnergyDrink(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> PurchaseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {
-        await _updateEnergyService.PurchaseEnergyDrinkAsync(id);
+        await _updateEnergyService.PurchaseEnergyDrinkAsync(userId);
         await _transactionService.Commit();
         return Results.Ok();
     }

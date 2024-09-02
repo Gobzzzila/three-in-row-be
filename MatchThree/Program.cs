@@ -1,13 +1,16 @@
 using System.Reflection;
 using System.Text;
+using MatchThree.API.Authentication;
+using MatchThree.API.Authentication.Requirements;
 using MatchThree.API.ExceptionHandlers;
 using MatchThree.API.Middleware;
 using MatchThree.API.Services;
-using MatchThree.API.Services.Authentication;
 using MatchThree.BL.Extensions;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Repository.MSSQL;
+using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -27,7 +30,7 @@ namespace MatchThree.API
 
             Configure();
             app.Run();
-
+            
             void ConfigureServices()
             {
                 builder.Services.AddAuthentication(options =>
@@ -47,8 +50,15 @@ namespace MatchThree.API
                             ValidAudience = builder.Configuration["Jwt:Audience"],
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
                         };
+                        options.MapInboundClaims = false;
                     });
-                builder.Services.AddAuthorization();
+                builder.Services.AddAuthorization(options =>
+                {
+                    options.AddPolicy(AuthenticationConstants.UserIdPolicy, policy =>
+                    {
+                        policy.Requirements.Add(new UserIdRequirement());
+                    });
+                });
                 
                 builder.Services.AddDbContext<MatchThreeDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext))));
@@ -56,6 +66,7 @@ namespace MatchThree.API
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<TopUpEnergyDrinksService>();
                 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
+                builder.Services.AddSingleton<IAuthorizationHandler, UserIdHandler>();
                 builder.Services.AddDomainServices();
 
                 var autoMapperProfileAssemblies =

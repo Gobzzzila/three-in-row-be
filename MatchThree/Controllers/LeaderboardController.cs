@@ -2,6 +2,7 @@
 using MatchThree.API.Models.Leaderboard;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Shared.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatchThree.API.Controllers;
@@ -18,6 +19,7 @@ public class LeaderboardController(IReadLeaderboardMemberService readLeaderboard
     /// Get leaderboard by league 
     /// </summary>
     [HttpGet("leagues/{league:int}")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LeaderboardDto))]
     public async Task<IResult> GetLeaderboard(int league, CancellationToken cancellationToken = new())
     {

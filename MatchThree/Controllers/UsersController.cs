@@ -4,6 +4,7 @@ using MatchThree.API.Models.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
+using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,7 +46,7 @@ public class UsersController(
     /// <summary>
     /// User auth
     /// </summary>
-    [HttpPost("{id:long}")]
+    [HttpPost("{userId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
     public async Task<IResult> SignIn([FromMultiSource] UserSignInRequestDto request, 
         CancellationToken cancellationToken = new())
@@ -60,14 +61,14 @@ public class UsersController(
     /// <summary>
     /// User deletion
     /// </summary>
-    [HttpDelete("{id:long}")]
-    [Authorize]
+    [HttpDelete("{userId:long}")]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    public async Task<IResult> Delete(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> Delete(long userId, CancellationToken cancellationToken = new())
     {
         //TODO The isDeleted flag should be added to avoid abuse of referrals 
-        await _deleteUserService.DeleteAsync(id);
+        await _deleteUserService.DeleteAsync(userId);
         await _transactionService.Commit();
         return Results.NoContent();
     }

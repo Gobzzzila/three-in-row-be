@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MatchThree.API.Models;
 using MatchThree.Domain.Interfaces.Balance;
+using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,13 +18,13 @@ public class BalanceController(IMapper mapper,
     /// <summary>
     /// Get balance by user identifier 
     /// </summary>
-    [HttpGet("{id:long}/balance")]
-    [Authorize]
+    [HttpGet("{userId:long}/balance")]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BalanceDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    public async Task<IResult> GetById(long id, CancellationToken cancellationToken = new())
+    public async Task<IResult> GetById(long userId, CancellationToken cancellationToken = new())
     {
-        var entity = await _readBalanceService.GetByIdAsync(id);
+        var entity = await _readBalanceService.GetByIdAsync(userId);
         return Results.Ok(_mapper.Map<BalanceDto>(entity));
     }
 }
