@@ -20,7 +20,8 @@ public class AutoMappingProfile : Profile
     private void DtoToEntityConfigurations()
     {
         //UserMapping
-        CreateMap<UserCreateDto, UserEntity>();
+        CreateMap<UserCreateRequestDto, UserEntity>();
+        CreateMap<UserSignInRequestDto, UserEntity>();
         CreateMap<UserDto, UserEntity>().ReverseMap();
         
         //BalanceMapping

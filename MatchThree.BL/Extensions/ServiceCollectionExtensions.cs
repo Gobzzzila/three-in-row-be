@@ -25,6 +25,7 @@ public static class ServiceCollectionExtensions
         //User
         services.AddScoped<ICreateUserService, CreateUserService>();
         services.AddScoped<IDeleteUserService, DeleteUserService>();
+        services.AddScoped<IUpdateUserService, UpdateUserService>();
         
         //Referral
         services.AddScoped<ICreateReferralService, CreateReferralService>();

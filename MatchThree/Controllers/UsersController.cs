@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using MatchThree.API.Attributes;
 using MatchThree.API.Models.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatchThree.API.Controllers;
@@ -12,36 +14,61 @@ namespace MatchThree.API.Controllers;
 public class UsersController(
     IMapper mapper,
     ICreateUserService createUserService,
+    IUpdateUserService updateUserService,
     IDeleteUserService deleteUserService,
+    IJwtTokenService jwtTokenService,
     ITransactionService transactionService)
 {
+    private readonly IMapper _mapper = mapper;
+    private readonly ICreateUserService _createUserService = createUserService;
+    private readonly IUpdateUserService _updateUserService = updateUserService;
+    private readonly IDeleteUserService _deleteUserService = deleteUserService;
+    private readonly IJwtTokenService _jwtTokenService = jwtTokenService;
+    private readonly ITransactionService _transactionService = transactionService;
+
     /// <summary>
     /// User creation
     /// </summary>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
-    public async Task<IResult> Create([FromBody] UserCreateDto createDto, 
+    public async Task<IResult> Create([FromBody] UserCreateRequestDto request, 
         CancellationToken cancellationToken = new())
     {
-        var entity = mapper.Map<UserEntity>(createDto);
-        var createdEntity = createDto.ReferrerId.HasValue 
-            ? await createUserService.CreateAsync(entity, createDto.ReferrerId.Value)
-            : createUserService.Create(entity);
-        await transactionService.Commit();
-        return Results.Ok(mapper.Map<UserDto>(createdEntity));
+        var entity = _mapper.Map<UserEntity>(request);
+        var createdEntity = request.ReferrerId.HasValue 
+            ? await _createUserService.CreateAsync(entity, request.ReferrerId.Value)
+            : _createUserService.Create(entity);
+        await _transactionService.Commit();
+        return Results.Ok(_mapper.Map<UserDto>(createdEntity));
+    }
+    
+    /// <summary>
+    /// User auth
+    /// </summary>
+    [HttpPost("{id:long}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+    public async Task<IResult> SignIn([FromMultiSource] UserSignInRequestDto request, 
+        CancellationToken cancellationToken = new())
+    {
+        var entity = _mapper.Map<UserEntity>(request);
+        await _updateUserService.SyncUserData(entity);
+        var token = _jwtTokenService.GenerateJwtToken(entity.Id);
+        await _transactionService.Commit();
+        return Results.Ok(token);
     }
 
     /// <summary>
     /// User deletion
     /// </summary>
-    [HttpDelete("/{id:long}")]
+    [HttpDelete("{id:long}")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     public async Task<IResult> Delete(long id, CancellationToken cancellationToken = new())
     {
         //TODO The isDeleted flag should be added to avoid abuse of referrals 
-        await deleteUserService.DeleteAsync(id);
-        await transactionService.Commit();
+        await _deleteUserService.DeleteAsync(id);
+        await _transactionService.Commit();
         return Results.NoContent();
     }
 }

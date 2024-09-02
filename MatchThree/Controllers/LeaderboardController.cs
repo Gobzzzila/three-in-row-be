@@ -11,6 +11,9 @@ namespace MatchThree.API.Controllers;
 public class LeaderboardController(IReadLeaderboardMemberService readLeaderboardMemberService,
     IMapper mapper)
 {
+    private readonly IReadLeaderboardMemberService _readLeaderboardMemberService = readLeaderboardMemberService;
+    private readonly IMapper _mapper = mapper;
+    
     /// <summary>
     /// Get leaderboard by league 
     /// </summary>
@@ -18,7 +21,7 @@ public class LeaderboardController(IReadLeaderboardMemberService readLeaderboard
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LeaderboardDto))]
     public async Task<IResult> GetLeaderboard(int league, CancellationToken cancellationToken = new())
     {
-        var entity = await readLeaderboardMemberService.GetLeaderboardByLeagueAsync((LeagueTypes)league);
-        return Results.Ok(mapper.Map<LeaderboardDto>(entity));
+        var entity = await _readLeaderboardMemberService.GetLeaderboardByLeagueAsync((LeagueTypes)league);
+        return Results.Ok(_mapper.Map<LeaderboardDto>(entity));
     }
 }

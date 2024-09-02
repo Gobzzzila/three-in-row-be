@@ -1,11 +1,16 @@
 using System.Reflection;
+using System.Text;
 using MatchThree.API.ExceptionHandlers;
 using MatchThree.API.Middleware;
 using MatchThree.API.Services;
+using MatchThree.API.Services.Authentication;
 using MatchThree.BL.Extensions;
+using MatchThree.Domain.Interfaces;
 using MatchThree.Repository.MSSQL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using static MatchThree.API.SwaggerConfiguration;
 
@@ -25,11 +30,32 @@ namespace MatchThree.API
 
             void ConfigureServices()
             {
+                builder.Services.AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+                            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                            ValidAudience = builder.Configuration["Jwt:Audience"],
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                        };
+                    });
+                builder.Services.AddAuthorization();
+                
                 builder.Services.AddDbContext<MatchThreeDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext))));
 
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<TopUpEnergyDrinksService>();
+                builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
                 builder.Services.AddDomainServices();
 
                 var autoMapperProfileAssemblies =
@@ -50,6 +76,31 @@ namespace MatchThree.API
                             Title = "Match three API"
                         });
                     c.OperationFilter<AcceptLanguageHeaderParameter>();
+                    
+                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer",
+                        BearerFormat = "JWT",
+                        In = ParameterLocation.Header,
+                        Description = "Enter your JWT token in the format: {token}"
+                    });
+
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
+                    });
                 });
 
                 builder.Services.AddExceptionHandler<NoDataFoundExceptionHandler>()
@@ -82,11 +133,14 @@ namespace MatchThree.API
                     "/swagger/v1/swagger.json",
                     "v1"));
 
+                app.UseAuthentication(); 
+                app.UseAuthorization();
+                
                 app.UseHttpsRedirection();
-                //app.UseAuthorization();
+
                 app.MapControllers();
 
-                app.UseExceptionHandler(opt => { });
+                app.UseExceptionHandler(_ => { });
 
                 app.UseMiddleware<LoggingMiddleware>();
                 
