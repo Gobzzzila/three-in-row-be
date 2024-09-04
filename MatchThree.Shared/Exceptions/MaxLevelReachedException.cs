@@ -1,7 +1,9 @@
 ﻿namespace MatchThree.Shared.Exceptions;
 
-public class MaxLevelReachedException(string messageText = MaxLevelReachedException.DefaultMessageText)
-    : Exception(messageText)
+public class MaxLevelReachedException(string messageKey = MaxLevelReachedException.DefaultMessageKey)
+    : Exception
 {
-    private const string DefaultMessageText = "Max level reached.";
+    private const string DefaultMessageKey = "MaxLevelReachedExceptionKey";
+    
+    public string MessageKey { get; } = messageKey;
 }

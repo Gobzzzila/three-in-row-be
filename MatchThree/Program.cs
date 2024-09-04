@@ -132,6 +132,9 @@ namespace MatchThree.API
 
             void Configure()
             {
+                var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
+                app.UseRequestLocalization(localizationOptions.Value);
+                
                 using (var scope = app.Services.CreateScope())
                 {
                     var dbContext = scope.ServiceProvider
@@ -154,9 +157,6 @@ namespace MatchThree.API
                 app.UseExceptionHandler(_ => { });
 
                 app.UseMiddleware<LoggingMiddleware>();
-                
-                var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
-                app.UseRequestLocalization(localizationOptions.Value);
             }
         }
 

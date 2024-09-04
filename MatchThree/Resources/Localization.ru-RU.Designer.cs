@@ -69,6 +69,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Возникла непредвиденная ошибка.
+        /// </summary>
+        internal static string DefaultExceptionKey {
+            get {
+                return ResourceManager.GetString("DefaultExceptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дельфин.
         /// </summary>
         internal static string DolphinLeagueKey {
@@ -92,6 +101,33 @@ namespace MatchThree.API.Resources {
         internal static string HumpbackLeagueKey {
             get {
                 return ResourceManager.GetString("HumpbackLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Достигнут максимальный уровень.
+        /// </summary>
+        internal static string MaxLevelReachedExceptionKey {
+            get {
+                return ResourceManager.GetString("MaxLevelReachedExceptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Указанный элемент не существует.
+        /// </summary>
+        internal static string NoDataFoundExceptionKey {
+            get {
+                return ResourceManager.GetString("NoDataFoundExceptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недостаточно средств на балансе.
+        /// </summary>
+        internal static string NotEnoughBalanceExceptionKey {
+            get {
+                return ResourceManager.GetString("NotEnoughBalanceExceptionKey", resourceCulture);
             }
         }
         
@@ -137,6 +173,15 @@ namespace MatchThree.API.Resources {
         internal static string UndefinedKey {
             get {
                 return ResourceManager.GetString("UndefinedKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Условия улучшения не были выполнены.
+        /// </summary>
+        internal static string UpgradeConditionsExceptionKey {
+            get {
+                return ResourceManager.GetString("UpgradeConditionsExceptionKey", resourceCulture);
             }
         }
         

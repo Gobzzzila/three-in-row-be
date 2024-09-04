@@ -48,4 +48,19 @@
     <data name="UndefinedKey" xml:space="preserve">
         <value>Undefined</value>
     </data>
+    <data name="NotEnoughBalanceExceptionKey" xml:space="preserve">
+        <value>Insufficient funds on the balance</value>
+    </data>
+    <data name="UpgradeConditionsExceptionKey" xml:space="preserve">
+        <value>Upgrade conditions have not been met</value>
+    </data>
+    <data name="NoDataFoundExceptionKey" xml:space="preserve">
+        <value>Specified item does not exist</value>
+    </data>
+    <data name="MaxLevelReachedExceptionKey" xml:space="preserve">
+        <value>Max level reached</value>
+    </data>
+    <data name="DefaultExceptionKey" xml:space="preserve">
+        <value>An unexpected error occurred</value>
+    </data>
 </root>

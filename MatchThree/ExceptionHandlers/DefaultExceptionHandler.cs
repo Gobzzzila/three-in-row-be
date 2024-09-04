@@ -1,26 +1,29 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace MatchThree.API.ExceptionHandlers;
 
-public class DefaultExceptionHandler : IExceptionHandler
+public class DefaultExceptionHandler(IStringLocalizer<Localization> localization) 
+    : IExceptionHandler
 {
+    private readonly IStringLocalizer<Localization> _localization = localization;
+
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext,
         Exception exception,
         CancellationToken cancellationToken)
     {
-        //TODO Add logging 
-
         httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+        var localizedTittle = _localization["DefaultExceptionKey"]; 
         await httpContext.Response.WriteAsJsonAsync(new
             ProblemDetails
             {
-                Status = (int)HttpStatusCode.InternalServerError,
+                Status = httpContext.Response.StatusCode,
                 Type = exception.GetType().Name,
-                Title = "An unexpected error occurred", //TODO translation 
-                Detail = exception.Message,
+                Title = localizedTittle, 
+                Detail = localizedTittle,
                 Instance = $"{httpContext.Request.Method} " +
                            $"{httpContext.Request.Path}"
             }, cancellationToken: cancellationToken);

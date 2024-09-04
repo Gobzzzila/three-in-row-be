@@ -48,4 +48,19 @@
     <data name="UndefinedKey" xml:space="preserve">
         <value>Не определено</value>
     </data>
+    <data name="NotEnoughBalanceExceptionKey" xml:space="preserve">
+        <value>Недостаточно средств на балансе</value>
+    </data>
+    <data name="UpgradeConditionsExceptionKey" xml:space="preserve">
+        <value>Условия улучшения не были выполнены</value>
+    </data>
+    <data name="NoDataFoundExceptionKey" xml:space="preserve">
+        <value>Указанный элемент не существует</value>
+    </data>
+    <data name="MaxLevelReachedExceptionKey" xml:space="preserve">
+        <value>Достигнут максимальный уровень</value>
+    </data>
+    <data name="DefaultExceptionKey" xml:space="preserve">
+        <value>Возникла непредвиденная ошибка</value>
+    </data>
 </root>

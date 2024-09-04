@@ -1,7 +1,9 @@
 ﻿namespace MatchThree.Shared.Exceptions;
 
-public class UpgradeConditionsException(string messageText = UpgradeConditionsException.DefaultMessageText)
-    : Exception(messageText)
+public class UpgradeConditionsException(string messageKey = UpgradeConditionsException.DefaultMessageKey)
+    : Exception
 {
-    private const string DefaultMessageText = "Improvement conditions have not been met.";
+    private const string DefaultMessageKey = "UpgradeConditionsExceptionKey";
+    
+    public string MessageKey { get; } = messageKey;
 }

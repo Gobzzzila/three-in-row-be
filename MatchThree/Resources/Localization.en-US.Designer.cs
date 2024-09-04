@@ -69,6 +69,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occurred.
+        /// </summary>
+        internal static string DefaultExceptionKey {
+            get {
+                return ResourceManager.GetString("DefaultExceptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dolphin.
         /// </summary>
         internal static string DolphinLeagueKey {
@@ -92,6 +101,33 @@ namespace MatchThree.API.Resources {
         internal static string HumpbackLeagueKey {
             get {
                 return ResourceManager.GetString("HumpbackLeagueKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max level reached.
+        /// </summary>
+        internal static string MaxLevelReachedExceptionKey {
+            get {
+                return ResourceManager.GetString("MaxLevelReachedExceptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified item does not exist.
+        /// </summary>
+        internal static string NoDataFoundExceptionKey {
+            get {
+                return ResourceManager.GetString("NoDataFoundExceptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insufficient funds on the balance.
+        /// </summary>
+        internal static string NotEnoughBalanceExceptionKey {
+            get {
+                return ResourceManager.GetString("NotEnoughBalanceExceptionKey", resourceCulture);
             }
         }
         
@@ -137,6 +173,15 @@ namespace MatchThree.API.Resources {
         internal static string UndefinedKey {
             get {
                 return ResourceManager.GetString("UndefinedKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade conditions have not been met.
+        /// </summary>
+        internal static string UpgradeConditionsExceptionKey {
+            get {
+                return ResourceManager.GetString("UpgradeConditionsExceptionKey", resourceCulture);
             }
         }
         
