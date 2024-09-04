@@ -27,6 +27,8 @@ public class EnergyController (IReadEnergyService energyReadService,
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EnergyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     public async Task<IResult> GetById(long userId, CancellationToken cancellationToken = new())
     {
         var entity = await _energyReadService.GetByUserIdAsync(userId);
@@ -39,9 +41,11 @@ public class EnergyController (IReadEnergyService energyReadService,
     [HttpPost("{userId:long}/upgrade-reserve")]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     public async Task<IResult> UpgradeReserve(long userId, CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.UpgradeReserveAsync(userId);
@@ -55,9 +59,11 @@ public class EnergyController (IReadEnergyService energyReadService,
     [HttpPost("{userId:long}/upgrade-recovery")]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     public async Task<IResult> UpgradeRecovery(long userId, CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.UpgradeRecoveryAsync(userId);
@@ -72,7 +78,9 @@ public class EnergyController (IReadEnergyService energyReadService,
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EnergyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     public async Task<IResult> UseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {
         var entity = await _updateEnergyService.UseEnergyDrinkAsync(userId);
@@ -86,6 +94,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     [HttpPost("{userId:long}/purchase-energy-drink")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
     public async Task<IResult> PurchaseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {

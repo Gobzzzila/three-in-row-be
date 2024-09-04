@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Text;
 using MatchThree.API.Authentication;
-using MatchThree.API.Authentication.Requirements;
+using MatchThree.API.Authentication.Policies;
 using MatchThree.API.ExceptionHandlers;
 using MatchThree.API.Middleware;
 using MatchThree.API.Services;

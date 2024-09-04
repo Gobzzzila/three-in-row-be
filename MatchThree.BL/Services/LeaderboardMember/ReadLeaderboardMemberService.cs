@@ -21,6 +21,7 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         var dbModels = await _context.Set<LeaderboardMemberDbModel>()
             .AsNoTracking()
             .Where(x => x.League == league)
+            .Take(100)
             .OrderBy(x => x.TopSpot)
             .ToListAsync();
 
@@ -28,6 +29,8 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         return new LeaderboardEntity
         {
             League = league,
+            MinValue = leagueParams.MinValue,
+            MaxValue = leagueParams.MaxValue,
             NextLeague = leagueParams.NextLeague,
             PreviousLeague = leagueParams.PreviousLeague,
             Members = _mapper.Map<List<LeaderboardMemberEntity>>(dbModels)

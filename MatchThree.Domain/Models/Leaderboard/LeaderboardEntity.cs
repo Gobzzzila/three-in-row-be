@@ -4,8 +4,10 @@ namespace MatchThree.Domain.Models.Leaderboard;
 
 public class LeaderboardEntity
 {
-    public LeagueTypes League { get; init; }
-    public LeagueTypes? NextLeague { get; init; }
-    public LeagueTypes? PreviousLeague { get; init; }
-    public List<LeaderboardMemberEntity> Members { get; init; } = [];
+    public LeagueTypes League { get; set; }
+    public ulong MinValue { get; set; }
+    public ulong MaxValue { get; set; }
+    public LeagueTypes? NextLeague { get; set; }
+    public LeagueTypes? PreviousLeague { get; set; }
+    public List<LeaderboardMemberEntity> Members { get; set; } = [];
 }

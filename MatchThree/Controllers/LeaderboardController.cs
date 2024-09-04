@@ -21,6 +21,8 @@ public class LeaderboardController(IReadLeaderboardMemberService readLeaderboard
     [HttpGet("leagues/{league:int}")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LeaderboardDto))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     public async Task<IResult> GetLeaderboard(int league, CancellationToken cancellationToken = new())
     {
         var entity = await _readLeaderboardMemberService.GetLeaderboardByLeagueAsync((LeagueTypes)league);

@@ -22,6 +22,8 @@ public class BalanceController(IMapper mapper,
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BalanceDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     public async Task<IResult> GetById(long userId, CancellationToken cancellationToken = new())
     {
         var entity = await _readBalanceService.GetByIdAsync(userId);

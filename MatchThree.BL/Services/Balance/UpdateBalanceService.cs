@@ -41,7 +41,7 @@ public class UpdateBalanceService (MatchThreeDbContext context,
         if (!result.isUpped)
             return;
         
-        var referrerId = await _readReferralService.ReferrerIdByReferralIdAsync(id);
+        var referrerId = await _readReferralService.GetReferrerIdByReferralIdAsync(id);
         if (!referrerId.HasValue)
             return;
         

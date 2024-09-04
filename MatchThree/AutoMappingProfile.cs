@@ -44,5 +44,8 @@ public class AutoMappingProfile : Profile
                 o => o.MapFrom(s => EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel)))
             .ForMember(x => x.NearbyEnergyRecoveryAt,
                 o => o.MapFrom(s => s.LastRecoveryStartTime + EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel)));
+        
+        //Referrals 
+        CreateMap<ReferralEntity, ReferralDto>();
     }
 }

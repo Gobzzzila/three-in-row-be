@@ -10,7 +10,7 @@ public class UpgradesRestrictionsService(IReadReferralService readReferralServic
 
     public async Task<bool> ValidateEnergyReserveRestrictions(long userId, int requiredReferralsAmount)
     {
-        var referralAmount = await _readReferralService.ReferralAmountByReferrerIdAsync(userId);
+        var referralAmount = await _readReferralService.GetReferralAmountByReferrerIdAsync(userId);
         return referralAmount >= requiredReferralsAmount;
     }
 

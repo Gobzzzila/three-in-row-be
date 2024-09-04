@@ -8,6 +8,50 @@ public static class LeagueConfiguration
 {
     private static readonly Dictionary<LeagueTypes, LeagueParameters> LeaguesParams;
 
+    public static LeagueTypes CalculateLeague(ulong overallBalance)
+    {
+        return (from leagueRange in LeaguesParams
+            where overallBalance >= leagueRange.Value.MinValue && overallBalance < leagueRange.Value.MaxValue
+            select leagueRange.Key).FirstOrDefault();
+    }
+    
+    public static uint CalculateReferralProfit(LeagueTypes league, bool wasPremium)
+    {
+        uint referralProfit = 0;
+        foreach (var leaguesParam in LeaguesParams)
+        {
+            referralProfit += leaguesParam.Value.RewardForReferrer;
+            
+            if (leaguesParam.Key == league)
+                break;
+        }
+        referralProfit += wasPremium
+            ? ReferralConstants.RewardPremiumUserForBeingInvited
+            : ReferralConstants.RewardRegularUserForBeingInvited;
+        return referralProfit;
+    }
+    
+    public static (bool isUpped, uint rewardForReferrer) IsLeagueUpped (ulong overallBalance, uint amountToAdd)
+    {
+        var oldLeague = CalculateLeague(overallBalance);
+        var newLeague = CalculateLeague(overallBalance + amountToAdd);
+
+        return (oldLeague < newLeague, LeaguesParams[newLeague].RewardForReferrer);
+    }
+    
+    public static LeagueParameters GetParamsByType(LeagueTypes league)
+    {
+        return LeaguesParams[league];
+    }
+    
+    public static LeagueTypes GetNextLeagueLooped(LeagueTypes league)
+    {
+        return LeaguesParams.TryGetValue(league, out var leagueParams)
+            ? leagueParams.NextLeague ?? LeagueTypes.Shrimp
+            : LeagueTypes.Shrimp;
+    }
+    
+    //ctor
     static LeagueConfiguration()
     {
         LeaguesParams = new Dictionary<LeagueTypes, LeagueParameters>
@@ -93,32 +137,5 @@ public static class LeagueConfiguration
                 }
             }
         };
-    }
-
-    public static LeagueTypes CalculateLeague(ulong overallBalance)
-    {
-        return (from leagueRange in LeaguesParams
-            where overallBalance >= leagueRange.Value.MinValue && overallBalance < leagueRange.Value.MaxValue
-            select leagueRange.Key).FirstOrDefault();
-    }
-    
-    public static (bool isUpped, uint rewardForReferrer) IsLeagueUpped (ulong overallBalance, uint amountToAdd)
-    {
-        var oldLeague = CalculateLeague(overallBalance);
-        var newLeague = CalculateLeague(overallBalance + amountToAdd);
-
-        return (oldLeague < newLeague, LeaguesParams[newLeague].RewardForReferrer);
-    }
-    
-    public static LeagueParameters GetParamsByType(LeagueTypes league)
-    {
-        return LeaguesParams[league];
-    }
-    
-    public static LeagueTypes GetNextLeagueLooped(LeagueTypes league)
-    {
-        return LeaguesParams.TryGetValue(league, out var leagueParams)
-            ? leagueParams.NextLeague ?? LeagueTypes.Shrimp
-            : LeagueTypes.Shrimp;
     }
 }
