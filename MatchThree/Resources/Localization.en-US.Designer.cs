@@ -87,6 +87,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Energy.
+        /// </summary>
+        internal static string EnergyCategoryTextKey {
+            get {
+                return ResourceManager.GetString("EnergyCategoryTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fish.
         /// </summary>
         internal static string FishLeagueKey {

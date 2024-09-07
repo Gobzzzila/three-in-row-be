@@ -1,6 +1,6 @@
 ﻿using MatchThree.Shared.Enums;
 
-namespace MatchThree.Domain.Interfaces;
+namespace MatchThree.Domain.Interfaces.Upgrades;
 
 public interface IUpgradesRestrictionsService
 {

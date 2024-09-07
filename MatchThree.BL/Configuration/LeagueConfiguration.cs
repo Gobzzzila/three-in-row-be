@@ -54,7 +54,7 @@ public static class LeagueConfiguration
     //ctor
     static LeagueConfiguration()
     {
-        LeaguesParams = new Dictionary<LeagueTypes, LeagueParameters>
+        LeaguesParams = new Dictionary<LeagueTypes, LeagueParameters>//TODO mb extract data for initialization to JSON 
         {
             {
                 LeagueTypes.Shrimp, new LeagueParameters

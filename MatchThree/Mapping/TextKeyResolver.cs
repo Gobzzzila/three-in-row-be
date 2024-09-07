@@ -3,7 +3,7 @@ using Microsoft.Extensions.Localization;
 
 namespace MatchThree.API.Mapping;
 
-public class TextIdResolver(IStringLocalizer<Localization> localizer)
+public class TextKeyResolver(IStringLocalizer<Localization> localizer)
     : IMemberValueResolver<object, object, string, string>
 {
     private readonly IStringLocalizer<Localization> _localizer = localizer;

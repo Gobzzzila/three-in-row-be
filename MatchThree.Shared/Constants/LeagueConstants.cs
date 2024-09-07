@@ -2,6 +2,7 @@
 
 public static class LeagueConstants
 {
+    //Leagues limits
     public const ulong ShrimpMaxValue = 10_000;
     public const ulong CrabMaxValue = 50_000;
     public const ulong OctopusMaxValue = 100_000;

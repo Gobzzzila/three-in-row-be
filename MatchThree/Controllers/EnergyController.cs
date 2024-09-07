@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MatchThree.API.Controllers;
 
 [ApiController]
-[Route("api/v1/user")]
+[Route("api/v1/users")]
 public class EnergyController (IReadEnergyService energyReadService,
     IUpdateEnergyService updateEnergyService,
     ITransactionService transactionService,
@@ -38,7 +38,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Upgrade reserve by user identifier 
     /// </summary>
-    [HttpPost("{userId:long}/upgrade-reserve")]
+    [HttpPost("{userId:long}/upgrade-reserve", Name = EndpointsConstants.UpgradeEnergyReserveEndpointName)]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
@@ -56,7 +56,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Upgrade reserve by user identifier 
     /// </summary>
-    [HttpPost("{userId:long}/upgrade-recovery")]
+    [HttpPost("{userId:long}/upgrade-recovery", Name = EndpointsConstants.UpgradeEnergyRecoveryEndpointName)]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]

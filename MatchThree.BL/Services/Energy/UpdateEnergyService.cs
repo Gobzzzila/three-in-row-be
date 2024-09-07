@@ -3,6 +3,7 @@ using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
+using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;

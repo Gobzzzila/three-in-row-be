@@ -3,12 +3,14 @@ using MatchThree.BL.Services.Balance;
 using MatchThree.BL.Services.Energy;
 using MatchThree.BL.Services.LeaderboardMember;
 using MatchThree.BL.Services.Referral;
+using MatchThree.BL.Services.Upgrades;
 using MatchThree.BL.Services.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Domain.Interfaces.Referral;
+using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Interfaces.User;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,7 +22,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         services.AddScoped<ITransactionService, TransactionService>();
-        services.AddScoped<IUpgradesRestrictionsService, UpgradesRestrictionsService>();
         
         //User
         services.AddScoped<ICreateUserService, CreateUserService>();
@@ -49,5 +50,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IReadEnergyService, ReadEnergyService>();
         services.AddTransient<ISynchronizationEnergyService, SynchronizationEnergyService>();
         services.AddScoped<IUpdateEnergyService, UpdateEnergyService>();
+        
+        //Upgrades
+        services.AddScoped<IUpgradesRestrictionsService, UpgradesRestrictionsService>();
+        services.AddScoped<IGetUpgradesService, GetUpgradesService>();
     }
 }

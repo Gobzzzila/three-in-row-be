@@ -1,4 +1,5 @@
 ﻿using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.Domain.Configuration;

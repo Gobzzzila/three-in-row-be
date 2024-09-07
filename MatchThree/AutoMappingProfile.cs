@@ -47,5 +47,23 @@ public class AutoMappingProfile : Profile
         
         //Referrals 
         CreateMap<ReferralEntity, ReferralDto>();
+        
+        //Upgrades 
+        CreateMap<UpgradeEntity, UpgradeDto>()
+            .ForMember(x => x.HeaderText,
+                o =>
+                    o.MapFrom<TextKeyResolver, string>(s => s.HeaderTextKey))
+            .ForMember(x => x.DescriptionText,
+                o =>
+                    o.MapFrom<TextKeyResolver, string>(s => s.DescriptionTextKey))
+            .ForMember(x => x.CategoryName,
+                o =>
+                    o.MapFrom<EnumTranslationResolver<UpgradeCategories>, UpgradeCategories>(s => s.Category))
+            .ForMember(x => x.BlockingText,
+                o =>
+                {
+                    o.PreCondition(src => src.BlockingTextKey is not null);
+                    o.MapFrom<TextKeyResolver, string>(s => s.BlockingTextKey!);
+                });
     }
 }

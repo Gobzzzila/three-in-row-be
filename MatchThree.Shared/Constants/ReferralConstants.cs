@@ -2,14 +2,10 @@
 
 public static class ReferralConstants
 {
+    //Referrer rewards
     public const uint RewardForInviteRegularUser = 500;
-    
     public const uint RewardForInvitePremiumUser = 2000;
-    
-    public const uint RewardPremiumUserForBeingInvited = 2000;
 
-    public const uint RewardRegularUserForBeingInvited = 500;
-    
     public const uint CrabLeagueReferrerReward = 1_000;
     public const uint OctopusLeagueReferrerReward = 1_000;
     public const uint FishLeagueReferrerReward = 1_000;
@@ -17,4 +13,8 @@ public static class ReferralConstants
     public const uint SharkLeagueReferrerReward = 1_000;
     public const uint WhaleLeagueReferrerReward = 1_000;
     public const uint HumpbackLeagueReferrerReward = 1_000;
+    
+    //Referral rewards
+    public const uint RewardPremiumUserForBeingInvited = 2000;
+    public const uint RewardRegularUserForBeingInvited = 500;
 }

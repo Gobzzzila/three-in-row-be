@@ -63,4 +63,7 @@
     <data name="DefaultExceptionKey" xml:space="preserve">
         <value>An unexpected error occurred</value>
     </data>
+    <data name="EnergyCategoryTextKey" xml:space="preserve">
+        <value>Energy</value>
+    </data>
 </root>

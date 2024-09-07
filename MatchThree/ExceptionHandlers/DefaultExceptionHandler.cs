@@ -16,14 +16,13 @@ public class DefaultExceptionHandler(IStringLocalizer<Localization> localization
     {
         httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-        var localizedTittle = _localization["DefaultExceptionKey"]; 
         await httpContext.Response.WriteAsJsonAsync(new
             ProblemDetails
             {
                 Status = httpContext.Response.StatusCode,
                 Type = exception.GetType().Name,
-                Title = localizedTittle, 
-                Detail = localizedTittle,
+                Title = _localization["DefaultExceptionKey"], 
+                Detail = exception.Message,
                 Instance = $"{httpContext.Request.Method} " +
                            $"{httpContext.Request.Path}"
             }, cancellationToken: cancellationToken);

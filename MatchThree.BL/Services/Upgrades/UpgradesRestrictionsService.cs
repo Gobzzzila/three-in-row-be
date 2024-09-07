@@ -1,8 +1,9 @@
 ﻿using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Referral;
+using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Enums;
 
-namespace MatchThree.BL.Services;
+namespace MatchThree.BL.Services.Upgrades;
 
 public class UpgradesRestrictionsService(IReadReferralService readReferralService) : IUpgradesRestrictionsService
 {

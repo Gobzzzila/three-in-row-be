@@ -63,4 +63,7 @@
     <data name="DefaultExceptionKey" xml:space="preserve">
         <value>Возникла непредвиденная ошибка</value>
     </data>
+    <data name="EnergyCategoryTextKey" xml:space="preserve">
+        <value>Энергия</value>
+    </data>
 </root>

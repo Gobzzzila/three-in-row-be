@@ -1,5 +1,6 @@
 ﻿using MatchThree.Domain.Configuration;
 using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
@@ -27,7 +28,7 @@ public static class EnergyReserveConfiguration
     //ctor
     static EnergyReserveConfiguration()
     {
-        EnergyReservesParams = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>
+        EnergyReservesParams = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>//TODO mb extract data for initialization to JSON 
         {
             {
                 EnergyReserveLevels.Level1, new EnergyReserveParameters
