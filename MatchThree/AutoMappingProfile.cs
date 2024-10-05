@@ -20,9 +20,14 @@ public class AutoMappingProfile : Profile
     private void DtoToEntityConfigurations()
     {
         //UserMapping
-        CreateMap<UserCreateRequestDto, UserEntity>();
-        CreateMap<UserSignInRequestDto, UserEntity>();
-        CreateMap<UserDto, UserEntity>().ReverseMap();
+        CreateMap<CreateUserRequestDto, UserEntity>();
+        CreateMap<UserSignInRequestDto, UserEntity>()
+            .ForMember(x => x.FirstName, 
+                o => o.MapFrom(s => s.MainUserInfo.FirstName))
+            .ForMember(x => x.Username, 
+                o => o.MapFrom(s => s.MainUserInfo.Username))
+            .ForMember(x => x.IsPremium, 
+                o => o.MapFrom(s => s.MainUserInfo.IsPremium));
         
         //BalanceMapping
         CreateMap<BalanceEntity, BalanceDto>()

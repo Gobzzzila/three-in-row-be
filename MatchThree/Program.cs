@@ -87,6 +87,7 @@ namespace MatchThree.API
                             Title = "Match three API"
                         });
                     c.OperationFilter<AcceptLanguageHeaderParameter>();
+                    c.EnableAnnotations();
                     
                     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                     {

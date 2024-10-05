@@ -4,6 +4,7 @@ using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MatchThree.API.Controllers;
 
@@ -26,12 +27,11 @@ public class UpgradesController(IMapper mapper,
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [SwaggerOperation(OperationId = "GetUpgrades", Tags = ["Upgrades"])]
     public async Task<IResult> GetAllUpgrades(long userId, CancellationToken cancellationToken = new())
     {
         var entities = await _getUpgradesService.GetAll(userId);
-        
         var result = new List<UpgradeDto>(entities.Count);
-
         var values = new { userId = userId.ToString() };
         foreach (var entity in entities)
         {

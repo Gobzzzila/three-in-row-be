@@ -1,8 +1,7 @@
 ﻿namespace MatchThree.API.Models.User;
 
-public class UserDto
+public class MainUserInfoDto
 {
-    public long Id { get; init; }
     public string? Username { get; init; }
     public string FirstName { get; init; } = string.Empty;
     public bool IsPremium { get; init; }

@@ -4,6 +4,7 @@ using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MatchThree.API.Controllers;
 
@@ -24,6 +25,7 @@ public class BalanceController(IMapper mapper,
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [SwaggerOperation(OperationId = "GetBalance", Tags = ["Balance"])]
     public async Task<IResult> GetById(long userId, CancellationToken cancellationToken = new())
     {
         var entity = await _readBalanceService.GetByIdAsync(userId);

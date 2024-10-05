@@ -4,6 +4,7 @@ using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MatchThree.API.Controllers;
 
@@ -23,6 +24,7 @@ public class ReferralController(IMapper mapper,
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ReferralDto>))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [SwaggerOperation(OperationId = "GetReferrals", Tags = ["Referrals"])]
     public async Task<IResult> GetReferralsByReferrerId(long userId, CancellationToken cancellationToken = new())
     {
         var entity = await _readReferralService.GetReferralsByReferrerId(userId);

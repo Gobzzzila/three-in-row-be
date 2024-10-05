@@ -7,6 +7,7 @@ using MatchThree.Domain.Models;
 using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MatchThree.API.Controllers;
 
@@ -31,16 +32,18 @@ public class UsersController(
     /// User creation
     /// </summary>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
-    public async Task<IResult> Create([FromBody] UserCreateRequestDto request, 
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+    [SwaggerOperation(OperationId = "CreateUser", Tags = ["Users"])]
+    public async Task<IResult> Create([FromBody] CreateUserRequestDto request, 
         CancellationToken cancellationToken = new())
     {
         var entity = _mapper.Map<UserEntity>(request);
         var createdEntity = request.ReferrerId.HasValue 
             ? await _createUserService.CreateAsync(entity, request.ReferrerId.Value)
             : _createUserService.Create(entity);
+        var token = _jwtTokenService.GenerateJwtToken(createdEntity.Id);
         await _transactionService.Commit();
-        return Results.Ok(_mapper.Map<UserDto>(createdEntity));
+        return Results.Ok(token);
     }
     
     /// <summary>
@@ -48,6 +51,8 @@ public class UsersController(
     /// </summary>
     [HttpPost("{userId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [SwaggerOperation(OperationId = "SignInUser", Tags = ["Users"])]
     public async Task<IResult> SignIn([FromMultiSource] UserSignInRequestDto request, 
         CancellationToken cancellationToken = new())
     {
@@ -65,6 +70,7 @@ public class UsersController(
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [SwaggerOperation(OperationId = "DeleteUser", Tags = ["Users"])]
     public async Task<IResult> Delete(long userId, CancellationToken cancellationToken = new())
     {
         //TODO The isDeleted flag should be added to avoid abuse of referrals 
