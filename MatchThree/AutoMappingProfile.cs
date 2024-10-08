@@ -2,10 +2,12 @@
 using MatchThree.API.Mapping;
 using MatchThree.API.Models;
 using MatchThree.API.Models.Leaderboard;
+using MatchThree.API.Models.Upgrades;
 using MatchThree.API.Models.User;
 using MatchThree.BL.Configuration;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Models.Leaderboard;
+using MatchThree.Domain.Models.Upgrades;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.API;
@@ -61,14 +63,16 @@ public class AutoMappingProfile : Profile
             .ForMember(x => x.DescriptionText,
                 o =>
                     o.MapFrom<TextKeyResolver, string>(s => s.DescriptionTextKey))
-            .ForMember(x => x.CategoryName,
-                o =>
-                    o.MapFrom<EnumTranslationResolver<UpgradeCategories>, UpgradeCategories>(s => s.Category))
             .ForMember(x => x.BlockingText,
                 o =>
                 {
                     o.PreCondition(src => src.BlockingTextKey is not null);
                     o.MapFrom<TextKeyResolver, string>(s => s.BlockingTextKey!);
                 });
+        
+        CreateMap<GroupedUpgradesEntity, GroupedUpgradesDto>()
+            .ForMember(x => x.CategoryName,
+                o =>
+                    o.MapFrom<EnumTranslationResolver<UpgradeCategories>, UpgradeCategories>(s => s.Category));
     }
 }

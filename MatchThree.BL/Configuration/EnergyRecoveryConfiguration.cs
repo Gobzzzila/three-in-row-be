@@ -27,7 +27,7 @@ public static class EnergyRecoveryConfiguration
     
     static EnergyRecoveryConfiguration()
     {
-        EnergyRecoveryParams = new Dictionary<EnergyRecoveryLevels, EnergyRecoveryParameters>//TODO mb extract data for initialization to JSON 
+        EnergyRecoveryParams = new Dictionary<EnergyRecoveryLevels, EnergyRecoveryParameters>//TODO make foreach and attributes as in fieldconfiguration
         {
             {
                 EnergyRecoveryLevels.Level1, new EnergyRecoveryParameters

@@ -1,4 +1,4 @@
-﻿namespace MatchThree.API.Models;
+﻿namespace MatchThree.API.Models.Upgrades;
 
 public class UpgradeDto
 {
@@ -8,6 +8,5 @@ public class UpgradeDto
     public int CurrentLevel { get; init; }
     public uint? Price { get; init; }
     public bool IsStars { get; init; }
-    public string CategoryName { get; init; } = string.Empty;
     public string ExecutePath { get; set; } = string.Empty;
 }

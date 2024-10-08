@@ -1,6 +1,4 @@
-﻿using MatchThree.Shared.Enums;
-
-namespace MatchThree.Domain.Models;
+﻿namespace MatchThree.Domain.Models.Upgrades;
 
 public class UpgradeEntity
 {
@@ -10,6 +8,5 @@ public class UpgradeEntity
     public int CurrentLevel { get; set; }
     public uint? Price { get; set; }
     public bool IsStars { get; set; }
-    public UpgradeCategories Category { get; set; }
     public string ExecutePathName { get; set; } = string.Empty;
 }

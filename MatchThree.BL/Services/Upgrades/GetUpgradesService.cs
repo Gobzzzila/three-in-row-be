@@ -2,6 +2,7 @@
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Models;
+using MatchThree.Domain.Models.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
@@ -11,14 +12,28 @@ public class GetUpgradesService(IReadEnergyService readEnergyService) : IGetUpgr
 {
     private readonly IReadEnergyService _readEnergyService = readEnergyService;
 
-    public async Task<IReadOnlyCollection<UpgradeEntity>> GetAll(long userId)
+    public async Task<IReadOnlyCollection<GroupedUpgradesEntity>> GetAll(long userId)
     {
         var energyEntity = await _readEnergyService.GetByUserIdAsync(userId);
 
-        var result = new List<UpgradeEntity>
+        var result = new List<GroupedUpgradesEntity>
         {
-            GetEnergyReserveUpgrade(energyEntity),
-            GetEnergyRecoveryUpgrade(energyEntity),
+            GetEnergyUpgrades(energyEntity)
+        };
+        
+        return result;
+    }
+
+    private GroupedUpgradesEntity GetEnergyUpgrades(EnergyEntity energyEntity)
+    {
+        var result = new GroupedUpgradesEntity
+        {
+            Category = UpgradeCategories.Energy,
+            Upgrades =
+            [
+                GetEnergyReserveUpgrade(energyEntity),
+                GetEnergyRecoveryUpgrade(energyEntity)
+            ]
         };
 
         return result;
@@ -36,7 +51,6 @@ public class GetUpgradesService(IReadEnergyService readEnergyService) : IGetUpgr
             CurrentLevel = (int)energyEntity.MaxReserve,
             Price = reserveParams.NextLevelCost,
             IsStars = false,
-            Category = UpgradeCategories.Energy,
             ExecutePathName = EndpointsConstants.UpgradeEnergyReserveEndpointName
         };
         return upgradeEntity;
@@ -54,7 +68,6 @@ public class GetUpgradesService(IReadEnergyService readEnergyService) : IGetUpgr
             CurrentLevel = (int)energyEntity.RecoveryLevel,
             Price = recoveryParams.NextLevelCost,
             IsStars = false,
-            Category = UpgradeCategories.Energy,
             ExecutePathName = EndpointsConstants.UpgradeEnergyRecoveryEndpointName
         };
         return upgradeEntity;

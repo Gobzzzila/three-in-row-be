@@ -8,27 +8,27 @@ namespace MatchThree.BL.Configuration;
 
 public static class EnergyReserveConfiguration
 {
-    private static readonly Dictionary<EnergyReserveLevels, EnergyReserveParameters> EnergyReservesParams;
+    private static readonly Dictionary<EnergyReserveLevels, EnergyReserveParameters> EnergyReserveParams;
     
     public static (EnergyReserveLevels ReserveLevel, int ReserveValue) GetStartValue()
     {
-        return (EnergyReserveLevels.Level1, EnergyReservesParams[EnergyReserveLevels.Level1].MaxReserve);
+        return (EnergyReserveLevels.Level1, EnergyReserveParams[EnergyReserveLevels.Level1].MaxReserve);
     }
     
     public static int GetReserveMaxValue(EnergyReserveLevels energyReserveLevel)
     {
-        return EnergyReservesParams[energyReserveLevel].MaxReserve;
+        return EnergyReserveParams[energyReserveLevel].MaxReserve;
     }
     
     public static EnergyReserveParameters GetParamsByLevel(EnergyReserveLevels energyReserveLevel)
     {
-        return EnergyReservesParams[energyReserveLevel];
+        return EnergyReserveParams[energyReserveLevel];
     }
     
     //ctor
     static EnergyReserveConfiguration()
     {
-        EnergyReservesParams = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>//TODO mb extract data for initialization to JSON 
+        EnergyReserveParams = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>//TODO make foreach and attributes as in fieldconfiguration
         {
             {
                 EnergyReserveLevels.Level1, new EnergyReserveParameters
