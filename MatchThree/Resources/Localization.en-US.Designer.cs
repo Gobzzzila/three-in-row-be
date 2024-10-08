@@ -195,6 +195,42 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Boosts the speed of energy recovery.
+        /// </summary>
+        internal static string UpgradeEnergyRecoveryDescriptionKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyRecoveryDescriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery speed.
+        /// </summary>
+        internal static string UpgradeEnergyRecoveryHeaderKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyRecoveryHeaderKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boosts energy reserves by 5.
+        /// </summary>
+        internal static string UpgradeEnergyReserveDescriptionKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyReserveDescriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Energy reserve.
+        /// </summary>
+        internal static string UpgradeEnergyReserveHeaderKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyReserveHeaderKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Whale.
         /// </summary>
         internal static string WhaleLeagueKey {

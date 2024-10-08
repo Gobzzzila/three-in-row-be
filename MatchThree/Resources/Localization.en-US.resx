@@ -66,4 +66,16 @@
     <data name="EnergyCategoryTextKey" xml:space="preserve">
         <value>Energy</value>
     </data>
+    <data name="UpgradeEnergyReserveHeaderKey" xml:space="preserve">
+        <value>Energy reserve</value>
+    </data>
+    <data name="UpgradeEnergyReserveDescriptionKey" xml:space="preserve">
+        <value>Boosts energy reserves by 5</value>
+    </data>
+    <data name="UpgradeEnergyRecoveryHeaderKey" xml:space="preserve">
+        <value>Recovery speed</value>
+    </data>
+    <data name="UpgradeEnergyRecoveryDescriptionKey" xml:space="preserve">
+        <value>Boosts the speed of energy recovery</value>
+    </data>
 </root>

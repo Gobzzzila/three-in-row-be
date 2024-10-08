@@ -2,7 +2,8 @@
 
 public static class TranslationConstants
 {
-    //League types
+    #region League types
+
     public const string UndefinedTextKey = "UndefinedKey";
     public const string ShrimpLeagueTextKey = "ShrimpLeagueKey";
     public const string CrabLeagueTextKey = "CrabLeagueKey";
@@ -13,10 +14,13 @@ public static class TranslationConstants
     public const string WhaleLeagueTextKey = "WhaleLeagueKey";
     public const string HumpbackLeagueTextKey = "HumpbackLeagueKey";
     
-    //Upgrade categories
+    #endregion
+    
+    #region Upgrades
+    
+    //Energy
     public const string EnergyCategoryTextKey = "EnergyCategoryTextKey";
     
-    //Upgrades
     public const string UpgradeEnergyReserveHeaderKey = "UpgradeEnergyReserveHeaderKey";
     public const string UpgradeEnergyReserveDescriptionKey = "UpgradeEnergyReserveDescriptionKey";
     public const string UpgradeEnergyReserveBlockingTextKey = "UpgradeEnergyReserveBlockingTextKey";
@@ -24,4 +28,8 @@ public static class TranslationConstants
     public const string UpgradeEnergyRecoveryHeaderKey = "UpgradeEnergyRecoveryHeaderKey";
     public const string UpgradeEnergyRecoveryDescriptionKey = "UpgradeEnergyRecoveryDescriptionKey";
     public const string UpgradeEnergyRecoveryBlockingTextKey = "UpgradeEnergyRecoveryBlockingTextKey";
+    
+    //Field
+    
+    #endregion
 }
