@@ -1,6 +1,7 @@
 ﻿using MatchThree.BL.Services;
 using MatchThree.BL.Services.Balance;
 using MatchThree.BL.Services.Energy;
+using MatchThree.BL.Services.FieldElements;
 using MatchThree.BL.Services.LeaderboardMember;
 using MatchThree.BL.Services.Referral;
 using MatchThree.BL.Services.Upgrades;
@@ -8,6 +9,7 @@ using MatchThree.BL.Services.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
+using MatchThree.Domain.Interfaces.FieldElements;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.Upgrades;
@@ -50,6 +52,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IReadEnergyService, ReadEnergyService>();
         services.AddTransient<ISynchronizationEnergyService, SynchronizationEnergyService>();
         services.AddScoped<IUpdateEnergyService, UpdateEnergyService>();
+        
+        //FieldElements
+        services.AddScoped<ICreateFieldElementsService, CreateFieldElementsService>();
         
         //Upgrades
         services.AddScoped<IUpgradesRestrictionsService, UpgradesRestrictionsService>();

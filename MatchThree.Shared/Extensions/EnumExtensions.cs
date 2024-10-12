@@ -6,6 +6,17 @@ namespace MatchThree.Shared.Extensions;
 
 public static class EnumExtensions
 {
+    public static uint? GetUpgradeCost<T>(this T enumValue) where T : Enum
+    {
+        var fieldName = Enum.GetName(typeof(T), enumValue);
+        if (fieldName == null)
+            throw new InvalidOperationException($"Value {enumValue} is not defined for enum type {typeof(T).Name}");
+
+        return typeof(T).GetField(fieldName)?.GetCustomAttribute<UpgradeCostAttribute>()?.UpgradeCost;
+    }
+    
+    #region TranslationId
+    
     public static string? GetTranslationId<T>(this T enumValue) where T : Enum
     {
         var enumValues = TextIdCache.Value.GetOrAdd(typeof(T), _ => new ConcurrentDictionary<int, string?>());
@@ -25,4 +36,6 @@ public static class EnumExtensions
     private static readonly Lazy<ConcurrentDictionary<Type, ConcurrentDictionary<int, string?>>>
         TextIdCache = new(() => new ConcurrentDictionary<Type, ConcurrentDictionary<int, string?>>(), 
             LazyThreadSafetyMode.PublicationOnly);
+    
+    #endregion
 }

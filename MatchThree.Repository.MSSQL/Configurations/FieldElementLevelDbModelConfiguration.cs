@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MatchThree.Repository.MSSQL.Configurations;
 
-public class EnergyDbModelConfiguration : EntityTypeConfigurationBase<EnergyDbModel>
+public class FieldElementLevelDbModelConfiguration : EntityTypeConfigurationBase<FieldElementLevelDbModel>
 {
-    protected override void ConfigureEntityProperties(EntityTypeBuilder<EnergyDbModel> builder)
+    protected override void ConfigureEntityProperties(EntityTypeBuilder<FieldElementLevelDbModel> builder)
     {
         builder
             .HasKey(x => x.Id)
@@ -18,8 +18,8 @@ public class EnergyDbModelConfiguration : EntityTypeConfigurationBase<EnergyDbMo
 
         builder
             .HasOne(x => x.User)
-            .WithOne(x => x.Energy)
-            .HasForeignKey<EnergyDbModel>(x => x.Id)
+            .WithOne(x => x.FieldElementLevel)
+            .HasForeignKey<FieldElementLevelDbModel>(x => x.Id)
             .IsRequired()
             .OnDelete(DeleteBehavior.NoAction);
     }
