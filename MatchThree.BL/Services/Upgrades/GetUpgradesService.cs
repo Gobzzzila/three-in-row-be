@@ -8,8 +8,11 @@ using MatchThree.Shared.Enums;
 
 namespace MatchThree.BL.Services.Upgrades;
 
-public class GetUpgradesService(IReadEnergyService readEnergyService) : IGetUpgradesService
+public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestrictionsService, 
+    IReadEnergyService readEnergyService) 
+    : IGetUpgradesService
 {
+    private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
     private readonly IReadEnergyService _readEnergyService = readEnergyService;
 
     public async Task<IReadOnlyCollection<GroupedUpgradesEntity>> GetAll(long userId)
@@ -18,20 +21,20 @@ public class GetUpgradesService(IReadEnergyService readEnergyService) : IGetUpgr
 
         var result = new List<GroupedUpgradesEntity>
         {
-            GetEnergyUpgrades(energyEntity)
+            await GetEnergyUpgrades(energyEntity)
         };
         
         return result;
     }
 
-    private GroupedUpgradesEntity GetEnergyUpgrades(EnergyEntity energyEntity)
+    private async ValueTask<GroupedUpgradesEntity> GetEnergyUpgrades(EnergyEntity energyEntity)
     {
         var result = new GroupedUpgradesEntity
         {
             Category = UpgradeCategories.Energy,
             Upgrades =
             [
-                GetEnergyReserveUpgrade(energyEntity),
+                await GetEnergyReserveUpgrade(energyEntity),
                 GetEnergyRecoveryUpgrade(energyEntity)
             ]
         };
@@ -39,15 +42,25 @@ public class GetUpgradesService(IReadEnergyService readEnergyService) : IGetUpgr
         return result;
     }
 
-    private UpgradeEntity GetEnergyReserveUpgrade(EnergyEntity energyEntity)
+    private async ValueTask<UpgradeEntity> GetEnergyReserveUpgrade(EnergyEntity energyEntity)
     {
         var reserveParams = EnergyReserveConfiguration.GetParamsByLevel(energyEntity.MaxReserve);
-
+        
+        int? missingAmountOfReferrals = default;
+        if (reserveParams.UpgradeCondition is not null)
+        {
+            missingAmountOfReferrals = 
+                await reserveParams.UpgradeCondition(_upgradesRestrictionsService, energyEntity.Id);
+        }
+        
         var upgradeEntity = new UpgradeEntity
         {
             HeaderTextKey = TranslationConstants.UpgradeEnergyReserveHeaderKey,
             DescriptionTextKey = TranslationConstants.UpgradeEnergyReserveDescriptionKey,
-            BlockingTextKey = TranslationConstants.UpgradeEnergyReserveBlockingTextKey,
+            BlockingTextKey = missingAmountOfReferrals is not null
+                ? TranslationConstants.UpgradeEnergyReserveBlockingTextKey
+                : null,
+            BlockingTextArgs = [missingAmountOfReferrals],
             CurrentLevel = (int)energyEntity.MaxReserve,
             Price = reserveParams.NextLevelCost,
             IsStars = false,

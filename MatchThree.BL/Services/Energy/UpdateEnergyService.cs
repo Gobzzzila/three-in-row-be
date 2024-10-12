@@ -33,10 +33,13 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         var reserveParams = EnergyReserveConfiguration.GetParamsByLevel(dbModel!.MaxReserve);
         if (!reserveParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
-        
-        if (reserveParams.UpgradeCondition is not null) 
-            if (!await reserveParams.UpgradeCondition(_upgradesRestrictionsService, userId)) 
+
+        if (reserveParams.UpgradeCondition is not null)
+        {
+            var missingAmountOfReferrals = await reserveParams.UpgradeCondition(_upgradesRestrictionsService, userId);
+            if (missingAmountOfReferrals is not null) 
                 throw new UpgradeConditionsException();
+        }
         
         await _updateBalanceService.SpentBalanceAsync(userId, reserveParams.NextLevelCost!.Value);
         

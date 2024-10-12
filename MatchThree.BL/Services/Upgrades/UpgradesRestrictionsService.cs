@@ -1,5 +1,4 @@
-﻿using MatchThree.Domain.Interfaces;
-using MatchThree.Domain.Interfaces.Referral;
+﻿using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Enums;
 
@@ -9,10 +8,13 @@ public class UpgradesRestrictionsService(IReadReferralService readReferralServic
 {
     private readonly IReadReferralService _readReferralService = readReferralService;
 
-    public async Task<bool> ValidateEnergyReserveRestrictions(long userId, int requiredReferralsAmount)
+    public async Task<int?> CalculateNumberOfMissingReferralsAsync(long userId, int requiredReferralsAmount)
     {
-        var referralAmount = await _readReferralService.GetReferralAmountByReferrerIdAsync(userId);
-        return referralAmount >= requiredReferralsAmount;
+        var referralsAmount = await _readReferralService.GetReferralAmountByReferrerIdAsync(userId);
+        if (referralsAmount >= requiredReferralsAmount) 
+            return default;
+        
+        return requiredReferralsAmount - referralsAmount;
     }
 
     public bool ValidateEnergyRecoveryRestrictions(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedLevel)

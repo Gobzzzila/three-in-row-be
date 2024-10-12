@@ -18,6 +18,7 @@ public class ReadReferralService (MatchThreeDbContext context)
             .Include(x => x.Referral)
             .ThenInclude(x => x!.Balance)
             .Where(x => x.ReferrerUserId == referrerId)
+            .Take(100)
             .Select(x => new ReferralEntity
             {
                 Id = x.ReferralUserId,

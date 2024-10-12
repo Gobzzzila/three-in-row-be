@@ -169,9 +169,9 @@ public static class EnergyReserveConfiguration
         };
     }
 
-    private static Func<IUpgradesRestrictionsService, long, Task<bool>> UpgradeCondition(int requiredReferralsAmount)
+    private static Func<IUpgradesRestrictionsService, long, Task<int?>> UpgradeCondition(int requiredReferralsAmount)
     {
         return (upgradesRestrictionsService, userId) => 
-            upgradesRestrictionsService.ValidateEnergyReserveRestrictions(userId, requiredReferralsAmount);
+            upgradesRestrictionsService.CalculateNumberOfMissingReferralsAsync(userId, requiredReferralsAmount);
     }
 }

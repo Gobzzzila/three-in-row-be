@@ -213,6 +213,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пригласите еще {0} друга.
+        /// </summary>
+        internal static string UpgradeEnergyReserveBlockingTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyReserveBlockingTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Увеличивает запас энергии на 5.
         /// </summary>
         internal static string UpgradeEnergyReserveDescriptionKey {

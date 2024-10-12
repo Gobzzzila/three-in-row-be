@@ -5,6 +5,7 @@ public class UpgradeEntity
     public string HeaderTextKey { get; set; } = string.Empty;
     public string DescriptionTextKey { get; set; } = string.Empty;
     public string? BlockingTextKey { get; set; }
+    public object?[] BlockingTextArgs { get; set; } = [];
     public int CurrentLevel { get; set; }
     public uint? Price { get; set; }
     public bool IsStars { get; set; }

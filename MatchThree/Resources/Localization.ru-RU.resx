@@ -78,4 +78,7 @@
     <data name="UpgradeEnergyRecoveryDescriptionKey" xml:space="preserve">
         <value>Повышает скорость восстановления энергии</value>
     </data>
+    <data name="UpgradeEnergyReserveBlockingTextKey" xml:space="preserve">
+        <value>Пригласите еще {0} друга</value>
+    </data>
 </root>

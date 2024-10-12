@@ -67,7 +67,8 @@ public class AutoMappingProfile : Profile
                 o =>
                 {
                     o.PreCondition(src => src.BlockingTextKey is not null);
-                    o.MapFrom<TextKeyResolver, string>(s => s.BlockingTextKey!);
+                    o.MapFrom<TextKeyWithArgsResolver, Tuple<string, object?[]>>(s => 
+                        Tuple.Create(s.BlockingTextKey!, s.BlockingTextArgs));
                 });
         
         CreateMap<GroupedUpgradesEntity, GroupedUpgradesDto>()
