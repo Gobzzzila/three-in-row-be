@@ -81,4 +81,7 @@
     <data name="UpgradeEnergyReserveBlockingTextKey" xml:space="preserve">
         <value>Invite {0} more friend(s)</value>
     </data>
+    <data name="UpgradeEnergyRecoveryBlockingTextKey" xml:space="preserve">
+        <value>Reach level {0} of energy reserve</value>
+    </data>
 </root>

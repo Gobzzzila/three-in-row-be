@@ -81,4 +81,7 @@
     <data name="UpgradeEnergyReserveBlockingTextKey" xml:space="preserve">
         <value>Пригласите еще {0} друга</value>
     </data>
+    <data name="UpgradeEnergyRecoveryBlockingTextKey" xml:space="preserve">
+        <value>Достигните {0} уровня запаса энергии</value>
+    </data>
 </root>

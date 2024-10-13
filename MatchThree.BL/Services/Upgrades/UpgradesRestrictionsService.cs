@@ -17,8 +17,11 @@ public class UpgradesRestrictionsService(IReadReferralService readReferralServic
         return requiredReferralsAmount - referralsAmount;
     }
 
-    public bool ValidateEnergyRecoveryRestrictions(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedLevel)
+    public int? ValidateEnergyReserveLevel(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedLevel)
     {
-        return currentLevel >= restrictedLevel;
+        if (currentLevel >= restrictedLevel) 
+            return null;
+        
+        return (int)restrictedLevel;
     }
 }

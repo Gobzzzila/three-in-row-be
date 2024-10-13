@@ -73,11 +73,20 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     {
         var recoveryParams = EnergyRecoveryConfiguration.GetParamsByLevel(energyEntity.RecoveryLevel);
 
+        int? requiredReserveLevel = default;
+        if (recoveryParams.UpgradeCondition is not null)
+        {
+            requiredReserveLevel = recoveryParams.UpgradeCondition(_upgradesRestrictionsService, energyEntity.MaxReserve);
+        }
+        
         var upgradeEntity = new UpgradeEntity
         {
             HeaderTextKey = TranslationConstants.UpgradeEnergyRecoveryHeaderKey,
             DescriptionTextKey = TranslationConstants.UpgradeEnergyRecoveryDescriptionKey,
-            BlockingTextKey = TranslationConstants.UpgradeEnergyRecoveryBlockingTextKey,
+            BlockingTextKey = requiredReserveLevel is not null
+                ? TranslationConstants.UpgradeEnergyRecoveryBlockingTextKey
+                : null,
+            BlockingTextArgs = [requiredReserveLevel],
             CurrentLevel = (int)energyEntity.RecoveryLevel,
             Price = recoveryParams.NextLevelCost,
             IsStars = false,

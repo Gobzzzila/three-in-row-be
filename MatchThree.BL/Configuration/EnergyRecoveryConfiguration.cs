@@ -86,9 +86,9 @@ public static class EnergyRecoveryConfiguration
         };
     }
     
-    private static Func<IUpgradesRestrictionsService, EnergyReserveLevels, bool> UpgradeCondition(EnergyReserveLevels restrictedLevel)
+    private static Func<IUpgradesRestrictionsService, EnergyReserveLevels, int?> UpgradeCondition(EnergyReserveLevels restrictedLevel)
     {
         return (upgradesRestrictionsService, currentLevel) => 
-            upgradesRestrictionsService.ValidateEnergyRecoveryRestrictions(currentLevel, restrictedLevel);
+            upgradesRestrictionsService.ValidateEnergyReserveLevel(currentLevel, restrictedLevel);
     }
 }

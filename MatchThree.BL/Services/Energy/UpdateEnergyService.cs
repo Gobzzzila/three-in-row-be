@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MatchThree.BL.Configuration;
-using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Upgrades;
@@ -61,8 +60,12 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         if (!recoveryParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
 
-        if (!recoveryParams.UpgradeCondition!(_upgradesRestrictionsService, dbModel.MaxReserve)) 
-            throw new UpgradeConditionsException();
+        if (recoveryParams.UpgradeCondition is not null)
+        {
+            var requiredReserveLevel = recoveryParams.UpgradeCondition!(_upgradesRestrictionsService, dbModel.MaxReserve);
+            if (requiredReserveLevel is not null) 
+                throw new UpgradeConditionsException();
+        }
         
         await _updateBalanceService.SpentBalanceAsync(id, recoveryParams.NextLevelCost!.Value);
         
