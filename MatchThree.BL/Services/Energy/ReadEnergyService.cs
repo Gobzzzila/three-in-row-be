@@ -9,7 +9,8 @@ namespace MatchThree.BL.Services.Energy;
 
 public class ReadEnergyService(MatchThreeDbContext context, 
     ISynchronizationEnergyService synchronizationEnergyService,
-    IMapper mapper) : IReadEnergyService
+    IMapper mapper) 
+    : IReadEnergyService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly ISynchronizationEnergyService _synchronizationEnergyService = synchronizationEnergyService;

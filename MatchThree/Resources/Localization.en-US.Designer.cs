@@ -96,6 +96,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Playing field.
+        /// </summary>
+        internal static string FieldCategoryTextKey {
+            get {
+                return ResourceManager.GetString("FieldCategoryTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fish.
         /// </summary>
         internal static string FishLeagueKey {
@@ -245,6 +254,24 @@ namespace MatchThree.API.Resources {
         internal static string UpgradeEnergyReserveHeaderKey {
             get {
                 return ResourceManager.GetString("UpgradeEnergyReserveHeaderKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increases the field size by 1 cell.
+        /// </summary>
+        internal static string UpgradeFieldDescriptionKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldDescriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade the field.
+        /// </summary>
+        internal static string UpgradeFieldHeaderKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldHeaderKey", resourceCulture);
             }
         }
         

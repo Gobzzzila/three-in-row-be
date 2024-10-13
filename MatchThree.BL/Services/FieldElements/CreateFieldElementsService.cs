@@ -12,7 +12,7 @@ public class CreateFieldElementsService(MatchThreeDbContext context)
 
     public void Create(long userId)
     {
-        _context.Set<FieldElementLevelDbModel>().Add(new FieldElementLevelDbModel
+        _context.Set<FieldElementsDbModel>().Add(new FieldElementsDbModel
         {
             Id = userId,
             FieldLevel = FieldConfiguration.GetStartValue()

@@ -16,7 +16,7 @@ public class UpdateFieldElementsService(MatchThreeDbContext context,
 
     public async Task UpgradeFieldAsync(long userId)
     {
-        var dbModel = await _context.Set<FieldElementLevelDbModel>().FindAsync(userId);
+        var dbModel = await _context.Set<FieldElementsDbModel>().FindAsync(userId);
         if (dbModel is null)
             throw new NoDataFoundException();
         
@@ -27,6 +27,6 @@ public class UpdateFieldElementsService(MatchThreeDbContext context,
         await _updateBalanceService.SpentBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
         
         dbModel.FieldLevel = fieldParams.NextLevel.Value;
-        _context.Set<FieldElementLevelDbModel>().Update(dbModel);
+        _context.Set<FieldElementsDbModel>().Update(dbModel);
     }
 }

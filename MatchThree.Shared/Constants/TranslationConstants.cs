@@ -30,6 +30,10 @@ public static class TranslationConstants
     public const string UpgradeEnergyRecoveryBlockingTextKey = "UpgradeEnergyRecoveryBlockingTextKey";
     
     //Field
+    public const string FieldCategoryTextKey = "FieldCategoryTextKey";
+    
+    public const string UpgradeFieldHeaderKey = "UpgradeFieldHeaderKey";
+    public const string UpgradeFieldDescriptionKey = "UpgradeFieldDescriptionKey";
     
     #endregion
 }

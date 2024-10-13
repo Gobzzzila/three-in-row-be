@@ -10,4 +10,7 @@ public enum UpgradeCategories
     
     [TranslationId(TranslationConstants.EnergyCategoryTextKey)]
     Energy = 1,
+    
+    [TranslationId(TranslationConstants.FieldCategoryTextKey)]
+    Field = 2,
 }

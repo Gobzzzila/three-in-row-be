@@ -84,4 +84,13 @@
     <data name="UpgradeEnergyRecoveryBlockingTextKey" xml:space="preserve">
         <value>Reach level {0} of energy reserve</value>
     </data>
+    <data name="FieldCategoryTextKey" xml:space="preserve">
+        <value>Playing field</value>
+    </data>
+    <data name="UpgradeFieldHeaderKey" xml:space="preserve">
+        <value>Upgrade the field</value>
+    </data>
+    <data name="UpgradeFieldDescriptionKey" xml:space="preserve">
+        <value>Increases the field size by 1 cell</value>
+    </data>
 </root>

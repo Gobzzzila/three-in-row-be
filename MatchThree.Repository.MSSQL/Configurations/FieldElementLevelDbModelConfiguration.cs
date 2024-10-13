@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MatchThree.Repository.MSSQL.Configurations;
 
-public class FieldElementLevelDbModelConfiguration : EntityTypeConfigurationBase<FieldElementLevelDbModel>
+public class FieldElementLevelDbModelConfiguration : EntityTypeConfigurationBase<FieldElementsDbModel>
 {
-    protected override void ConfigureEntityProperties(EntityTypeBuilder<FieldElementLevelDbModel> builder)
+    protected override void ConfigureEntityProperties(EntityTypeBuilder<FieldElementsDbModel> builder)
     {
         builder
             .HasKey(x => x.Id)
@@ -19,7 +19,7 @@ public class FieldElementLevelDbModelConfiguration : EntityTypeConfigurationBase
         builder
             .HasOne(x => x.User)
             .WithOne(x => x.FieldElementLevel)
-            .HasForeignKey<FieldElementLevelDbModel>(x => x.Id)
+            .HasForeignKey<FieldElementsDbModel>(x => x.Id)
             .IsRequired()
             .OnDelete(DeleteBehavior.NoAction);
     }

@@ -1,5 +1,6 @@
 ﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Energy;
+using MatchThree.Domain.Interfaces.FieldElements;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Models.Upgrades;
@@ -9,26 +10,31 @@ using MatchThree.Shared.Enums;
 namespace MatchThree.BL.Services.Upgrades;
 
 public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestrictionsService, 
-    IReadEnergyService readEnergyService) 
+    IReadEnergyService readEnergyService,
+    IReadFieldElementsService readFieldElementsService) 
     : IGetUpgradesService
 {
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
     private readonly IReadEnergyService _readEnergyService = readEnergyService;
+    private readonly IReadFieldElementsService _readFieldElementsService = readFieldElementsService;
 
     public async Task<IReadOnlyCollection<GroupedUpgradesEntity>> GetAll(long userId)
     {
-        var energyEntity = await _readEnergyService.GetByUserIdAsync(userId);
-
         var result = new List<GroupedUpgradesEntity>
         {
-            await GetEnergyUpgrades(energyEntity)
+            await GetEnergyUpgrades(userId),
+            await GetFieldElementsUpgrades(userId)
         };
         
         return result;
     }
-
-    private async ValueTask<GroupedUpgradesEntity> GetEnergyUpgrades(EnergyEntity energyEntity)
+    
+    #region EnergyUpgrades
+    
+    private async Task<GroupedUpgradesEntity> GetEnergyUpgrades(long userId)
     {
+        var energyEntity = await _readEnergyService.GetByUserIdAsync(userId);
+
         var result = new GroupedUpgradesEntity
         {
             Category = UpgradeCategories.Energy,
@@ -94,4 +100,42 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         };
         return upgradeEntity;
     }
+    
+    #endregion
+    
+    #region EnergyUpgrades
+    
+    private async Task<GroupedUpgradesEntity> GetFieldElementsUpgrades(long userId)
+    {
+        var fieldElements = await _readFieldElementsService.GetByUserIdAsync(userId);
+        
+        var result = new GroupedUpgradesEntity
+        {
+            Category = UpgradeCategories.Field,
+            Upgrades =
+            [
+                GetFieldUpgrade(fieldElements),
+            ]
+        };
+
+        return result;
+    }
+
+    private UpgradeEntity GetFieldUpgrade(FieldElementsEntity fieldElements)
+    {
+        var fieldParams = FieldConfiguration.GetParamsByLevel(fieldElements.FieldLevel);
+
+        var upgradeEntity = new UpgradeEntity
+        {
+            HeaderTextKey = TranslationConstants.UpgradeFieldHeaderKey,
+            DescriptionTextKey = TranslationConstants.UpgradeFieldDescriptionKey,
+            CurrentLevel = (int)fieldElements.FieldLevel,
+            Price = fieldParams.NextLevelCost,
+            IsStars = false,
+            ExecutePathName = EndpointsConstants.UpgradeFieldEndpointName
+        };
+        return upgradeEntity;
+    }
+
+    #endregion
 }

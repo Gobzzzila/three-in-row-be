@@ -96,6 +96,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Игровое поле.
+        /// </summary>
+        internal static string FieldCategoryTextKey {
+            get {
+                return ResourceManager.GetString("FieldCategoryTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рыба.
         /// </summary>
         internal static string FishLeagueKey {
@@ -245,6 +254,24 @@ namespace MatchThree.API.Resources {
         internal static string UpgradeEnergyReserveHeaderKey {
             get {
                 return ResourceManager.GetString("UpgradeEnergyReserveHeaderKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Увеличивает размер поля на 1 клетку.
+        /// </summary>
+        internal static string UpgradeFieldDescriptionKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldDescriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Улучшить поле.
+        /// </summary>
+        internal static string UpgradeFieldHeaderKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldHeaderKey", resourceCulture);
             }
         }
         

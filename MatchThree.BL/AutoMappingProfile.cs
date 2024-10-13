@@ -25,5 +25,8 @@ public class AutoMappingProfile : Profile
         
         //Energy 
         CreateMap<EnergyDbModel, EnergyEntity>();
+        
+        //FieldElemets
+        CreateMap<FieldElementsDbModel, FieldElementsEntity>();
     }
 }

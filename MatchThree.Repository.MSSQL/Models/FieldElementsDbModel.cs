@@ -5,7 +5,7 @@ using MatchThree.Shared.Enums;
 namespace MatchThree.Repository.MSSQL.Models;
 
 [Table("FieldElementLevels")]
-public class FieldElementLevelDbModel : DbModel
+public class FieldElementsDbModel : DbModel
 {
     public FieldLevels FieldLevel { get; set; }
     

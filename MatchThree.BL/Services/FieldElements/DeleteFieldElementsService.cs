@@ -11,7 +11,7 @@ public class DeleteFieldElementsService(MatchThreeDbContext context)
 
     public async Task DeleteAsync(long id)
     {
-        var dbModel = await _context.Set<FieldElementLevelDbModel>().FindAsync(id);
-        _context.Set<FieldElementLevelDbModel>().Remove(dbModel!);
+        var dbModel = await _context.Set<FieldElementsDbModel>().FindAsync(id);
+        _context.Set<FieldElementsDbModel>().Remove(dbModel!);
     }
 }

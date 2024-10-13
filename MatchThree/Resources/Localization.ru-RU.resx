@@ -84,4 +84,13 @@
     <data name="UpgradeEnergyRecoveryBlockingTextKey" xml:space="preserve">
         <value>Достигните {0} уровня запаса энергии</value>
     </data>
+    <data name="FieldCategoryTextKey" xml:space="preserve">
+        <value>Игровое поле</value>
+    </data>
+    <data name="UpgradeFieldHeaderKey" xml:space="preserve">
+        <value>Улучшить поле</value>
+    </data>
+    <data name="UpgradeFieldDescriptionKey" xml:space="preserve">
+        <value>Увеличивает размер поля на 1 клетку</value>
+    </data>
 </root>
