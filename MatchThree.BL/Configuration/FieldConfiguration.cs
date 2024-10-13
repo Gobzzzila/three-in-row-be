@@ -29,6 +29,11 @@ public static class FieldConfiguration
         }
     }
     
+    public static FieldParameters GetParamsByLevel(FieldLevels fieldLevel)
+    {
+        return FieldParams[fieldLevel];
+    }
+    
     public static FieldLevels GetStartValue()
     {
         return FieldLevels.Level1;

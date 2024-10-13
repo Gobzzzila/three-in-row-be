@@ -55,6 +55,8 @@ public static class ServiceCollectionExtensions
         
         //FieldElements
         services.AddScoped<ICreateFieldElementsService, CreateFieldElementsService>();
+        services.AddScoped<IDeleteFieldElementsService, DeleteFieldElementsService>();
+        services.AddScoped<IUpdateFieldElementsService, UpdateFieldElementsService>();
         
         //Upgrades
         services.AddScoped<IUpgradesRestrictionsService, UpgradesRestrictionsService>();

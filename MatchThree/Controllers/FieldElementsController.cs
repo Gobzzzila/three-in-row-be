@@ -1,0 +1,36 @@
+﻿using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Interfaces.FieldElements;
+using MatchThree.Shared.Constants;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+
+namespace MatchThree.API.Controllers;
+
+[ApiController]
+[Route("api/v1/field-elements")]
+public class FieldElementsController(IUpdateFieldElementsService updateFieldElementsService,
+    ITransactionService transactionService)
+{
+    private readonly IUpdateFieldElementsService _updateFieldElementsService = updateFieldElementsService;
+    private readonly ITransactionService _transactionService = transactionService;
+
+    /// <summary>
+    /// Upgrade field by user identifier 
+    /// </summary>
+    [HttpPost("{userId:long}/upgrade-field", Name = EndpointsConstants.UpgradeFieldEndpointName)]
+    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [SwaggerOperation(OperationId = "UpgradeField", Tags = ["FieldElements"])]
+    public async Task<IResult> UpgradeField(long userId, CancellationToken cancellationToken = new())
+    {
+        await _updateFieldElementsService.UpgradeFieldAsync(userId);
+        await _transactionService.Commit();
+        return Results.Ok();
+    }
+}
