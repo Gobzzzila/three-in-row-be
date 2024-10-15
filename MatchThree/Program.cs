@@ -61,7 +61,14 @@ namespace MatchThree.API
                 });
                 
                 builder.Services.AddDbContext<MatchThreeDbContext>(options =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext))));
+                    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext)),
+                        optionsBuilder =>
+                        {
+                            optionsBuilder.EnableRetryOnFailure(
+                                maxRetryCount: 5,
+                                maxRetryDelay: TimeSpan.FromSeconds(10),
+                                errorNumbersToAdd: null);
+                        }));
 
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<TopUpEnergyDrinksService>();
