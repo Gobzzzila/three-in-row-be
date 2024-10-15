@@ -66,6 +66,7 @@ namespace MatchThree.API
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<TopUpEnergyDrinksService>();
                 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
+                builder.Services.AddSingleton<ITelegramValidatorService, TelegramValidatorService>();
                 builder.Services.AddSingleton<IAuthorizationHandler, UserIdHandler>();
                 builder.Services.AddDomainServices();
 

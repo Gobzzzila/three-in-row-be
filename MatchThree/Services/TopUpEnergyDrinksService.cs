@@ -1,5 +1,4 @@
-﻿using MatchThree.Domain.Interfaces;
-using MatchThree.Domain.Interfaces.Energy;
+﻿using MatchThree.Domain.Interfaces.Energy;
 
 namespace MatchThree.API.Services;
 
@@ -10,7 +9,7 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
     
     private readonly IServiceScope _scope;
     private readonly IEnergyDrinkRefillsService _energyDrinkRefillsService;
-    private readonly IDateTimeProvider _dateTimeProvider;
+    private readonly TimeProvider _timeProvider;
     private readonly ILogger<CalculateLeaderboardService> _logger;
     
     public TopUpEnergyDrinksService(IServiceProvider serviceProvider,
@@ -19,13 +18,13 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         _logger = logger;
         _scope = serviceProvider.CreateScope();
         var provider = _scope.ServiceProvider;
-        _dateTimeProvider = provider.GetRequiredService<IDateTimeProvider>();
+        _timeProvider = provider.GetRequiredService<TimeProvider>();
         _energyDrinkRefillsService = provider.GetRequiredService<IEnergyDrinkRefillsService>();
     }
     
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        var now = _dateTimeProvider.GetUtcDateTime();
+        var now = _timeProvider.GetUtcNow().DateTime;
         var nextMidnight = now.Date.AddDays(1);
         var initialDelay = nextMidnight - now;
         

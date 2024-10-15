@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.FieldElements;
@@ -18,7 +17,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateBalanceService createBalanceService,
     ICreateEnergyService createEnergyService,
     ICreateFieldElementsService fieldElementsService,
-    IDateTimeProvider dateTimeProvider) : ICreateUserService
+    TimeProvider timeProvider) : ICreateUserService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly IMapper _mapper = mapper;
@@ -26,7 +25,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateBalanceService _createBalanceService = createBalanceService;
     private readonly ICreateEnergyService _createEnergyService = createEnergyService;
     private readonly ICreateFieldElementsService _fieldElementsService = fieldElementsService;
-    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+    private readonly TimeProvider _dateTimeProvider = timeProvider;
 
     public UserEntity Create(UserEntity userEntity)
     {
@@ -35,7 +34,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
         return result;
     }
 
-    public async Task<UserEntity> CreateAsync(UserEntity userEntity, long referrerId)
+    public async Task<UserEntity> CreateWithReferrerAsync(UserEntity userEntity, long referrerId)
     {
         var result = CreateUser(userEntity);
 
@@ -51,7 +50,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private UserEntity CreateUser(UserEntity userEntity)
     {
         var createDbModel = _mapper.Map<UserDbModel>(userEntity);
-        createDbModel.CreatedAt = _dateTimeProvider.GetUtcDateTime();
+        createDbModel.CreatedAt = _dateTimeProvider.GetUtcNow().DateTime;
         createDbModel = _context.Set<UserDbModel>().Add(createDbModel).Entity;
         var result = _mapper.Map<UserEntity>(createDbModel);
         return result;

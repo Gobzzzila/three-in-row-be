@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using MatchThree.API.Attributes;
-using MatchThree.API.Models.User;
+﻿using MatchThree.API.Attributes;
+using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
-using MatchThree.Domain.Models;
-using MatchThree.Shared.Constants;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -13,18 +9,17 @@ namespace MatchThree.API.Controllers;
 
 [ApiController]
 [Route("api/v1/users")]
-public class UsersController(
-    IMapper mapper,
+public class UsersController(IReadUserService readUserService,
     ICreateUserService createUserService,
     IUpdateUserService updateUserService,
-    IDeleteUserService deleteUserService,
+    ITelegramValidatorService telegramValidatorService,
     IJwtTokenService jwtTokenService,
     ITransactionService transactionService)
 {
-    private readonly IMapper _mapper = mapper;
+    private readonly IReadUserService _readUserService = readUserService;
     private readonly ICreateUserService _createUserService = createUserService;
     private readonly IUpdateUserService _updateUserService = updateUserService;
-    private readonly IDeleteUserService _deleteUserService = deleteUserService;
+    private readonly ITelegramValidatorService _telegramValidatorService = telegramValidatorService;
     private readonly IJwtTokenService _jwtTokenService = jwtTokenService;
     private readonly ITransactionService _transactionService = transactionService;
 
@@ -33,49 +28,29 @@ public class UsersController(
     /// </summary>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-    [SwaggerOperation(OperationId = "CreateUser", Tags = ["Users"])]
-    public async Task<IResult> Create([FromBody] CreateUserRequestDto request, 
+    [SwaggerOperation(OperationId = "SignUp", Tags = ["Users"])]
+    public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request, 
         CancellationToken cancellationToken = new())
     {
-        var entity = _mapper.Map<UserEntity>(request);
-        var createdEntity = request.ReferrerId.HasValue 
-            ? await _createUserService.CreateAsync(entity, request.ReferrerId.Value)
-            : _createUserService.Create(entity);
-        var token = _jwtTokenService.GenerateJwtToken(createdEntity.Id);
+        var userEntityFromRequest = _telegramValidatorService.ValidateTelegramWebAppData(request.InitData);
+        if (userEntityFromRequest is null)
+            throw new Exception("Init data doesn't contain user info");
+        
+        var userEntity = await _readUserService.GetByIdAsync(userEntityFromRequest.Id);
+        if (userEntity is null)
+        {
+            if (request.ReferrerId.HasValue)
+                await _createUserService.CreateWithReferrerAsync(userEntityFromRequest, request.ReferrerId.Value);
+            else
+                _createUserService.Create(userEntityFromRequest);
+        }
+        else
+        {
+            await _updateUserService.SyncUserData(userEntityFromRequest);
+        }
+        
+        var token = _jwtTokenService.GenerateJwtToken(userEntityFromRequest.Id);
         await _transactionService.Commit();
         return Results.Ok(token);
-    }
-    
-    /// <summary>
-    /// User auth
-    /// </summary>
-    [HttpPost("{userId:long}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [SwaggerOperation(OperationId = "SignInUser", Tags = ["Users"])]
-    public async Task<IResult> SignIn([FromMultiSource] UserSignInRequestDto request, 
-        CancellationToken cancellationToken = new())
-    {
-        var entity = _mapper.Map<UserEntity>(request);
-        await _updateUserService.SyncUserData(entity);
-        var token = _jwtTokenService.GenerateJwtToken(entity.Id);
-        await _transactionService.Commit();
-        return Results.Ok(token);
-    }
-
-    /// <summary>
-    /// User deletion
-    /// </summary>
-    [HttpDelete("{userId:long}")]
-    [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [SwaggerOperation(OperationId = "DeleteUser", Tags = ["Users"])]
-    public async Task<IResult> Delete(long userId, CancellationToken cancellationToken = new())
-    {
-        //TODO The isDeleted flag should be added to avoid abuse of referrals 
-        await _deleteUserService.DeleteAsync(userId);
-        await _transactionService.Commit();
-        return Results.NoContent();
     }
 }

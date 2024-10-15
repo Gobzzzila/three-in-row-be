@@ -1,20 +1,19 @@
 ﻿using MatchThree.BL.Configuration;
-using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Repository.MSSQL.Models;
 
 namespace MatchThree.BL.Services.Energy;
 
-public class SynchronizationEnergyService (IDateTimeProvider dateTimeProvider) : ISynchronizationEnergyService
+public class SynchronizationEnergyService (TimeProvider timeProvider) : ISynchronizationEnergyService
 {
-    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+    private readonly TimeProvider _dateTimeProvider = timeProvider;
 
     public void SynchronizeModel(EnergyDbModel dbModel)
     {
         if (dbModel.LastRecoveryStartTime is null)
             return;
         
-        var now = _dateTimeProvider.GetUtcDateTime();
+        var now = _dateTimeProvider.GetUtcNow().DateTime;
         var timePass = now - dbModel.LastRecoveryStartTime;
         if (timePass < TimeSpan.Zero) //TODO mb need extra logic
             return;

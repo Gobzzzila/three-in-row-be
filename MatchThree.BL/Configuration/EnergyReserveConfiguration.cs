@@ -1,5 +1,4 @@
 ﻿using MatchThree.Domain.Configuration;
-using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;

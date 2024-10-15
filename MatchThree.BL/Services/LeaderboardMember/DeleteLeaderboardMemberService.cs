@@ -17,4 +17,10 @@ public class DeleteLeaderboardMemberService(MatchThreeDbContext context)
              .Where(x => x.League == league)
              .ExecuteDeleteAsync();
      }
+     
+     public Task DeleteAll()
+     {
+         return _context.Set<LeaderboardMemberDbModel>()
+             .ExecuteDeleteAsync();
+     }
  }

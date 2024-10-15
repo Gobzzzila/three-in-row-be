@@ -22,13 +22,14 @@ public static class ServiceCollectionExtensions
 {
     public static void AddDomainServices(this IServiceCollection services)
     {
-        services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+        services.AddSingleton(TimeProvider.System);
         services.AddScoped<ITransactionService, TransactionService>();
         
         //User
         services.AddScoped<ICreateUserService, CreateUserService>();
         services.AddScoped<IDeleteUserService, DeleteUserService>();
         services.AddScoped<IUpdateUserService, UpdateUserService>();
+        services.AddScoped<IReadUserService, ReadUserService>();
         
         //Referral
         services.AddScoped<ICreateReferralService, CreateReferralService>();

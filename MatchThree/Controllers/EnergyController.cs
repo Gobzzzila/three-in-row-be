@@ -42,7 +42,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// </summary>
     [HttpPost("{userId:long}/upgrade-reserve", Name = EndpointsConstants.UpgradeEnergyReserveEndpointName)]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
@@ -53,7 +53,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     {
         await _updateEnergyService.UpgradeReserveAsync(userId);
         await _transactionService.Commit();
-        return Results.Ok();
+        return Results.NoContent();
     }
     
     /// <summary>
@@ -61,7 +61,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// </summary>
     [HttpPost("{userId:long}/upgrade-recovery", Name = EndpointsConstants.UpgradeEnergyRecoveryEndpointName)]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
@@ -72,7 +72,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     {
         await _updateEnergyService.UpgradeRecoveryAsync(userId);
         await _transactionService.Commit();
-        return Results.Ok();
+        return Results.NoContent();
     }
     
     /// <summary>
@@ -80,7 +80,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// </summary>
     [HttpPost("{userId:long}/energy-drink")]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EnergyDto))]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
@@ -88,16 +88,16 @@ public class EnergyController (IReadEnergyService energyReadService,
     [SwaggerOperation(OperationId = "UseEnergyDrink", Tags = ["Energy"])]
     public async Task<IResult> UseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {
-        var entity = await _updateEnergyService.UseEnergyDrinkAsync(userId);
+        await _updateEnergyService.UseEnergyDrinkAsync(userId);
         await _transactionService.Commit();
-        return Results.Ok(_mapper.Map<EnergyDto>(entity));
+        return Results.NoContent();
     }
     
     /// <summary>
     /// Purchase an energy drink
     /// </summary>
     [HttpPost("{userId:long}/purchase-energy-drink")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
@@ -106,6 +106,6 @@ public class EnergyController (IReadEnergyService energyReadService,
     {
         await _updateEnergyService.PurchaseEnergyDrinkAsync(userId);
         await _transactionService.Commit();
-        return Results.Ok();
+        return Results.NoContent();
     }
 }

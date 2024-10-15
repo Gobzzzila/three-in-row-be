@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using MatchThree.BL.Configuration;
+﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Upgrades;
-using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
@@ -13,15 +11,13 @@ namespace MatchThree.BL.Services.Energy;
 public class UpdateEnergyService(MatchThreeDbContext context,
     ISynchronizationEnergyService synchronizationEnergyService,
     IUpdateBalanceService updateBalanceService,
-    IUpgradesRestrictionsService upgradesRestrictionsService,
-    IMapper mapper) 
+    IUpgradesRestrictionsService upgradesRestrictionsService) 
     : IUpdateEnergyService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly ISynchronizationEnergyService _synchronizationEnergyService = synchronizationEnergyService;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
-    private readonly IMapper _mapper = mapper;
 
     public async Task UpgradeReserveAsync(long userId)
     {
@@ -76,7 +72,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
 
-    public async Task<EnergyEntity> UseEnergyDrinkAsync(long id)
+    public async Task UseEnergyDrinkAsync(long id)
     {
         var dbModel = await _context.Set<EnergyDbModel>().FindAsync(id);
         if (dbModel is null)
@@ -91,8 +87,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         dbModel.LastRecoveryStartTime = null;
         dbModel.AvailableEnergyDrinkAmount -= 1;
         
-        var result = _context.Set<EnergyDbModel>().Update(dbModel);
-        return _mapper.Map<EnergyEntity>(result.Entity);
+        _context.Set<EnergyDbModel>().Update(dbModel);
     }
     
     public async Task PurchaseEnergyDrinkAsync(long id)

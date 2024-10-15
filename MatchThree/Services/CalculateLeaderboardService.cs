@@ -30,12 +30,15 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
     
     public async Task StartAsync(CancellationToken cancellationToken)
     {
+        await _deleteLeaderboardMemberService.DeleteAll();
         foreach (int value in Enum.GetValues(typeof(LeagueTypes))) //TODO need to be refactored, cuz this method blocks app
         {
             if (value is 0 or 1)
                 continue;
 
-            await UpdateLeaderboardByLeague((LeagueTypes)value);
+            await _createLeaderboardMemberService.CreateByLeagueTypeAsync((LeagueTypes)value);
+            await _transactionService.Commit();
+            _transactionService.CleanChangeTracker();
         }
         
         _timer = new Timer(async state => await UpdateLeaderboard(state),
