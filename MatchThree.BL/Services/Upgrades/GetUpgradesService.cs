@@ -61,7 +61,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         
         var upgradeEntity = new UpgradeEntity
         {
-            HeaderTextKey = TranslationConstants.UpgradeEnergyReserveHeaderKey,
+            Type = UpgradeTypes.EnergyReserve,
             DescriptionTextKey = TranslationConstants.UpgradeEnergyReserveDescriptionKey,
             BlockingTextKey = missingAmountOfReferrals is not null
                 ? TranslationConstants.UpgradeEnergyReserveBlockingTextKey
@@ -69,7 +69,6 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             BlockingTextArgs = [missingAmountOfReferrals],
             CurrentLevel = (int)energyEntity.MaxReserve,
             Price = reserveParams.NextLevelCost,
-            IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeEnergyReserveEndpointName
         };
         return upgradeEntity;
@@ -87,7 +86,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         
         var upgradeEntity = new UpgradeEntity
         {
-            HeaderTextKey = TranslationConstants.UpgradeEnergyRecoveryHeaderKey,
+            Type = UpgradeTypes.EnergyRecovery,
             DescriptionTextKey = TranslationConstants.UpgradeEnergyRecoveryDescriptionKey,
             BlockingTextKey = requiredReserveLevel is not null
                 ? TranslationConstants.UpgradeEnergyRecoveryBlockingTextKey
@@ -95,15 +94,14 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             BlockingTextArgs = [requiredReserveLevel],
             CurrentLevel = (int)energyEntity.RecoveryLevel,
             Price = recoveryParams.NextLevelCost,
-            IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeEnergyRecoveryEndpointName
         };
         return upgradeEntity;
     }
     
-    #endregion
+    #endregion EnergyUpgrades
     
-    #region EnergyUpgrades
+    #region FieldElementsUpgrades
     
     private async Task<GroupedUpgradesEntity> GetFieldElementsUpgrades(long userId)
     {
@@ -127,15 +125,14 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
 
         var upgradeEntity = new UpgradeEntity
         {
-            HeaderTextKey = TranslationConstants.UpgradeFieldHeaderKey,
+            Type = UpgradeTypes.Field,
             DescriptionTextKey = TranslationConstants.UpgradeFieldDescriptionKey,
             CurrentLevel = (int)fieldElements.FieldLevel,
             Price = fieldParams.NextLevelCost,
-            IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeFieldEndpointName
         };
         return upgradeEntity;
     }
 
-    #endregion
+    #endregion FieldElementsUpgrades
 }

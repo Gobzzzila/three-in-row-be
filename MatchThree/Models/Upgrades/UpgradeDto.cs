@@ -7,6 +7,6 @@ public class UpgradeDto
     public string? BlockingText { get; init; }
     public int CurrentLevel { get; init; }
     public uint? Price { get; init; }
-    public bool IsStars { get; init; }
+    public string Type { get; init; } = string.Empty;
     public string ExecutePath { get; set; } = string.Empty;
 }

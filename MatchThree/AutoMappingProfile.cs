@@ -52,7 +52,7 @@ public class AutoMappingProfile : Profile
         CreateMap<UpgradeEntity, UpgradeDto>()
             .ForMember(x => x.HeaderText,
                 o =>
-                    o.MapFrom<TextKeyResolver, string>(s => s.HeaderTextKey))
+                    o.MapFrom<EnumTranslationResolver<UpgradeTypes>, UpgradeTypes>(s => s.Type))
             .ForMember(x => x.DescriptionText,
                 o =>
                     o.MapFrom<TextKeyResolver, string>(s => s.DescriptionTextKey))
