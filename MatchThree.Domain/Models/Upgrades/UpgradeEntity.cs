@@ -9,6 +9,7 @@ public class UpgradeEntity
     public object?[] BlockingTextArgs { get; set; } = [];
     public int CurrentLevel { get; set; }
     public uint? Price { get; set; }
-    public string ExecutePathName { get; set; } = string.Empty;
+    public bool IsStars { get; set; }
     public UpgradeTypes Type { get; set; }
+    public string ExecutePathName { get; set; } = string.Empty;
 }

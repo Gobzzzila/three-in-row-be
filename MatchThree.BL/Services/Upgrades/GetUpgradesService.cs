@@ -69,6 +69,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             BlockingTextArgs = [missingAmountOfReferrals],
             CurrentLevel = (int)energyEntity.MaxReserve,
             Price = reserveParams.NextLevelCost,
+            IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeEnergyReserveEndpointName
         };
         return upgradeEntity;
@@ -94,6 +95,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             BlockingTextArgs = [requiredReserveLevel],
             CurrentLevel = (int)energyEntity.RecoveryLevel,
             Price = recoveryParams.NextLevelCost,
+            IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeEnergyRecoveryEndpointName
         };
         return upgradeEntity;
@@ -129,6 +131,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             DescriptionTextKey = TranslationConstants.UpgradeFieldDescriptionKey,
             CurrentLevel = (int)fieldElements.FieldLevel,
             Price = fieldParams.NextLevelCost,
+            IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeFieldEndpointName
         };
         return upgradeEntity;
