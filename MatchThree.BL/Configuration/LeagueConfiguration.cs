@@ -26,8 +26,8 @@ public static class LeagueConfiguration
                 break;
         }
         referralProfit += wasPremium
-            ? ReferralConstants.RewardPremiumUserForBeingInvited
-            : ReferralConstants.RewardRegularUserForBeingInvited;
+            ? ReferralConstants.RewardForInvitingPremiumUser
+            : ReferralConstants.RewardForInvitingRegularUser;
         return referralProfit;
     }
     

@@ -24,8 +24,8 @@ public class CreateReferralService (MatchThreeDbContext context,
         });
 
         var referrerReward = isPremium
-            ? ReferralConstants.RewardForInvitePremiumUser
-            : ReferralConstants.RewardForInviteRegularUser;
+            ? ReferralConstants.RewardForInvitingPremiumUser
+            : ReferralConstants.RewardForInvitingRegularUser;
         await _updateBalanceService.AddBalanceAsync(referrerId, referrerReward);
     }
 }

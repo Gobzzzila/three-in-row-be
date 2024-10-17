@@ -1,6 +1,6 @@
 ﻿using MatchThree.Shared.Enums;
 
-namespace MatchThree.API.Models;
+namespace MatchThree.API.Models.Referrals;
 
 public class ReferralDto
 {

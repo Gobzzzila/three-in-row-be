@@ -2,6 +2,7 @@
 using MatchThree.API.Mapping;
 using MatchThree.API.Models;
 using MatchThree.API.Models.Leaderboard;
+using MatchThree.API.Models.Referrals;
 using MatchThree.API.Models.Upgrades;
 using MatchThree.API.Models.Users;
 using MatchThree.BL.Configuration;

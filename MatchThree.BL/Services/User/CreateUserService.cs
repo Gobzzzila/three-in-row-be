@@ -40,8 +40,8 @@ public sealed class CreateUserService(MatchThreeDbContext context,
 
         await _createReferralService.CreateAsync(referrerId, result.Id, result.IsPremium);
         var referralReward = userEntity.IsPremium
-            ? ReferralConstants.RewardPremiumUserForBeingInvited
-            : ReferralConstants.RewardRegularUserForBeingInvited;
+            ? ReferralConstants.RewardForInvitingPremiumUser
+            : ReferralConstants.RewardForInvitingRegularUser;
         
         CreateSubEntities(result, referralReward);
         return result;
