@@ -52,18 +52,10 @@ public class AutoMappingProfile : Profile
         //Upgrades 
         CreateMap<UpgradeEntity, UpgradeDto>()
             .ForMember(x => x.HeaderText,
-                o =>
-                    o.MapFrom<EnumTranslationResolver<UpgradeTypes>, UpgradeTypes>(s => s.Type))
-            .ForMember(x => x.DescriptionText,
-                o =>
-                    o.MapFrom<TextKeyResolver, string>(s => s.DescriptionTextKey))
-            .ForMember(x => x.BlockingText,
-                o =>
-                {
-                    o.PreCondition(src => src.BlockingTextKey is not null);
-                    o.MapFrom<TextKeyWithArgsResolver, Tuple<string, object?[]>>(s => 
-                        Tuple.Create(s.BlockingTextKey!, s.BlockingTextArgs));
-                });
+                o => o.MapFrom<UpgradeInfoResolver>())
+            .ForMember(x => x.ExecutePath,
+                o => o.MapFrom<PathWithArgsResolver, Tuple<string, object?>>(s => 
+                        Tuple.Create(s.ExecutePathName!, s.ExecutePathArgs)));
         
         CreateMap<GroupedUpgradesEntity, GroupedUpgradesDto>()
             .ForMember(x => x.CategoryName,

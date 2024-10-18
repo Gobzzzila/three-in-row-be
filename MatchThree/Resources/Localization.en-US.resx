@@ -93,4 +93,13 @@
     <data name="UpgradeFieldDescriptionKey" xml:space="preserve">
         <value>Increases the field size by 1 cell</value>
     </data>
+    <data name="EnergyDrinkHeaderKey" xml:space="preserve">
+        <value>Energy drink</value>
+    </data>
+    <data name="EnergyDrinkDescriptionKey" xml:space="preserve">
+        <value>Restores an amount of energy equal to the maximum energy reserve</value>
+    </data>
+    <data name="EnergyDrinkBlockingTextKey" xml:space="preserve">
+        <value>A day's supply of energy drinks have been purchased, try again in {0} hours</value>
+    </data>
 </root>

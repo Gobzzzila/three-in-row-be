@@ -5,15 +5,27 @@ namespace MatchThree.Shared.Enums;
 
 public enum UpgradeTypes
 {
-    [TranslationId(TranslationConstants.UndefinedTextKey)]
+    [UpgradeInfo(TranslationConstants.UndefinedTextKey,
+        TranslationConstants.UndefinedTextKey,
+        TranslationConstants.UndefinedTextKey)]
     Undefined = 0,
     
-    [TranslationId(TranslationConstants.UpgradeEnergyReserveHeaderKey)]
+    [UpgradeInfo(TranslationConstants.UpgradeEnergyReserveHeaderKey,
+        TranslationConstants.UpgradeEnergyReserveDescriptionKey,
+        TranslationConstants.UpgradeEnergyReserveBlockingTextKey)]
     EnergyReserve = 1,
     
-    [TranslationId(TranslationConstants.UpgradeEnergyRecoveryHeaderKey)]
+    [UpgradeInfo(TranslationConstants.UpgradeEnergyRecoveryHeaderKey,
+        TranslationConstants.UpgradeEnergyRecoveryDescriptionKey,
+        TranslationConstants.UpgradeEnergyRecoveryBlockingTextKey)]
     EnergyRecovery = 2,
     
-    [TranslationId(TranslationConstants.UpgradeFieldHeaderKey)]
+    [UpgradeInfo(TranslationConstants.UpgradeFieldHeaderKey,
+        TranslationConstants.UpgradeFieldDescriptionKey)]
     Field = 3,
+
+    [UpgradeInfo(TranslationConstants.EnergyDrinkHeaderKey,
+        TranslationConstants.EnergyDrinkDescriptionKey,
+        TranslationConstants.EnergyDrinkBlockingTextKey)]
+    EnergyDrink = 4, 
 }

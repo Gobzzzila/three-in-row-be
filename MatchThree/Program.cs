@@ -7,6 +7,7 @@ using MatchThree.API.Middleware;
 using MatchThree.API.Services;
 using MatchThree.BL.Extensions;
 using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Settings;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,9 +47,11 @@ namespace MatchThree.API
                             ValidateAudience = true,
                             ValidateLifetime = true,
                             ValidateIssuerSigningKey = true,
-                            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                            ValidAudience = builder.Configuration["Jwt:Audience"],
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                            ValidIssuer = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Issuer)}"],
+                            ValidAudience = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Audience)}"],
+                            IssuerSigningKey = new SymmetricSecurityKey(
+                                Encoding.UTF8.GetBytes(
+                                    builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Key)}"]!))
                         };
                         options.MapInboundClaims = false;
                     });
@@ -72,11 +75,14 @@ namespace MatchThree.API
 
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<TopUpEnergyDrinksService>();
+                builder.Services.AddSingleton<ITelegramBotService, TelegramBotService>();
                 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
-                builder.Services.AddSingleton<ITelegramValidatorService, TelegramValidatorService>();
                 builder.Services.AddSingleton<IAuthorizationHandler, UserIdHandler>();
                 builder.Services.AddDomainServices();
 
+                builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
+                builder.Services.Configure<TelegramSettings>(builder.Configuration.GetSection(nameof(TelegramSettings)));
+                
                 var autoMapperProfileAssemblies =
                     new List<Assembly>
                     {
@@ -137,6 +143,8 @@ namespace MatchThree.API
                     options.AddSupportedCultures(supportedCultures);
                     options.AddSupportedUICultures(supportedCultures);
                 });
+                
+                
             }
 
             void Configure()
@@ -172,6 +180,8 @@ namespace MatchThree.API
                 app.UseExceptionHandler(_ => { });
 
                 app.UseMiddleware<LoggingMiddleware>();
+                
+                app.Services.GetRequiredService<ITelegramBotService>();
             }
         }
 

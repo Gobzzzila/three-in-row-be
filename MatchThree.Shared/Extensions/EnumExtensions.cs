@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 using MatchThree.Shared.Attributes;
+using MatchThree.Shared.Enums;
 
 namespace MatchThree.Shared.Extensions;
 
@@ -13,6 +14,15 @@ public static class EnumExtensions
             throw new InvalidOperationException($"Value {enumValue} is not defined for enum type {typeof(T).Name}");
 
         return typeof(T).GetField(fieldName)?.GetCustomAttribute<UpgradeCostAttribute>()?.UpgradeCost;
+    }
+    
+    public static UpgradeInfoAttribute? GetUpgradeInfo(this UpgradeTypes enumValue)
+    {
+        var fieldName = Enum.GetName(typeof(UpgradeTypes), enumValue);
+        if (fieldName is null)
+            throw new InvalidOperationException($"Value {enumValue} is not defined for UpgradeTypes");
+
+        return typeof(UpgradeTypes).GetField(fieldName)?.GetCustomAttribute<UpgradeInfoAttribute>();
     }
     
     #region TranslationId

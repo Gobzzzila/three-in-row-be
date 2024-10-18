@@ -1,9 +1,14 @@
-﻿using MatchThree.API.Attributes;
+﻿using System.Text.Json;
+using MatchThree.API.Attributes;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
+using MatchThree.Domain.Models;
+using MatchThree.Domain.Settings;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
+using Telegram.Bot;
 
 namespace MatchThree.API.Controllers;
 
@@ -12,15 +17,15 @@ namespace MatchThree.API.Controllers;
 public class UsersController(IReadUserService readUserService,
     ICreateUserService createUserService,
     IUpdateUserService updateUserService,
-    ITelegramValidatorService telegramValidatorService,
     IJwtTokenService jwtTokenService,
+    IOptions<TelegramSettings> settings,
     ITransactionService transactionService)
 {
     private readonly IReadUserService _readUserService = readUserService;
     private readonly ICreateUserService _createUserService = createUserService;
     private readonly IUpdateUserService _updateUserService = updateUserService;
-    private readonly ITelegramValidatorService _telegramValidatorService = telegramValidatorService;
     private readonly IJwtTokenService _jwtTokenService = jwtTokenService;
+    private readonly TelegramSettings _settings = settings.Value;
     private readonly ITransactionService _transactionService = transactionService;
 
     /// <summary>
@@ -32,7 +37,12 @@ public class UsersController(IReadUserService readUserService,
     public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request, 
         CancellationToken cancellationToken = new())
     {
-        var userEntityFromRequest = _telegramValidatorService.ValidateTelegramWebAppData(request.InitData);
+        var parsedInitData = AuthHelpers.ParseValidateData(request.InitData, _settings.BotToken);
+        var userString = parsedInitData.GetValueOrDefault("user");
+        if (string.IsNullOrEmpty(userString))
+            throw new Exception("User info is not set");
+        
+        var userEntityFromRequest = JsonSerializer.Deserialize<UserEntity>(userString);
         if (userEntityFromRequest is null)
             throw new Exception("Init data doesn't contain user info");
         

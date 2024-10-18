@@ -8,6 +8,8 @@ using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Telegram.Bot;
+using Telegram.Bot.Types.Payments;
 
 namespace MatchThree.API.Controllers;
 
@@ -58,7 +60,7 @@ public class DebugController(IMapper mapper,
         await _transactionService.Commit();
         return Results.Ok(token);
     }
-
+    
     /// <summary>
     /// User deletion
     /// </summary>

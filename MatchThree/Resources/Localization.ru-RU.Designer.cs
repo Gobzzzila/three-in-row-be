@@ -96,6 +96,33 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дневной запас энергетических напитков был куплен, повторите попытку через {0} часов.
+        /// </summary>
+        internal static string EnergyDrinkBlockingTextKey {
+            get {
+                return ResourceManager.GetString("EnergyDrinkBlockingTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Восстанавливает количество энергии равное максимальному запасу.
+        /// </summary>
+        internal static string EnergyDrinkDescriptionKey {
+            get {
+                return ResourceManager.GetString("EnergyDrinkDescriptionKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Энергетик.
+        /// </summary>
+        internal static string EnergyDrinkHeaderKey {
+            get {
+                return ResourceManager.GetString("EnergyDrinkHeaderKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Игровое поле.
         /// </summary>
         internal static string FieldCategoryTextKey {

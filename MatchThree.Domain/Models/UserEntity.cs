@@ -11,10 +11,10 @@ public class UserEntity
     public required string? Username { get; set; }
 
     [JsonPropertyName("first_name")]
-    public required  string FirstName { get; set; } = string.Empty;
+    public required string FirstName { get; set; } = string.Empty;
 
     [JsonPropertyName("is_premium")]
-    public required  bool IsPremium { get; set; }
+    public required bool IsPremium { get; set; }
 
     [JsonIgnore]
     public DateTime CreatedAt{ get; set; }

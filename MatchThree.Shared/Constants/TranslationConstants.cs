@@ -29,11 +29,15 @@ public static class TranslationConstants
     public const string UpgradeEnergyRecoveryDescriptionKey = "UpgradeEnergyRecoveryDescriptionKey";
     public const string UpgradeEnergyRecoveryBlockingTextKey = "UpgradeEnergyRecoveryBlockingTextKey";
     
+    public const string EnergyDrinkHeaderKey = "EnergyDrinkHeaderKey";
+    public const string EnergyDrinkDescriptionKey = "EnergyDrinkDescriptionKey";
+    public const string EnergyDrinkBlockingTextKey = "EnergyDrinkBlockingTextKey";
+    
     //Field
     public const string FieldCategoryTextKey = "FieldCategoryTextKey";
     
     public const string UpgradeFieldHeaderKey = "UpgradeFieldHeaderKey";
     public const string UpgradeFieldDescriptionKey = "UpgradeFieldDescriptionKey";
-    
+
     #endregion
 }

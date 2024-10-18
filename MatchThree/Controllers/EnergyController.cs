@@ -78,7 +78,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     /// <summary>
     /// Use an energy drink
     /// </summary>
-    [HttpPost("{userId:long}/energy-drink")]
+    [HttpPost("{userId:long}/energy-drink", Name = EndpointsConstants.UseEnergyDrinkEndpoint)]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
@@ -89,22 +89,6 @@ public class EnergyController (IReadEnergyService energyReadService,
     public async Task<IResult> UseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.UseEnergyDrinkAsync(userId);
-        await _transactionService.Commit();
-        return Results.NoContent();
-    }
-    
-    /// <summary>
-    /// Purchase an energy drink
-    /// </summary>
-    [HttpPost("{userId:long}/purchase-energy-drink")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
-    [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
-    [SwaggerOperation(OperationId = "PurchaseEnergyDrink", Tags = ["Energy"])]
-    public async Task<IResult> PurchaseEnergyDrink(long userId, CancellationToken cancellationToken = new())
-    {
-        await _updateEnergyService.PurchaseEnergyDrinkAsync(userId);
         await _transactionService.Commit();
         return Results.NoContent();
     }

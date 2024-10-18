@@ -2,17 +2,19 @@
 using System.Security.Claims;
 using System.Text;
 using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Settings;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MatchThree.API.Authentication;
 
-public class JwtTokenService(IConfiguration configuration) : IJwtTokenService
+public class JwtTokenService(IOptions<JwtSettings> options) : IJwtTokenService
 {
-    private readonly IConfiguration _configuration = configuration;
+    private readonly JwtSettings _options = options.Value;
 
     public string GenerateJwtToken(long userId)
     {
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
@@ -22,8 +24,8 @@ public class JwtTokenService(IConfiguration configuration) : IJwtTokenService
         };
 
         var token = new JwtSecurityToken(
-            issuer: _configuration["Jwt:Issuer"],
-            audience: _configuration["Jwt:Audience"],
+            issuer: _options.Issuer,
+            audience: _options.Audience,
             claims: claims,
             expires: DateTime.Now.AddMinutes(60),
             signingCredentials: credentials);

@@ -93,4 +93,13 @@
     <data name="UpgradeFieldDescriptionKey" xml:space="preserve">
         <value>Увеличивает размер поля на 1 клетку</value>
     </data>
+    <data name="EnergyDrinkHeaderKey" xml:space="preserve">
+        <value>Энергетик</value>
+    </data>
+    <data name="EnergyDrinkDescriptionKey" xml:space="preserve">
+        <value>Восстанавливает количество энергии равное максимальному запасу</value>
+    </data>
+    <data name="EnergyDrinkBlockingTextKey" xml:space="preserve">
+        <value>Дневной запас энергетических напитков был куплен, повторите попытку через {0} часов</value>
+    </data>
 </root>
