@@ -21,6 +21,9 @@ jobs:
         with:
           dotnet-version: '8.x'
 
+      - name: Add custom nuget source
+        run: dotnet nuget add source "https://pkgs.dev.azure.com/tgbots/Telegram.Bot/_packaging/release/nuget/v3/index.json" -n Telegram.Bot
+      
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
