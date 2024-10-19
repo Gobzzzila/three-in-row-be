@@ -42,7 +42,7 @@ public class UpgradesController(IMapper mapper,
     /// </summary>
     [HttpPost("{userId:long}/create-invoice/{upgradeType:int}", Name = EndpointsConstants.CreateInvoiceLinkEndpoint)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
-    [SwaggerOperation(OperationId = "CreateInvoiceLink", Tags = ["Debug"])]
+    [SwaggerOperation(OperationId = "CreateInvoiceLink", Tags = ["Upgrades"])]
     public async Task<IResult> Create([FromMultiSource]CreateInvoiceLinkRequestDto request, 
         CancellationToken cancellationToken = new())
     {

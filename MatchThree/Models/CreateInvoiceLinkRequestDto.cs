@@ -5,9 +5,9 @@ namespace MatchThree.API.Models;
 
 public class CreateInvoiceLinkRequestDto
 {
-    [FromQuery]
+    [FromRoute(Name = "userId")]
     public long UserId { get; init; }
     
-    [FromQuery]
+    [FromRoute(Name = "upgradeType")]
     public UpgradeTypes UpgradeType { get; init; }
 }
