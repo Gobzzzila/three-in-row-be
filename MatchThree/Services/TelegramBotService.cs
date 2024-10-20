@@ -83,7 +83,18 @@ public class TelegramBotService : ITelegramBotService, IDisposable
     private async Task OnMessage(Message msg, UpdateType type)
     {
         if (msg.Text == "/start")
-            await _bot.SendTextMessageAsync(msg.Chat, "Welcome to the club buddy!");
+        {
+            await _bot.SendTextMessageAsync(msg.Chat, "Welcome to the club buddy!!");
+            return;
+        }
+
+        if (msg is { Text: not null, Chat.Id: 126017510 or 273296652 } && msg.Text.StartsWith("/refund"))
+        {
+            await _bot.SendTextMessageAsync(msg.Chat, "Refunding...");
+            var invoiceId = msg.Text.Replace("/refund ", "");
+            await _bot.RefundStarPayment(msg.Chat.Id, invoiceId);
+            return;
+        }
         
         if (msg.SuccessfulPayment is not null )
         {
@@ -97,6 +108,7 @@ public class TelegramBotService : ITelegramBotService, IDisposable
 
             _logger.LogInformation($"Telegram successful payment: User {msg.Chat} paid for {msg.SuccessfulPayment.InvoicePayload}. " +
                                    $"TelegramPaymentChargeId: {msg.SuccessfulPayment.TelegramPaymentChargeId}");
+            return;
         }
     }
     

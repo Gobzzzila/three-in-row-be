@@ -46,9 +46,9 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
 
-    public async Task UpgradeRecoveryAsync(long id)
+    public async Task UpgradeRecoveryAsync(long userId)
     {
-        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(id);
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
         if (dbModel is null)
             throw new NoDataFoundException();
         
@@ -63,7 +63,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
                 throw new UpgradeConditionsException();
         }
         
-        await _updateBalanceService.SpentBalanceAsync(id, recoveryParams.NextLevelCost!.Value);
+        await _updateBalanceService.SpentBalanceAsync(userId, recoveryParams.NextLevelCost!.Value);
         
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.RecoveryLevel = recoveryParams.NextLevel.Value;
@@ -72,9 +72,9 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
 
-    public async Task UseEnergyDrinkAsync(long id)
+    public async Task UseEnergyDrinkAsync(long userId)
     {
-        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(id);
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
         if (dbModel is null)
             throw new NoDataFoundException();
         
@@ -90,9 +90,9 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
     
-    public async Task PurchaseEnergyDrinkAsync(long id)
+    public async Task PurchaseEnergyDrinkAsync(long userId)
     {
-        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(id);
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
         if (dbModel is null)
             throw new NoDataFoundException();
         
@@ -102,7 +102,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.PurchasableEnergyDrinkAmount -=1;
         dbModel.AvailableEnergyDrinkAmount += 1;
-        
-        _context.Set<EnergyDbModel>().Update(dbModel);
+
+        await UseEnergyDrinkAsync(userId);
     }
 }

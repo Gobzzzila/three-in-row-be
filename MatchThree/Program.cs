@@ -144,11 +144,22 @@ namespace MatchThree.API
                     options.AddSupportedUICultures(supportedCultures);
                 });
                 
-                
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowSpecificOrigin",
+                        builder =>
+                        {
+                            builder.WithOrigins("https://bbalkonsky.github.io")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                        });
+                });
             }
 
             void Configure()
             {
+                app.UseCors("AllowSpecificOrigin");
+                
                 var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>();
                 app.UseRequestLocalization(localizationOptions.Value);
                 
