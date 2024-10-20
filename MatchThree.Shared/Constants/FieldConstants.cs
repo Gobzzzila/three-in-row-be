@@ -1,6 +1,6 @@
 ﻿namespace MatchThree.Shared.Constants;
 
-public class FieldConstants
+public static class FieldConstants
 {
     public const int BaseAmountOfCells = 25;
     
@@ -60,7 +60,5 @@ public class FieldConstants
     public const int Level55FieldCost = 1_000;
     public const int Level56FieldCost = 1_000;
     public const int Level57FieldCost = 1_000;
-
-
 
 }

@@ -2,6 +2,15 @@
 
 public static class TranslationConstants
 {
+    #region Exceptions
+
+    public const string MaxLevelReachedExceptionKey = "MaxLevelReachedExceptionKey";
+    public const string NoDataFoundExceptionKey = "NoDataFoundExceptionKey";
+    public const string NotEnoughBalanceExceptionKey = "NotEnoughBalanceExceptionKey";
+    public const string UpgradeConditionsExceptionKey = "UpgradeConditionsExceptionKey";
+    
+    #endregion
+    
     #region League types
 
     public const string UndefinedTextKey = "UndefinedKey";

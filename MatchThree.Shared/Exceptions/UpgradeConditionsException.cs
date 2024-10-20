@@ -1,9 +1,11 @@
-﻿namespace MatchThree.Shared.Exceptions;
+﻿using MatchThree.Shared.Constants;
+
+namespace MatchThree.Shared.Exceptions;
 
 public class UpgradeConditionsException(string messageKey = UpgradeConditionsException.DefaultMessageKey)
     : Exception
 {
-    private const string DefaultMessageKey = "UpgradeConditionsExceptionKey";
+    private const string DefaultMessageKey = TranslationConstants.UpgradeConditionsExceptionKey;
     
     public string MessageKey { get; } = messageKey;
 }
