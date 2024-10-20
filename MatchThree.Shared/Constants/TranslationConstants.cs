@@ -2,9 +2,10 @@
 
 public static class TranslationConstants
 {
+    public const string MaxLevelReachedTextKey = "MaxLevelReachedTextKey";
+    
     #region Exceptions
 
-    public const string MaxLevelReachedExceptionKey = "MaxLevelReachedExceptionKey";
     public const string NoDataFoundExceptionKey = "NoDataFoundExceptionKey";
     public const string NotEnoughBalanceExceptionKey = "NotEnoughBalanceExceptionKey";
     public const string UpgradeConditionsExceptionKey = "UpgradeConditionsExceptionKey";

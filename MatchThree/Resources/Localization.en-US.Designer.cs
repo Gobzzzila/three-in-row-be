@@ -96,7 +96,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A day&apos;s supply of energy drinks have been purchased, try again in {0} hours.
+        ///   Looks up a localized string similar to Today&apos;s limit is reached.
         /// </summary>
         internal static string EnergyDrinkBlockingTextKey {
             get {
@@ -105,7 +105,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restores an amount of energy equal to the maximum energy reserve.
+        ///   Looks up a localized string similar to Restores {0} energy.
         /// </summary>
         internal static string EnergyDrinkDescriptionKey {
             get {
@@ -152,9 +152,9 @@ namespace MatchThree.API.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Max level reached.
         /// </summary>
-        internal static string MaxLevelReachedExceptionKey {
+        internal static string MaxLevelReachedTextKey {
             get {
-                return ResourceManager.GetString("MaxLevelReachedExceptionKey", resourceCulture);
+                return ResourceManager.GetString("MaxLevelReachedTextKey", resourceCulture);
             }
         }
         

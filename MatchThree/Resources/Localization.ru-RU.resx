@@ -57,9 +57,6 @@
     <data name="NoDataFoundExceptionKey" xml:space="preserve">
         <value>Указанный элемент не существует</value>
     </data>
-    <data name="MaxLevelReachedExceptionKey" xml:space="preserve">
-        <value>Достигнут максимальный уровень</value>
-    </data>
     <data name="DefaultExceptionKey" xml:space="preserve">
         <value>Возникла непредвиденная ошибка</value>
     </data>
@@ -97,9 +94,12 @@
         <value>Энергетик</value>
     </data>
     <data name="EnergyDrinkDescriptionKey" xml:space="preserve">
-        <value>Восстанавливает количество энергии равное максимальному запасу</value>
+        <value>Восстанавливает {0} энергии</value>
     </data>
     <data name="EnergyDrinkBlockingTextKey" xml:space="preserve">
-        <value>Дневной запас энергетических напитков был куплен, повторите попытку через {0} часов</value>
+        <value>Сегодняшний лимит исчерпан</value>
+    </data>
+    <data name="MaxLevelReachedTextKey" xml:space="preserve">
+        <value>Достигнут максимальный уровень</value>
     </data>
 </root>

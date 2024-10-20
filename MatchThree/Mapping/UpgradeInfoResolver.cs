@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MatchThree.API.Models.Upgrades;
 using MatchThree.Domain.Models.Upgrades;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Extensions;
 using Microsoft.Extensions.Localization;
 
@@ -14,12 +15,19 @@ public sealed class UpgradeInfoResolver(IStringLocalizer<Localization> localizer
     public string Resolve(UpgradeEntity source, UpgradeDto destination, string destMember, ResolutionContext context)
     {
         var upgradeInfo = source.Type.GetUpgradeInfo();
-        if (source.BlockingTextArgs.Length != 0)
-        {
-            var localizedResource = _localizer[upgradeInfo!.BlockingTextId!];
-            destination.BlockingText = string.Format(localizedResource, source.BlockingTextArgs);
-        }
-        destination.DescriptionText = _localizer[upgradeInfo!.DescriptionTextId];
-        return _localizer[upgradeInfo.HeaderTextId];
+
+        if (source.IsBlocked)
+            destination.BlockingText = ResolveWithArgs(upgradeInfo!.BlockingTextId!, source.BlockingTextArgs);
+        
+        destination.DescriptionText = source.Price is not null 
+            ? ResolveWithArgs(upgradeInfo!.DescriptionTextId, source.DescriptionTextArgs) 
+            : ResolveWithArgs(TranslationConstants.MaxLevelReachedTextKey, source.BlockingTextArgs); //TODO mb wrong place for logic
+
+        return _localizer[upgradeInfo!.HeaderTextId];
+    }
+
+    private string ResolveWithArgs(string textId, object?[] textArgs)
+    {
+        return string.Format(_localizer[textId], textArgs);
     }
 }

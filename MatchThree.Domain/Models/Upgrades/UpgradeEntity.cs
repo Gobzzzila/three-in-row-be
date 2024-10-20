@@ -4,7 +4,9 @@ namespace MatchThree.Domain.Models.Upgrades;
 
 public class UpgradeEntity
 {
+    public object?[] DescriptionTextArgs { get; set; } = [];
     public object?[] BlockingTextArgs { get; set; } = [];
+    public bool IsBlocked { get; set; }
     public int CurrentLevel { get; set; }
     public uint? Price { get; set; }
     public bool IsStars { get; set; }

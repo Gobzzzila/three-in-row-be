@@ -11,14 +11,12 @@ namespace MatchThree.BL.Services.Upgrades;
 
 public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestrictionsService, 
     IReadEnergyService readEnergyService,
-    IReadFieldElementsService readFieldElementsService,
-    TimeProvider timeProvider) 
+    IReadFieldElementsService readFieldElementsService) 
     : IGetUpgradesService
 {
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
     private readonly IReadEnergyService _readEnergyService = readEnergyService;
     private readonly IReadFieldElementsService _readFieldElementsService = readFieldElementsService;
-    private readonly TimeProvider _timeProvider = timeProvider;
 
     public async Task<IReadOnlyCollection<GroupedUpgradesEntity>> GetAll(long userId)
     {
@@ -54,13 +52,15 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     private UpgradeEntity GetEnergyDrinkUpgrade(EnergyEntity energyEntity)
     {
         var condition = energyEntity.AvailableEnergyDrinkAmount > 0;
+        var reserveParams = EnergyReserveConfiguration.GetParamsByLevel(energyEntity.MaxReserve);
+        var availableAmount = energyEntity.AvailableEnergyDrinkAmount + energyEntity.PurchasableEnergyDrinkAmount;
+        
         var upgradeEntity = new UpgradeEntity
         {
             Type = UpgradeTypes.EnergyDrink,
-            BlockingTextArgs = energyEntity.AvailableEnergyDrinkAmount + energyEntity.PurchasableEnergyDrinkAmount < 1
-                ? [Math.Ceiling((_timeProvider.GetUtcNow().Date.AddDays(1) - _timeProvider.GetUtcNow()).TotalHours)]
-                : [],
-            CurrentLevel = energyEntity.AvailableEnergyDrinkAmount + energyEntity.PurchasableEnergyDrinkAmount,
+            DescriptionTextArgs = [$"{reserveParams.MaxReserve}"],
+            IsBlocked = availableAmount < 1,
+            CurrentLevel = availableAmount,
             Price = condition 
                 ? 0 
                 : (uint)EnergyConstants.EnergyDrinkPrice,
@@ -89,9 +89,8 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         var upgradeEntity = new UpgradeEntity
         {
             Type = UpgradeTypes.EnergyReserve,
-            BlockingTextArgs = missingAmountOfReferrals is not null
-                ? [missingAmountOfReferrals]
-                : [],
+            IsBlocked = missingAmountOfReferrals is not null,
+            BlockingTextArgs = [missingAmountOfReferrals],
             CurrentLevel = (int)energyEntity.MaxReserve,
             Price = reserveParams.NextLevelCost,
             IsStars = false,
@@ -114,9 +113,8 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         var upgradeEntity = new UpgradeEntity
         {
             Type = UpgradeTypes.EnergyRecovery,
-            BlockingTextArgs = requiredReserveLevel is not null
-                ? [requiredReserveLevel]
-                : [],
+            IsBlocked = requiredReserveLevel is not null,
+            BlockingTextArgs = [requiredReserveLevel],
             CurrentLevel = (int)energyEntity.RecoveryLevel,
             Price = recoveryParams.NextLevelCost,
             IsStars = false,
