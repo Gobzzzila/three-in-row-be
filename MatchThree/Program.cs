@@ -149,7 +149,7 @@ namespace MatchThree.API
                     options.AddPolicy("AllowSpecificOrigin",
                         builder =>
                         {
-                            builder.WithOrigins("https://bbalkonsky.github.io")
+                            builder.WithOrigins("https://cryptofe-75961.web.app")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                         });
