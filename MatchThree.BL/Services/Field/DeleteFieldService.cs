@@ -1,11 +1,11 @@
-﻿using MatchThree.Domain.Interfaces.FieldElements;
+﻿using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 
-namespace MatchThree.BL.Services.FieldElements;
+namespace MatchThree.BL.Services.Field;
 
-public class DeleteFieldElementsService(MatchThreeDbContext context) 
-    : IDeleteFieldElementsService
+public class DeleteFieldService(MatchThreeDbContext context) 
+    : IDeleteFieldService
 {
     private readonly MatchThreeDbContext _context = context;
 

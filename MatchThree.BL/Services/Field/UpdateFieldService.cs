@@ -1,15 +1,15 @@
 ﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Balance;
-using MatchThree.Domain.Interfaces.FieldElements;
+using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
 
-namespace MatchThree.BL.Services.FieldElements;
+namespace MatchThree.BL.Services.Field;
 
-public class UpdateFieldElementsService(MatchThreeDbContext context,
+public class UpdateFieldService(MatchThreeDbContext context,
     IUpdateBalanceService updateBalanceService) 
-    : IUpdateFieldElementsService
+    : IUpdateFieldService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;

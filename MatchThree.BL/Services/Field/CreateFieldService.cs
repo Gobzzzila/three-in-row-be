@@ -1,12 +1,12 @@
 ﻿using MatchThree.BL.Configuration;
-using MatchThree.Domain.Interfaces.FieldElements;
+using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 
-namespace MatchThree.BL.Services.FieldElements;
+namespace MatchThree.BL.Services.Field;
 
-public class CreateFieldElementsService(MatchThreeDbContext context) 
-    : ICreateFieldElementsService
+public class CreateFieldService(MatchThreeDbContext context) 
+    : ICreateFieldService
 {
     private readonly MatchThreeDbContext _context = context;
 

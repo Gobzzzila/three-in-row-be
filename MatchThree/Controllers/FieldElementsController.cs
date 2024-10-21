@@ -1,5 +1,5 @@
 ﻿using MatchThree.Domain.Interfaces;
-using MatchThree.Domain.Interfaces.FieldElements;
+using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +9,10 @@ namespace MatchThree.API.Controllers;
 
 [ApiController]
 [Route("api/v1/field-elements")]
-public class FieldElementsController(IUpdateFieldElementsService updateFieldElementsService,
+public class FieldElementsController(IUpdateFieldService updateFieldService,
     ITransactionService transactionService)
 {
-    private readonly IUpdateFieldElementsService _updateFieldElementsService = updateFieldElementsService;
+    private readonly IUpdateFieldService _updateFieldService = updateFieldService;
     private readonly ITransactionService _transactionService = transactionService;
 
     /// <summary>
@@ -29,7 +29,7 @@ public class FieldElementsController(IUpdateFieldElementsService updateFieldElem
     [SwaggerOperation(OperationId = "UpgradeField", Tags = ["FieldElements"])]
     public async Task<IResult> UpgradeField(long userId, CancellationToken cancellationToken = new())
     {
-        await _updateFieldElementsService.UpgradeFieldAsync(userId);
+        await _updateFieldService.UpgradeFieldAsync(userId);
         await _transactionService.Commit();
         return Results.Ok();
     }

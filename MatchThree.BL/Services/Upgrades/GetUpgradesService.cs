@@ -1,6 +1,6 @@
 ﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Energy;
-using MatchThree.Domain.Interfaces.FieldElements;
+using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Models.Upgrades;
@@ -11,12 +11,12 @@ namespace MatchThree.BL.Services.Upgrades;
 
 public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestrictionsService, 
     IReadEnergyService readEnergyService,
-    IReadFieldElementsService readFieldElementsService) 
+    IReadFieldService readFieldService) 
     : IGetUpgradesService
 {
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
     private readonly IReadEnergyService _readEnergyService = readEnergyService;
-    private readonly IReadFieldElementsService _readFieldElementsService = readFieldElementsService;
+    private readonly IReadFieldService _readFieldService = readFieldService;
 
     public async Task<IReadOnlyCollection<GroupedUpgradesEntity>> GetAll(long userId)
     {
@@ -130,7 +130,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     
     private async Task<GroupedUpgradesEntity> GetFieldElementsUpgrades(long userId)
     {
-        var fieldElements = await _readFieldElementsService.GetByUserIdAsync(userId);
+        var fieldElements = await _readFieldService.GetByUserIdAsync(userId);
         
         var result = new GroupedUpgradesEntity
         {
