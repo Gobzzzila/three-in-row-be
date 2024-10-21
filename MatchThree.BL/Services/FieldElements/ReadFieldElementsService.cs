@@ -14,13 +14,13 @@ public class ReadFieldElementsService(MatchThreeDbContext context,
     private readonly MatchThreeDbContext _context = context;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<FieldElementsEntity> GetByUserIdAsync(long userId)
+    public async Task<FieldEntity> GetByUserIdAsync(long userId)
     {
-        var dbModel = await _context.Set<FieldElementsDbModel>().FindAsync(userId);
+        var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
         
         if (dbModel is null)
             throw new NoDataFoundException();
 
-        return _mapper.Map<FieldElementsEntity>(dbModel);
+        return _mapper.Map<FieldEntity>(dbModel);
     }
 }

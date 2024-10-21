@@ -15,5 +15,6 @@ public class UserDbModel : DbModel
     public ReferralDbModel? Referrer { get; set; }
     public BalanceDbModel? Balance { get; set; }
     public EnergyDbModel? Energy { get; set; }
-    public FieldElementsDbModel? FieldElementLevel { get; set; }
+    public FieldDbModel? FieldElementLevel { get; set; }
+    public List<FieldElementDbModel>? FieldElements { get; set; } = [];
 }

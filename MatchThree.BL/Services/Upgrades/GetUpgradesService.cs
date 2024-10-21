@@ -144,18 +144,18 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         return result;
     }
 
-    private static UpgradeEntity GetFieldUpgrade(FieldElementsEntity fieldElements)
+    private static UpgradeEntity GetFieldUpgrade(FieldEntity field)
     {
-        var fieldParams = FieldConfiguration.GetParamsByLevel(fieldElements.FieldLevel);
+        var fieldParams = FieldConfiguration.GetParamsByLevel(field.FieldLevel);
 
         var upgradeEntity = new UpgradeEntity
         {
             Type = UpgradeTypes.Field,
-            CurrentLevel = (int)fieldElements.FieldLevel,
+            CurrentLevel = (int)field.FieldLevel,
             Price = fieldParams.NextLevelCost,
             IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeFieldEndpointName,
-            ExecutePathArgs = new { userId = fieldElements.Id }                                 //TODO get rid of anonymous cringe
+            ExecutePathArgs = new { userId = field.Id }                                 //TODO get rid of anonymous cringe
         };
         return upgradeEntity;
     }

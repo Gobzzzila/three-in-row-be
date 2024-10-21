@@ -4,10 +4,9 @@ using MatchThree.Shared.Enums;
 
 namespace MatchThree.Repository.MSSQL.Models;
 
-[Table("FieldElementLevels")]
-public class FieldElementsDbModel : DbModel
+[Table("Fields")]
+public class FieldDbModel : DbModel
 {
     public FieldLevels FieldLevel { get; set; }
-    
     public UserDbModel? User { get; set; }
 }

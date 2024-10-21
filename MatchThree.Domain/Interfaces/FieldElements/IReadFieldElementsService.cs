@@ -4,5 +4,5 @@ namespace MatchThree.Domain.Interfaces.FieldElements;
 
 public interface IReadFieldElementsService
 {
-    Task<FieldElementsEntity> GetByUserIdAsync(long userId);
+    Task<FieldEntity> GetByUserIdAsync(long userId);
 }

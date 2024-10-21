@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MatchThree.Repository.MSSQL.Configurations;
 
-public class CellDbModelConfiguration : EntityTypeConfigurationBase<CellDbModel>
+public class FieldElementDbModelConfiguration : EntityTypeConfigurationBase<FieldElementDbModel>
 {
-    protected override void ConfigureEntityProperties(EntityTypeBuilder<CellDbModel> builder)
+    protected override void ConfigureEntityProperties(EntityTypeBuilder<FieldElementDbModel> builder)
     {
         builder
             .HasKey(x => x.Id);
@@ -16,15 +16,14 @@ public class CellDbModelConfiguration : EntityTypeConfigurationBase<CellDbModel>
             .HasIndex(x => x.UserId);
         
         builder
-            .HasIndex(x => new { x.UserId, x.CoordinateX, x.CoordinateY })
+            .HasIndex(x => new { x.UserId, x.Element })
             .IsUnique();
 
         builder
             .HasOne(x => x.User)
-            .WithMany(x => x.Cells)
+            .WithMany(x => x.FieldElements)
             .HasForeignKey(x => x.UserId)
             .IsRequired()
             .OnDelete(DeleteBehavior.NoAction);
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace MatchThree.Domain.Models;
 
-public class FieldElementsEntity
+public class FieldEntity
 {
     public long Id { get; set; }
     public FieldLevels FieldLevel { get; set; }
