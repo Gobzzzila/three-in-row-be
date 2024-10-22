@@ -24,6 +24,6 @@ public class EnergyDrinkRefillsService (MatchThreeDbContext context)
         return _context.Set<EnergyDbModel>()
             .Where(x => x.PurchasableEnergyDrinkAmount != EnergyConstants.PurchasableEnergyDrinksPerDay)
             .ExecuteUpdateAsync(x => 
-                x.SetProperty(v => v.AvailableEnergyDrinkAmount, EnergyConstants.PurchasableEnergyDrinksPerDay));
+                x.SetProperty(v => v.PurchasableEnergyDrinkAmount, EnergyConstants.PurchasableEnergyDrinksPerDay));
     }
 }
