@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using AutoMapper;
+﻿using AutoMapper;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
@@ -61,6 +60,7 @@ public class DebugController(IMapper mapper,
         return Results.Ok(token);
     }
     
+#if DEBUG
     /// <summary>
     /// User deletion
     /// </summary>
@@ -76,5 +76,5 @@ public class DebugController(IMapper mapper,
         await _transactionService.Commit();
         return Results.NoContent();
     }
-}
 #endif
+}

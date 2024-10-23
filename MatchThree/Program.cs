@@ -151,6 +151,10 @@ namespace MatchThree.API
                         {
                             builder.WithOrigins("https://cryptofe-75961.web.app")
                                 .AllowAnyHeader()
+                                .AllowAnyMethod();                            
+                            
+                            builder.WithOrigins("http://localhost:5173")
+                                .AllowAnyHeader()
                                 .AllowAnyMethod();
                         });
                 });
