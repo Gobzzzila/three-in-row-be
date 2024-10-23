@@ -34,11 +34,13 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         IOptions<TelegramSettings> options,
         ILogger<TelegramBotService> logger)
     {
+#if !DEBUG
         _bot = new TelegramBotClient(options.Value.BotToken);
         _bot.OnError += OnError;
         _bot.OnMessage += OnMessage;
         _bot.OnUpdate += OnUpdate;
-        
+#endif
+
         _localizer = localizer;
         _logger = logger;
         _scope = serviceProvider.CreateScope();

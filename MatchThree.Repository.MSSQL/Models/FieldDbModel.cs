@@ -8,5 +8,6 @@ namespace MatchThree.Repository.MSSQL.Models;
 public class FieldDbModel : DbModel
 {
     public FieldLevels FieldLevel { get; set; }
+    public int[][] Field { get; set; } = [];
     public UserDbModel? User { get; set; }
 }

@@ -10,7 +10,6 @@ public class UserDbModel : DbModel
     public string FirstName { get; set; } = string.Empty;
     public bool IsPremium { get; set; }
     public DateTime CreatedAt{ get; set; }
-    public List<CellDbModel> Cells { get; set; } = [];
     public List<ReferralDbModel> Referrals { get; set; } = [];
     public ReferralDbModel? Referrer { get; set; }
     public BalanceDbModel? Balance { get; set; }
