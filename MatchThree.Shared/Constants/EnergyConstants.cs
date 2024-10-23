@@ -45,12 +45,18 @@ public static class EnergyConstants
     public const int Level14EnergyReserveReferralAmount = 8;
 
     //Energy recovery
-    public static readonly TimeSpan Level1EnergyRecovery = TimeSpan.FromMinutes(4);
-    public static readonly TimeSpan Level2EnergyRecovery = TimeSpan.FromMinutes(3.5);
-    public static readonly TimeSpan Level3EnergyRecovery = TimeSpan.FromMinutes(3);
-    public static readonly TimeSpan Level4EnergyRecovery = TimeSpan.FromMinutes(2.5);
-    public static readonly TimeSpan Level5EnergyRecovery = TimeSpan.FromMinutes(2);
-    public static readonly TimeSpan Level6EnergyRecovery = TimeSpan.FromMinutes(1.75);
+    // public static readonly TimeSpan Level1EnergyRecovery = TimeSpan.FromMinutes(4);
+    // public static readonly TimeSpan Level2EnergyRecovery = TimeSpan.FromMinutes(3.5);
+    // public static readonly TimeSpan Level3EnergyRecovery = TimeSpan.FromMinutes(3);
+    // public static readonly TimeSpan Level4EnergyRecovery = TimeSpan.FromMinutes(2.5);
+    // public static readonly TimeSpan Level5EnergyRecovery = TimeSpan.FromMinutes(2);
+    // public static readonly TimeSpan Level6EnergyRecovery = TimeSpan.FromMinutes(1.75);
+    public static readonly TimeSpan Level1EnergyRecovery = TimeSpan.FromSeconds(30);            //TODO REVERSE AT RELEASE
+    public static readonly TimeSpan Level2EnergyRecovery = TimeSpan.FromSeconds(25);
+    public static readonly TimeSpan Level3EnergyRecovery = TimeSpan.FromSeconds(20);
+    public static readonly TimeSpan Level4EnergyRecovery = TimeSpan.FromSeconds(15);
+    public static readonly TimeSpan Level5EnergyRecovery = TimeSpan.FromSeconds(10);
+    public static readonly TimeSpan Level6EnergyRecovery = TimeSpan.FromSeconds(5);
     
     public const int Level2EnergyRecoveryCost = 1_000;
     public const int Level3EnergyRecoveryCost = 1_000;
