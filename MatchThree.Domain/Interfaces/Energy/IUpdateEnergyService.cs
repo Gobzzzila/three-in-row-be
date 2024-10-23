@@ -6,4 +6,5 @@ public interface IUpdateEnergyService
     Task UpgradeRecoveryAsync(long userId);
     Task UseEnergyDrinkAsync(long userId);
     Task PurchaseEnergyDrinkAsync(long userId);
+    Task SpendEnergy(long userId);
 }

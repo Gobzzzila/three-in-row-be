@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
+using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
 using MatchThree.Shared.Constants;
@@ -20,7 +21,8 @@ public class DebugController(IMapper mapper,
     IUpdateUserService updateUserService,
     IDeleteUserService deleteUserService,
     IJwtTokenService jwtTokenService,
-    ITransactionService transactionService)
+    ITransactionService transactionService,
+    IUpdateEnergyService updateEnergyService)
 {
     private readonly IMapper _mapper = mapper;
     private readonly IReadUserService _readUserService = readUserService;
@@ -29,6 +31,7 @@ public class DebugController(IMapper mapper,
     private readonly IDeleteUserService _deleteUserService = deleteUserService;
     private readonly IJwtTokenService _jwtTokenService = jwtTokenService;
     private readonly ITransactionService _transactionService = transactionService;
+    private readonly IUpdateEnergyService _updateEnergyService = updateEnergyService;
     
     /// <summary>
     /// User creation
@@ -58,6 +61,20 @@ public class DebugController(IMapper mapper,
         var token = _jwtTokenService.GenerateJwtToken(entity.Id);
         await _transactionService.Commit();
         return Results.Ok(token);
+    }
+    
+    /// <summary>
+    /// User creation
+    /// </summary>
+    [HttpPost("{userId:long}/spend-energy")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [SwaggerOperation(OperationId = "SpendEnergy", Tags = ["Debug"])]
+    public async Task<IResult> SpendEnergy([FromRoute] long userId,
+        CancellationToken cancellationToken = new())
+    {
+        await _updateEnergyService.SpendEnergy(userId);
+        await _transactionService.Commit();
+        return Results.Ok();
     }
     
 #if DEBUG

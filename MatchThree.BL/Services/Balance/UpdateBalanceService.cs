@@ -14,7 +14,7 @@ public class UpdateBalanceService (MatchThreeDbContext context,
     private readonly MatchThreeDbContext _context = context;
     private readonly IReadReferralService _readReferralService = readReferralService;
 
-    public async Task SpentBalanceAsync(long id, uint amount)
+    public async Task SpendBalanceAsync(long id, uint amount)
     {
         var dbModel = (await _context.Set<BalanceDbModel>().FindAsync(id))!;
 

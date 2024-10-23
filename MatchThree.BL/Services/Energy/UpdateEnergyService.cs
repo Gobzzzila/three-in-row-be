@@ -11,13 +11,15 @@ namespace MatchThree.BL.Services.Energy;
 public class UpdateEnergyService(MatchThreeDbContext context,
     ISynchronizationEnergyService synchronizationEnergyService,
     IUpdateBalanceService updateBalanceService,
-    IUpgradesRestrictionsService upgradesRestrictionsService) 
+    IUpgradesRestrictionsService upgradesRestrictionsService,
+    TimeProvider timeProvider) 
     : IUpdateEnergyService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly ISynchronizationEnergyService _synchronizationEnergyService = synchronizationEnergyService;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
+    private readonly TimeProvider _timeProvider = timeProvider;
 
     public async Task UpgradeReserveAsync(long userId)
     {
@@ -36,7 +38,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
                 throw new UpgradeConditionsException();
         }
         
-        await _updateBalanceService.SpentBalanceAsync(userId, reserveParams.NextLevelCost!.Value);
+        await _updateBalanceService.SpendBalanceAsync(userId, reserveParams.NextLevelCost!.Value);
         
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.MaxReserve = reserveParams.NextLevel.Value;
@@ -63,7 +65,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
                 throw new UpgradeConditionsException();
         }
         
-        await _updateBalanceService.SpentBalanceAsync(userId, recoveryParams.NextLevelCost!.Value);
+        await _updateBalanceService.SpendBalanceAsync(userId, recoveryParams.NextLevelCost!.Value);
         
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.RecoveryLevel = recoveryParams.NextLevel.Value;
@@ -104,5 +106,18 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         dbModel.AvailableEnergyDrinkAmount += 1;
 
         await UseEnergyDrinkAsync(userId);
+    }
+    
+    public async Task SpendEnergy(long userId)
+    {
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
+        if (dbModel is null)
+            throw new NoDataFoundException();
+        
+        _synchronizationEnergyService.SynchronizeModel(dbModel);
+        dbModel.CurrentReserve -=1;
+        dbModel.LastRecoveryStartTime ??= _timeProvider.GetUtcNow().DateTime;
+        
+        _context.Set<EnergyDbModel>().Update(dbModel);
     }
 }

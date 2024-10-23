@@ -24,7 +24,7 @@ public class UpdateFieldService(MatchThreeDbContext context,
         if (!fieldParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
 
-        await _updateBalanceService.SpentBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
+        await _updateBalanceService.SpendBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
         
         dbModel.FieldLevel = fieldParams.NextLevel.Value;
         _context.Set<FieldDbModel>().Update(dbModel);
