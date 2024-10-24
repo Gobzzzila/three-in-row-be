@@ -9,6 +9,7 @@ public class UserDbModel : DbModel
     public string? Username { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public bool IsPremium { get; set; }
+    public string SessionHash { get; set; } = string.Empty;
     public DateTime CreatedAt{ get; set; }
     public List<ReferralDbModel> Referrals { get; set; } = [];
     public ReferralDbModel? Referrer { get; set; }

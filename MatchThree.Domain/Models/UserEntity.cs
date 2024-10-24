@@ -15,6 +15,8 @@ public class UserEntity
 
     [JsonPropertyName("is_premium")]
     public bool IsPremium { get; set; }
+    
+    public string SessionHash { get; set; } = string.Empty;
 
     [JsonIgnore]
     public DateTime CreatedAt{ get; set; }

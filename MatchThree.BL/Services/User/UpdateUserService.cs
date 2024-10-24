@@ -21,6 +21,7 @@ public class UpdateUserService(MatchThreeDbContext context) : IUpdateUserService
         dbModel.IsPremium = entity.IsPremium;
         dbModel.FirstName = entity.FirstName;
         dbModel.Username = entity.Username;
+        dbModel.SessionHash = entity.SessionHash;
         
         _context.Set<UserDbModel>().Update(dbModel);
     }

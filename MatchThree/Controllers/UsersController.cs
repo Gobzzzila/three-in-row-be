@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Web;
 using MatchThree.API.Attributes;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
@@ -34,17 +35,20 @@ public class UsersController(IReadUserService readUserService,
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
     [SwaggerOperation(OperationId = "SignUp", Tags = ["Users"])]
-    public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request, 
+    public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request,         //TODO There's a lot of logic here, mb implement service
         CancellationToken cancellationToken = new())
     {
         var parsedInitData = AuthHelpers.ParseValidateData(request.InitData, _settings.BotToken);
         var userString = parsedInitData.GetValueOrDefault("user");
         if (string.IsNullOrEmpty(userString))
-            throw new Exception("User info is not set");
+            throw new Exception("User info is not set");        //TODO implement special exception
         
         var userEntityFromRequest = JsonSerializer.Deserialize<UserEntity>(userString);
         if (userEntityFromRequest is null)
             throw new Exception("Init data doesn't contain user info");
+        
+        var data = HttpUtility.ParseQueryString(request.InitData);
+        userEntityFromRequest.SessionHash = data["hash"]!;
         
         var userEntity = await _readUserService.GetByIdAsync(userEntityFromRequest.Id);
         if (userEntity is null)
