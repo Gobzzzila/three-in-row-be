@@ -26,7 +26,10 @@ public class UpdateFieldService(MatchThreeDbContext context,
 
         await _updateBalanceService.SpendBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
         
+        var random = new Random();
+        dbModel.Field[fieldParams.NextLevelCoordinates.Y][fieldParams.NextLevelCoordinates.X] = random.Next(1, 6);
         dbModel.FieldLevel = fieldParams.NextLevel.Value;
+
         _context.Set<FieldDbModel>().Update(dbModel);
     }
 }

@@ -9,7 +9,7 @@ namespace MatchThree.API.Controllers;
 
 [ApiController]
 [Route("api/v1/field-elements")]
-public class FieldElementsController(IUpdateFieldService updateFieldService,
+public class FieldController(IUpdateFieldService updateFieldService,
     ITransactionService transactionService)
 {
     private readonly IUpdateFieldService _updateFieldService = updateFieldService;
@@ -26,7 +26,7 @@ public class FieldElementsController(IUpdateFieldService updateFieldService,
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status402PaymentRequired, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
-    [SwaggerOperation(OperationId = "UpgradeField", Tags = ["FieldElements"])]
+    [SwaggerOperation(OperationId = "UpgradeField", Tags = ["Field"])]
     public async Task<IResult> UpgradeField(long userId, CancellationToken cancellationToken = new())
     {
         await _updateFieldService.UpgradeFieldAsync(userId);

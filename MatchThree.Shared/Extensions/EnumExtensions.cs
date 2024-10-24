@@ -25,6 +25,15 @@ public static class EnumExtensions
         return typeof(UpgradeTypes).GetField(fieldName)?.GetCustomAttribute<UpgradeInfoAttribute>();
     }
     
+    public static CoordinatesForNextLevelAttribute? GetNextLevelCoordinates(this FieldLevels enumValue)
+    {
+        var fieldName = Enum.GetName(typeof(FieldLevels), enumValue);
+        if (fieldName is null)
+            throw new InvalidOperationException($"Value {enumValue} is not defined for UpgradeTypes");
+
+        return typeof(FieldLevels).GetField(fieldName)?.GetCustomAttribute<CoordinatesForNextLevelAttribute>();
+    }
+    
     #region TranslationId
     
     public static string? GetTranslationId<T>(this T enumValue) where T : Enum
