@@ -16,8 +16,10 @@ public class UpdateBalanceService (MatchThreeDbContext context,
 
     public async Task SpendBalanceAsync(long id, uint amount)
     {
-        var dbModel = (await _context.Set<BalanceDbModel>().FindAsync(id))!;
-
+        var dbModel = await _context.Set<BalanceDbModel>().FindAsync(id);
+        if (dbModel is null)
+            throw new NoDataFoundException();
+        
         if (dbModel.Balance < amount)
             throw new NotEnoughBalanceException();
         
@@ -27,7 +29,10 @@ public class UpdateBalanceService (MatchThreeDbContext context,
     
     public async Task AddBalanceAsync(long id, uint amount)
     {
-        var dbModel = (await _context.Set<BalanceDbModel>().FindAsync(id))!;
+        var dbModel = await _context.Set<BalanceDbModel>().FindAsync(id);
+        if (dbModel is null)
+            throw new NoDataFoundException();
+        
         await UpdateReferrerBalance(id, dbModel.OverallBalance, amount);
         dbModel.Balance += amount;
         dbModel.OverallBalance += amount;

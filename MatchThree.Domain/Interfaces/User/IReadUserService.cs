@@ -4,5 +4,5 @@ namespace MatchThree.Domain.Interfaces.User;
 
 public interface IReadUserService
 {
-    Task<UserEntity?> GetByIdAsync(long userId);
+    Task<UserEntity?> FindByIdAsync(long userId);
 }

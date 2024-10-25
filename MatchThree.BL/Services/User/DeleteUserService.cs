@@ -1,4 +1,5 @@
 ﻿using MatchThree.Domain.Interfaces.Balance;
+using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
@@ -8,16 +9,19 @@ using MatchThree.Shared.Exceptions;
 
 namespace MatchThree.BL.Services.User;
 
-public class DeleteUserService (MatchThreeDbContext context,
+public class DeleteUserService(
+    MatchThreeDbContext context,
     IDeleteReferralService deleteReferralService,
     IDeleteBalanceService deleteBalanceService,
-    IDeleteFieldService deleteFieldService)
+    IDeleteFieldService deleteFieldService,
+    IDeleteEnergyService deleteEnergyService)
     : IDeleteUserService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly IDeleteReferralService _deleteReferralService = deleteReferralService;
     private readonly IDeleteBalanceService _deleteBalanceService = deleteBalanceService;
     private readonly IDeleteFieldService _deleteFieldService = deleteFieldService;
+    private readonly IDeleteEnergyService _deleteEnergyService = deleteEnergyService;
 
     public async Task DeleteAsync(long id)
     {
@@ -25,6 +29,7 @@ public class DeleteUserService (MatchThreeDbContext context,
         if (dbModel is null)
             throw new NoDataFoundException();
 
+        await _deleteEnergyService.DeleteAsync(id);
         await _deleteReferralService.DeleteByUserIdAsync(id);
         await _deleteBalanceService.DeleteAsync(id);
         await _deleteFieldService.DeleteAsync(id);

@@ -50,7 +50,7 @@ public class UsersController(IReadUserService readUserService,
         var data = HttpUtility.ParseQueryString(request.InitData);
         userEntityFromRequest.SessionHash = data["hash"]!;
         
-        var userEntity = await _readUserService.GetByIdAsync(userEntityFromRequest.Id);
+        var userEntity = await _readUserService.FindByIdAsync(userEntityFromRequest.Id);
         if (userEntity is null)
         {
             if (request.ReferrerId.HasValue)

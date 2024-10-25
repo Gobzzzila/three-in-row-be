@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.BL.Services.Referral;
 
-public class DeleteReferralService (MatchThreeDbContext context) 
-    : IDeleteReferralService
+public class DeleteReferralService(MatchThreeDbContext context) : IDeleteReferralService
 {
     private readonly MatchThreeDbContext _context = context;
 

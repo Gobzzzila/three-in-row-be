@@ -8,8 +8,6 @@ using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Telegram.Bot;
-using Telegram.Bot.Types.Payments;
 
 namespace MatchThree.API.Controllers;
 
@@ -42,7 +40,7 @@ public class DebugController(IMapper mapper,
     public async Task<IResult> Create([FromBody] DebugUserRequestDto request, 
         CancellationToken cancellationToken = new())
     {
-        var userEntity = await _readUserService.GetByIdAsync(request.Id);
+        var userEntity = await _readUserService.FindByIdAsync(request.Id);
 
         UserEntity entity;
         if (userEntity is null)

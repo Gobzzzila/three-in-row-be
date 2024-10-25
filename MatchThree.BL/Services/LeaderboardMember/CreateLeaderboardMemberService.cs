@@ -21,7 +21,7 @@ public class CreateLeaderboardMemberService(MatchThreeDbContext context)
             .Include(x => x.User)
             .Where(x => x.OverallBalance > leagueParam.MinValue && x.OverallBalance <= leagueParam.MaxValue)
             .OrderByDescending(x => x.OverallBalance)
-            .Take(1000)
+            .Take(999)
             .Select(x => new LeaderboardMemberDbModel
             {
                 Id = x.User!.Id,

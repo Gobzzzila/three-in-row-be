@@ -12,9 +12,7 @@ public class UpdateUserService(MatchThreeDbContext context) : IUpdateUserService
 
     public async Task SyncUserData(UserEntity entity)
     {
-        var dbModel = await _context.Set<UserDbModel>()
-            .FindAsync(entity.Id);
-        
+        var dbModel = await _context.Set<UserDbModel>().FindAsync(entity.Id);
         if (dbModel is null)
             throw new NoDataFoundException();
 

@@ -42,6 +42,6 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         var dbModel = await _context.Set<LeaderboardMemberDbModel>().AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == userId);
 
-        return dbModel?.TopSpot ?? 1001;
+        return dbModel?.TopSpot ?? 1000;
     }
 }

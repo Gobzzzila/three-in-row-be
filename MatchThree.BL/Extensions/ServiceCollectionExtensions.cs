@@ -53,12 +53,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IReadEnergyService, ReadEnergyService>();
         services.AddTransient<ISynchronizationEnergyService, SynchronizationEnergyService>();
         services.AddScoped<IUpdateEnergyService, UpdateEnergyService>();
+        services.AddScoped<IDeleteEnergyService, DeleteEnergyService>();
         
-        //FieldElements
+        //Field
         services.AddScoped<ICreateFieldService, CreateFieldService>();
         services.AddScoped<IDeleteFieldService, DeleteFieldService>();
         services.AddScoped<IUpdateFieldService, UpdateFieldService>();
         services.AddScoped<IReadFieldService, ReadFieldService>();
+        services.AddScoped<IMoveService, MoveService>();
         
         //Upgrades
         services.AddScoped<IUpgradesRestrictionsService, UpgradesRestrictionsService>();

@@ -17,7 +17,6 @@ public class ReadFieldService(MatchThreeDbContext context,
     public async Task<FieldEntity> GetByUserIdAsync(long userId)
     {
         var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
-        
         if (dbModel is null)
             throw new NoDataFoundException();
 

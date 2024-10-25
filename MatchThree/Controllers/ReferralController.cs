@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MatchThree.API.Models;
 using MatchThree.API.Models.Referrals;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Shared.Constants;

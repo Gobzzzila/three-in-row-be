@@ -13,7 +13,7 @@ public class ReadUserService(MatchThreeDbContext context,
     private readonly MatchThreeDbContext _context = context;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<UserEntity?> GetByIdAsync(long userId)
+    public async Task<UserEntity?> FindByIdAsync(long userId)
     {
         var dbModel = await _context.Set<UserDbModel>().FindAsync(userId);
         return _mapper.Map<UserEntity?>(dbModel);

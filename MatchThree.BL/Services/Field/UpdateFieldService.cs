@@ -8,7 +8,7 @@ using MatchThree.Shared.Exceptions;
 namespace MatchThree.BL.Services.Field;
 
 public class UpdateFieldService(MatchThreeDbContext context,
-    IUpdateBalanceService updateBalanceService) 
+    IUpdateBalanceService updateBalanceService)
     : IUpdateFieldService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -19,17 +19,34 @@ public class UpdateFieldService(MatchThreeDbContext context,
         var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
         if (dbModel is null)
             throw new NoDataFoundException();
-        
+
         var fieldParams = FieldConfiguration.GetParamsByLevel(dbModel!.FieldLevel);
         if (!fieldParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
 
         await _updateBalanceService.SpendBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
-        
+
         var random = new Random();
         dbModel.Field[fieldParams.NextLevelCoordinates.Y][fieldParams.NextLevelCoordinates.X] = random.Next(1, 6);
         dbModel.FieldLevel = fieldParams.NextLevel.Value;
 
+        _context.Set<FieldDbModel>().Update(dbModel);
+    }
+
+    public async Task UpdateFieldAsync(long userId, int[][] field)
+    {
+        if (field.Length != 9 || field.Any(x => x.Length != 9))
+            throw new Exception("Wrong field size");
+
+        var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
+        if (dbModel is null)
+            throw new NoDataFoundException();
+
+        var fieldParams = FieldConfiguration.GetParamsByLevel(dbModel.FieldLevel);
+        if (field.Sum(x => x.Count(y => y != 0)) != fieldParams.AmountOfCells)
+            throw new Exception("Wrong field values");
+        
+        dbModel.Field = field;
         _context.Set<FieldDbModel>().Update(dbModel);
     }
 }
