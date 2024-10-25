@@ -2,6 +2,7 @@
 using MatchThree.Repository.MSSQL.Configurations.Base;
 using MatchThree.Repository.MSSQL.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -21,9 +22,16 @@ public class FieldDbModelConfiguration : EntityTypeConfigurationBase<FieldDbMode
         var converter = new ValueConverter<int[][], string>(
             v => JsonSerializer.Serialize(v, new JsonSerializerOptions { WriteIndented = false }),
             v => JsonSerializer.Deserialize<int[][]>(v, new JsonSerializerOptions { PropertyNameCaseInsensitive = false })!);
+        
+        var comparer = new ValueComparer<int[][]>(
+            (c1, c2) => c1.SequenceEqual(c2),
+            c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+            c => c.ToArray()
+        );
 
         builder.Property(e => e.Field)
-            .HasConversion(converter);
+            .HasConversion(converter)
+            .Metadata.SetValueComparer(comparer);
         
         builder
             .HasOne(x => x.User)

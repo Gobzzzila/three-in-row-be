@@ -41,11 +41,14 @@ public class AutoMappingProfile : Profile
         CreateMap<EnergyEntity, EnergyDto>()
             .ForMember(x => x.MaxReserve, 
                 o => o.MapFrom(s => EnergyReserveConfiguration.GetReserveMaxValue(s.MaxReserve)))
-            .ForMember(x => x.RecoveryTime,
-                o => o.MapFrom(s => EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel)))
-            .ForMember(x => x.NearbyEnergyRecoveryAt,
-                o => o.MapFrom(s => s.LastRecoveryStartTime + EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel)));
-        
+            .ForMember(x => x.RecoveryTimeInSeconds,
+                o => o.MapFrom(s => EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel).TotalSeconds))
+            .ForMember(x => x.NearbyEnergyRecoveryAt, 
+                o => o.MapFrom(s => 
+                s.LastRecoveryStartTime.HasValue
+                    ? new DateTimeOffset(s.LastRecoveryStartTime.Value + EnergyRecoveryConfiguration.GetRecoveryTime(s.RecoveryLevel), TimeSpan.Zero)
+                    : (DateTimeOffset?)null));
+
         //Referrals 
         CreateMap<ReferralEntity, ReferralDto>();
         
