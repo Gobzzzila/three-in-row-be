@@ -42,7 +42,6 @@ public class ReferralController(IMapper mapper,
     [HttpGet("referrals/rewards")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ReferrerRewardDto))]
-    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [SwaggerOperation(OperationId = "GetRewardsInfo", Tags = ["Referrals"])]
     public Task<IResult> GetRewardsInfo(CancellationToken cancellationToken = new())
