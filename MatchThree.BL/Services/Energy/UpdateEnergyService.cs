@@ -54,17 +54,14 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         if (dbModel is null)
             throw new NoDataFoundException();
         
-        var recoveryParams = EnergyRecoveryConfiguration.GetParamsByLevel(dbModel!.RecoveryLevel);
+        var recoveryParams = EnergyRecoveryConfiguration.GetParamsByLevel(dbModel.RecoveryLevel);
         if (!recoveryParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
 
-        if (recoveryParams.UpgradeCondition is not null)
-        {
-            var requiredReserveLevel = recoveryParams.UpgradeCondition!(_upgradesRestrictionsService, dbModel.MaxReserve);
-            if (requiredReserveLevel is not null) 
-                throw new UpgradeConditionsException();
-        }
-        
+        var requiredReserveLevel = recoveryParams.UpgradeCondition?.Invoke(_upgradesRestrictionsService, dbModel.MaxReserve);
+        if (requiredReserveLevel != null) 
+            throw new UpgradeConditionsException();
+
         await _updateBalanceService.SpendBalanceAsync(userId, recoveryParams.NextLevelCost!.Value);
         
         _synchronizationEnergyService.SynchronizeModel(dbModel);
@@ -83,7 +80,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         if (dbModel.AvailableEnergyDrinkAmount < 1)
             throw new NotEnoughBalanceException();
         
-        var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel!.MaxReserve);
+        var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.CurrentReserve += maxReserve;
         dbModel.LastRecoveryStartTime = null;
@@ -116,7 +113,10 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.CurrentReserve -=1;
-        dbModel.LastRecoveryStartTime ??= _timeProvider.GetUtcNow().DateTime;
+        
+        var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
+        if (maxReserve > dbModel.CurrentReserve && dbModel.LastRecoveryStartTime is null)
+            dbModel.LastRecoveryStartTime = _timeProvider.GetUtcNow().DateTime;
         
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
