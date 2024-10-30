@@ -28,6 +28,7 @@ public class FieldController(IUpdateFieldService updateFieldService,
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int[][]))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [SwaggerOperation(OperationId = "GetField", Tags = ["Field"])]
     public async Task<IResult> GetField(long userId, CancellationToken cancellationToken = new())

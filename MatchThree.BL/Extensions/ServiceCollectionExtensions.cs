@@ -71,5 +71,6 @@ public static class ServiceCollectionExtensions
         //Field elements
         services.AddScoped<ICreateFieldElementService, CreateFieldElementService>();
         services.AddScoped<IDeleteFieldElementService, DeleteFieldElementService>();
+        services.AddScoped<IReadFieldElementService, ReadFieldElementService>();
     }
 }

@@ -24,6 +24,11 @@ public static class FieldElementsConfiguration
         ];
     }
     
+    public static int GetProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
+    {
+        return FieldElemetsParams[cryptoType][elementLevel].Profit;
+    }
+    
     private record MultiplierAndSyllable(double Multiplier, int Syllable);
     static FieldElementsConfiguration()
     {
