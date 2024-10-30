@@ -53,7 +53,7 @@ public static class EnergyReserveConfiguration
                     MaxReserve = EnergyConstants.Level3EnergyReserve,
                     NextLevel = EnergyReserveLevels.Level4,
                     NextLevelCost = EnergyConstants.Level4EnergyReserveCost,
-                    UpgradeCondition = null
+                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level4EnergyReserveReferralAmount)
                 }
             },
             {

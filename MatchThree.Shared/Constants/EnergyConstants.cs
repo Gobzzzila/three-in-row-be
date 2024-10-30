@@ -5,7 +5,7 @@ public static class EnergyConstants
     //Energy drinks
     public const int FreeEnergyDrinksPerDay = 1;
     public const int PurchasableEnergyDrinksPerDay = 3;
-    public const int EnergyDrinkPrice = 1;
+    public const int EnergyDrinkPrice = 34;
     
     //Energy reserve
     public const int Level1EnergyReserve = 30;
@@ -24,22 +24,23 @@ public static class EnergyConstants
     public const int Level14EnergyReserve = 95;
     public const int Level15EnergyReserve = 100;
     
-    public const int Level2EnergyReserveCost = 1_000;
-    public const int Level3EnergyReserveCost = 1_000;
-    public const int Level4EnergyReserveCost = 1_000;
-    public const int Level5EnergyReserveCost = 1_000;
-    public const int Level6EnergyReserveCost = 1_000;
-    public const int Level7EnergyReserveCost = 1_000;
-    public const int Level8EnergyReserveCost = 1_000;
-    public const int Level9EnergyReserveCost = 1_000;
-    public const int Level10EnergyReserveCost = 1_000;
-    public const int Level11EnergyReserveCost = 1_000;
-    public const int Level12EnergyReserveCost = 1_000;
-    public const int Level13EnergyReserveCost = 1_000;
-    public const int Level14EnergyReserveCost = 1_000;
-    public const int Level15EnergyReserveCost = 1_000;
+    public const int Level2EnergyReserveCost = 2_000;
+    public const int Level3EnergyReserveCost = 3_000;
+    public const int Level4EnergyReserveCost = 5_000;
+    public const int Level5EnergyReserveCost = 8_000;
+    public const int Level6EnergyReserveCost = 12_000;
+    public const int Level7EnergyReserveCost = 17_000;
+    public const int Level8EnergyReserveCost = 23_000;
+    public const int Level9EnergyReserveCost = 30_000;
+    public const int Level10EnergyReserveCost = 35_000;
+    public const int Level11EnergyReserveCost = 40_000;
+    public const int Level12EnergyReserveCost = 45_000;
+    public const int Level13EnergyReserveCost = 50_000;
+    public const int Level14EnergyReserveCost = 55_000;
+    public const int Level15EnergyReserveCost = 60_000;
     
-    public const int Level7EnergyReserveReferralAmount = 4;
+    public const int Level4EnergyReserveReferralAmount = 1;
+    public const int Level7EnergyReserveReferralAmount = 3;
     public const int Level10EnergyReserveReferralAmount = 6;
     public const int Level12EnergyReserveReferralAmount = 7;
     public const int Level14EnergyReserveReferralAmount = 8;
@@ -58,9 +59,9 @@ public static class EnergyConstants
     public static readonly TimeSpan Level5EnergyRecovery = TimeSpan.FromSeconds(10);
     public static readonly TimeSpan Level6EnergyRecovery = TimeSpan.FromSeconds(5);
     
-    public const int Level2EnergyRecoveryCost = 1_000;
-    public const int Level3EnergyRecoveryCost = 1_000;
-    public const int Level4EnergyRecoveryCost = 1_000;
-    public const int Level5EnergyRecoveryCost = 1_000;
-    public const int Level6EnergyRecoveryCost = 1_000;
+    public const int Level2EnergyRecoveryCost = 5_000;
+    public const int Level3EnergyRecoveryCost = 15_000;
+    public const int Level4EnergyRecoveryCost = 25_000;
+    public const int Level5EnergyRecoveryCost = 50_000;
+    public const int Level6EnergyRecoveryCost = 75_000;
 }

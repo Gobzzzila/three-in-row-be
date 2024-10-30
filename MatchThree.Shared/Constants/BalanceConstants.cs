@@ -2,5 +2,5 @@
 
 public static class BalanceConstants
 {
-    public const uint InitialBalanceValue = 500;
+    public const uint InitialBalanceValue = 100;
 }
