@@ -4,6 +4,7 @@ using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.BL.Services.Energy;
 
@@ -18,7 +19,9 @@ public class ReadEnergyService(MatchThreeDbContext context,
 
     public async Task<EnergyEntity> GetByUserIdAsync(long userId)
     {
-        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
+        var dbModel = await _context.Set<EnergyDbModel>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == userId);
         if (dbModel is null)
             throw new NoDataFoundException();
 

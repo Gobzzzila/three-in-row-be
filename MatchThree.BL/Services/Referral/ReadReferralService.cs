@@ -14,7 +14,8 @@ public class ReadReferralService (MatchThreeDbContext context)
 
     public async Task<IReadOnlyCollection<ReferralEntity>> GetReferralsByReferrerId(long referrerId)
     {
-        var entities = await _context.Set<ReferralDbModel>().AsNoTracking()
+        var entities = await _context.Set<ReferralDbModel>()
+            .AsNoTracking()
             .Include(x => x.Referral)
             .ThenInclude(x => x!.Balance)
             .Where(x => x.ReferrerUserId == referrerId)

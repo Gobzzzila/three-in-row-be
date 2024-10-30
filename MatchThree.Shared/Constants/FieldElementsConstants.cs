@@ -2,6 +2,18 @@
 
 public class FieldElementsConstants
 {
+    public const double JettonUpgradeCostMultiplier = 1.1;
+    public const int JettonProfitSyllable = 5;
+    
+    public const double NotUpgradeCostMultiplier = 1.2;
+    public const int NotProfitSyllable = 10;
+    
+    public const double DogsUpgradeCostMultiplier = 1.3;
+    public const int DogsProfitSyllable = 15;
+    
+    public const double CatiUpgradeCostMultiplier = 1.4;
+    public const int CatiProfitSyllable = 20;
+    
     public const int Level2BaseFieldElementCost = 300;
     public const int Level3BaseFieldElementCost = 500;
     public const int Level4BaseFieldElementCost = 750;

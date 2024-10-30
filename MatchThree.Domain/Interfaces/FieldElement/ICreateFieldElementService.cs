@@ -2,5 +2,5 @@
 
 public interface ICreateFieldElementService
 {
-    
+    void Create(long userId);
 }

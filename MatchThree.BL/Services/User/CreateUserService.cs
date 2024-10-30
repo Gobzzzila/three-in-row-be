@@ -2,6 +2,7 @@
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
+using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
@@ -17,6 +18,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateBalanceService createBalanceService,
     ICreateEnergyService createEnergyService,
     ICreateFieldService createFieldService,
+    ICreateFieldElementService createFieldElementService,
     TimeProvider timeProvider) : ICreateUserService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -25,6 +27,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateBalanceService _createBalanceService = createBalanceService;
     private readonly ICreateEnergyService _createEnergyService = createEnergyService;
     private readonly ICreateFieldService _createFieldService = createFieldService;
+    private readonly ICreateFieldElementService _createFieldElementService = createFieldElementService;
     private readonly TimeProvider _dateTimeProvider = timeProvider;
 
     public UserEntity Create(UserEntity userEntity)
@@ -61,5 +64,6 @@ public sealed class CreateUserService(MatchThreeDbContext context,
         _createBalanceService.Create(userEntity.Id, referralReward);
         _createEnergyService.Create(userEntity.Id);
         _createFieldService.Create(userEntity.Id);
+        _createFieldElementService.Create(userEntity.Id);
     }
 }

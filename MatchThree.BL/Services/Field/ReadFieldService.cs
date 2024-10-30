@@ -4,6 +4,7 @@ using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.BL.Services.Field;
 
@@ -16,7 +17,9 @@ public class ReadFieldService(MatchThreeDbContext context,
 
     public async Task<FieldEntity> GetByUserIdAsync(long userId)
     {
-        var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
+        var dbModel = await _context.Set<FieldDbModel>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == userId);
         if (dbModel is null)
             throw new NoDataFoundException();
 
