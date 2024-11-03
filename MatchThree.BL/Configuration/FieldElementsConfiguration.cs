@@ -14,7 +14,7 @@ public static class FieldElementsConfiguration
         return [
             (CryptoTypes.Ton, ElementLevels.Level1),
             (CryptoTypes.Ston, ElementLevels.Level1),
-            (CryptoTypes.Mc, ElementLevels.Level1),
+            (CryptoTypes.Raff, ElementLevels.Level1),
             (CryptoTypes.Fnz, ElementLevels.Level1),
             (CryptoTypes.Usdt, ElementLevels.Level1),
             (CryptoTypes.Jetton, ElementLevels.Undefined),

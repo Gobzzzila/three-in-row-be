@@ -16,6 +16,6 @@ public class DeleteFieldService(MatchThreeDbContext context)
         if (dbModel is null)
             throw new NoDataFoundException();
         
-        _context.Set<FieldDbModel>().Remove(dbModel!);
+        _context.Set<FieldDbModel>().Remove(dbModel);
     }
 }

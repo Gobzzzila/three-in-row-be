@@ -4,6 +4,7 @@ using MatchThree.BL.Services.Energy;
 using MatchThree.BL.Services.Field;
 using MatchThree.BL.Services.FieldElement;
 using MatchThree.BL.Services.LeaderboardMember;
+using MatchThree.BL.Services.Quests;
 using MatchThree.BL.Services.Referral;
 using MatchThree.BL.Services.Upgrades;
 using MatchThree.BL.Services.User;
@@ -13,6 +14,7 @@ using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
+using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Interfaces.User;
@@ -72,5 +74,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICreateFieldElementService, CreateFieldElementService>();
         services.AddScoped<IDeleteFieldElementService, DeleteFieldElementService>();
         services.AddScoped<IReadFieldElementService, ReadFieldElementService>();
+        
+        //Quests
+        services.AddScoped<ICreateCompletedQuestsService, CreateCompletedQuestsService>();
+        services.AddScoped<IDeleteCompletedQuestsService, DeleteCompletedQuestsService>();
+        services.AddScoped<IQuestCompletionService, QuestCompletionService>();
+        services.AddScoped<IReadQuestService, ReadQuestService>();
     }
 }

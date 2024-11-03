@@ -150,6 +150,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invite 1 friend.
+        /// </summary>
+        internal static string Invite1FriendTiitleTextKey {
+            get {
+                return ResourceManager.GetString("Invite1FriendTiitleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max level reached.
         /// </summary>
         internal static string MaxLevelReachedTextKey {

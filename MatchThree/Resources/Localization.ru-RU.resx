@@ -102,4 +102,7 @@
     <data name="MaxLevelReachedTextKey" xml:space="preserve">
         <value>Достигнут максимальный уровень</value>
     </data>
+    <data name="Invite1FriendTiitleTextKey" xml:space="preserve">
+        <value>Пригласи 1 друга</value>
+    </data>
 </root>

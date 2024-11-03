@@ -23,11 +23,9 @@ public class FieldDbModelConfiguration : EntityTypeConfigurationBase<FieldDbMode
             v => JsonSerializer.Serialize(v, new JsonSerializerOptions { WriteIndented = false }),
             v => JsonSerializer.Deserialize<int[][]>(v, new JsonSerializerOptions { PropertyNameCaseInsensitive = false })!);
         
-        var comparer = new ValueComparer<int[][]>(
-            (c1, c2) => c1.SequenceEqual(c2),
+        var comparer = new ValueComparer<int[][]>((c1, c2) => c1.SequenceEqual(c2),
             c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
-            c => c.ToArray()
-        );
+            c => c.ToArray());
 
         builder.Property(e => e.Field)
             .HasConversion(converter)

@@ -69,5 +69,17 @@ public class AutoMappingProfile : Profile
         CreateMap<FieldElementEntity, FieldElementDto>()
             .ForMember(x => x.Profit, 
                 o => o.MapFrom(s => FieldElementsConfiguration.GetProfit(s.Element, s.Level)));
+        
+        //Quests
+        CreateMap<QuestEntity, QuestDto>()
+            .ForMember(x => x.Tittle,
+                o =>
+                    o.MapFrom<TextKeyResolver, string>(s => s.TittleKey))
+            .ForMember(x => x.Description,
+                o =>
+                {
+                    o.PreCondition(s => s.DescriptionKey is not null);
+                    o.MapFrom<TextKeyResolver, string>(s => s.DescriptionKey!);
+                });
     }
 }
