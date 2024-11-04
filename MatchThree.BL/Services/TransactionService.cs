@@ -13,7 +13,7 @@ public class TransactionService : ITransactionService
         Context = context;
     }
 
-    public async Task Commit() => await Context.Database
+    public async Task CommitAsync() => await Context.Database
         .CreateExecutionStrategy()
         .ExecuteAsync(RunTransaction);
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MatchThree.Domain.Interfaces.Balance;
+using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
@@ -21,6 +22,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateFieldService createFieldService,
     ICreateFieldElementService createFieldElementService,
     ICreateCompletedQuestsService createCompletedQuestsService,
+    ICreateDailyLoginService createDailyLoginService,
     TimeProvider timeProvider) : ICreateUserService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -31,6 +33,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateFieldService _createFieldService = createFieldService;
     private readonly ICreateFieldElementService _createFieldElementService = createFieldElementService;
     private readonly ICreateCompletedQuestsService _createCompletedQuestsService = createCompletedQuestsService;
+    private readonly ICreateDailyLoginService _createDailyLoginService = createDailyLoginService;
     private readonly TimeProvider _dateTimeProvider = timeProvider;
 
     public UserEntity Create(UserEntity userEntity)
@@ -69,5 +72,6 @@ public sealed class CreateUserService(MatchThreeDbContext context,
         _createFieldService.Create(userEntity.Id);
         _createFieldElementService.Create(userEntity.Id);
         _createCompletedQuestsService.Create(userEntity.Id);
+        _createDailyLoginService.Create(userEntity.Id);
     }
 }

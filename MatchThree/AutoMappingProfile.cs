@@ -83,5 +83,8 @@ public class AutoMappingProfile : Profile
                 })
             .ForMember(x => x.IsWithSecretCode, 
                 o => o.MapFrom(s => !string.IsNullOrEmpty(s.SecretCode)));
+        
+        //Daily login
+        CreateMap<DailyLoginEntity, DailyLoginDto>();
     }
 }

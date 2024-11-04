@@ -37,7 +37,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
                 continue;
 
             await _createLeaderboardMemberService.CreateByLeagueTypeAsync((LeagueTypes)value);
-            await _transactionService.Commit();
+            await _transactionService.CommitAsync();
             _transactionService.CleanChangeTracker();
         }
         
@@ -65,7 +65,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
     {
         await _deleteLeaderboardMemberService.DeleteByLeagueTypeAsync(currentLeague); //TODO think about it, this method not part of .Commit()
         await _createLeaderboardMemberService.CreateByLeagueTypeAsync(currentLeague);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         _transactionService.CleanChangeTracker();
     }
     

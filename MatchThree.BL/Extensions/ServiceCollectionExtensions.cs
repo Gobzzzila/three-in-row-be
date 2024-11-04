@@ -1,5 +1,6 @@
 ﻿using MatchThree.BL.Services;
 using MatchThree.BL.Services.Balance;
+using MatchThree.BL.Services.DailyLogin;
 using MatchThree.BL.Services.Energy;
 using MatchThree.BL.Services.Field;
 using MatchThree.BL.Services.FieldElement;
@@ -10,6 +11,7 @@ using MatchThree.BL.Services.Upgrades;
 using MatchThree.BL.Services.User;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
+using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
@@ -81,5 +83,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IValidateQuestCompletionService, ValidateQuestCompletionService>();
         services.AddScoped<IReadQuestService, ReadQuestService>();
         services.AddScoped<ICompleteQuestService, CompleteQuestService>();
+        
+        //Daily login
+        services.AddScoped<ICreateDailyLoginService, CreateDailyLoginService>();
+        services.AddScoped<IDeleteDailyLoginService, DeleteDailyLoginService>();
+        services.AddScoped<IReadDailyLoginService, ReadDailyLoginService>();
+        services.AddScoped<IExecuteDailyLoginService, ExecuteDailyLoginService>();
     }
 }

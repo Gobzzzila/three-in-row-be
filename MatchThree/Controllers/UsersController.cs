@@ -64,7 +64,7 @@ public class UsersController(IReadUserService readUserService,
         }
         
         var token = _jwtTokenService.GenerateJwtToken(userEntityFromRequest.Id);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.Ok(token);
     }
 }

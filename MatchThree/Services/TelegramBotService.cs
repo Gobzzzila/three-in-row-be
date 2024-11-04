@@ -104,7 +104,7 @@ public class TelegramBotService : ITelegramBotService, IDisposable
             if (payload is { UpgradeType: UpgradeTypes.EnergyDrink })
             {
                 await _updateEnergyService.PurchaseEnergyDrinkAsync(payload.UserId);
-                await _transactionService.Commit();
+                await _transactionService.CommitAsync();
                 _transactionService.CleanChangeTracker();
             }
 

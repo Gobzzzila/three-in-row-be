@@ -52,7 +52,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     public async Task<IResult> UpgradeReserve(long userId, CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.UpgradeReserveAsync(userId);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
     
@@ -71,7 +71,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     public async Task<IResult> UpgradeRecovery(long userId, CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.UpgradeRecoveryAsync(userId);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
     
@@ -89,7 +89,7 @@ public class EnergyController (IReadEnergyService energyReadService,
     public async Task<IResult> UseEnergyDrink(long userId, CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.UseEnergyDrinkAsync(userId);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
 }

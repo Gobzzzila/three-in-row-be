@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using MatchThree.Repository.MSSQL.Interfaces;
+using MatchThree.Repository.MSSQL.Models.Base;
 
 namespace MatchThree.Repository.MSSQL.Models;
 
 [Table("CompletedQuests")]
-public class CompletedQuestsDbModel : IDbModel
+public class CompletedQuestsDbModel : DbModel
 {
-    public long Id { get; set; }
     public List<Guid> QuestIds { get; set; } = [];
 }

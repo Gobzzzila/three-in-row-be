@@ -57,7 +57,7 @@ public class DebugController(IMapper mapper,
         }
         
         var token = _jwtTokenService.GenerateJwtToken(entity.Id);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.Ok(token);
     }
     
@@ -71,7 +71,7 @@ public class DebugController(IMapper mapper,
         CancellationToken cancellationToken = new())
     {
         await _updateEnergyService.SpendEnergy(userId);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.Ok();
     }
     
@@ -88,7 +88,7 @@ public class DebugController(IMapper mapper,
     {
         //TODO The isDeleted flag should be added to avoid abuse of referrals 
         await _deleteUserService.DeleteAsync(userId);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
 #endif

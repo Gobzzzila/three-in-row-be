@@ -69,7 +69,7 @@ public class QuestController(IReadQuestService readQuestService,
         CancellationToken cancellationToken = new())
     {
         await _completeQuestService.CompleteQuest(request.UserId, request.QuestId, request.SecretCode);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
 }

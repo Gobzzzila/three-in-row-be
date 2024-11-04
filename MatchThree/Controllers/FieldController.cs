@@ -52,7 +52,7 @@ public class FieldController(IUpdateFieldService updateFieldService,
     public async Task<IResult> UpgradeField(long userId, CancellationToken cancellationToken = new())
     {
         await _updateFieldService.UpgradeFieldAsync(userId);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
     
@@ -69,7 +69,7 @@ public class FieldController(IUpdateFieldService updateFieldService,
         CancellationToken cancellationToken = new())
     {
         await _moveService.MakeMoveAsync(request.UserId, (uint)request.Body.Reward, request.Body.Field, request.Body.Hash);
-        await _transactionService.Commit();
+        await _transactionService.CommitAsync();
         return Results.NoContent();
     }
 }
