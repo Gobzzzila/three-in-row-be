@@ -9,6 +9,11 @@ public static class QuestsConfiguration
 {
     private static readonly Dictionary<Guid, QuestEntity> Quests;
 
+    public static QuestEntity GetById(Guid questId)
+    {
+        return Quests[questId];
+    }
+    
     public static List<QuestEntity> GetUncompleted(List<Guid> completedQuestIds)
     {
         return (from quest in Quests 
@@ -39,11 +44,11 @@ public static class QuestsConfiguration
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(1)
                 }
-            }
+            },
         };
     }
     
-    private static Func<IQuestCompletionService, long, Task<bool>> IsEnoughReferralsAsync(int requiredReferralsAmount)
+    private static Func<IValidateQuestCompletionService, long, Task<bool>> IsEnoughReferralsAsync(int requiredReferralsAmount)
     {
         return (questCompletionService, userId) => 
             questCompletionService.IsEnoughReferralsAsync(userId, requiredReferralsAmount);

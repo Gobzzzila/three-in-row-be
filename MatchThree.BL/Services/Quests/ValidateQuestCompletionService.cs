@@ -3,8 +3,8 @@ using MatchThree.Domain.Interfaces.Referral;
 
 namespace MatchThree.BL.Services.Quests;
 
-public sealed class QuestCompletionService(IReadReferralService readReferralService) 
-    : IQuestCompletionService
+public sealed class ValidateQuestCompletionService(IReadReferralService readReferralService) 
+    : IValidateQuestCompletionService
 {
     private readonly IReadReferralService _readReferralService = readReferralService;
 

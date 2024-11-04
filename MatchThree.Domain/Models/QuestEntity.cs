@@ -12,5 +12,5 @@ public sealed class QuestEntity
     public uint Reward { get; init; }
     public string? ExecuteLink { get; init; } = string.Empty;
     public string? SecretCode { get; init; }
-    public Func<IQuestCompletionService, long, Task<bool>>? VerificationOfFulfillment { get; init; } 
+    public Func<IValidateQuestCompletionService, long, Task<bool>>? VerificationOfFulfillment { get; init; } 
 }

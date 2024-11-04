@@ -80,6 +80,8 @@ public class AutoMappingProfile : Profile
                 {
                     o.PreCondition(s => s.DescriptionKey is not null);
                     o.MapFrom<TextKeyResolver, string>(s => s.DescriptionKey!);
-                });
+                })
+            .ForMember(x => x.IsWithSecretCode, 
+                o => o.MapFrom(s => !string.IsNullOrEmpty(s.SecretCode)));
     }
 }

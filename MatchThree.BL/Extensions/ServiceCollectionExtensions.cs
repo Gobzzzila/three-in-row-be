@@ -78,7 +78,8 @@ public static class ServiceCollectionExtensions
         //Quests
         services.AddScoped<ICreateCompletedQuestsService, CreateCompletedQuestsService>();
         services.AddScoped<IDeleteCompletedQuestsService, DeleteCompletedQuestsService>();
-        services.AddScoped<IQuestCompletionService, QuestCompletionService>();
+        services.AddScoped<IValidateQuestCompletionService, ValidateQuestCompletionService>();
         services.AddScoped<IReadQuestService, ReadQuestService>();
+        services.AddScoped<ICompleteQuestService, CompleteQuestService>();
     }
 }
