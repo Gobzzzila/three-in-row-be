@@ -10,7 +10,7 @@ public sealed class QuestEntity
     public string TittleKey { get; init; } = string.Empty;
     public string? DescriptionKey { get; init; }
     public uint Reward { get; init; }
-    public string? ExecuteLink { get; init; } = string.Empty;
+    public string? ExternalLink { get; init; } = string.Empty;
     public string? SecretCode { get; init; }
     public Func<IValidateQuestCompletionService, long, Task<bool>>? VerificationOfFulfillment { get; init; } 
 }

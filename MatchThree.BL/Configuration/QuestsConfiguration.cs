@@ -40,7 +40,7 @@ public static class QuestsConfiguration
                     TittleKey = QuestsConstants.Invite1FriendTittleTextKey,
                     DescriptionKey = null,
                     Reward = QuestsConstants.Invite1FriendReward,
-                    ExecuteLink = null,
+                    ExternalLink = null,
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(1)
                 }
