@@ -21,7 +21,7 @@ public sealed class UpgradeInfoResolver(IStringLocalizer<Localization> localizer
         
         destination.DescriptionText = source.Price is not null 
             ? ResolveWithArgs(upgradeInfo!.DescriptionTextId, source.DescriptionTextArgs) 
-            : ResolveWithArgs(TranslationConstants.MaxLevelReachedTextKey, source.BlockingTextArgs); //TODO mb wrong place for logic
+            : ResolveWithArgs(TranslationConstants.CommonMaxLevelReachedTextKey, source.BlockingTextArgs); //TODO mb wrong place for logic
 
         return _localizer[upgradeInfo!.HeaderTextId];
     }

@@ -5,12 +5,12 @@ namespace MatchThree.Shared.Enums;
 
 public enum UpgradeCategories
 {
-    [TranslationId(TranslationConstants.UndefinedTextKey)]
+    [TranslationId(TranslationConstants.CommonUndefinedTextKey)]
     Undefined = 0,
     
-    [TranslationId(TranslationConstants.EnergyCategoryTextKey)]
+    [TranslationId(TranslationConstants.UpgradeCategoryEnergyTextKey)]
     Energy = 1,
     
-    [TranslationId(TranslationConstants.FieldCategoryTextKey)]
+    [TranslationId(TranslationConstants.UpgradeCategoryFieldTextKey)]
     Field = 2,
 }

@@ -15,7 +15,7 @@ public class PingController(IStringLocalizer<Localization> localization) : Contr
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IResult Get()
     {
-        var text = _localization["PingOk"];
+        var text = _localization["CommonPingOk"];
         return Results.Ok(text.Value);
     }
 }

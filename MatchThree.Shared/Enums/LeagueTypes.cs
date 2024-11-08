@@ -5,30 +5,30 @@ namespace MatchThree.Shared.Enums;
 
 public enum LeagueTypes
 {
-    [TranslationId(TranslationConstants.UndefinedTextKey)]
+    [TranslationId(TranslationConstants.CommonUndefinedTextKey)]
     Undefined = 0,
     
-    [TranslationId(TranslationConstants.ShrimpLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueShrimpTextKey)]
     Shrimp = 1,
     
-    [TranslationId(TranslationConstants.CrabLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueCrabTextKey)]
     Crab = 2,
     
-    [TranslationId(TranslationConstants.OctopusLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueOctopusTextKey)]
     Octopus = 3,
 
-    [TranslationId(TranslationConstants.FishLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueFishTextKey)]
     Fish = 4,
 
-    [TranslationId(TranslationConstants.DolphinLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueDolphinTextKey)]
     Dolphin = 5,
 
-    [TranslationId(TranslationConstants.SharkLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueSharkTextKey)]
     Shark = 6,
 
-    [TranslationId(TranslationConstants.WhaleLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueWhaleTextKey)]
     Whale = 7,
 
-    [TranslationId(TranslationConstants.HumpbackLeagueTextKey)]
+    [TranslationId(TranslationConstants.LeagueHumpbackTextKey)]
     Humpback = 8
 }

@@ -60,182 +60,200 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crab.
-        /// </summary>
-        internal static string CrabLeagueKey {
-            get {
-                return ResourceManager.GetString("CrabLeagueKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An unexpected error occurred.
-        /// </summary>
-        internal static string DefaultExceptionKey {
-            get {
-                return ResourceManager.GetString("DefaultExceptionKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Dolphin.
-        /// </summary>
-        internal static string DolphinLeagueKey {
-            get {
-                return ResourceManager.GetString("DolphinLeagueKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Energy.
-        /// </summary>
-        internal static string EnergyCategoryTextKey {
-            get {
-                return ResourceManager.GetString("EnergyCategoryTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Today&apos;s limit is reached.
-        /// </summary>
-        internal static string EnergyDrinkBlockingTextKey {
-            get {
-                return ResourceManager.GetString("EnergyDrinkBlockingTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restores {0} energy.
-        /// </summary>
-        internal static string EnergyDrinkDescriptionKey {
-            get {
-                return ResourceManager.GetString("EnergyDrinkDescriptionKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Energy drink.
-        /// </summary>
-        internal static string EnergyDrinkHeaderKey {
-            get {
-                return ResourceManager.GetString("EnergyDrinkHeaderKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Playing field.
-        /// </summary>
-        internal static string FieldCategoryTextKey {
-            get {
-                return ResourceManager.GetString("FieldCategoryTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fish.
-        /// </summary>
-        internal static string FishLeagueKey {
-            get {
-                return ResourceManager.GetString("FishLeagueKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Humpback.
-        /// </summary>
-        internal static string HumpbackLeagueKey {
-            get {
-                return ResourceManager.GetString("HumpbackLeagueKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invite 1 friend.
-        /// </summary>
-        internal static string Invite1FriendTiitleTextKey {
-            get {
-                return ResourceManager.GetString("Invite1FriendTiitleTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Max level reached.
         /// </summary>
-        internal static string MaxLevelReachedTextKey {
+        internal static string CommonMaxLevelReachedTextKey {
             get {
-                return ResourceManager.GetString("MaxLevelReachedTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Specified item does not exist.
-        /// </summary>
-        internal static string NoDataFoundExceptionKey {
-            get {
-                return ResourceManager.GetString("NoDataFoundExceptionKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Insufficient funds on the balance.
-        /// </summary>
-        internal static string NotEnoughBalanceExceptionKey {
-            get {
-                return ResourceManager.GetString("NotEnoughBalanceExceptionKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Octopus.
-        /// </summary>
-        internal static string OctopusLeagueKey {
-            get {
-                return ResourceManager.GetString("OctopusLeagueKey", resourceCulture);
+                return ResourceManager.GetString("CommonMaxLevelReachedTextKey", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Nice ping!.
         /// </summary>
-        internal static string PingOk {
+        internal static string CommonPingOk {
             get {
-                return ResourceManager.GetString("PingOk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shark.
-        /// </summary>
-        internal static string SharkLeagueKey {
-            get {
-                return ResourceManager.GetString("SharkLeagueKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shrimp.
-        /// </summary>
-        internal static string ShrimpLeagueKey {
-            get {
-                return ResourceManager.GetString("ShrimpLeagueKey", resourceCulture);
+                return ResourceManager.GetString("CommonPingOk", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Undefined.
         /// </summary>
-        internal static string UndefinedKey {
+        internal static string CommonUndefinedTextKey {
             get {
-                return ResourceManager.GetString("UndefinedKey", resourceCulture);
+                return ResourceManager.GetString("CommonUndefinedTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occurred.
+        /// </summary>
+        internal static string ExceptionDefaultTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionDefaultTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specified item does not exist.
+        /// </summary>
+        internal static string ExceptionNoDataFoundTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionNoDataFoundTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insufficient funds on the balance.
+        /// </summary>
+        internal static string ExceptionNotEnoughBalanceTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionNotEnoughBalanceTextKey", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Upgrade conditions have not been met.
         /// </summary>
-        internal static string UpgradeConditionsExceptionKey {
+        internal static string ExceptionUpgradeConditionsTextKey {
             get {
-                return ResourceManager.GetString("UpgradeConditionsExceptionKey", resourceCulture);
+                return ResourceManager.GetString("ExceptionUpgradeConditionsTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crab.
+        /// </summary>
+        internal static string LeagueCrabTextKey {
+            get {
+                return ResourceManager.GetString("LeagueCrabTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dolphin.
+        /// </summary>
+        internal static string LeagueDolphinTextKey {
+            get {
+                return ResourceManager.GetString("LeagueDolphinTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fish.
+        /// </summary>
+        internal static string LeagueFishTextKey {
+            get {
+                return ResourceManager.GetString("LeagueFishTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Humpback.
+        /// </summary>
+        internal static string LeagueHumpbackTextKey {
+            get {
+                return ResourceManager.GetString("LeagueHumpbackTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Octopus.
+        /// </summary>
+        internal static string LeagueOctopusTextKey {
+            get {
+                return ResourceManager.GetString("LeagueOctopusTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shark.
+        /// </summary>
+        internal static string LeagueSharkTextKey {
+            get {
+                return ResourceManager.GetString("LeagueSharkTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shrimp.
+        /// </summary>
+        internal static string LeagueShrimpTextKey {
+            get {
+                return ResourceManager.GetString("LeagueShrimpTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whale.
+        /// </summary>
+        internal static string LeagueWhaleTextKey {
+            get {
+                return ResourceManager.GetString("LeagueWhaleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get an extra reward for the first friend you invite.
+        /// </summary>
+        internal static string QuestInvite1FriendDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestInvite1FriendDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invite 1 friend.
+        /// </summary>
+        internal static string QuestInvite1FriendTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestInvite1FriendTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Energy.
+        /// </summary>
+        internal static string UpgradeCategoryEnergyTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeCategoryEnergyTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playing field.
+        /// </summary>
+        internal static string UpgradeCategoryFieldTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeCategoryFieldTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today&apos;s limit is reached.
+        /// </summary>
+        internal static string UpgradeEnergyDrinkBlockingTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyDrinkBlockingTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restores {0} energy.
+        /// </summary>
+        internal static string UpgradeEnergyDrinkDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyDrinkDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Energy drink.
+        /// </summary>
+        internal static string UpgradeEnergyDrinkHeaderTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeEnergyDrinkHeaderTextKey", resourceCulture);
             }
         }
         
@@ -251,18 +269,18 @@ namespace MatchThree.API.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Boosts the speed of energy recovery.
         /// </summary>
-        internal static string UpgradeEnergyRecoveryDescriptionKey {
+        internal static string UpgradeEnergyRecoveryDescriptionTextKey {
             get {
-                return ResourceManager.GetString("UpgradeEnergyRecoveryDescriptionKey", resourceCulture);
+                return ResourceManager.GetString("UpgradeEnergyRecoveryDescriptionTextKey", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Recovery speed.
         /// </summary>
-        internal static string UpgradeEnergyRecoveryHeaderKey {
+        internal static string UpgradeEnergyRecoveryHeaderTextKey {
             get {
-                return ResourceManager.GetString("UpgradeEnergyRecoveryHeaderKey", resourceCulture);
+                return ResourceManager.GetString("UpgradeEnergyRecoveryHeaderTextKey", resourceCulture);
             }
         }
         
@@ -278,45 +296,36 @@ namespace MatchThree.API.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Boosts energy reserves by 5.
         /// </summary>
-        internal static string UpgradeEnergyReserveDescriptionKey {
+        internal static string UpgradeEnergyReserveDescriptionTextKey {
             get {
-                return ResourceManager.GetString("UpgradeEnergyReserveDescriptionKey", resourceCulture);
+                return ResourceManager.GetString("UpgradeEnergyReserveDescriptionTextKey", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Energy reserve.
         /// </summary>
-        internal static string UpgradeEnergyReserveHeaderKey {
+        internal static string UpgradeEnergyReserveHeaderTextKey {
             get {
-                return ResourceManager.GetString("UpgradeEnergyReserveHeaderKey", resourceCulture);
+                return ResourceManager.GetString("UpgradeEnergyReserveHeaderTextKey", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Increases the field size by 1 cell.
         /// </summary>
-        internal static string UpgradeFieldDescriptionKey {
+        internal static string UpgradeFieldDescriptionTextKey {
             get {
-                return ResourceManager.GetString("UpgradeFieldDescriptionKey", resourceCulture);
+                return ResourceManager.GetString("UpgradeFieldDescriptionTextKey", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Upgrade the field.
         /// </summary>
-        internal static string UpgradeFieldHeaderKey {
+        internal static string UpgradeFieldHeaderTextKey {
             get {
-                return ResourceManager.GetString("UpgradeFieldHeaderKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Whale.
-        /// </summary>
-        internal static string WhaleLeagueKey {
-            get {
-                return ResourceManager.GetString("WhaleLeagueKey", resourceCulture);
+                return ResourceManager.GetString("UpgradeFieldHeaderTextKey", resourceCulture);
             }
         }
     }

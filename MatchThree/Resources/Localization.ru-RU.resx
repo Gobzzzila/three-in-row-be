@@ -18,91 +18,94 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="PingOk" xml:space="preserve">
-        <value>Ну пинганул</value>
-    </data>
-    <data name="CrabLeagueKey" xml:space="preserve">
-        <value>Краб</value>
-    </data>
-    <data name="DolphinLeagueKey" xml:space="preserve">
-        <value>Дельфин</value>
-    </data>
-    <data name="FishLeagueKey" xml:space="preserve">
-        <value>Рыба</value>
-    </data>
-    <data name="OctopusLeagueKey" xml:space="preserve">
-        <value>Осьминог</value>
-    </data>
-    <data name="SharkLeagueKey" xml:space="preserve">
-        <value>Акула</value>
-    </data>
-    <data name="ShrimpLeagueKey" xml:space="preserve">
-        <value>Креветка</value>
-    </data>
-    <data name="WhaleLeagueKey" xml:space="preserve">
-        <value>Кит</value>
-    </data>
-    <data name="HumpbackLeagueKey" xml:space="preserve">
-        <value>Горбатый кит</value>
-    </data>
-    <data name="UndefinedKey" xml:space="preserve">
-        <value>Не определено</value>
-    </data>
-    <data name="NotEnoughBalanceExceptionKey" xml:space="preserve">
-        <value>Недостаточно средств на балансе</value>
-    </data>
-    <data name="UpgradeConditionsExceptionKey" xml:space="preserve">
-        <value>Условия улучшения не были выполнены</value>
-    </data>
-    <data name="NoDataFoundExceptionKey" xml:space="preserve">
-        <value>Указанный элемент не существует</value>
-    </data>
-    <data name="DefaultExceptionKey" xml:space="preserve">
-        <value>Возникла непредвиденная ошибка</value>
-    </data>
-    <data name="EnergyCategoryTextKey" xml:space="preserve">
-        <value>Энергия</value>
-    </data>
-    <data name="UpgradeEnergyReserveHeaderKey" xml:space="preserve">
-        <value>Запас энергии</value>
-    </data>
-    <data name="UpgradeEnergyReserveDescriptionKey" xml:space="preserve">
-        <value>Увеличивает запас энергии на 5</value>
-    </data>
-    <data name="UpgradeEnergyRecoveryHeaderKey" xml:space="preserve">
-        <value>Скорость восстановления</value>
-    </data>
-    <data name="UpgradeEnergyRecoveryDescriptionKey" xml:space="preserve">
-        <value>Повышает скорость восстановления энергии</value>
-    </data>
     <data name="UpgradeEnergyReserveBlockingTextKey" xml:space="preserve">
         <value>Пригласите еще {0} друга</value>
     </data>
     <data name="UpgradeEnergyRecoveryBlockingTextKey" xml:space="preserve">
         <value>Достигните {0} уровня запаса энергии</value>
     </data>
-    <data name="FieldCategoryTextKey" xml:space="preserve">
+    <data name="QuestInvite1FriendTittleTextKey" xml:space="preserve">
+        <value>Пригласи 1 друга</value>
+    </data>
+    <data name="QuestInvite1FriendDescriptionTextKey" xml:space="preserve">
+        <value>Получи дополнительную награду за первого приглашенного друга</value>
+    </data>
+    <data name="ExceptionNoDataFoundTextKey" xml:space="preserve">
+        <value>Указанный элемент не существует</value>
+    </data>
+    <data name="ExceptionNotEnoughBalanceTextKey" xml:space="preserve">
+        <value>Недостаточно средств на балансе</value>
+    </data>
+    <data name="ExceptionUpgradeConditionsTextKey" xml:space="preserve">
+        <value>Условия улучшения не были выполнены</value>
+    </data>
+    <data name="LeagueShrimpTextKey" xml:space="preserve">
+        <value>Креветка</value>
+    </data>
+    <data name="LeagueCrabTextKey" xml:space="preserve">
+        <value>Краб</value>
+    </data>
+    <data name="LeagueOctopusTextKey" xml:space="preserve">
+        <value>Осьминог</value>
+    </data>
+    <data name="LeagueFishTextKey" xml:space="preserve">
+        <value>Рыба</value>
+    </data>
+    <data name="LeagueDolphinTextKey" xml:space="preserve">
+        <value>Дельфин</value>
+    </data>
+    <data name="LeagueSharkTextKey" xml:space="preserve">
+        <value>Акула</value>
+    </data>
+    <data name="LeagueWhaleTextKey" xml:space="preserve">
+        <value>Кит</value>
+    </data>
+    <data name="LeagueHumpbackTextKey" xml:space="preserve">
+        <value>Горбатый кит</value>
+    </data>
+    <data name="UpgradeCategoryEnergyTextKey" xml:space="preserve">
+        <value>Энергия</value>
+    </data>
+    <data name="UpgradeCategoryFieldTextKey" xml:space="preserve">
         <value>Игровое поле</value>
     </data>
-    <data name="UpgradeFieldHeaderKey" xml:space="preserve">
-        <value>Улучшить поле</value>
+    <data name="ExceptionDefaultTextKey" xml:space="preserve">
+        <value>Возникла непредвиденная ошибка</value>
     </data>
-    <data name="UpgradeFieldDescriptionKey" xml:space="preserve">
-        <value>Увеличивает размер поля на 1 клетку</value>
-    </data>
-    <data name="EnergyDrinkHeaderKey" xml:space="preserve">
+    <data name="UpgradeEnergyDrinkHeaderTextKey" xml:space="preserve">
         <value>Энергетик</value>
     </data>
-    <data name="EnergyDrinkDescriptionKey" xml:space="preserve">
-        <value>Восстанавливает {0} энергии</value>
-    </data>
-    <data name="EnergyDrinkBlockingTextKey" xml:space="preserve">
+    <data name="UpgradeEnergyDrinkBlockingTextKey" xml:space="preserve">
         <value>Сегодняшний лимит исчерпан</value>
     </data>
-    <data name="MaxLevelReachedTextKey" xml:space="preserve">
+    <data name="UpgradeEnergyReserveHeaderTextKey" xml:space="preserve">
+        <value>Запас энергии</value>
+    </data>
+    <data name="UpgradeEnergyReserveDescriptionTextKey" xml:space="preserve">
+        <value>Увеличивает запас энергии на 5</value>
+    </data>
+    <data name="UpgradeEnergyRecoveryHeaderTextKey" xml:space="preserve">
+        <value>Скорость восстановления</value>
+    </data>
+    <data name="UpgradeEnergyRecoveryDescriptionTextKey" xml:space="preserve">
+        <value>Повышает скорость восстановления энергии</value>
+    </data>
+    <data name="UpgradeEnergyDrinkDescriptionTextKey" xml:space="preserve">
+        <value>Восстанавливает {0} энергии</value>
+    </data>
+    <data name="CommonMaxLevelReachedTextKey" xml:space="preserve">
         <value>Достигнут максимальный уровень</value>
     </data>
-    <data name="Invite1FriendTiitleTextKey" xml:space="preserve">
-        <value>Пригласи 1 друга</value>
+    <data name="CommonUndefinedTextKey" xml:space="preserve">
+        <value>Не определено</value>
+    </data>
+    <data name="CommonPingOk" xml:space="preserve">
+        <value>Ну пинганул</value>
+    </data>
+    <data name="UpgradeFieldHeaderTextKey" xml:space="preserve">
+        <value>Улучшить поле</value>
+    </data>
+    <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
+        <value>Увеличивает размер поля на 1 клетку</value>
     </data>
 </root>

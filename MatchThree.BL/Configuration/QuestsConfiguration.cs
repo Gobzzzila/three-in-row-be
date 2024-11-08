@@ -37,9 +37,9 @@ public static class QuestsConfiguration
                 {
                     Id = Guid.Parse("F1111111-908A-4619-8868-F8310EA7D2E3"),
                     Type = QuestTypes.InvitingFriends,
-                    TittleKey = QuestsConstants.Invite1FriendTittleTextKey,
-                    DescriptionKey = null,
-                    Reward = QuestsConstants.Invite1FriendReward,
+                    TittleKey = TranslationConstants.QuestInvite1FriendTittleTextKey,
+                    DescriptionKey = TranslationConstants.QuestInvite1FriendDescriptionTextKey,
+                    Reward = QuestsConstants.QuestInvite1FriendReward,
                     ExternalLink = null,
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(1)

@@ -18,91 +18,94 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="PingOk" xml:space="preserve">
-        <value>Nice ping!</value>
-    </data>
-    <data name="ShrimpLeagueKey" xml:space="preserve">
-        <value>Shrimp</value>
-    </data>
-    <data name="CrabLeagueKey" xml:space="preserve">
-        <value>Crab</value>
-    </data>
-    <data name="OctopusLeagueKey" xml:space="preserve">
-        <value>Octopus</value>
-    </data>
-    <data name="FishLeagueKey" xml:space="preserve">
-        <value>Fish</value>
-    </data>
-    <data name="DolphinLeagueKey" xml:space="preserve">
-        <value>Dolphin</value>
-    </data>
-    <data name="SharkLeagueKey" xml:space="preserve">
-        <value>Shark</value>
-    </data>
-    <data name="WhaleLeagueKey" xml:space="preserve">
-        <value>Whale</value>
-    </data>
-    <data name="HumpbackLeagueKey" xml:space="preserve">
-        <value>Humpback</value>
-    </data>
-    <data name="UndefinedKey" xml:space="preserve">
-        <value>Undefined</value>
-    </data>
-    <data name="NotEnoughBalanceExceptionKey" xml:space="preserve">
-        <value>Insufficient funds on the balance</value>
-    </data>
-    <data name="UpgradeConditionsExceptionKey" xml:space="preserve">
-        <value>Upgrade conditions have not been met</value>
-    </data>
-    <data name="NoDataFoundExceptionKey" xml:space="preserve">
-        <value>Specified item does not exist</value>
-    </data>
-    <data name="DefaultExceptionKey" xml:space="preserve">
-        <value>An unexpected error occurred</value>
-    </data>
-    <data name="EnergyCategoryTextKey" xml:space="preserve">
-        <value>Energy</value>
-    </data>
-    <data name="UpgradeEnergyReserveHeaderKey" xml:space="preserve">
-        <value>Energy reserve</value>
-    </data>
-    <data name="UpgradeEnergyReserveDescriptionKey" xml:space="preserve">
-        <value>Boosts energy reserves by 5</value>
-    </data>
-    <data name="UpgradeEnergyRecoveryHeaderKey" xml:space="preserve">
-        <value>Recovery speed</value>
-    </data>
-    <data name="UpgradeEnergyRecoveryDescriptionKey" xml:space="preserve">
-        <value>Boosts the speed of energy recovery</value>
-    </data>
     <data name="UpgradeEnergyReserveBlockingTextKey" xml:space="preserve">
         <value>Invite {0} more friend(s)</value>
     </data>
     <data name="UpgradeEnergyRecoveryBlockingTextKey" xml:space="preserve">
         <value>Reach level {0} of energy reserve</value>
     </data>
-    <data name="FieldCategoryTextKey" xml:space="preserve">
+    <data name="QuestInvite1FriendTittleTextKey" xml:space="preserve">
+        <value>Invite 1 friend</value>
+    </data>
+    <data name="QuestInvite1FriendDescriptionTextKey" xml:space="preserve">
+        <value>Get an extra reward for the first friend you invite</value>
+    </data>
+    <data name="ExceptionNoDataFoundTextKey" xml:space="preserve">
+        <value>Specified item does not exist</value>
+    </data>
+    <data name="ExceptionNotEnoughBalanceTextKey" xml:space="preserve">
+        <value>Insufficient funds on the balance</value>
+    </data>
+    <data name="ExceptionUpgradeConditionsTextKey" xml:space="preserve">
+        <value>Upgrade conditions have not been met</value>
+    </data>
+    <data name="LeagueShrimpTextKey" xml:space="preserve">
+        <value>Shrimp</value>
+    </data>
+    <data name="LeagueCrabTextKey" xml:space="preserve">
+        <value>Crab</value>
+    </data>
+    <data name="LeagueOctopusTextKey" xml:space="preserve">
+        <value>Octopus</value>
+    </data>
+    <data name="LeagueFishTextKey" xml:space="preserve">
+        <value>Fish</value>
+    </data>
+    <data name="LeagueDolphinTextKey" xml:space="preserve">
+        <value>Dolphin</value>
+    </data>
+    <data name="LeagueSharkTextKey" xml:space="preserve">
+        <value>Shark</value>
+    </data>
+    <data name="LeagueWhaleTextKey" xml:space="preserve">
+        <value>Whale</value>
+    </data>
+    <data name="LeagueHumpbackTextKey" xml:space="preserve">
+        <value>Humpback</value>
+    </data>
+    <data name="UpgradeCategoryEnergyTextKey" xml:space="preserve">
+        <value>Energy</value>
+    </data>
+    <data name="UpgradeCategoryFieldTextKey" xml:space="preserve">
         <value>Playing field</value>
     </data>
-    <data name="UpgradeFieldHeaderKey" xml:space="preserve">
-        <value>Upgrade the field</value>
+    <data name="ExceptionDefaultTextKey" xml:space="preserve">
+        <value>An unexpected error occurred</value>
     </data>
-    <data name="UpgradeFieldDescriptionKey" xml:space="preserve">
-        <value>Increases the field size by 1 cell</value>
-    </data>
-    <data name="EnergyDrinkHeaderKey" xml:space="preserve">
+    <data name="UpgradeEnergyDrinkHeaderTextKey" xml:space="preserve">
         <value>Energy drink</value>
     </data>
-    <data name="EnergyDrinkDescriptionKey" xml:space="preserve">
-        <value>Restores {0} energy</value>
-    </data>
-    <data name="EnergyDrinkBlockingTextKey" xml:space="preserve">
+    <data name="UpgradeEnergyDrinkBlockingTextKey" xml:space="preserve">
         <value>Today's limit is reached</value>
     </data>
-    <data name="MaxLevelReachedTextKey" xml:space="preserve">
+    <data name="UpgradeEnergyReserveHeaderTextKey" xml:space="preserve">
+        <value>Energy reserve</value>
+    </data>
+    <data name="UpgradeEnergyReserveDescriptionTextKey" xml:space="preserve">
+        <value>Boosts energy reserves by 5</value>
+    </data>
+    <data name="UpgradeEnergyRecoveryHeaderTextKey" xml:space="preserve">
+        <value>Recovery speed</value>
+    </data>
+    <data name="UpgradeEnergyRecoveryDescriptionTextKey" xml:space="preserve">
+        <value>Boosts the speed of energy recovery</value>
+    </data>
+    <data name="UpgradeEnergyDrinkDescriptionTextKey" xml:space="preserve">
+        <value>Restores {0} energy</value>
+    </data>
+    <data name="CommonMaxLevelReachedTextKey" xml:space="preserve">
         <value>Max level reached</value>
     </data>
-    <data name="Invite1FriendTiitleTextKey" xml:space="preserve">
-        <value>Invite 1 friend</value>
+    <data name="CommonUndefinedTextKey" xml:space="preserve">
+        <value>Undefined</value>
+    </data>
+    <data name="CommonPingOk" xml:space="preserve">
+        <value>Nice ping!</value>
+    </data>
+    <data name="UpgradeFieldHeaderTextKey" xml:space="preserve">
+        <value>Upgrade the field</value>
+    </data>
+    <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
+        <value>Increases the field size by 1 cell</value>
     </data>
 </root>

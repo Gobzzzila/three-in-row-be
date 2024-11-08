@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -21,7 +22,7 @@ public class DefaultExceptionHandler(IStringLocalizer<Localization> localization
             {
                 Status = httpContext.Response.StatusCode,
                 Type = exception.GetType().Name,
-                Title = _localization["DefaultExceptionKey"], 
+                Title = _localization[TranslationConstants.ExceptionDefaultTextKey], 
                 Detail = exception.Message,
                 Instance = $"{httpContext.Request.Method} " +
                            $"{httpContext.Request.Path}"

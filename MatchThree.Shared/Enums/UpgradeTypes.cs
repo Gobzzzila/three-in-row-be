@@ -5,27 +5,27 @@ namespace MatchThree.Shared.Enums;
 
 public enum UpgradeTypes
 {
-    [UpgradeInfo(TranslationConstants.UndefinedTextKey,
-        TranslationConstants.UndefinedTextKey,
-        TranslationConstants.UndefinedTextKey)]
+    [UpgradeInfo(TranslationConstants.CommonUndefinedTextKey,
+        TranslationConstants.CommonUndefinedTextKey,
+        TranslationConstants.CommonUndefinedTextKey)]
     Undefined = 0,
     
-    [UpgradeInfo(TranslationConstants.UpgradeEnergyReserveHeaderKey,
-        TranslationConstants.UpgradeEnergyReserveDescriptionKey,
+    [UpgradeInfo(TranslationConstants.UpgradeEnergyReserveHeaderTextKey,
+        TranslationConstants.UpgradeEnergyReserveDescriptionTextKey,
         TranslationConstants.UpgradeEnergyReserveBlockingTextKey)]
     EnergyReserve = 1,
     
-    [UpgradeInfo(TranslationConstants.UpgradeEnergyRecoveryHeaderKey,
-        TranslationConstants.UpgradeEnergyRecoveryDescriptionKey,
+    [UpgradeInfo(TranslationConstants.UpgradeEnergyRecoveryHeaderTextKey,
+        TranslationConstants.UpgradeEnergyRecoveryDescriptionTextKey,
         TranslationConstants.UpgradeEnergyRecoveryBlockingTextKey)]
     EnergyRecovery = 2,
     
-    [UpgradeInfo(TranslationConstants.UpgradeFieldHeaderKey,
-        TranslationConstants.UpgradeFieldDescriptionKey)]
+    [UpgradeInfo(TranslationConstants.UpgradeFieldHeaderTextKey,
+        TranslationConstants.UpgradeFieldDescriptionTextKey)]
     Field = 3,
 
-    [UpgradeInfo(TranslationConstants.EnergyDrinkHeaderKey,
-        TranslationConstants.EnergyDrinkDescriptionKey,
-        TranslationConstants.EnergyDrinkBlockingTextKey)]
+    [UpgradeInfo(TranslationConstants.UpgradeEnergyDrinkHeaderTextKey,
+        TranslationConstants.UpgradeEnergyDrinkDescriptionTextKey,
+        TranslationConstants.UpgradeEnergyDrinkBlockingTextKey)]
     EnergyDrink = 4, 
 }
