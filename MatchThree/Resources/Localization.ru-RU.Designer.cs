@@ -258,6 +258,24 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Узнавайте новости одним из первых.
+        /// </summary>
+        internal static string QuestSubscribeToNewsChannelDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestSubscribeToNewsChannelDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подпишись на наш ТГ канал.
+        /// </summary>
+        internal static string QuestSubscribeToNewsChannelHeaderTextKey {
+            get {
+                return ResourceManager.GetString("QuestSubscribeToNewsChannelHeaderTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Энергия.
         /// </summary>
         internal static string UpgradeCategoryEnergyTextKey {

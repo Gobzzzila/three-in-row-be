@@ -123,4 +123,10 @@
     <data name="LinkNewsChannelTextKey" xml:space="preserve">
         <value>https://t.me/PingWinGame_ru</value>
     </data>
+    <data name="QuestSubscribeToNewsChannelHeaderTextKey" xml:space="preserve">
+        <value>Подпишись на наш ТГ канал</value>
+    </data>
+    <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
+        <value>Узнавайте новости одним из первых</value>
+    </data>
 </root>

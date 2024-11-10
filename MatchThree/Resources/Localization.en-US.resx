@@ -123,4 +123,10 @@
     <data name="LinkNewsChannelTextKey" xml:space="preserve">
         <value>https://t.me/PingWinGame</value>
     </data>
+    <data name="QuestSubscribeToNewsChannelHeaderTextKey" xml:space="preserve">
+        <value>Join our TG channel</value>
+    </data>
+    <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
+        <value>Be one of the first to know the news</value>
+    </data>
 </root>
