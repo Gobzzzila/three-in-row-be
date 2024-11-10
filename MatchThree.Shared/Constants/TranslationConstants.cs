@@ -2,60 +2,69 @@
 
 public static class TranslationConstants
 {
-    public const string CommonMaxLevelReachedTextKey = "CommonMaxLevelReachedTextKey";
-    public const string CommonUndefinedTextKey = "CommonUndefinedTextKey";
+    public const string CommonMaxLevelReachedTextKey = nameof(CommonMaxLevelReachedTextKey);
+    public const string CommonUndefinedTextKey = nameof(CommonUndefinedTextKey);
     
     #region Exceptions
 
-    public const string ExceptionDefaultTextKey = "ExceptionDefaultTextKey";
-    public const string ExceptionNoDataFoundTextKey = "ExceptionNoDataFoundTextKey";
-    public const string ExceptionNotEnoughBalanceTextKey = "ExceptionNotEnoughBalanceTextKey";
-    public const string ExceptionUpgradeConditionsTextKey = "ExceptionUpgradeConditionsTextKey";
+    public const string ExceptionDefaultTextKey = nameof(ExceptionDefaultTextKey);
+    public const string ExceptionNoDataFoundTextKey = nameof(ExceptionNoDataFoundTextKey);
+    public const string ExceptionNotEnoughBalanceTextKey = nameof(ExceptionNotEnoughBalanceTextKey);
+    public const string ExceptionUpgradeConditionsTextKey = nameof(ExceptionUpgradeConditionsTextKey);
     
     #endregion
     
     #region League types
 
-    public const string LeagueShrimpTextKey = "LeagueShrimpTextKey";
-    public const string LeagueCrabTextKey = "LeagueCrabTextKey";
-    public const string LeagueOctopusTextKey = "LeagueOctopusTextKey";
-    public const string LeagueFishTextKey = "LeagueFishTextKey";
-    public const string LeagueDolphinTextKey = "LeagueDolphinTextKey";
-    public const string LeagueSharkTextKey = "LeagueSharkTextKey";
-    public const string LeagueWhaleTextKey = "LeagueWhaleTextKey";
-    public const string LeagueHumpbackTextKey = "LeagueHumpbackTextKey";
+    public const string LeagueShrimpTextKey = nameof(LeagueShrimpTextKey);
+    public const string LeagueCrabTextKey = nameof(LeagueCrabTextKey);
+    public const string LeagueOctopusTextKey = nameof(LeagueOctopusTextKey);
+    public const string LeagueFishTextKey = nameof(LeagueFishTextKey);
+    public const string LeagueDolphinTextKey = nameof(LeagueDolphinTextKey);
+    public const string LeagueSharkTextKey = nameof(LeagueSharkTextKey);
+    public const string LeagueWhaleTextKey = nameof(LeagueWhaleTextKey);
+    public const string LeagueHumpbackTextKey = nameof(LeagueHumpbackTextKey);
     
     #endregion
     
     #region Upgrades
     
     //Energy
-    public const string UpgradeCategoryEnergyTextKey = "UpgradeCategoryEnergyTextKey";
+    public const string UpgradeCategoryEnergyTextKey = nameof(UpgradeCategoryEnergyTextKey);
     
-    public const string UpgradeEnergyReserveHeaderTextKey = "UpgradeEnergyReserveHeaderTextKey";
-    public const string UpgradeEnergyReserveDescriptionTextKey = "UpgradeEnergyReserveDescriptionTextKey";
-    public const string UpgradeEnergyReserveBlockingTextKey = "UpgradeEnergyReserveBlockingTextKey";
+    public const string UpgradeEnergyReserveHeaderTextKey = nameof(UpgradeEnergyReserveHeaderTextKey);
+    public const string UpgradeEnergyReserveDescriptionTextKey = nameof(UpgradeEnergyReserveDescriptionTextKey);
+    public const string UpgradeEnergyReserveBlockingTextKey = nameof(UpgradeEnergyReserveBlockingTextKey);
     
-    public const string UpgradeEnergyRecoveryHeaderTextKey = "UpgradeEnergyRecoveryHeaderTextKey";
-    public const string UpgradeEnergyRecoveryDescriptionTextKey = "UpgradeEnergyRecoveryDescriptionTextKey";
-    public const string UpgradeEnergyRecoveryBlockingTextKey = "UpgradeEnergyRecoveryBlockingTextKey";
+    public const string UpgradeEnergyRecoveryHeaderTextKey = nameof(UpgradeEnergyRecoveryHeaderTextKey);
+    public const string UpgradeEnergyRecoveryDescriptionTextKey = nameof(UpgradeEnergyRecoveryDescriptionTextKey);
+    public const string UpgradeEnergyRecoveryBlockingTextKey = nameof(UpgradeEnergyRecoveryBlockingTextKey);
     
-    public const string UpgradeEnergyDrinkHeaderTextKey = "UpgradeEnergyDrinkHeaderTextKey";
-    public const string UpgradeEnergyDrinkDescriptionTextKey = "UpgradeEnergyDrinkDescriptionTextKey";
-    public const string UpgradeEnergyDrinkBlockingTextKey = "EnergyDrinkBlockingTextKey";
+    public const string UpgradeEnergyDrinkHeaderTextKey = nameof(UpgradeEnergyDrinkHeaderTextKey);
+    public const string UpgradeEnergyDrinkDescriptionTextKey = nameof(UpgradeEnergyDrinkDescriptionTextKey);
+    public const string UpgradeEnergyDrinkBlockingTextKey = nameof(UpgradeEnergyDrinkBlockingTextKey);
     
     //Field
-    public const string UpgradeCategoryFieldTextKey = "UpgradeCategoryFieldTextKey";
+    public const string UpgradeCategoryFieldTextKey = nameof(UpgradeCategoryFieldTextKey);
     
-    public const string UpgradeFieldHeaderTextKey = "UpgradeFieldHeaderTextKey";
-    public const string UpgradeFieldDescriptionTextKey = "UpgradeFieldDescriptionTextKey";
+    public const string UpgradeFieldHeaderTextKey = nameof(UpgradeFieldHeaderTextKey);
+    public const string UpgradeFieldDescriptionTextKey = nameof(UpgradeFieldDescriptionTextKey);
 
     #endregion
     
     #region Quests
 
-    public const string QuestInvite1FriendTittleTextKey = "QuestInvite1FriendTittleTextKey";
-    public const string QuestInvite1FriendDescriptionTextKey = "QuestInvite1FriendDescriptionTextKey";
+    public const string QuestInvite1FriendTittleTextKey = nameof(QuestInvite1FriendTittleTextKey);
+    public const string QuestInvite1FriendDescriptionTextKey = nameof(QuestInvite1FriendDescriptionTextKey);
+    
+    public const string QuestInvite3FriendTittleTextKey = nameof(QuestInvite3FriendTittleTextKey);
+    public const string QuestInvite3FriendDescriptionTextKey = nameof(QuestInvite3FriendDescriptionTextKey);
+    
+    public const string QuestInvite5FriendTittleTextKey = nameof(QuestInvite5FriendTittleTextKey);
+    public const string QuestInvite5FriendDescriptionTextKey = nameof(QuestInvite5FriendDescriptionTextKey);
+    
+    public const string QuestSubscribeToNewsChannelHeaderTextKey = nameof(QuestSubscribeToNewsChannelHeaderTextKey);
+    public const string QuestSubscribeToNewsChannelDescriptionTextKey = nameof(QuestSubscribeToNewsChannelDescriptionTextKey);
     
     #endregion
 

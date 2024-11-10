@@ -195,6 +195,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://t.me/PingWinGame.
+        /// </summary>
+        internal static string LinkNewsChannelTextKey {
+            get {
+                return ResourceManager.GetString("LinkNewsChannelTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get an extra reward for the first friend you invite.
         /// </summary>
         internal static string QuestInvite1FriendDescriptionTextKey {
@@ -209,6 +218,42 @@ namespace MatchThree.API.Resources {
         internal static string QuestInvite1FriendTittleTextKey {
             get {
                 return ResourceManager.GetString("QuestInvite1FriendTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get extra rewards for the first two friends you invite.
+        /// </summary>
+        internal static string QuestInvite3FriendDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestInvite3FriendDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invite 3 friend.
+        /// </summary>
+        internal static string QuestInvite3FriendTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestInvite3FriendTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get extra rewards for the first five friends you invite.
+        /// </summary>
+        internal static string QuestInvite5FriendDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestInvite5FriendDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invite 5 friend.
+        /// </summary>
+        internal static string QuestInvite5FriendTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestInvite5FriendTittleTextKey", resourceCulture);
             }
         }
         

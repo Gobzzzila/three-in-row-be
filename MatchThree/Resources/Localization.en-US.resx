@@ -108,4 +108,19 @@
     <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
         <value>Increases the field size by 1 cell</value>
     </data>
+    <data name="QuestInvite3FriendTittleTextKey" xml:space="preserve">
+        <value>Invite 3 friend</value>
+    </data>
+    <data name="QuestInvite3FriendDescriptionTextKey" xml:space="preserve">
+        <value>Get extra rewards for the first two friends you invite</value>
+    </data>
+    <data name="QuestInvite5FriendTittleTextKey" xml:space="preserve">
+        <value>Invite 5 friend</value>
+    </data>
+    <data name="QuestInvite5FriendDescriptionTextKey" xml:space="preserve">
+        <value>Get extra rewards for the first five friends you invite</value>
+    </data>
+    <data name="LinkNewsChannelTextKey" xml:space="preserve">
+        <value>https://t.me/PingWinGame</value>
+    </data>
 </root>

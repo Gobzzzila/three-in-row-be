@@ -44,7 +44,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
         _timer = new Timer(async state => await UpdateLeaderboard(state),
             null,
             TimeSpan.Zero,
-            TimeSpan.FromMinutes(7));
+            TimeSpan.FromMinutes(2));   //TODO Move magic number to appsettings
     }
 
     private async Task UpdateLeaderboard(object? state)

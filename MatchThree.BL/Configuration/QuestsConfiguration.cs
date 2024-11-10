@@ -33,16 +33,55 @@ public static class QuestsConfiguration
         Quests = new Dictionary<Guid, QuestEntity>
         {
             {
-                Guid.Parse("F1111111-908A-4619-8868-F8310EA7D2E3"), new QuestEntity
+                QuestsConstants.QuestIdInvite1Friend, new QuestEntity
                 {
-                    Id = Guid.Parse("F1111111-908A-4619-8868-F8310EA7D2E3"),
+                    Id = QuestsConstants.QuestIdInvite1Friend,
                     Type = QuestTypes.InvitingFriends,
                     TittleKey = TranslationConstants.QuestInvite1FriendTittleTextKey,
                     DescriptionKey = TranslationConstants.QuestInvite1FriendDescriptionTextKey,
                     Reward = QuestsConstants.QuestInvite1FriendReward,
-                    ExternalLink = null,
+                    ExternalLinkKey = null,
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(1)
+                }
+            },
+            {
+                QuestsConstants.QuestIdInvite3Friend, new QuestEntity
+                {
+                    Id = QuestsConstants.QuestIdInvite3Friend,
+                    Type = QuestTypes.InvitingFriends,
+                    TittleKey = TranslationConstants.QuestInvite3FriendTittleTextKey,
+                    DescriptionKey = TranslationConstants.QuestInvite3FriendDescriptionTextKey,
+                    Reward = QuestsConstants.QuestInvite3FriendReward,
+                    ExternalLinkKey = null,
+                    SecretCode = null,
+                    VerificationOfFulfillment = IsEnoughReferralsAsync(3)
+                }
+            },
+            {
+                QuestsConstants.QuestIdInvite5Friend, new QuestEntity
+                {
+                    Id = QuestsConstants.QuestIdInvite5Friend,
+                    Type = QuestTypes.InvitingFriends,
+                    TittleKey = TranslationConstants.QuestInvite5FriendTittleTextKey,
+                    DescriptionKey = TranslationConstants.QuestInvite5FriendDescriptionTextKey,
+                    Reward = QuestsConstants.QuestInvite5FriendReward,
+                    ExternalLinkKey = null,
+                    SecretCode = null,
+                    VerificationOfFulfillment = IsEnoughReferralsAsync(5)
+                }
+            },
+            {
+                QuestsConstants.QuestIdNewsChannelSubscription, new QuestEntity
+                {
+                    Id = QuestsConstants.QuestIdNewsChannelSubscription,
+                    Type = QuestTypes.TelegramChannel,
+                    TittleKey = TranslationConstants.QuestSubscribeToNewsChannelHeaderTextKey,
+                    DescriptionKey = TranslationConstants.QuestSubscribeToNewsChannelDescriptionTextKey,
+                    Reward = QuestsConstants.QuestNewsChannelSubscriptionReward,
+                    ExternalLinkKey = ChatConstants.LinkNewsChannelTextKey,
+                    SecretCode = null,
+                    VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.NewsChannelId, ChatConstants.NewsChannelIdRu)
                 }
             },
         };
@@ -52,5 +91,10 @@ public static class QuestsConfiguration
     {
         return (questCompletionService, userId) => 
             questCompletionService.IsEnoughReferralsAsync(userId, requiredReferralsAmount);
+    }
+    
+    private static Func<IValidateQuestCompletionService, long, Task<bool>> IsSubscribedToChannel(params long[] chatIds)
+    {
+        return (questCompletionService, userId) => questCompletionService.IsSubscribedToChannelAsync(userId, chatIds);
     }
 }

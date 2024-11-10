@@ -74,7 +74,27 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         
         return invoiceLink;
     }
-    
+
+    public async Task<bool> IsSubscribedToChannelAsync(long userId, params long[] chatIds)
+    {
+        foreach (var chatId in chatIds)
+        {
+            try
+            {
+                var chatMember = await _bot.GetChatMemberAsync(chatId, userId);
+
+                if (chatMember.Status is ChatMemberStatus.Administrator or ChatMemberStatus.Member or ChatMemberStatus.Creator) 
+                    return true;
+            }
+            catch
+            {
+                // not subscribed
+            }
+        }
+
+        return false;
+    }
+
     private Task OnError(Exception exception, HandleErrorSource source)
     {
         _logger.LogError($"Telegram error: {exception}");
