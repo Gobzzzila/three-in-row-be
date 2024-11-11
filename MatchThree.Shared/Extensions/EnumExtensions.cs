@@ -7,6 +7,8 @@ namespace MatchThree.Shared.Extensions;
 
 public static class EnumExtensions
 {
+    #region Without cache
+
     public static uint? GetUpgradeCost<T>(this T enumValue) where T : Enum
     {
         var fieldName = Enum.GetName(typeof(T), enumValue);
@@ -14,15 +16,6 @@ public static class EnumExtensions
             throw new InvalidOperationException($"Value {enumValue} is not defined for enum type {typeof(T).Name}");
 
         return typeof(T).GetField(fieldName)?.GetCustomAttribute<UpgradeCostAttribute>()?.UpgradeCost;
-    }
-    
-    public static UpgradeInfoAttribute? GetUpgradeInfo(this UpgradeTypes enumValue)
-    {
-        var fieldName = Enum.GetName(typeof(UpgradeTypes), enumValue);
-        if (fieldName is null)
-            throw new InvalidOperationException($"Value {enumValue} is not defined for UpgradeTypes");
-
-        return typeof(UpgradeTypes).GetField(fieldName)?.GetCustomAttribute<UpgradeInfoAttribute>();
     }
     
     public static CoordinatesForNextLevelAttribute? GetNextLevelCoordinates(this FieldLevels enumValue)
@@ -33,6 +26,29 @@ public static class EnumExtensions
 
         return typeof(FieldLevels).GetField(fieldName)?.GetCustomAttribute<CoordinatesForNextLevelAttribute>();
     }
+
+    #endregion
+    
+    #region UpgradeInfo
+    
+    public static UpgradeInfoAttribute? GetUpgradeInfo(this UpgradeTypes enumValue)
+    {
+        var upgradeInfo = UpgradeInfoCache.Value.GetOrAdd(enumValue, value =>
+        {
+            var fieldName = Enum.GetName(typeof(UpgradeTypes), value);
+            if (fieldName is null)
+                throw new InvalidOperationException($"Value {value} is not defined for UpgradeTypes");
+
+            return typeof(UpgradeTypes).GetField(fieldName)?.GetCustomAttribute<UpgradeInfoAttribute>();
+        });
+
+        return upgradeInfo;
+    }
+    
+    private static readonly Lazy<ConcurrentDictionary<UpgradeTypes, UpgradeInfoAttribute?>>
+        UpgradeInfoCache = new(() => new ConcurrentDictionary<UpgradeTypes, UpgradeInfoAttribute?>(), LazyThreadSafetyMode.PublicationOnly);
+    
+    #endregion
     
     #region TranslationId
     
