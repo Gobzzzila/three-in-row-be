@@ -64,12 +64,7 @@ public class AutoMappingProfile : Profile
             .ForMember(x => x.CategoryName,
                 o =>
                     o.MapFrom<EnumTranslationResolver<UpgradeCategories>, UpgradeCategories>(s => s.Category));
-        
-        //Field elements
-        CreateMap<FieldElementEntity, FieldElementDto>()
-            .ForMember(x => x.Profit, 
-                o => o.MapFrom(s => FieldElementsConfiguration.GetProfit(s.Element, s.Level)));
-        
+
         //Quests
         CreateMap<QuestEntity, QuestDto>()
             .ForMember(x => x.Tittle,
