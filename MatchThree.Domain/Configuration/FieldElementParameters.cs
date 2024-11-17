@@ -1,8 +1,10 @@
-﻿namespace MatchThree.Domain.Configuration;
+﻿using MatchThree.Shared.Enums;
+
+namespace MatchThree.Domain.Configuration;
 
 public class FieldElementParameters
 {
-    public FieldElementParameters? NextLevelParams { get; init; }
     public uint? NextLevelCost { get; init; }
+    public ElementLevels? NextLevel { get; init; }
     public int Profit { get; init; }
 }

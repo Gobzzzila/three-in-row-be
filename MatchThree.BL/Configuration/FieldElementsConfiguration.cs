@@ -19,6 +19,14 @@ public static class FieldElementsConfiguration
         return FieldElemetsParams[cryptoType][elementLevel].Profit;
     }
     
+    public static int? GetNextLevelProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
+    {
+        var fieldLevelParams = GetParamsByTypeAndLevel(cryptoType, elementLevel);
+        return fieldLevelParams.NextLevel is null
+            ? default(int?)
+            : FieldElemetsParams[cryptoType][fieldLevelParams.NextLevel!.Value].Profit;
+    }
+    
     public static List<(CryptoTypes cryptoType, ElementLevels elementLevel)> GetStartValue()
     {
         return [
@@ -73,18 +81,18 @@ public static class FieldElementsConfiguration
                 multiplierAndSyllable = value;
 
             var jStartValue = GetRequiredFieldLevelForFirstLevelElement(currentCryptoType) == FieldLevels.Undefined ? 1 : 0;
-            FieldElementParameters? previousParams = null;
-            for (var j = elementLevels.Length - 1; j >= jStartValue; j--)
+            for (var j = jStartValue; j < elementLevels.Length; j++)
             {
                 var currentLevel = (ElementLevels)elementLevels.GetValue(j)!;
                 var fieldElementParameters = new FieldElementParameters
                 {
                     Profit = (int)currentLevel + (currentLevel == 0 ? 0 : multiplierAndSyllable.Syllable),
                     NextLevelCost = (uint?)(currentLevel.GetUpgradeCost() * multiplierAndSyllable.Multiplier),
-                    NextLevelParams = previousParams
+                    NextLevel = j != elementLevels.Length - 1 
+                            ? (ElementLevels)elementLevels.GetValue(j + 1)!
+                            : null
                 };
 
-                previousParams = fieldElementParameters;
                 cryptoTypeDictionary.Add(currentLevel, fieldElementParameters);
             }
             FieldElemetsParams.Add(currentCryptoType, cryptoTypeDictionary);

@@ -189,7 +189,12 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         var upgradeEntity = new UpgradeEntity
         {
             HeaderTextArgs = [fieldElement.Element.ToString()],
-            DescriptionTextArgs = [fieldElement.Element.ToString(), fieldElementParams.Profit, fieldElementParams.NextLevelParams?.Profit],
+            DescriptionTextArgs =
+            [
+                fieldElement.Element.ToString(), 
+                fieldElementParams.Profit,
+                FieldElementsConfiguration.GetNextLevelProfit(fieldElement.Element, fieldElement.Level)
+            ],
             BlockingTextArgs = blockingTextArgs,
             IsBlocked = isZeroLevelElement,
             Type = ConvertCryptoTypeToUpgradeType(fieldElement.Element),

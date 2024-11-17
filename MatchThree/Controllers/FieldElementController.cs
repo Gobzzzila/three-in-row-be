@@ -13,9 +13,11 @@ namespace MatchThree.API.Controllers;
 [ApiController]
 [Route("api/v1/users")]
 public class FieldElementController(IReadFieldElementService readFieldElementService, 
+    IUpdateFieldElementService updateFieldElementService,
     ITransactionService transactionService)
 {
     private readonly IReadFieldElementService _readFieldElementService = readFieldElementService;
+    private readonly IUpdateFieldElementService _updateFieldElementService = updateFieldElementService;
     private readonly ITransactionService _transactionService = transactionService;
 
     /// <summary>
@@ -50,7 +52,7 @@ public class FieldElementController(IReadFieldElementService readFieldElementSer
     public async Task<IResult> UpgradeFieldElement([FromMultiSource] UpgradeFieldElementRequestDto request, 
         CancellationToken cancellationToken = new())
     {
-        
+        await _updateFieldElementService.UpgradeFieldElementAsync(request.UserId, request.CryptoType);
         await _transactionService.CommitAsync();
         return Results.NoContent();
     }
