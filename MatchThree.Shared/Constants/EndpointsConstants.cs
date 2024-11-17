@@ -7,5 +7,7 @@ public static class EndpointsConstants
     public const string UpgradeEnergyRecoveryEndpointName = "UpgradeEnergyRecoveryEndpoint";
     public const string UpgradeFieldEndpointName = "UpgradeFieldEndpoint";
     public const string UseEnergyDrinkEndpoint = "UseEnergyDrinkEndpoint";
-    public const string CreateInvoiceLinkEndpoint = "CreateInvoiceLinkEndpoint";
+    public const string CreateInvoiceLinkEndpoint = "CreateInvoiceLinkEndpoint";    
+    public const string UpgradeFieldElementEndpointName = "UpgradeFieldElementEndpoint";
+
 }

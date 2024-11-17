@@ -8,7 +8,17 @@ namespace MatchThree.BL.Configuration;
 public static class FieldConfiguration
 {
     private static readonly Dictionary<FieldLevels, FieldParameters> FieldParams;
-
+    
+    public static FieldParameters GetParamsByLevel(FieldLevels fieldLevel)
+    {
+        return FieldParams[fieldLevel];
+    }
+    
+    public static FieldLevels GetStartValue()
+    {
+        return FieldLevels.Level1;
+    }
+    
     static FieldConfiguration()
     {
         var enumValues = Enum.GetValues(typeof(FieldLevels));
@@ -29,15 +39,5 @@ public static class FieldConfiguration
                         null
             });
         }
-    }
-    
-    public static FieldParameters GetParamsByLevel(FieldLevels fieldLevel)
-    {
-        return FieldParams[fieldLevel];
-    }
-    
-    public static FieldLevels GetStartValue()
-    {
-        return FieldLevels.Level1;
     }
 }

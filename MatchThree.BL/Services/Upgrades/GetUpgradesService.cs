@@ -1,6 +1,7 @@
 ﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
+using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Models.Upgrades;
@@ -11,19 +12,26 @@ namespace MatchThree.BL.Services.Upgrades;
 
 public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestrictionsService, 
     IReadEnergyService readEnergyService,
-    IReadFieldService readFieldService) 
+    IReadFieldService readFieldService,
+    IReadFieldElementService readFieldElementService) 
     : IGetUpgradesService
 {
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
     private readonly IReadEnergyService _readEnergyService = readEnergyService;
     private readonly IReadFieldService _readFieldService = readFieldService;
+    private readonly IReadFieldElementService _readFieldElementService = readFieldElementService;
 
     public async Task<IReadOnlyCollection<GroupedUpgradesEntity>> GetAll(long userId)
     {
+        var energyEntity = await _readEnergyService.GetByUserIdAsync(userId);
+        var field = await _readFieldService.GetByUserIdAsync(userId);
+        var fieldElements = await _readFieldElementService.GetByUserIdAsync(userId);
+
         var result = new List<GroupedUpgradesEntity>
         {
-            await GetEnergyUpgrades(userId),
-            await GetFieldElementsUpgrades(userId)
+            await GetEnergyUpgrades(energyEntity),
+            GetFieldUpgrades(field),
+            GetFieldElementsUpgrades(fieldElements)
         };
         
         return result;
@@ -31,10 +39,8 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     
     #region EnergyUpgrades
     
-    private async Task<GroupedUpgradesEntity> GetEnergyUpgrades(long userId)
+    private async Task<GroupedUpgradesEntity> GetEnergyUpgrades(EnergyEntity energyEntity)
     {
-        var energyEntity = await _readEnergyService.GetByUserIdAsync(userId);
-
         var result = new GroupedUpgradesEntity
         {
             Category = UpgradeCategories.Energy,
@@ -49,7 +55,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         return result;
     }
 
-    private UpgradeEntity GetEnergyDrinkUpgrade(EnergyEntity energyEntity)
+    private static UpgradeEntity GetEnergyDrinkUpgrade(EnergyEntity energyEntity)
     {
         var condition = energyEntity.AvailableEnergyDrinkAmount > 0;
         var reserveParams = EnergyReserveConfiguration.GetParamsByLevel(energyEntity.MaxReserve);
@@ -81,10 +87,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         
         int? missingAmountOfReferrals = default;
         if (reserveParams.UpgradeCondition is not null)
-        {
-            missingAmountOfReferrals = 
-                await reserveParams.UpgradeCondition(_upgradesRestrictionsService, energyEntity.Id);
-        }
+            missingAmountOfReferrals = await reserveParams.UpgradeCondition(_upgradesRestrictionsService, energyEntity.Id);
 
         var upgradeEntity = new UpgradeEntity
         {
@@ -106,9 +109,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
 
         int? requiredReserveLevel = default;
         if (recoveryParams.UpgradeCondition is not null)
-        {
             requiredReserveLevel = recoveryParams.UpgradeCondition(_upgradesRestrictionsService, energyEntity.MaxReserve);
-        }
         
         var upgradeEntity = new UpgradeEntity
         {
@@ -126,18 +127,16 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     
     #endregion EnergyUpgrades
     
-    #region FieldElementsUpgrades
+    #region FieldUpgrades
     
-    private async Task<GroupedUpgradesEntity> GetFieldElementsUpgrades(long userId)
+    private static GroupedUpgradesEntity GetFieldUpgrades(FieldEntity field)
     {
-        var fieldElements = await _readFieldService.GetByUserIdAsync(userId);
-        
         var result = new GroupedUpgradesEntity
         {
             Category = UpgradeCategories.Field,
             Upgrades =
             [
-                GetFieldUpgrade(fieldElements),
+                GetFieldUpgrade(field),
             ]
         };
 
@@ -160,5 +159,65 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         return upgradeEntity;
     }
 
+    #endregion FieldElementsUpgrades
+    
+    #region FieldElementsUpgrades
+    
+    private static GroupedUpgradesEntity GetFieldElementsUpgrades(List<FieldElementEntity> fieldElements)
+    {
+        var result = new GroupedUpgradesEntity
+        {
+            Category = UpgradeCategories.FieldElements,
+            Upgrades = new List<UpgradeEntity>(fieldElements.Count)
+        };
+
+        foreach (var upgradeEntity in fieldElements.Select(GetFieldElementUpgrade))
+            result.Upgrades.Add(upgradeEntity);
+
+        return result;
+    }
+
+    private static UpgradeEntity GetFieldElementUpgrade(FieldElementEntity fieldElement)
+    {
+        var fieldElementParams = FieldElementsConfiguration.GetParamsByTypeAndLevel(fieldElement.Element, fieldElement.Level);
+
+        var isZeroLevelElement = fieldElement.Level == ElementLevels.Undefined;
+        object?[] blockingTextArgs = [];
+        if (isZeroLevelElement)
+            blockingTextArgs = [(int)FieldElementsConfiguration.GetRequiredFieldLevelForFirstLevelElement(fieldElement.Element)];
+        
+        var upgradeEntity = new UpgradeEntity
+        {
+            HeaderTextArgs = [fieldElement.Element.ToString()],
+            DescriptionTextArgs = [fieldElement.Element.ToString(), fieldElementParams.Profit, fieldElementParams.NextLevelParams?.Profit],
+            BlockingTextArgs = blockingTextArgs,
+            IsBlocked = isZeroLevelElement,
+            Type = ConvertCryptoTypeToUpgradeType(fieldElement.Element),
+            CurrentLevel = (int)fieldElement.Level,
+            Price = fieldElementParams.NextLevelCost,
+            IsStars = false,
+            ExecutePathName = EndpointsConstants.UpgradeFieldElementEndpointName,
+            ExecutePathArgs = new { userId = fieldElement.Id, fieldElement = fieldElement.Element }      //TODO get rid of anonymous cringe
+        };
+        return upgradeEntity;
+
+        UpgradeTypes ConvertCryptoTypeToUpgradeType(CryptoTypes cryptoType)
+        {
+            return cryptoType switch
+            {
+                CryptoTypes.Ton => UpgradeTypes.TonElement,
+                CryptoTypes.Ston => UpgradeTypes.StonElement,
+                CryptoTypes.Raff => UpgradeTypes.RaffElement,
+                CryptoTypes.Fnz => UpgradeTypes.FnzElement,
+                CryptoTypes.Usdt => UpgradeTypes.UsdtElement,
+                CryptoTypes.Jetton => UpgradeTypes.JettonElement,
+                CryptoTypes.Not => UpgradeTypes.NotElement,
+                CryptoTypes.Dogs => UpgradeTypes.DogsElement,
+                CryptoTypes.Cati => UpgradeTypes.CatiElement,
+                _ => UpgradeTypes.Undefined
+            };
+        }
+    }
+    
     #endregion FieldElementsUpgrades
 }

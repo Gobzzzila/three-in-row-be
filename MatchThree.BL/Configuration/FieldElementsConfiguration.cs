@@ -8,7 +8,17 @@ namespace MatchThree.BL.Configuration;
 public static class FieldElementsConfiguration
 {
     private static readonly Dictionary<CryptoTypes, Dictionary<ElementLevels, FieldElementParameters>> FieldElemetsParams;
-
+    
+    public static FieldElementParameters GetParamsByTypeAndLevel(CryptoTypes cryptoType, ElementLevels elementLevel)
+    {
+        return FieldElemetsParams[cryptoType][elementLevel];
+    }
+    
+    public static int GetProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
+    {
+        return FieldElemetsParams[cryptoType][elementLevel].Profit;
+    }
+    
     public static List<(CryptoTypes cryptoType, ElementLevels elementLevel)> GetStartValue()
     {
         return [
@@ -23,10 +33,17 @@ public static class FieldElementsConfiguration
             (CryptoTypes.Cati, ElementLevels.Undefined)
         ];
     }
-    
-    public static int GetProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
+
+    public static FieldLevels GetRequiredFieldLevelForFirstLevelElement(CryptoTypes cryptoType)
     {
-        return FieldElemetsParams[cryptoType][elementLevel].Profit;
+        return cryptoType switch
+        {
+            CryptoTypes.Jetton => FieldLevels.Level12,
+            CryptoTypes.Not => FieldLevels.Level25,
+            CryptoTypes.Dogs => FieldLevels.Level40,
+            CryptoTypes.Cati => FieldLevels.Level57,
+            _ => FieldLevels.Undefined
+        };
     }
     
     private record MultiplierAndSyllable(double Multiplier, int Syllable);
@@ -54,21 +71,20 @@ public static class FieldElementsConfiguration
             var multiplierAndSyllable = new MultiplierAndSyllable(1.0, 0);
             if (multipliersAndSyllables.TryGetValue(currentCryptoType, out var value))
                 multiplierAndSyllable = value;
-            
-            var jStartValue = i > 5 ? 0 : 1;
-            for (var j = jStartValue; j < elementLevels.Length; j++)
+
+            var jStartValue = GetRequiredFieldLevelForFirstLevelElement(currentCryptoType) == FieldLevels.Undefined ? 1 : 0;
+            FieldElementParameters? previousParams = null;
+            for (var j = elementLevels.Length - 1; j >= jStartValue; j--)
             {
                 var currentLevel = (ElementLevels)elementLevels.GetValue(j)!;
                 var fieldElementParameters = new FieldElementParameters
                 {
                     Profit = (int)currentLevel + (currentLevel == 0 ? 0 : multiplierAndSyllable.Syllable),
                     NextLevelCost = (uint?)(currentLevel.GetUpgradeCost() * multiplierAndSyllable.Multiplier),
-                    NextLevel = 
-                        j != elementLevels.Length - 1 
-                            ? (ElementLevels)elementLevels.GetValue(j + 1)!
-                            : null
+                    NextLevelParams = previousParams
                 };
-                
+
+                previousParams = fieldElementParameters;
                 cryptoTypeDictionary.Add(currentLevel, fieldElementParameters);
             }
             FieldElemetsParams.Add(currentCryptoType, cryptoTypeDictionary);

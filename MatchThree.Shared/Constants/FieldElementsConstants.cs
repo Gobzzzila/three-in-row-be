@@ -14,6 +14,7 @@ public class FieldElementsConstants
     public const double CatiUpgradeCostMultiplier = 1.4;
     public const int CatiProfitSyllable = 20;
     
+    public const int Level1BaseFieldElementCost = 0;
     public const int Level2BaseFieldElementCost = 300;
     public const int Level3BaseFieldElementCost = 500;
     public const int Level4BaseFieldElementCost = 750;

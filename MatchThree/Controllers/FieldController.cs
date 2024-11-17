@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace MatchThree.API.Controllers;
 
 [ApiController]
-[Route("api/v1/fields")]
+[Route("api/v1/users")]
 public class FieldController(IUpdateFieldService updateFieldService,
     IReadFieldService readFieldService,
     ITransactionService transactionService,
@@ -24,7 +24,7 @@ public class FieldController(IUpdateFieldService updateFieldService,
     /// <summary>
     /// Gets field by user id
     /// </summary>
-    [HttpGet("{userId:long}")]
+    [HttpGet("{userId:long}/fields")]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int[][]))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
@@ -40,7 +40,7 @@ public class FieldController(IUpdateFieldService updateFieldService,
     /// <summary>
     /// Upgrade field by user identifier 
     /// </summary>
-    [HttpPost("{userId:long}/upgrade-field", Name = EndpointsConstants.UpgradeFieldEndpointName)]
+    [HttpPost("{userId:long}/fields/upgrade", Name = EndpointsConstants.UpgradeFieldEndpointName)]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]

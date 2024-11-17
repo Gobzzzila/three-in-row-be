@@ -129,4 +129,16 @@
     <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
         <value>Узнавайте новости одним из первых</value>
     </data>
+    <data name="UpgradeCategoryFieldElementsTextKey" xml:space="preserve">
+        <value>Крипта</value>
+    </data>
+    <data name="UpgradeFieldElementBlockingTextKey" xml:space="preserve">
+        <value>Достигните уровня {0} поля</value>
+    </data>
+    <data name="UpgradeFieldElementHeaderTextKey" xml:space="preserve">
+        <value>Базовая ценность {0}</value>
+    </data>
+    <data name="UpgradeFieldElementDescriptionTextKey" xml:space="preserve">
+        <value>Увеличивает базовую стоимость {0} с {1} до {2}</value>
+    </data>
 </root>

@@ -50,6 +50,13 @@ public static class TranslationConstants
     public const string UpgradeFieldHeaderTextKey = nameof(UpgradeFieldHeaderTextKey);
     public const string UpgradeFieldDescriptionTextKey = nameof(UpgradeFieldDescriptionTextKey);
 
+    //Field elements
+    public const string UpgradeCategoryFieldElementsTextKey = nameof(UpgradeCategoryFieldElementsTextKey);
+
+    public const string UpgradeFieldElementHeaderTextKey = nameof(UpgradeFieldElementHeaderTextKey);
+    public const string UpgradeFieldElementBlockingTextKey = nameof(UpgradeFieldElementBlockingTextKey);
+    public const string UpgradeFieldElementDescriptionTextKey = nameof(UpgradeFieldElementDescriptionTextKey);
+
     #endregion
     
     #region Quests

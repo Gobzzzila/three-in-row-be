@@ -285,6 +285,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Крипта.
+        /// </summary>
+        internal static string UpgradeCategoryFieldElementsTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeCategoryFieldElementsTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Игровое поле.
         /// </summary>
         internal static string UpgradeCategoryFieldTextKey {
@@ -380,6 +389,33 @@ namespace MatchThree.API.Resources {
         internal static string UpgradeFieldDescriptionTextKey {
             get {
                 return ResourceManager.GetString("UpgradeFieldDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Достигните уровня {0} поля.
+        /// </summary>
+        internal static string UpgradeFieldElementBlockingTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldElementBlockingTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Увеличивает базовую стоимость {0} с {1} до {2}.
+        /// </summary>
+        internal static string UpgradeFieldElementDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldElementDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Базовая ценность {0}.
+        /// </summary>
+        internal static string UpgradeFieldElementHeaderTextKey {
+            get {
+                return ResourceManager.GetString("UpgradeFieldElementHeaderTextKey", resourceCulture);
             }
         }
         

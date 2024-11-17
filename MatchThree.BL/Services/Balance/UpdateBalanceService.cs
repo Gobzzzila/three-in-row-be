@@ -20,6 +20,9 @@ public class UpdateBalanceService (MatchThreeDbContext context,
         if (dbModel is null)
             throw new NoDataFoundException();
         
+        if (amount == 0)
+            throw new Exception();      //TODO define exception
+        
         if (dbModel.Balance < amount)
             throw new NotEnoughBalanceException();
         

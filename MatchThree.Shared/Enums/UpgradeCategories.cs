@@ -13,4 +13,7 @@ public enum UpgradeCategories
     
     [TranslationId(TranslationConstants.UpgradeCategoryFieldTextKey)]
     Field = 2,
+    
+    [TranslationId(TranslationConstants.UpgradeCategoryFieldElementsTextKey)]
+    FieldElements = 3,
 }

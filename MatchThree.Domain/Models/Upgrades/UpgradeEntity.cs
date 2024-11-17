@@ -4,6 +4,7 @@ namespace MatchThree.Domain.Models.Upgrades;
 
 public class UpgradeEntity
 {
+    public object?[] HeaderTextArgs { get; set; } = [];
     public object?[] DescriptionTextArgs { get; set; } = [];
     public object?[] BlockingTextArgs { get; set; } = [];
     public bool IsBlocked { get; set; }

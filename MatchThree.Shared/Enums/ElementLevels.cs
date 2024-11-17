@@ -5,7 +5,7 @@ namespace MatchThree.Shared.Enums;
 
 public enum ElementLevels
 {
-    [UpgradeCost(FieldElementsConstants.Level2BaseFieldElementCost)]
+    [UpgradeCost(FieldElementsConstants.Level1BaseFieldElementCost)]
     Undefined = 0,
     
     [UpgradeCost(FieldElementsConstants.Level2BaseFieldElementCost)]

@@ -5,7 +5,7 @@ using MatchThree.Shared.Enums;
 
 namespace MatchThree.Shared.Extensions;
 
-public static class EnumExtensions
+public static class EnumGetAttributesExtensions
 {
     #region Without cache
 

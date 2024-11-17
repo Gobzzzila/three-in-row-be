@@ -129,4 +129,16 @@
     <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
         <value>Be one of the first to know the news</value>
     </data>
+    <data name="UpgradeCategoryFieldElementsTextKey" xml:space="preserve">
+        <value>Crypto</value>
+    </data>
+    <data name="UpgradeFieldElementBlockingTextKey" xml:space="preserve">
+        <value>Reach level {0} of the field</value>
+    </data>
+    <data name="UpgradeFieldElementHeaderTextKey" xml:space="preserve">
+        <value>Base value of {0}</value>
+    </data>
+    <data name="UpgradeFieldElementDescriptionTextKey" xml:space="preserve">
+        <value>Increases base value of {0} from {1} to {2}</value>
+    </data>
 </root>

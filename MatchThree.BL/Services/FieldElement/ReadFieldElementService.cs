@@ -21,6 +21,7 @@ public class ReadFieldElementService(MatchThreeDbContext context,
         var dbModels = await _context.Set<FieldElementDbModel>()
             .AsNoTracking()
             .Where(x => x.UserId == userId)
+            .OrderBy(x => x.Element)
             .ToListAsync();
         
         return _mapper.Map<List<FieldElementEntity>>(dbModels);
