@@ -87,6 +87,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Квест уже выполнен сегодня.
+        /// </summary>
+        internal static string ExceptionDailyLoginCompletedTodayTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionDailyLoginCompletedTodayTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Возникла непредвиденная ошибка.
         /// </summary>
         internal static string ExceptionDefaultTextKey {
@@ -114,11 +123,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не все условия были выполнены.
+        /// </summary>
+        internal static string ExceptionQuestsConditionNotMetTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionQuestsConditionNotMetTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Условия улучшения не были выполнены.
         /// </summary>
         internal static string ExceptionUpgradeConditionsTextKey {
             get {
                 return ResourceManager.GetString("ExceptionUpgradeConditionsTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Полученные данные не соответствуют правилам проверки.
+        /// </summary>
+        internal static string ExceptionValidationTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionValidationTextKey", resourceCulture);
             }
         }
         

@@ -60,10 +60,10 @@ public class QuestController(IReadQuestService readQuestService,
     [HttpPost("{userId:long}/quests/{questId:guid}")]
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [SwaggerOperation(OperationId = "CompleteQuest", Tags = ["Quests"])]
     public async Task<IResult> CompleteQuest([FromMultiSource] CompleteQuestRequestDto request, 
         CancellationToken cancellationToken = new())

@@ -87,6 +87,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The quest has already been completed today.
+        /// </summary>
+        internal static string ExceptionDailyLoginCompletedTodayTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionDailyLoginCompletedTodayTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unexpected error occurred.
         /// </summary>
         internal static string ExceptionDefaultTextKey {
@@ -114,11 +123,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not all conditions were met.
+        /// </summary>
+        internal static string ExceptionQuestsConditionNotMetTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionQuestsConditionNotMetTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upgrade conditions have not been met.
         /// </summary>
         internal static string ExceptionUpgradeConditionsTextKey {
             get {
                 return ResourceManager.GetString("ExceptionUpgradeConditionsTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data received does not fit the validation rules.
+        /// </summary>
+        internal static string ExceptionValidationTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionValidationTextKey", resourceCulture);
             }
         }
         

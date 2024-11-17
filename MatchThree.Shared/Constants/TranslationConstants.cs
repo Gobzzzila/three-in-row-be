@@ -7,10 +7,16 @@ public static class TranslationConstants
     
     #region Exceptions
 
+    //Default
     public const string ExceptionDefaultTextKey = nameof(ExceptionDefaultTextKey);
     public const string ExceptionNoDataFoundTextKey = nameof(ExceptionNoDataFoundTextKey);
     public const string ExceptionNotEnoughBalanceTextKey = nameof(ExceptionNotEnoughBalanceTextKey);
     public const string ExceptionUpgradeConditionsTextKey = nameof(ExceptionUpgradeConditionsTextKey);
+    public const string ExceptionValidationTextKey = nameof(ExceptionValidationTextKey);
+    
+    //Specific
+    public const string ExceptionDailyLoginCompletedTodayTextKey = nameof(ExceptionDailyLoginCompletedTodayTextKey);
+    public const string ExceptionQuestsConditionNotMetTextKey = nameof(ExceptionQuestsConditionNotMetTextKey);
     
     #endregion
     

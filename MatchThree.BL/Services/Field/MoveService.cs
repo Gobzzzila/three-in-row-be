@@ -38,7 +38,7 @@ public class MoveService(MatchThreeDbContext context,
             CalculateHash($"{reward}{userId}{fieldDbModel.User.Energy.CurrentReserve}{fieldDbModel.User.SessionHash}");
 
         if (!calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
-            throw new Exception("Wrong hash");
+            throw new ValidationException();
 
         await _updateEnergyService.SpendEnergy(userId);
         await _updateFieldService.UpdateFieldAsync(userId, field);

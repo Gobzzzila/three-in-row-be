@@ -141,4 +141,13 @@
     <data name="UpgradeFieldElementDescriptionTextKey" xml:space="preserve">
         <value>Увеличивает базовую стоимость {0} с {1} до {2}</value>
     </data>
+    <data name="ExceptionValidationTextKey" xml:space="preserve">
+        <value>Полученные данные не соответствуют правилам проверки</value>
+    </data>
+    <data name="ExceptionDailyLoginCompletedTodayTextKey" xml:space="preserve">
+        <value>Квест уже выполнен сегодня</value>
+    </data>
+    <data name="ExceptionQuestsConditionNotMetTextKey" xml:space="preserve">
+        <value>Не все условия были выполнены</value>
+    </data>
 </root>

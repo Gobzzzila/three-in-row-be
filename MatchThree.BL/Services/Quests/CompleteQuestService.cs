@@ -3,6 +3,7 @@ using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Exceptions;
 
 namespace MatchThree.BL.Services.Quests;
@@ -24,7 +25,7 @@ public class CompleteQuestService(MatchThreeDbContext context,
             throw new NoDataFoundException();
 
         if (dbModel.QuestIds.Contains(questId))
-            throw new Exception();              //TODO make specific exception
+            throw new ValidationException();
         
         var questEntity = QuestsConfiguration.GetById(questId);
         var isCompleted = true;
@@ -36,7 +37,7 @@ public class CompleteQuestService(MatchThreeDbContext context,
             isCompleted = questEntity.SecretCode.Equals(secretCode, StringComparison.OrdinalIgnoreCase);
         
         if (!isCompleted)
-            throw new Exception();              //TODO make specific exception
+            throw new ValidationException(TranslationConstants.ExceptionQuestsConditionNotMetTextKey);
 
         await _updateBalanceService.AddBalanceAsync(userId, questEntity.Reward);
         dbModel.QuestIds.Add(questId);

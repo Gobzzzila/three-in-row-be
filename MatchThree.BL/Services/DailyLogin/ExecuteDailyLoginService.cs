@@ -2,6 +2,7 @@
 using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Exceptions;
 using static MatchThree.BL.Configuration.DailyLoginConfiguration;
 
@@ -24,7 +25,7 @@ public class ExecuteDailyLoginService(MatchThreeDbContext context,
 
         var todayDate = _timeProvider.GetUtcNow().Date;
         if (dbModel.LastExecuteDate == todayDate)
-            throw new Exception();                  //TODO make specific exception
+            throw new ValidationException(TranslationConstants.ExceptionDailyLoginCompletedTodayTextKey);
         
         var isExecutedYesterday = dbModel.LastExecuteDate == todayDate.AddDays(-1);
         var index = isExecutedYesterday ? ShortenIndex(dbModel.StreakCount) : 0;

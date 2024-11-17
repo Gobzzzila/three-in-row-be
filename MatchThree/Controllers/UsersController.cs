@@ -6,6 +6,7 @@ using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Settings;
+using MatchThree.Shared.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
@@ -34,6 +35,7 @@ public class UsersController(IReadUserService readUserService,
     /// </summary>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [SwaggerOperation(OperationId = "SignUp", Tags = ["Users"])]
     public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request,         //TODO There's a lot of logic here, mb implement service
         CancellationToken cancellationToken = new())
@@ -41,14 +43,16 @@ public class UsersController(IReadUserService readUserService,
         var parsedInitData = AuthHelpers.ParseValidateData(request.InitData, _settings.BotToken);
         var userString = parsedInitData.GetValueOrDefault("user");
         if (string.IsNullOrEmpty(userString))
-            throw new Exception("User info is not set");        //TODO implement special exception
+            throw new ValidationException();
         
         var userEntityFromRequest = JsonSerializer.Deserialize<UserEntity>(userString);
         if (userEntityFromRequest is null)
-            throw new Exception("Init data doesn't contain user info");
+            throw new ValidationException();
         
-        var data = HttpUtility.ParseQueryString(request.InitData);
-        userEntityFromRequest.SessionHash = data["hash"]!;
+        var hash = HttpUtility.ParseQueryString(request.InitData)["hash"];
+        if (hash is null)
+            throw new ValidationException();
+        userEntityFromRequest.SessionHash = hash;
         
         var userEntity = await _readUserService.FindByIdAsync(userEntityFromRequest.Id);
         if (userEntity is null)

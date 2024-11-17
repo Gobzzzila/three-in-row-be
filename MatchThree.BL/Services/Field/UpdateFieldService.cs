@@ -36,7 +36,7 @@ public class UpdateFieldService(MatchThreeDbContext context,
     public async Task UpdateFieldAsync(long userId, int[][] field)
     {
         if (field.Length != 9 || field.Any(x => x.Length != 9))
-            throw new Exception("Wrong field size");
+            throw new ValidationException();
 
         var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
         if (dbModel is null)
@@ -44,7 +44,7 @@ public class UpdateFieldService(MatchThreeDbContext context,
 
         var fieldParams = FieldConfiguration.GetParamsByLevel(dbModel.FieldLevel);
         if (field.Sum(x => x.Count(y => y != 0)) != fieldParams.AmountOfCells)
-            throw new Exception("Wrong field values");
+            throw new ValidationException();
         
         dbModel.Field = field;
         _context.Set<FieldDbModel>().Update(dbModel);

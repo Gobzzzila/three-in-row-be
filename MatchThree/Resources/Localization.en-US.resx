@@ -141,4 +141,13 @@
     <data name="UpgradeFieldElementDescriptionTextKey" xml:space="preserve">
         <value>Increases base value of {0} from {1} to {2}</value>
     </data>
+    <data name="ExceptionValidationTextKey" xml:space="preserve">
+        <value>The data received does not fit the validation rules</value>
+    </data>
+    <data name="ExceptionDailyLoginCompletedTodayTextKey" xml:space="preserve">
+        <value>The quest has already been completed today</value>
+    </data>
+    <data name="ExceptionQuestsConditionNotMetTextKey" xml:space="preserve">
+        <value>Not all conditions were met</value>
+    </data>
 </root>

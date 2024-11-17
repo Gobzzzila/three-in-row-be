@@ -129,7 +129,8 @@ namespace MatchThree.API
                     });
                 });
 
-                builder.Services.AddExceptionHandler<NoDataFoundExceptionHandler>()
+                builder.Services.AddExceptionHandler<ValidationExceptionHandler>()
+                    .AddExceptionHandler<NoDataFoundExceptionHandler>()
                     .AddExceptionHandler<NotEnoughBalanceExceptionHandler>()
                     .AddExceptionHandler<MaxLevelReachedExceptionHandler>()
                     .AddExceptionHandler<UpgradeConditionsExceptionHandler>()
