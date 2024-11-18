@@ -202,7 +202,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             Price = fieldElementParams.NextLevelCost,
             IsStars = false,
             ExecutePathName = EndpointsConstants.UpgradeFieldElementEndpointName,
-            ExecutePathArgs = new { userId = fieldElement.Id, fieldElement = fieldElement.Element }      //TODO get rid of anonymous cringe
+            ExecutePathArgs = new { userId = fieldElement.UserId, fieldElement = (int)fieldElement.Element }      //TODO get rid of anonymous cringe
         };
         return upgradeEntity;
 
