@@ -12,24 +12,21 @@ public class CreateFieldService(MatchThreeDbContext context)
 
     public void Create(long userId)
     {
-        var field = new int[9][];
-        var random = new Random();
-        for (var i = 0; i < 9; i++)
-        {
-            field[i] = new int[9];
-            for (var j = 0; j < 9; j++)
-            {
-                if (i is >= 0 and <= 4 && j is >= 2 and <= 6)
-                    field[i][j] = random.Next(1, 6);
-                else
-                    field[i][j] = 0;
-            }
-        }
-
         _context.Set<FieldDbModel>().Add(new FieldDbModel
         {
             Id = userId,
-            Field = field,
+            Field = new int[][]
+            {
+                [ 0, 0, 4, 5, 3, 3, 1, 0, 0 ],
+                [ 0, 0, 2, 4, 2, 1, 1, 0, 0 ],
+                [ 0, 0, 4, 5, 1, 3, 4, 0, 0 ],
+                [ 0, 0, 2, 2, 5, 2, 1, 0, 0 ],
+                [ 0, 0, 5, 5, 2, 3, 1, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            },
             FieldLevel = FieldConfiguration.GetStartValue()
         });
     }

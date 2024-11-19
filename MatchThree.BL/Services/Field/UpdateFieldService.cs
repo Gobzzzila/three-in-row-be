@@ -26,11 +26,30 @@ public class UpdateFieldService(MatchThreeDbContext context,
 
         await _updateBalanceService.SpendBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
 
-        var random = new Random();
-        dbModel.Field[fieldParams.NextLevelCoordinates.Y][fieldParams.NextLevelCoordinates.X] = random.Next(1, 6);
         dbModel.FieldLevel = fieldParams.NextLevel.Value;
+        dbModel.Field[fieldParams.NextLevelCoordinates.Y][fieldParams.NextLevelCoordinates.X] = 
+            GetUniqueValue(dbModel.Field, fieldParams.NextLevelCoordinates.Y, fieldParams.NextLevelCoordinates.X);
 
         _context.Set<FieldDbModel>().Update(dbModel);
+    }
+    
+    private static int GetUniqueValue(int[][] array, int y, int x)
+    {
+        var possibleValues = new HashSet<int> { 1, 2, 3, 4, 5 };
+        if (y > 0)
+            possibleValues.Remove(array[y - 1][x]); 
+        
+        if (y < array.Length - 1) 
+            possibleValues.Remove(array[y + 1][x]); 
+        
+        if (x > 0) 
+            possibleValues.Remove(array[y][x - 1]); 
+        
+        if (x < array[y].Length - 1) 
+            possibleValues.Remove(array[y][x + 1]); 
+        
+        var random = new Random();
+        return possibleValues.ElementAt(random.Next(possibleValues.Count));
     }
 
     public async Task UpdateFieldAsync(long userId, int[][] field)
