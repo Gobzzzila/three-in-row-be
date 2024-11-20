@@ -1,4 +1,5 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using System.Collections.Frozen;
+using MatchThree.Domain.Configuration;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
@@ -7,7 +8,7 @@ namespace MatchThree.BL.Configuration;
 
 public static class EnergyRecoveryConfiguration
 {
-    private static readonly Dictionary<EnergyRecoveryLevels, EnergyRecoveryParameters> EnergyRecoveryParams;
+    private static readonly FrozenDictionary<EnergyRecoveryLevels, EnergyRecoveryParameters> EnergyRecoveryParams;
     
     public static EnergyRecoveryLevels GetStartValue()
     {
@@ -26,7 +27,7 @@ public static class EnergyRecoveryConfiguration
     
     static EnergyRecoveryConfiguration()
     {
-        EnergyRecoveryParams = new Dictionary<EnergyRecoveryLevels, EnergyRecoveryParameters>//TODO make foreach and attributes as in fieldconfiguration
+        var dictionary = new Dictionary<EnergyRecoveryLevels, EnergyRecoveryParameters>//TODO make foreach and attributes as in fieldconfiguration
         {
             {
                 EnergyRecoveryLevels.Level1, new EnergyRecoveryParameters
@@ -83,6 +84,8 @@ public static class EnergyRecoveryConfiguration
                 }
             },
         };
+
+        EnergyRecoveryParams = dictionary.ToFrozenDictionary();
     }
     
     private static Func<IUpgradesRestrictionsService, EnergyReserveLevels, int?> UpgradeCondition(EnergyReserveLevels restrictedLevel)

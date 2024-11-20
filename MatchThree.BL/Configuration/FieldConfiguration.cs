@@ -1,4 +1,5 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using System.Collections.Frozen;
+using MatchThree.Domain.Configuration;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 using MatchThree.Shared.Extensions;
@@ -7,7 +8,7 @@ namespace MatchThree.BL.Configuration;
 
 public static class FieldConfiguration
 {
-    private static readonly Dictionary<FieldLevels, FieldParameters> FieldParams;
+    private static readonly FrozenDictionary<FieldLevels, FieldParameters> FieldParams;
     
     public static FieldParameters GetParamsByLevel(FieldLevels fieldLevel)
     {
@@ -22,13 +23,13 @@ public static class FieldConfiguration
     static FieldConfiguration()
     {
         var enumValues = Enum.GetValues(typeof(FieldLevels));
-        FieldParams = new Dictionary<FieldLevels, FieldParameters>(enumValues.Length - 1);
+        var dictionary = new Dictionary<FieldLevels, FieldParameters>(enumValues.Length - 1);
         
         for (var i = 1; i < enumValues.Length; i++)
         {
             var currentValue = (FieldLevels)enumValues.GetValue(i)!;
             var nextLevelInfo = currentValue.GetNextLevelCoordinates();
-            FieldParams.Add(currentValue, new FieldParameters
+            dictionary.Add(currentValue, new FieldParameters
             {
                 NextLevelCost = currentValue.GetUpgradeCost(),
                 NextLevelCoordinates = (nextLevelInfo!.X, nextLevelInfo!.Y),
@@ -40,5 +41,7 @@ public static class FieldConfiguration
                         null
             });
         }
+
+        FieldParams = dictionary.ToFrozenDictionary();
     }
 }

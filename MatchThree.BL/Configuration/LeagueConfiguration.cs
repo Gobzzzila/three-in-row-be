@@ -1,4 +1,5 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using System.Collections.Frozen;
+using MatchThree.Domain.Configuration;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
@@ -6,7 +7,7 @@ namespace MatchThree.BL.Configuration;
 
 public static class LeagueConfiguration
 {
-    private static readonly Dictionary<LeagueTypes, LeagueParameters> LeaguesParams;
+    private static readonly FrozenDictionary<LeagueTypes, LeagueParameters> LeaguesParams;
 
     public static LeagueTypes CalculateLeague(ulong overallBalance)
     {
@@ -54,7 +55,7 @@ public static class LeagueConfiguration
     //ctor
     static LeagueConfiguration()
     {
-        LeaguesParams = new Dictionary<LeagueTypes, LeagueParameters>//TODO make foreach and attributes as in fieldconfiguration
+        var dictionary = new Dictionary<LeagueTypes, LeagueParameters>//TODO make foreach and attributes as in fieldconfiguration
         {
             {
                 LeagueTypes.Shrimp, new LeagueParameters
@@ -137,5 +138,7 @@ public static class LeagueConfiguration
                 }
             }
         };
+
+        LeaguesParams = dictionary.ToFrozenDictionary();
     }
 }

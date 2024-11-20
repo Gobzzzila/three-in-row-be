@@ -1,4 +1,5 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using System.Collections.Frozen;
+using MatchThree.Domain.Configuration;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 using MatchThree.Shared.Extensions;
@@ -7,16 +8,16 @@ namespace MatchThree.BL.Configuration;
 
 public static class FieldElementsConfiguration
 {
-    private static readonly Dictionary<CryptoTypes, Dictionary<ElementLevels, FieldElementParameters>> FieldElemetsParams;
+    private static readonly FrozenDictionary<CryptoTypes, FrozenDictionary<ElementLevels, FieldElementParameters>> FieldElementsParams;
     
     public static FieldElementParameters GetParamsByTypeAndLevel(CryptoTypes cryptoType, ElementLevels elementLevel)
     {
-        return FieldElemetsParams[cryptoType][elementLevel];
+        return FieldElementsParams[cryptoType][elementLevel];
     }
     
     public static int GetProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
     {
-        return FieldElemetsParams[cryptoType][elementLevel].Profit;
+        return FieldElementsParams[cryptoType][elementLevel].Profit;
     }
     
     public static int? GetNextLevelProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
@@ -24,7 +25,7 @@ public static class FieldElementsConfiguration
         var fieldLevelParams = GetParamsByTypeAndLevel(cryptoType, elementLevel);
         return fieldLevelParams.NextLevel is null
             ? default(int?)
-            : FieldElemetsParams[cryptoType][fieldLevelParams.NextLevel!.Value].Profit;
+            : FieldElementsParams[cryptoType][fieldLevelParams.NextLevel!.Value].Profit;
     }
     
     public static List<(CryptoTypes cryptoType, ElementLevels elementLevel)> GetStartValue()
@@ -60,8 +61,8 @@ public static class FieldElementsConfiguration
         var cryptoTypes = Enum.GetValues(typeof(CryptoTypes));
         var elementLevels = Enum.GetValues(typeof(ElementLevels));
 
-        FieldElemetsParams = 
-            new Dictionary<CryptoTypes, Dictionary<ElementLevels, FieldElementParameters>>(cryptoTypes.Length - 1);
+        var dictionary = 
+            new Dictionary<CryptoTypes, FrozenDictionary<ElementLevels, FieldElementParameters>>(cryptoTypes.Length - 1);
 
         var multipliersAndSyllables = new Dictionary<CryptoTypes, MultiplierAndSyllable>
         {
@@ -95,7 +96,9 @@ public static class FieldElementsConfiguration
 
                 cryptoTypeDictionary.Add(currentLevel, fieldElementParameters);
             }
-            FieldElemetsParams.Add(currentCryptoType, cryptoTypeDictionary);
+            dictionary.Add(currentCryptoType, cryptoTypeDictionary.ToFrozenDictionary());
         }
+
+        FieldElementsParams = dictionary.ToFrozenDictionary();
     }
 }

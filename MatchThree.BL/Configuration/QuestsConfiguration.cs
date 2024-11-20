@@ -1,4 +1,5 @@
-﻿using MatchThree.Domain.Interfaces.Quests;
+﻿using System.Collections.Frozen;
+using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Models;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
@@ -7,7 +8,7 @@ namespace MatchThree.BL.Configuration;
 
 public static class QuestsConfiguration
 {
-    private static readonly Dictionary<Guid, QuestEntity> Quests;
+    private static readonly FrozenDictionary<Guid, QuestEntity> Quests;
 
     public static QuestEntity GetById(Guid questId)
     {
@@ -30,7 +31,7 @@ public static class QuestsConfiguration
     
     static QuestsConfiguration()
     {
-        Quests = new Dictionary<Guid, QuestEntity>
+        var dictionary = new Dictionary<Guid, QuestEntity>
         {
             {
                 QuestsConstants.QuestIdInvite1Friend, new QuestEntity
@@ -85,6 +86,8 @@ public static class QuestsConfiguration
                 }
             },
         };
+
+        Quests = dictionary.ToFrozenDictionary();
     }
     
     private static Func<IValidateQuestCompletionService, long, Task<bool>> IsEnoughReferralsAsync(int requiredReferralsAmount)

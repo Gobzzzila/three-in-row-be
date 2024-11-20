@@ -1,4 +1,5 @@
-﻿using MatchThree.Domain.Configuration;
+﻿using System.Collections.Frozen;
+using MatchThree.Domain.Configuration;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
@@ -7,7 +8,7 @@ namespace MatchThree.BL.Configuration;
 
 public static class EnergyReserveConfiguration
 {
-    private static readonly Dictionary<EnergyReserveLevels, EnergyReserveParameters> EnergyReserveParams;
+    private static readonly FrozenDictionary<EnergyReserveLevels, EnergyReserveParameters> EnergyReserveParams;
     
     public static (EnergyReserveLevels ReserveLevel, int ReserveValue) GetStartValue()
     {
@@ -27,7 +28,7 @@ public static class EnergyReserveConfiguration
     //ctor
     static EnergyReserveConfiguration()
     {
-        EnergyReserveParams = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>//TODO make foreach and attributes as in fieldconfiguration
+        var dictionary = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>//TODO make foreach and attributes as in fieldconfiguration
         {
             {
                 EnergyReserveLevels.Level1, new EnergyReserveParameters
@@ -166,6 +167,8 @@ public static class EnergyReserveConfiguration
                 }
             }
         };
+
+        EnergyReserveParams = dictionary.ToFrozenDictionary();
     }
 
     private static Func<IUpgradesRestrictionsService, long, Task<int?>> UpgradeCondition(int requiredReferralsAmount)
