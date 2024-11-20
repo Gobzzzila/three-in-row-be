@@ -1,5 +1,6 @@
 ﻿using System.Collections.Frozen;
 using MatchThree.Domain.Configuration;
+using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 using MatchThree.Shared.Extensions;
@@ -85,13 +86,17 @@ public static class FieldElementsConfiguration
             for (var j = jStartValue; j < elementLevels.Length; j++)
             {
                 var currentLevel = (ElementLevels)elementLevels.GetValue(j)!;
+                var upgradeConditionArg = currentLevel.GetUpgradeConditionArgument<FieldLevels, ElementLevels>();
                 var fieldElementParameters = new FieldElementParameters
                 {
                     Profit = (int)currentLevel + (currentLevel == 0 ? 0 : multiplierAndSyllable.Syllable),
                     NextLevelCost = (uint?)(currentLevel.GetUpgradeCost() * multiplierAndSyllable.Multiplier),
                     NextLevel = j != elementLevels.Length - 1 
                             ? (ElementLevels)elementLevels.GetValue(j + 1)!
-                            : null
+                            : null,
+                    UpgradeCondition = upgradeConditionArg != FieldLevels.Undefined ? 
+                        UpgradeCondition(upgradeConditionArg) : 
+                        null 
                 };
 
                 cryptoTypeDictionary.Add(currentLevel, fieldElementParameters);
@@ -100,5 +105,11 @@ public static class FieldElementsConfiguration
         }
 
         FieldElementsParams = dictionary.ToFrozenDictionary();
+    }
+    
+    private static Func<IUpgradesRestrictionsService, long, Task<int?>> UpgradeCondition(FieldLevels restrictedFieldLevel)
+    {
+        return (upgradesRestrictionsService, userId) => 
+            upgradesRestrictionsService.ValidateFieldLevel(userId, restrictedFieldLevel);
     }
 }

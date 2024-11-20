@@ -6,5 +6,7 @@ public interface IUpgradesRestrictionsService
 {
     Task<int?> CalculateNumberOfMissingReferralsAsync(long userId, int requiredReferralsAmount);
     
-    int? ValidateEnergyReserveLevel(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedLevel);
+    int? ValidateEnergyReserveLevel(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedReserveLevel);
+    
+    Task<int?> ValidateFieldLevel(long userId, FieldLevels restrictedFieldLevel);
 }

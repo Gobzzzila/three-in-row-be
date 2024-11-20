@@ -31,7 +31,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         {
             await GetEnergyUpgrades(energyEntity),
             GetFieldUpgrades(field),
-            GetFieldElementsUpgrades(fieldElements)
+            await GetFieldElementsUpgrades(fieldElements)
         };
         
         return result;
@@ -39,7 +39,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     
     #region EnergyUpgrades
     
-    private async Task<GroupedUpgradesEntity> GetEnergyUpgrades(EnergyEntity energyEntity)
+    private async ValueTask<GroupedUpgradesEntity> GetEnergyUpgrades(EnergyEntity energyEntity)
     {
         var result = new GroupedUpgradesEntity
         {
@@ -163,7 +163,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
     
     #region FieldElementsUpgrades
     
-    private static GroupedUpgradesEntity GetFieldElementsUpgrades(List<FieldElementEntity> fieldElements)
+    private async ValueTask<GroupedUpgradesEntity> GetFieldElementsUpgrades(List<FieldElementEntity> fieldElements)
     {
         var result = new GroupedUpgradesEntity
         {
@@ -171,20 +171,25 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             Upgrades = new List<UpgradeEntity>(fieldElements.Count)
         };
 
-        foreach (var upgradeEntity in fieldElements.Select(GetFieldElementUpgrade))
+        foreach (var filedElement in fieldElements)
+        {
+            var upgradeEntity = await GetFieldElementUpgrade(filedElement);
             result.Upgrades.Add(upgradeEntity);
+        }
 
         return result;
     }
 
-    private static UpgradeEntity GetFieldElementUpgrade(FieldElementEntity fieldElement)
+    private async ValueTask<UpgradeEntity> GetFieldElementUpgrade(FieldElementEntity fieldElement)
     {
         var fieldElementParams = FieldElementsConfiguration.GetParamsByTypeAndLevel(fieldElement.Element, fieldElement.Level);
 
-        var isZeroLevelElement = fieldElement.Level == ElementLevels.Undefined;
-        object?[] blockingTextArgs = [];
-        if (isZeroLevelElement)
-            blockingTextArgs = [(int)FieldElementsConfiguration.GetRequiredFieldLevelForFirstLevelElement(fieldElement.Element)];
+        int? restrictedFieldLevel = default;
+        if (fieldElementParams.UpgradeCondition is not null)
+            restrictedFieldLevel = await fieldElementParams.UpgradeCondition(_upgradesRestrictionsService, fieldElement.UserId);
+
+        if (fieldElement.Level == ElementLevels.Undefined)
+            restrictedFieldLevel = (int)FieldElementsConfiguration.GetRequiredFieldLevelForFirstLevelElement(fieldElement.Element);
         
         var upgradeEntity = new UpgradeEntity
         {
@@ -195,8 +200,8 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
                 fieldElementParams.Profit,
                 FieldElementsConfiguration.GetNextLevelProfit(fieldElement.Element, fieldElement.Level)
             ],
-            BlockingTextArgs = blockingTextArgs,
-            IsBlocked = isZeroLevelElement,
+            BlockingTextArgs = [restrictedFieldLevel],
+            IsBlocked = restrictedFieldLevel is not null,
             Type = ConvertCryptoTypeToUpgradeType(fieldElement.Element),
             CurrentLevel = (int)fieldElement.Level,
             Price = fieldElementParams.NextLevelCost,

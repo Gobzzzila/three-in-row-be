@@ -5,7 +5,7 @@ namespace MatchThree.Shared.Enums;
 
 public enum ElementLevels
 {
-    [UpgradeCost(FieldElementsConstants.Level1BaseFieldElementCost)]
+    [UpgradeCost(FieldElementsConstants.Level1BaseFieldElementCost)]    //it should be here, that's the way
     Undefined = 0,
     
     [UpgradeCost(FieldElementsConstants.Level2BaseFieldElementCost)]
@@ -20,6 +20,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level5BaseFieldElementCost)]
     Level4 = 4,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level4)]
     [UpgradeCost(FieldElementsConstants.Level6BaseFieldElementCost)]
     Level5 = 5,
 
@@ -35,6 +36,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level10BaseFieldElementCost)]
     Level9 = 9,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level12)]
     [UpgradeCost(FieldElementsConstants.Level11BaseFieldElementCost)]
     Level10 = 10,
 
@@ -50,6 +52,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level15BaseFieldElementCost)]
     Level14 = 14,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level20)]
     [UpgradeCost(FieldElementsConstants.Level16BaseFieldElementCost)]
     Level15 = 15,
 
@@ -65,6 +68,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level20BaseFieldElementCost)]
     Level19 = 19,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level30)]
     [UpgradeCost(FieldElementsConstants.Level21BaseFieldElementCost)]
     Level20 = 20,
 
@@ -80,6 +84,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level25BaseFieldElementCost)]
     Level24 = 24,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level38)]
     [UpgradeCost(FieldElementsConstants.Level26BaseFieldElementCost)]
     Level25 = 25,
 
@@ -95,6 +100,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level30BaseFieldElementCost)]
     Level29 = 29,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level50)]
     [UpgradeCost(FieldElementsConstants.Level31BaseFieldElementCost)]
     Level30 = 30,
 
@@ -110,6 +116,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level35BaseFieldElementCost)]
     Level34 = 34,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level55)]
     [UpgradeCost(FieldElementsConstants.Level36BaseFieldElementCost)]
     Level35 = 35,
 
@@ -122,6 +129,7 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level39BaseFieldElementCost)]
     Level38 = 38,
 
+    [UpgradeConditionArgument<FieldLevels>(FieldLevels.Level57)]
     [UpgradeCost(FieldElementsConstants.Level40BaseFieldElementCost)]
     Level39 = 39,
 

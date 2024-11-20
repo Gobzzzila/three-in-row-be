@@ -1,12 +1,16 @@
-﻿using MatchThree.Domain.Interfaces.Referral;
+﻿using MatchThree.Domain.Interfaces.Field;
+using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.BL.Services.Upgrades;
 
-public class UpgradesRestrictionsService(IReadReferralService readReferralService) : IUpgradesRestrictionsService
+public class UpgradesRestrictionsService(IReadReferralService readReferralService, 
+    IReadFieldService readFieldService) 
+    : IUpgradesRestrictionsService
 {
     private readonly IReadReferralService _readReferralService = readReferralService;
+    private readonly IReadFieldService _readFieldService = readFieldService;
 
     public async Task<int?> CalculateNumberOfMissingReferralsAsync(long userId, int requiredReferralsAmount)
     {
@@ -17,11 +21,20 @@ public class UpgradesRestrictionsService(IReadReferralService readReferralServic
         return requiredReferralsAmount - referralsAmount;
     }
 
-    public int? ValidateEnergyReserveLevel(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedLevel)
+    public int? ValidateEnergyReserveLevel(EnergyReserveLevels currentLevel, EnergyReserveLevels restrictedReserveLevel)
     {
-        if (currentLevel >= restrictedLevel) 
-            return null;
+        if (currentLevel >= restrictedReserveLevel) 
+            return default;
         
-        return (int)restrictedLevel;
+        return (int)restrictedReserveLevel;
+    }
+    
+    public async Task<int?> ValidateFieldLevel(long userId, FieldLevels restrictedFieldLevel)
+    {
+        var fieldEntity = await _readFieldService.GetByUserIdAsync(userId);
+        if (fieldEntity.FieldLevel >= restrictedFieldLevel) 
+            return default;
+        
+        return (int)restrictedFieldLevel;
     }
 }
