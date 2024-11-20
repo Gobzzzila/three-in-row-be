@@ -36,4 +36,19 @@ public class UpdateFieldElementService(MatchThreeDbContext context,
 
         _context.Set<FieldElementDbModel>().Update(dbModel);
     }
+    
+    public async Task UnlockFieldElementAsync(long userId, CryptoTypes cryptoType)
+    {
+        var dbModel = await _context.Set<FieldElementDbModel>()
+            .SingleOrDefaultAsync(x => x.UserId == userId && x.Element == cryptoType);
+        
+        if (dbModel is null)
+            throw new NoDataFoundException();
+        
+        if (dbModel.Level != ElementLevels.Undefined) 
+            throw new ValidationException();
+        
+        dbModel.Level = ElementLevels.Level1;
+        _context.Set<FieldElementDbModel>().Update(dbModel);
+    }
 }

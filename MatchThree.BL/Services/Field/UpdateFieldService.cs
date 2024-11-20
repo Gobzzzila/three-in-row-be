@@ -1,6 +1,7 @@
 ﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Field;
+using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Exceptions;
@@ -8,11 +9,13 @@ using MatchThree.Shared.Exceptions;
 namespace MatchThree.BL.Services.Field;
 
 public class UpdateFieldService(MatchThreeDbContext context,
-    IUpdateBalanceService updateBalanceService)
+    IUpdateBalanceService updateBalanceService,
+    IUpdateFieldElementService updateFieldElementService)
     : IUpdateFieldService
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
+    private readonly IUpdateFieldElementService _updateFieldElementService = updateFieldElementService;
 
     public async Task UpgradeFieldAsync(long userId)
     {
@@ -23,6 +26,9 @@ public class UpdateFieldService(MatchThreeDbContext context,
         var fieldParams = FieldConfiguration.GetParamsByLevel(dbModel!.FieldLevel);
         if (!fieldParams.NextLevel.HasValue)
             throw new MaxLevelReachedException();
+
+        if (fieldParams.NextLevelNewCrypto.HasValue)
+            await _updateFieldElementService.UnlockFieldElementAsync(userId, fieldParams.NextLevelNewCrypto.Value);
 
         await _updateBalanceService.SpendBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
 

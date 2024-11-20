@@ -18,13 +18,13 @@ public static class EnumGetAttributesExtensions
         return typeof(T).GetField(fieldName)?.GetCustomAttribute<UpgradeCostAttribute>()?.UpgradeCost;
     }
     
-    public static CoordinatesForNextLevelAttribute? GetNextLevelCoordinates(this FieldLevels enumValue)
+    public static NextLevelFieldInfoAttribute? GetNextLevelCoordinates(this FieldLevels enumValue)
     {
         var fieldName = Enum.GetName(typeof(FieldLevels), enumValue);
         if (fieldName is null)
             throw new InvalidOperationException($"Value {enumValue} is not defined for UpgradeTypes");
 
-        return typeof(FieldLevels).GetField(fieldName)?.GetCustomAttribute<CoordinatesForNextLevelAttribute>();
+        return typeof(FieldLevels).GetField(fieldName)?.GetCustomAttribute<NextLevelFieldInfoAttribute>();
     }
 
     #endregion

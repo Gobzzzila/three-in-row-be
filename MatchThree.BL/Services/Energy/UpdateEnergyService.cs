@@ -4,6 +4,7 @@ using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Exceptions;
 
 namespace MatchThree.BL.Services.Energy;
@@ -112,6 +113,9 @@ public class UpdateEnergyService(MatchThreeDbContext context,
             throw new NoDataFoundException();
         
         _synchronizationEnergyService.SynchronizeModel(dbModel);
+        if (dbModel.CurrentReserve == 0)
+            throw new ValidationException(TranslationConstants.ExceptionNotEnoughEnergyTextKey);
+        
         dbModel.CurrentReserve -=1;
         
         var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);

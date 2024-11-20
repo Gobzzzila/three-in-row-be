@@ -8,4 +8,5 @@ public class FieldParameters
     public FieldLevels? NextLevel { get; init; }
     public uint? NextLevelCost { get; init; }
     public (int X, int Y) NextLevelCoordinates { get; init; }
+    public CryptoTypes? NextLevelNewCrypto { get; init; }
 }

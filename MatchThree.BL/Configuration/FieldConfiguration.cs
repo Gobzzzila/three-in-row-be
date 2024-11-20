@@ -27,11 +27,12 @@ public static class FieldConfiguration
         for (var i = 1; i < enumValues.Length; i++)
         {
             var currentValue = (FieldLevels)enumValues.GetValue(i)!;
-            var nextLevelCoordinates = currentValue.GetNextLevelCoordinates();
+            var nextLevelInfo = currentValue.GetNextLevelCoordinates();
             FieldParams.Add(currentValue, new FieldParameters
             {
                 NextLevelCost = currentValue.GetUpgradeCost(),
-                NextLevelCoordinates = (nextLevelCoordinates!.X, nextLevelCoordinates!.Y),
+                NextLevelCoordinates = (nextLevelInfo!.X, nextLevelInfo!.Y),
+                NextLevelNewCrypto = nextLevelInfo.NewCrypto,
                 AmountOfCells = FieldConstants.BaseAmountOfCells + i - 1,
                 NextLevel = 
                     i != enumValues.Length - 1 ? 

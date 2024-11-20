@@ -123,6 +123,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not enough energy.
+        /// </summary>
+        internal static string ExceptionNotEnoughEnergyTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionNotEnoughEnergyTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not all conditions were met.
         /// </summary>
         internal static string ExceptionQuestsConditionNotMetTextKey {

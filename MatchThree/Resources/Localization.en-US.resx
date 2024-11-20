@@ -150,4 +150,7 @@
     <data name="ExceptionQuestsConditionNotMetTextKey" xml:space="preserve">
         <value>Not all conditions were met</value>
     </data>
+    <data name="ExceptionNotEnoughEnergyTextKey" xml:space="preserve">
+        <value>Not enough energy</value>
+    </data>
 </root>
