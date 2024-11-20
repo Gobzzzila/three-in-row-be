@@ -6,5 +6,6 @@ namespace MatchThree.Domain.Interfaces.LeaderboardMember;
 public interface IReadLeaderboardMemberService
 {
     Task<LeaderboardEntity> GetLeaderboardByLeagueAsync(LeagueTypes league);
+    
     Task<int> GetTopSpotByUserId(long userId);
 }

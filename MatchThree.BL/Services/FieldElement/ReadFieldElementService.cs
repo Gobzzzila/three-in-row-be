@@ -3,8 +3,6 @@ using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
-using MatchThree.Shared.Enums;
-using MatchThree.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.BL.Services.FieldElement;

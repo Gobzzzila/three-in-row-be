@@ -1,5 +1,4 @@
 ﻿using MatchThree.Domain.Models;
-using MatchThree.Repository.MSSQL.Models;
 
 namespace MatchThree.Domain.Interfaces.FieldElement;
 

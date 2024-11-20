@@ -231,6 +231,6 @@ public enum FieldLevels
     [NextLevelFieldInfo(0, 8, CryptoTypes.Cati)]
     Level56 = 56,
     
-    [NextLevelFieldInfo]
+    [NextLevelFieldInfo]    //it should be here, that's the way
     Level57 = 57
 }

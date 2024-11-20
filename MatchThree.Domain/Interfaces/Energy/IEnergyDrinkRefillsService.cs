@@ -3,5 +3,6 @@
 public interface IEnergyDrinkRefillsService
 {
     Task RefillFreeEnergyDrinks();
+    
     Task RefillPurchasableEnergyDrinks();
 }
