@@ -3,6 +3,7 @@ using MatchThree.Domain.Configuration;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
+using MatchThree.Shared.Extensions;
 
 namespace MatchThree.BL.Configuration;
 
@@ -28,145 +29,26 @@ public static class EnergyReserveConfiguration
     //ctor
     static EnergyReserveConfiguration()
     {
-        var dictionary = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>//TODO make foreach and attributes as in fieldconfiguration
+        var enumValues = Enum.GetValues(typeof(EnergyReserveLevels));
+        var dictionary = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>(enumValues.Length - 1);
+        
+        for (var i = 1; i < enumValues.Length; i++)
         {
+            var currentValue = (EnergyReserveLevels)enumValues.GetValue(i)!;
+            var upgradeConditionArg = currentValue.GetUpgradeConditionArgument<int, EnergyReserveLevels>();
+            dictionary.Add(currentValue, new EnergyReserveParameters
             {
-                EnergyReserveLevels.Level1, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level1EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level2,
-                    NextLevelCost = EnergyConstants.Level2EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level2, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level2EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level3,
-                    NextLevelCost = EnergyConstants.Level3EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level3, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level3EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level4,
-                    NextLevelCost = EnergyConstants.Level4EnergyReserveCost,
-                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level4EnergyReserveReferralAmount)
-                }
-            },
-            {
-                EnergyReserveLevels.Level4, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level4EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level5,
-                    NextLevelCost = EnergyConstants.Level5EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level5, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level5EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level6,
-                    NextLevelCost = EnergyConstants.Level6EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level6, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level6EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level7,
-                    NextLevelCost = EnergyConstants.Level7EnergyReserveCost,
-                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level7EnergyReserveReferralAmount)
-                }
-            },
-            {
-                EnergyReserveLevels.Level7, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level7EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level8,
-                    NextLevelCost = EnergyConstants.Level8EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-                
-            },
-            {
-                EnergyReserveLevels.Level8, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level8EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level9,
-                    NextLevelCost = EnergyConstants.Level9EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level9, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level9EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level10,
-                    NextLevelCost = EnergyConstants.Level10EnergyReserveCost,
-                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level10EnergyReserveReferralAmount)
-                }
-            },
-            {
-                EnergyReserveLevels.Level10, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level10EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level11,
-                    NextLevelCost = EnergyConstants.Level11EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level11, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level11EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level12,
-                    NextLevelCost = EnergyConstants.Level12EnergyReserveCost,
-                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level12EnergyReserveReferralAmount)
-                }
-            },
-            {
-                EnergyReserveLevels.Level12, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level12EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level13,
-                    NextLevelCost = EnergyConstants.Level13EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level13, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level13EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level14,
-                    NextLevelCost = EnergyConstants.Level14EnergyReserveCost,
-                    UpgradeCondition = UpgradeCondition(EnergyConstants.Level14EnergyReserveReferralAmount)
-                }
-            },
-            {
-                EnergyReserveLevels.Level14, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level14EnergyReserve,
-                    NextLevel = EnergyReserveLevels.Level15,
-                    NextLevelCost = EnergyConstants.Level15EnergyReserveCost,
-                    UpgradeCondition = null
-                }
-            },
-            {
-                EnergyReserveLevels.Level15, new EnergyReserveParameters
-                {
-                    MaxReserve = EnergyConstants.Level15EnergyReserve,
-                    NextLevel = null,
-                    NextLevelCost = null,
-                    UpgradeCondition = null
-                }
-            }
-        };
+                MaxReserve = EnergyConstants.Level0EnergyReserve + (i * EnergyConstants.EnergyReserveMultiplierPerLevel),
+                NextLevelCost = currentValue.GetUpgradeCost(),
+                NextLevel = 
+                    i != enumValues.Length - 1 ? 
+                        (EnergyReserveLevels)enumValues.GetValue(i + 1)! :
+                        null,
+                UpgradeCondition = upgradeConditionArg != 0 ? 
+                    UpgradeCondition(upgradeConditionArg) : 
+                    null
+            });
+        }
 
         EnergyReserveParams = dictionary.ToFrozenDictionary();
     }

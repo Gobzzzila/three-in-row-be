@@ -18,6 +18,16 @@ public static class EnumGetAttributesExtensions
         return typeof(T).GetField(fieldName)?.GetCustomAttribute<UpgradeCostAttribute>()?.UpgradeCost;
     }
     
+    public static T1 GetUpgradeConditionArgument<T1, T2>(this T2 enumValue) where T2 : Enum
+    {
+        var fieldName = Enum.GetName(typeof(T2), enumValue);
+        if (fieldName == null)
+            throw new InvalidOperationException($"Value {enumValue} is not defined for enum type {typeof(T2).Name}");
+
+        var attribute = typeof(T2).GetField(fieldName)?.GetCustomAttribute<UpgradeConditionArgumentAttribute<T1>>();
+        return (attribute is null ? default : attribute.Arg)!;
+    }
+    
     public static NextLevelFieldInfoAttribute? GetNextLevelCoordinates(this FieldLevels enumValue)
     {
         var fieldName = Enum.GetName(typeof(FieldLevels), enumValue);

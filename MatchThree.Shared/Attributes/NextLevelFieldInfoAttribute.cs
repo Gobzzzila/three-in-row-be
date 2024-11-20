@@ -3,7 +3,7 @@
 namespace MatchThree.Shared.Attributes;
 
 [AttributeUsage(AttributeTargets.Field)]
-public class NextLevelFieldInfoAttribute(int x = 0, int y = 0, CryptoTypes newCrypto = CryptoTypes.Undefined) 
+public class NextLevelFieldInfoAttribute(int x, int y, CryptoTypes newCrypto = CryptoTypes.Undefined) 
     : Attribute
 {
     public int X { get; } = x;

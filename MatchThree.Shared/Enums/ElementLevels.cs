@@ -125,6 +125,5 @@ public enum ElementLevels
     [UpgradeCost(FieldElementsConstants.Level40BaseFieldElementCost)]
     Level39 = 39,
 
-    [UpgradeCost]
     Level40 = 40,
 }

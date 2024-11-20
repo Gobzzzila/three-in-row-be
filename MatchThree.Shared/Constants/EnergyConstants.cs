@@ -8,22 +8,9 @@ public static class EnergyConstants
     public const int EnergyDrinkPrice = 34;
     
     //Energy reserve
-    public const int Level1EnergyReserve = 30;
-    public const int Level2EnergyReserve = 35;
-    public const int Level3EnergyReserve = 40;
-    public const int Level4EnergyReserve = 45;
-    public const int Level5EnergyReserve = 50;
-    public const int Level6EnergyReserve = 55;
-    public const int Level7EnergyReserve = 60;
-    public const int Level8EnergyReserve = 65;
-    public const int Level9EnergyReserve = 70;
-    public const int Level10EnergyReserve = 75;
-    public const int Level11EnergyReserve = 80;
-    public const int Level12EnergyReserve = 85;
-    public const int Level13EnergyReserve = 90;
-    public const int Level14EnergyReserve = 95;
-    public const int Level15EnergyReserve = 100;
-    
+    public const int Level0EnergyReserve = 25;
+    public const int EnergyReserveMultiplierPerLevel = 5;
+
     public const int Level2EnergyReserveCost = 2_000;
     public const int Level3EnergyReserveCost = 3_000;
     public const int Level4EnergyReserveCost = 5_000;

@@ -1,17 +1,7 @@
 ﻿namespace MatchThree.Shared.Attributes;
 
 [AttributeUsage(AttributeTargets.Field)]
-public sealed class UpgradeCostAttribute : Attribute
+public sealed class UpgradeCostAttribute(uint upgradeCost) : Attribute
 {
-    public UpgradeCostAttribute()
-    {
-        UpgradeCost = null;
-    }
-    
-    public UpgradeCostAttribute(uint upgradeCost)
-    {
-        UpgradeCost = upgradeCost;
-    }
-
-    public uint? UpgradeCost { get; }
+    public uint UpgradeCost { get; } = upgradeCost;
 }
