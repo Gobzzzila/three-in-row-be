@@ -96,6 +96,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Вы были забанены на {0} часов.
+        /// </summary>
+        internal static string ExceptionBannedTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionBannedTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Квест уже выполнен сегодня.
         /// </summary>
         internal static string ExceptionDailyLoginCompletedTodayTextKey {

@@ -20,6 +20,7 @@ public static class TranslationConstants
     public const string ExceptionNotEnoughEnergyTextKey = nameof(ExceptionNotEnoughEnergyTextKey);
     public const string ExceptionAuthorizationTextKey = nameof(ExceptionAuthorizationTextKey);
     public const string ExceptionReferralLinkTextKey = nameof(ExceptionReferralLinkTextKey);
+    public const string ExceptionBannedTextKey = nameof(ExceptionBannedTextKey);
     
     #endregion
     

@@ -11,6 +11,7 @@ public class UserDbModel : DbModel
     public bool IsPremium { get; set; }
     public string SessionHash { get; set; } = string.Empty;
     public DateTime CreatedAt{ get; set; }
+    public DateTime? BannedUntil { get; set; }
     public List<ReferralDbModel> Referrals { get; set; } = [];
     public ReferralDbModel? Referrer { get; set; }
     public BalanceDbModel? Balance { get; set; }

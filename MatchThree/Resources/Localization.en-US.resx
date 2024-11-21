@@ -159,4 +159,7 @@
     <data name="ExceptionReferralLinkTextKey" xml:space="preserve">
         <value>The referral link you clicked on is not working. Want to continue but without referral rewards?</value>
     </data>
+    <data name="ExceptionBannedTextKey" xml:space="preserve">
+        <value>You've been banned for {0} hour(s)</value>
+    </data>
 </root>
