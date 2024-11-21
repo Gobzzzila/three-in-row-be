@@ -18,6 +18,8 @@ public static class TranslationConstants
     public const string ExceptionDailyLoginCompletedTodayTextKey = nameof(ExceptionDailyLoginCompletedTodayTextKey);
     public const string ExceptionQuestsConditionNotMetTextKey = nameof(ExceptionQuestsConditionNotMetTextKey);
     public const string ExceptionNotEnoughEnergyTextKey = nameof(ExceptionNotEnoughEnergyTextKey);
+    public const string ExceptionAuthorizationTextKey = nameof(ExceptionAuthorizationTextKey);
+    public const string ExceptionReferralLinkTextKey = nameof(ExceptionReferralLinkTextKey);
     
     #endregion
     

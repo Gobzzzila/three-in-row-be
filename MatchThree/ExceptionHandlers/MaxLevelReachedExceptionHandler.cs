@@ -11,18 +11,17 @@ public class MaxLevelReachedExceptionHandler(IStringLocalizer<Localization> loca
 {
     private readonly IStringLocalizer<Localization> _localization = localization;
 
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext,
-        Exception exception,
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
         CancellationToken cancellationToken)
     {
         if (exception is not MaxLevelReachedException maxLevelReachedException) 
             return false;
 
         httpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
-
         var localizedTittle = _localization[maxLevelReachedException.MessageKey];
+        
         await httpContext.Response.WriteAsJsonAsync(new
-            ProblemDetails //TODO fix body
+            ProblemDetails
             {
                 Status = httpContext.Response.StatusCode,
                 Type = exception.GetType().Name,

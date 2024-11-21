@@ -2,10 +2,8 @@
 
 namespace MatchThree.Shared.Exceptions;
 
-public class MaxLevelReachedException(string messageKey = MaxLevelReachedException.DefaultMessageKey)
+public class MaxLevelReachedException(string messageKey = TranslationConstants.CommonMaxLevelReachedTextKey)
     : Exception
 {
-    private const string DefaultMessageKey = TranslationConstants.CommonMaxLevelReachedTextKey;
-    
     public string MessageKey { get; } = messageKey;
 }

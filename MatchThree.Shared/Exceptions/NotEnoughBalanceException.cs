@@ -2,10 +2,8 @@
 
 namespace MatchThree.Shared.Exceptions;
 
-public class NotEnoughBalanceException(string messageKey = NotEnoughBalanceException.DefaultMessageKey)
+public class NotEnoughBalanceException(string messageKey = TranslationConstants.ExceptionNotEnoughBalanceTextKey)
     : Exception
 {
-    private const string DefaultMessageKey = TranslationConstants.ExceptionNotEnoughBalanceTextKey;
-
     public string MessageKey { get; } = messageKey;
 }

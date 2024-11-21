@@ -1,5 +1,4 @@
-﻿using System.Net;
-using MatchThree.Shared.Exceptions;
+﻿using MatchThree.Shared.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -11,26 +10,23 @@ public class ValidationExceptionHandler(IStringLocalizer<Localization> localizat
 {
     private readonly IStringLocalizer<Localization> _localization = localization;
 
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext,
-        Exception exception,
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, 
         CancellationToken cancellationToken)
     {
         if (exception is not ValidationException validationException) 
             return false;
 
-        httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-        var localizedTittle = _localization[validationException.MessageKey];
-        await httpContext.Response.WriteAsJsonAsync(new
-            ProblemDetails //TODO fix body
-            {
-                Status = httpContext.Response.StatusCode,
-                Type = exception.GetType().Name,
-                Title = localizedTittle, 
-                Detail = localizedTittle,
-                Instance = $"{httpContext.Request.Method} " +
-                           $"{httpContext.Request.Path}"
-            }, cancellationToken: cancellationToken);
+        httpContext.Response.StatusCode = (int)validationException.StatusCode;
+        var localizedTittle = string.Format(_localization[validationException.MessageKey], validationException.MessageArgs);
+        
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
+        {
+            Status = httpContext.Response.StatusCode,
+            Type = exception.GetType().Name,
+            Title = localizedTittle, 
+            Detail = localizedTittle,
+            Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}"
+        }, cancellationToken: cancellationToken);
 
         return true;
     }

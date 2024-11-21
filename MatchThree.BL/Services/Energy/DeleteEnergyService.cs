@@ -11,10 +11,10 @@ public class DeleteEnergyService(MatchThreeDbContext context) : IDeleteEnergySer
 
     public async Task DeleteAsync(long id)
     {
-        var dbModel = await _context.Set<UserDbModel>().FindAsync(id);
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(id);
         if (dbModel is null)
             throw new NoDataFoundException();
         
-        _context.Set<UserDbModel>().Remove(dbModel);
+        _context.Set<EnergyDbModel>().Remove(dbModel);
     }
 }

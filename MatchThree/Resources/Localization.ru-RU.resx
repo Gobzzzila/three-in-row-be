@@ -153,4 +153,10 @@
     <data name="ExceptionNotEnoughEnergyTextKey" xml:space="preserve">
         <value>Недостаточно энергии</value>
     </data>
+    <data name="ExceptionAuthorizationTextKey" xml:space="preserve">
+        <value>Не удалось авторизоваться. Пожалуйста, попробуйте еще раз позже. {0}</value>
+    </data>
+    <data name="ExceptionReferralLinkTextKey" xml:space="preserve">
+        <value>Реферальная ссылка, по которой вы перешли, не работает. Хотите продолжить, но без реферальных наград?</value>
+    </data>
 </root>

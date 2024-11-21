@@ -87,6 +87,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to authorize. Please try again later. {0}.
+        /// </summary>
+        internal static string ExceptionAuthorizationTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionAuthorizationTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The quest has already been completed today.
         /// </summary>
         internal static string ExceptionDailyLoginCompletedTodayTextKey {
@@ -137,6 +146,15 @@ namespace MatchThree.API.Resources {
         internal static string ExceptionQuestsConditionNotMetTextKey {
             get {
                 return ResourceManager.GetString("ExceptionQuestsConditionNotMetTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The referral link you clicked on is not working. Want to continue but without referral rewards?.
+        /// </summary>
+        internal static string ExceptionReferralLinkTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionReferralLinkTextKey", resourceCulture);
             }
         }
         

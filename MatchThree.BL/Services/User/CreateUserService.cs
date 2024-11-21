@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Domain.Interfaces.Energy;
@@ -11,11 +12,13 @@ using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Constants;
+using MatchThree.Shared.Exceptions;
 
 namespace MatchThree.BL.Services.User;
 
 public sealed class CreateUserService(MatchThreeDbContext context, 
     IMapper mapper, 
+    IReadUserService readUserService,
     ICreateReferralService createReferralService, 
     ICreateBalanceService createBalanceService,
     ICreateEnergyService createEnergyService,
@@ -27,6 +30,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
 {
     private readonly MatchThreeDbContext _context = context;
     private readonly IMapper _mapper = mapper;
+    private readonly IReadUserService _readUserService = readUserService;
     private readonly ICreateReferralService _createReferralService = createReferralService;
     private readonly ICreateBalanceService _createBalanceService = createBalanceService;
     private readonly ICreateEnergyService _createEnergyService = createEnergyService;
@@ -36,42 +40,42 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateDailyLoginService _createDailyLoginService = createDailyLoginService;
     private readonly TimeProvider _dateTimeProvider = timeProvider;
 
-    public UserEntity Create(UserEntity userEntity)
+    public void Create(UserEntity userEntity)
     {
-        var result = CreateUser(userEntity);
-        CreateSubEntities(result, 0);
-        return result;
+        CreateUser(userEntity);
+        CreateSubEntities(userEntity.Id, 0);
     }
 
-    public async Task<UserEntity> CreateWithReferrerAsync(UserEntity userEntity, long referrerId)
+    public async Task CreateWithReferrerAsync(UserEntity userEntity, long referrerId)
     {
-        var result = CreateUser(userEntity);
+        CreateUser(userEntity);
 
-        await _createReferralService.CreateAsync(referrerId, result.Id, result.IsPremium);
+        var referrer = await _readUserService.FindByIdAsync(referrerId);
+        if (referrer is null)
+            throw new ValidationException(TranslationConstants.ExceptionReferralLinkTextKey, [], HttpStatusCode.FailedDependency);
+        
+        await _createReferralService.CreateAsync(referrerId, userEntity.Id, userEntity.IsPremium);
         var referralReward = userEntity.IsPremium
             ? ReferralConstants.RewardForInvitingPremiumUser
             : ReferralConstants.RewardForInvitingRegularUser;
         
-        CreateSubEntities(result, referralReward);
-        return result;
+        CreateSubEntities(userEntity.Id, referralReward);
     }
 
-    private UserEntity CreateUser(UserEntity userEntity)
+    private void CreateUser(UserEntity userEntity)
     {
         var createDbModel = _mapper.Map<UserDbModel>(userEntity);
         createDbModel.CreatedAt = _dateTimeProvider.GetUtcNow().DateTime;
-        createDbModel = _context.Set<UserDbModel>().Add(createDbModel).Entity;
-        var result = _mapper.Map<UserEntity>(createDbModel);
-        return result;
+        _context.Set<UserDbModel>().Add(createDbModel);
     }
     
-    private void CreateSubEntities(UserEntity userEntity, uint referralReward)
+    private void CreateSubEntities(long userId, uint referralReward)
     {
-        _createBalanceService.Create(userEntity.Id, referralReward);
-        _createEnergyService.Create(userEntity.Id);
-        _createFieldService.Create(userEntity.Id);
-        _createFieldElementService.Create(userEntity.Id);
-        _createCompletedQuestsService.Create(userEntity.Id);
-        _createDailyLoginService.Create(userEntity.Id);
+        _createBalanceService.Create(userId, referralReward);
+        _createEnergyService.Create(userId);
+        _createFieldService.Create(userId);
+        _createFieldElementService.Create(userId);
+        _createCompletedQuestsService.Create(userId);
+        _createDailyLoginService.Create(userId);
     }
 }

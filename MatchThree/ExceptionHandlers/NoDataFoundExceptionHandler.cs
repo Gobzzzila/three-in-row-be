@@ -11,26 +11,23 @@ public class NoDataFoundExceptionHandler(IStringLocalizer<Localization> localiza
 {
     private readonly IStringLocalizer<Localization> _localization = localization;
 
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext,
-        Exception exception,
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
         CancellationToken cancellationToken)
     {
         if (exception is not NoDataFoundException noDataFoundException) 
             return false;
 
         httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-
         var localizedTittle = _localization[noDataFoundException.MessageKey];
-        await httpContext.Response.WriteAsJsonAsync(new
-            ProblemDetails //TODO fix body
+        
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
-                Status = httpContext.Response.StatusCode,
-                Type = exception.GetType().Name,
-                Title = localizedTittle, 
-                Detail = localizedTittle,
-                Instance = $"{httpContext.Request.Method} " +
-                           $"{httpContext.Request.Path}"
-            }, cancellationToken: cancellationToken);
+            Status = httpContext.Response.StatusCode,
+            Type = exception.GetType().Name,
+            Title = localizedTittle, 
+            Detail = localizedTittle,
+            Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}"
+        }, cancellationToken: cancellationToken);
 
         return true;
     }

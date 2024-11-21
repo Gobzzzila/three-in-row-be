@@ -130,10 +130,10 @@ namespace MatchThree.API
                 });
 
                 builder.Services.AddExceptionHandler<ValidationExceptionHandler>()
-                    .AddExceptionHandler<NoDataFoundExceptionHandler>()
                     .AddExceptionHandler<NotEnoughBalanceExceptionHandler>()
                     .AddExceptionHandler<MaxLevelReachedExceptionHandler>()
                     .AddExceptionHandler<UpgradeConditionsExceptionHandler>()
+                    .AddExceptionHandler<NoDataFoundExceptionHandler>()
                     .AddExceptionHandler<DefaultExceptionHandler>();
                 
                 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");

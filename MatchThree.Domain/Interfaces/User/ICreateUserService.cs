@@ -4,7 +4,7 @@ namespace MatchThree.Domain.Interfaces.User;
 
 public interface ICreateUserService
 {
-    Task<UserEntity> CreateWithReferrerAsync(UserEntity userEntity, long referrerId);
+    Task CreateWithReferrerAsync(UserEntity userEntity, long referrerId);
     
-    UserEntity Create(UserEntity userEntity);
+    void Create(UserEntity userEntity);
 }

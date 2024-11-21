@@ -11,22 +11,21 @@ public class DefaultExceptionHandler(IStringLocalizer<Localization> localization
 {
     private readonly IStringLocalizer<Localization> _localization = localization;
 
-    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext,
-        Exception exception,
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
         CancellationToken cancellationToken)
     {
         httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-
-        await httpContext.Response.WriteAsJsonAsync(new
-            ProblemDetails
+        var localizedTittle = _localization[TranslationConstants.ExceptionDefaultTextKey];
+        
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
             {
                 Status = httpContext.Response.StatusCode,
                 Type = exception.GetType().Name,
-                Title = _localization[TranslationConstants.ExceptionDefaultTextKey], 
-                Detail = exception.Message,
-                Instance = $"{httpContext.Request.Method} " +
-                           $"{httpContext.Request.Path}"
-            }, cancellationToken: cancellationToken);
+                Title = localizedTittle,
+                Detail = localizedTittle,
+                Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}"
+            },
+            cancellationToken: cancellationToken);
 
         return true;
     }

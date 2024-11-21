@@ -2,10 +2,8 @@
 
 namespace MatchThree.Shared.Exceptions;
 
-public class NoDataFoundException(string messageKey = NoDataFoundException.DefaultMessageKey)
+public class NoDataFoundException(string messageKey = TranslationConstants.ExceptionNoDataFoundTextKey)
     : Exception
 { 
-    private const string DefaultMessageKey = TranslationConstants.ExceptionNoDataFoundTextKey;
-    
     public string MessageKey { get; } = messageKey;
 }

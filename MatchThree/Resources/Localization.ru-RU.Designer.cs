@@ -87,6 +87,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не удалось авторизоваться. Пожалуйста, попробуйте еще раз позже. {0}.
+        /// </summary>
+        internal static string ExceptionAuthorizationTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionAuthorizationTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Квест уже выполнен сегодня.
         /// </summary>
         internal static string ExceptionDailyLoginCompletedTodayTextKey {
@@ -137,6 +146,15 @@ namespace MatchThree.API.Resources {
         internal static string ExceptionQuestsConditionNotMetTextKey {
             get {
                 return ResourceManager.GetString("ExceptionQuestsConditionNotMetTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Реферальная ссылка, по которой вы перешли, не работает. Хотите продолжить, но без реферальных наград?.
+        /// </summary>
+        internal static string ExceptionReferralLinkTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionReferralLinkTextKey", resourceCulture);
             }
         }
         

@@ -153,4 +153,10 @@
     <data name="ExceptionNotEnoughEnergyTextKey" xml:space="preserve">
         <value>Not enough energy</value>
     </data>
+    <data name="ExceptionAuthorizationTextKey" xml:space="preserve">
+        <value>Failed to authorize. Please try again later. {0}</value>
+    </data>
+    <data name="ExceptionReferralLinkTextKey" xml:space="preserve">
+        <value>The referral link you clicked on is not working. Want to continue but without referral rewards?</value>
+    </data>
 </root>
