@@ -86,6 +86,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         dbModel.CurrentReserve += maxReserve;
         dbModel.LastRecoveryStartTime = null;
         dbModel.AvailableEnergyDrinkAmount -= 1;
+        dbModel.EnergyDrinkCounter += 1;
         
         _context.Set<EnergyDbModel>().Update(dbModel);
     }

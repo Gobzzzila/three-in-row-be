@@ -72,6 +72,7 @@ public class UpdateFieldService(MatchThreeDbContext context,
             throw new ValidationException();
         
         dbModel.Field = field;
+        dbModel.MoveСounter += 1;
         _context.Set<FieldDbModel>().Update(dbModel);
     }
 }

@@ -9,5 +9,6 @@ public class FieldDbModel : DbModel
 {
     public FieldLevels FieldLevel { get; set; }
     public int[][] Field { get; set; } = [];
+    public int MoveСounter { get; set; }
     public UserDbModel? User { get; set; }
 }

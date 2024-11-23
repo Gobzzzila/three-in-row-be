@@ -25,17 +25,16 @@ public class MoveService(MatchThreeDbContext context,
 
     public async Task MakeMoveAsync(long userId, uint reward, int[][] field, string hash)
     {
-        var fieldDbModel = await _context.Set<FieldDbModel>()
-            .Include(x => x.User)
-            .ThenInclude(x => x!.Energy)
+        var userDbModel = await _context.Set<UserDbModel>()
+            .Include(x => x!.Energy)
             .SingleOrDefaultAsync(x => x.Id == userId);
         
-        if (fieldDbModel?.User?.Energy is null)
+        if (userDbModel?.Energy is null)
             throw new NoDataFoundException();
         
-        _synchronizationEnergyService.SynchronizeModel(fieldDbModel.User.Energy);
+        _synchronizationEnergyService.SynchronizeModel(userDbModel.Energy);
         var calculatedHash = 
-            CalculateHash($"{reward}{userId}{fieldDbModel.User.Energy.CurrentReserve}{fieldDbModel.User.SessionHash}");
+            CalculateHash($"{reward}{userId}{userDbModel.Energy.CurrentReserve}{userDbModel.SessionHash}");
 
         if (!calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
             throw new ValidationException();
