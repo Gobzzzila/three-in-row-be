@@ -115,6 +115,11 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
         {
             Type = UpgradeTypes.EnergyRecovery,
             IsBlocked = requiredReserveLevel is not null,
+            DescriptionTextArgs = 
+                [
+                    recoveryParams.RecoveryTime.TotalSeconds,
+                    EnergyRecoveryConfiguration.GetNextLevelRecoveryTime(energyEntity.RecoveryLevel).TotalSeconds
+                ],
             BlockingTextArgs = [requiredReserveLevel],
             CurrentLevel = (int)energyEntity.RecoveryLevel,
             Price = recoveryParams.NextLevelCost,

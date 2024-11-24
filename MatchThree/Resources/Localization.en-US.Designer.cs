@@ -402,7 +402,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Boosts the speed of energy recovery.
+        ///   Looks up a localized string similar to Increases energy recovery speed from {0} sec to {1} sec.
         /// </summary>
         internal static string UpgradeEnergyRecoveryDescriptionTextKey {
             get {

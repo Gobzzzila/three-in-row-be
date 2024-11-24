@@ -88,7 +88,7 @@
         <value>Скорость восстановления</value>
     </data>
     <data name="UpgradeEnergyRecoveryDescriptionTextKey" xml:space="preserve">
-        <value>Повышает скорость восстановления энергии</value>
+        <value>Повышает скорость восстановления энергии c {0} сек до {1} сек</value>
     </data>
     <data name="UpgradeEnergyDrinkDescriptionTextKey" xml:space="preserve">
         <value>Восстанавливает {0} энергии</value>

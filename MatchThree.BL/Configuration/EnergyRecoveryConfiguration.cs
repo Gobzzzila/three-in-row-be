@@ -20,6 +20,14 @@ public static class EnergyRecoveryConfiguration
         return EnergyRecoveryParams[energyRecoveryLevel].RecoveryTime;
     }
     
+    public static TimeSpan GetNextLevelRecoveryTime(EnergyRecoveryLevels energyRecoveryLevel)
+    {
+        var levelParams = GetParamsByLevel(energyRecoveryLevel);
+        return levelParams.NextLevel is not null
+            ? EnergyRecoveryParams[levelParams.NextLevel.Value].RecoveryTime
+            : default;
+    }
+    
     public static EnergyRecoveryParameters GetParamsByLevel(EnergyRecoveryLevels energyRecoveryLevel)
     {
         return EnergyRecoveryParams[energyRecoveryLevel];

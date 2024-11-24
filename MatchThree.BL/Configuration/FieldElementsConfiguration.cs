@@ -24,9 +24,9 @@ public static class FieldElementsConfiguration
     public static int? GetNextLevelProfit(CryptoTypes cryptoType, ElementLevels elementLevel)
     {
         var fieldLevelParams = GetParamsByTypeAndLevel(cryptoType, elementLevel);
-        return fieldLevelParams.NextLevel is null
-            ? default(int?)
-            : FieldElementsParams[cryptoType][fieldLevelParams.NextLevel!.Value].Profit;
+        return fieldLevelParams.NextLevel is not null
+            ? FieldElementsParams[cryptoType][fieldLevelParams.NextLevel!.Value].Profit
+            : default(int?);
     }
     
     public static List<(CryptoTypes cryptoType, ElementLevels elementLevel)> GetStartValue()
