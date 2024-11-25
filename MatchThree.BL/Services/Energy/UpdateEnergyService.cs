@@ -86,7 +86,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         dbModel.CurrentReserve += maxReserve;
         dbModel.LastRecoveryStartTime = null;
         dbModel.AvailableEnergyDrinkAmount -= 1;
-        dbModel.EnergyDrinkCounter += 1;
+        dbModel.UsedEnergyDrinkCounter += 1;
         
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
@@ -103,6 +103,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         _synchronizationEnergyService.SynchronizeModel(dbModel);
         dbModel.PurchasableEnergyDrinkAmount -=1;
         dbModel.AvailableEnergyDrinkAmount += 1;
+        dbModel.PurchasedEnergyDrinkCounter += 1;
 
         await UseEnergyDrinkAsync(userId);
     }

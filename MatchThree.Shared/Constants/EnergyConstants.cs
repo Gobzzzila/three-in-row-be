@@ -4,7 +4,7 @@ public static class EnergyConstants
 {
     //Energy drinks
     public const int FreeEnergyDrinksPerDay = 1;
-    public const int PurchasableEnergyDrinksPerDay = 3;
+    public const int PurchasableEnergyDrinksPerDay = 10;
     public const int EnergyDrinkPrice = 34;
     
     //Energy reserve

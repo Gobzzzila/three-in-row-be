@@ -98,7 +98,6 @@ public class TelegramBotService : ITelegramBotService, IDisposable
     private Task OnError(Exception exception, HandleErrorSource source)
     {
         _logger.LogError($"Telegram error: {exception}");
-        
         return Task.CompletedTask;
     }
 
@@ -130,7 +129,6 @@ public class TelegramBotService : ITelegramBotService, IDisposable
 
             _logger.LogInformation($"Telegram successful payment: User {msg.Chat} paid for {msg.SuccessfulPayment.InvoicePayload}. " +
                                    $"TelegramPaymentChargeId: {msg.SuccessfulPayment.TelegramPaymentChargeId}");
-            return;
         }
     }
     

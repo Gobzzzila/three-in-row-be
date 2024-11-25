@@ -12,7 +12,8 @@ public class EnergyDbModel : DbModel
     public EnergyRecoveryLevels RecoveryLevel { get; set; }
     public int AvailableEnergyDrinkAmount { get; set; }
     public int PurchasableEnergyDrinkAmount { get; set; }
-    public int EnergyDrinkCounter { get; set; }
+    public int UsedEnergyDrinkCounter { get; set; }
+    public int PurchasedEnergyDrinkCounter { get; set; }
     public DateTime? LastRecoveryStartTime { get; set; }
     public UserDbModel? User { get; set; }
 }

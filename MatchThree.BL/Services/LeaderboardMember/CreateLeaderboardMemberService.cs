@@ -16,8 +16,7 @@ public class CreateLeaderboardMemberService(MatchThreeDbContext context)
     {
         var leagueParam = LeagueConfiguration.GetParamsByType(league);
 
-        var dbModelsToAdd = await _context.Set<BalanceDbModel>()
-            .AsNoTracking()
+        var dbModelsToAdd = await _context.Set<BalanceDbModel>().AsNoTracking()
             .Include(x => x.User)
             .Where(x => x.OverallBalance > leagueParam.MinValue && x.OverallBalance <= leagueParam.MaxValue)
             .OrderByDescending(x => x.OverallBalance)
