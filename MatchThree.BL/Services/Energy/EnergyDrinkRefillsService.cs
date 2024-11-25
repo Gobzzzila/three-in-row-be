@@ -11,19 +11,27 @@ public class EnergyDrinkRefillsService (MatchThreeDbContext context)
 {
     private readonly MatchThreeDbContext _context = context;
 
-    public Task RefillFreeEnergyDrinks()
+    public async Task RefillEnergyDrinks()
     {
-        return _context.Set<EnergyDbModel>()
-            .Where(x => x.AvailableEnergyDrinkAmount == 0)
-            .ExecuteUpdateAsync(x => 
-                x.SetProperty(v => v.AvailableEnergyDrinkAmount, EnergyConstants.FreeEnergyDrinksPerDay));
-    }
-
-    public Task RefillPurchasableEnergyDrinks()
-    {
-        return _context.Set<EnergyDbModel>()
-            .Where(x => x.PurchasableEnergyDrinkAmount != EnergyConstants.PurchasableEnergyDrinksPerDay)
-            .ExecuteUpdateAsync(x => 
-                x.SetProperty(v => v.PurchasableEnergyDrinkAmount, EnergyConstants.PurchasableEnergyDrinksPerDay));
+        await using var transaction = await _context.Database.BeginTransactionAsync(); 
+        try 
+        { 
+            await _context.Set<EnergyDbModel>()
+                .Where(x => x.AvailableEnergyDrinkAmount == 0)
+                .ExecuteUpdateAsync(x => 
+                    x.SetProperty(v => v.AvailableEnergyDrinkAmount, EnergyConstants.FreeEnergyDrinksPerDay));
+        
+            await _context.Set<EnergyDbModel>()
+                .Where(x => x.PurchasableEnergyDrinkAmount != EnergyConstants.PurchasableEnergyDrinksPerDay)
+                .ExecuteUpdateAsync(x => 
+                    x.SetProperty(v => v.PurchasableEnergyDrinkAmount, EnergyConstants.PurchasableEnergyDrinksPerDay));
+            
+            await transaction.CommitAsync();
+        }
+        catch (Exception)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 }
