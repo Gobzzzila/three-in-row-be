@@ -150,6 +150,24 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The quest is already completed.
+        /// </summary>
+        internal static string ExceptionQuestAlreadyCompletedTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionQuestAlreadyCompletedTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quest is no longer available.
+        /// </summary>
+        internal static string ExceptionQuestOutdatedTextKey {
+            get {
+                return ResourceManager.GetString("ExceptionQuestOutdatedTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not all conditions were met.
         /// </summary>
         internal static string ExceptionQuestsConditionNotMetTextKey {
@@ -177,7 +195,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The data received does not fit the validation rules.
+        ///   Looks up a localized string similar to Failed to process the request.
         /// </summary>
         internal static string ExceptionValidationTextKey {
             get {

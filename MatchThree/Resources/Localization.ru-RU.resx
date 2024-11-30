@@ -142,7 +142,7 @@
         <value>Увеличивает базовую стоимость {0} с {1} до {2}</value>
     </data>
     <data name="ExceptionValidationTextKey" xml:space="preserve">
-        <value>Полученные данные не соответствуют правилам проверки</value>
+        <value>Не удалось обработать запрос</value>
     </data>
     <data name="ExceptionDailyLoginCompletedTodayTextKey" xml:space="preserve">
         <value>Квест уже выполнен сегодня</value>
@@ -161,5 +161,11 @@
     </data>
     <data name="ExceptionBannedTextKey" xml:space="preserve">
         <value>Вы были забанены на {0} часов</value>
+    </data>
+    <data name="ExceptionQuestAlreadyCompletedTextKey" xml:space="preserve">
+        <value>Квест уже завершен</value>
+    </data>
+    <data name="ExceptionQuestOutdatedTextKey" xml:space="preserve">
+        <value>Задание больше недоступно</value>
     </data>
 </root>

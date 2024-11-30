@@ -17,6 +17,8 @@ public static class TranslationConstants
     //Specific
     public const string ExceptionDailyLoginCompletedTodayTextKey = nameof(ExceptionDailyLoginCompletedTodayTextKey);
     public const string ExceptionQuestsConditionNotMetTextKey = nameof(ExceptionQuestsConditionNotMetTextKey);
+    public const string ExceptionQuestAlreadyCompletedTextKey = nameof(ExceptionQuestAlreadyCompletedTextKey);
+    public const string ExceptionQuestOutdatedTextKey = nameof(ExceptionQuestOutdatedTextKey);
     public const string ExceptionNotEnoughEnergyTextKey = nameof(ExceptionNotEnoughEnergyTextKey);
     public const string ExceptionAuthorizationTextKey = nameof(ExceptionAuthorizationTextKey);
     public const string ExceptionReferralLinkTextKey = nameof(ExceptionReferralLinkTextKey);

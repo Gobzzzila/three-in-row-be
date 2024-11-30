@@ -142,7 +142,7 @@
         <value>Increases base value of {0} from {1} to {2}</value>
     </data>
     <data name="ExceptionValidationTextKey" xml:space="preserve">
-        <value>The data received does not fit the validation rules</value>
+        <value>Failed to process the request</value>
     </data>
     <data name="ExceptionDailyLoginCompletedTodayTextKey" xml:space="preserve">
         <value>The quest has already been completed today</value>
@@ -161,5 +161,11 @@
     </data>
     <data name="ExceptionBannedTextKey" xml:space="preserve">
         <value>You've been banned for {0} hour(s)</value>
+    </data>
+    <data name="ExceptionQuestAlreadyCompletedTextKey" xml:space="preserve">
+        <value>The quest is already completed</value>
+    </data>
+    <data name="ExceptionQuestOutdatedTextKey" xml:space="preserve">
+        <value>Quest is no longer available</value>
     </data>
 </root>

@@ -18,7 +18,7 @@ public static class QuestsConfiguration
     public static List<QuestEntity> GetUncompleted(List<Guid> completedQuestIds)
     {
         return (from quest in Quests 
-            where !completedQuestIds.Contains(quest.Key) 
+            where !completedQuestIds.Contains(quest.Key) && !quest.Value.IsDeleted 
             select quest.Value).ToList();
     }
     
@@ -43,7 +43,8 @@ public static class QuestsConfiguration
                     Reward = QuestsConstants.QuestInvite1FriendReward,
                     ExternalLinkKey = null,
                     SecretCode = null,
-                    VerificationOfFulfillment = IsEnoughReferralsAsync(1)
+                    VerificationOfFulfillment = IsEnoughReferralsAsync(1),
+                    IsDeleted = false
                 }
             },
             {
@@ -56,7 +57,8 @@ public static class QuestsConfiguration
                     Reward = QuestsConstants.QuestInvite3FriendReward,
                     ExternalLinkKey = null,
                     SecretCode = null,
-                    VerificationOfFulfillment = IsEnoughReferralsAsync(3)
+                    VerificationOfFulfillment = IsEnoughReferralsAsync(3),
+                    IsDeleted = false
                 }
             },
             {
@@ -69,7 +71,8 @@ public static class QuestsConfiguration
                     Reward = QuestsConstants.QuestInvite5FriendReward,
                     ExternalLinkKey = null,
                     SecretCode = null,
-                    VerificationOfFulfillment = IsEnoughReferralsAsync(5)
+                    VerificationOfFulfillment = IsEnoughReferralsAsync(5),
+                    IsDeleted = false
                 }
             },
             {
@@ -82,7 +85,8 @@ public static class QuestsConfiguration
                     Reward = QuestsConstants.QuestNewsChannelSubscriptionReward,
                     ExternalLinkKey = ChatConstants.LinkNewsChannelTextKey,
                     SecretCode = null,
-                    VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.NewsChannelId, ChatConstants.NewsChannelIdRu)
+                    VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.NewsChannelId, ChatConstants.NewsChannelIdRu),
+                    IsDeleted = false
                 }
             },
         };

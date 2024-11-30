@@ -25,11 +25,13 @@ public class CompleteQuestService(MatchThreeDbContext context,
             throw new NoDataFoundException();
 
         if (dbModel.QuestIds.Contains(questId))
-            throw new ValidationException();
+            throw new ValidationException(TranslationConstants.ExceptionQuestAlreadyCompletedTextKey);
         
         var questEntity = QuestsConfiguration.GetById(questId);
+        if (questEntity.IsDeleted)
+            throw new ValidationException(TranslationConstants.ExceptionQuestOutdatedTextKey);
+        
         var isCompleted = true;
-
         if (questEntity.VerificationOfFulfillment is not null)
             isCompleted = await questEntity.VerificationOfFulfillment.Invoke(_validateQuestCompletionService, userId);
         
