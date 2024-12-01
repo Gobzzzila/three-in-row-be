@@ -22,23 +22,22 @@ public static class FieldConfiguration
     
     static FieldConfiguration()
     {
-        var enumValues = Enum.GetValues(typeof(FieldLevels));
+        var enumValues = Enum.GetValues<FieldLevels>();
         var dictionary = new Dictionary<FieldLevels, FieldParameters>(enumValues.Length - 1);
         
         for (var i = 1; i < enumValues.Length; i++)
         {
-            var currentValue = (FieldLevels)enumValues.GetValue(i)!;
+            var currentValue = enumValues[i];
             var nextLevelInfo = currentValue.GetNextLevelCoordinates();
             dictionary.Add(currentValue, new FieldParameters
             {
                 NextLevelCost = currentValue.GetUpgradeCost(),
-                NextLevelCoordinates = (nextLevelInfo!.X, nextLevelInfo!.Y),
+                NextLevelCoordinates = (nextLevelInfo!.X, nextLevelInfo.Y),
                 NextLevelNewCrypto = nextLevelInfo.NewCrypto,
                 AmountOfCells = FieldConstants.BaseAmountOfCells + i - 1,
-                NextLevel = 
-                    i != enumValues.Length - 1 ? 
-                        (FieldLevels)enumValues.GetValue(i + 1)! :
-                        null
+                NextLevel = enumValues.Length - 1 != i ? 
+                    enumValues[i + 1] : 
+                    null
             });
         }
 

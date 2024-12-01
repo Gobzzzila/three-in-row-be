@@ -59,8 +59,8 @@ public static class FieldElementsConfiguration
     private record MultiplierAndSyllable(double Multiplier, int Syllable);
     static FieldElementsConfiguration()
     {
-        var cryptoTypes = Enum.GetValues(typeof(CryptoTypes));
-        var elementLevels = Enum.GetValues(typeof(ElementLevels));
+        var cryptoTypes = Enum.GetValues<CryptoTypes>();
+        var elementLevels = Enum.GetValues<ElementLevels>();
 
         var dictionary = 
             new Dictionary<CryptoTypes, FrozenDictionary<ElementLevels, FieldElementParameters>>(cryptoTypes.Length - 1);
@@ -76,7 +76,7 @@ public static class FieldElementsConfiguration
         for (var i = 1; i < cryptoTypes.Length; i++)
         {
             var cryptoTypeDictionary = new Dictionary<ElementLevels, FieldElementParameters>(elementLevels.Length - 1);
-            var currentCryptoType = (CryptoTypes)cryptoTypes.GetValue(i)!;
+            var currentCryptoType = cryptoTypes[i];
             
             var multiplierAndSyllable = new MultiplierAndSyllable(1.0, 0);
             if (multipliersAndSyllables.TryGetValue(currentCryptoType, out var value))
@@ -91,9 +91,9 @@ public static class FieldElementsConfiguration
                 {
                     Profit = (int)currentLevel + (currentLevel == 0 ? 0 : multiplierAndSyllable.Syllable),
                     NextLevelCost = (uint?)(currentLevel.GetUpgradeCost() * multiplierAndSyllable.Multiplier),
-                    NextLevel = j != elementLevels.Length - 1 
-                            ? (ElementLevels)elementLevels.GetValue(j + 1)!
-                            : null,
+                    NextLevel = elementLevels.Length - 1 != j ? 
+                        elementLevels[j + 1] : 
+                        null,
                     UpgradeCondition = upgradeConditionArg != FieldLevels.Undefined ? 
                         UpgradeCondition(upgradeConditionArg) : 
                         null 

@@ -29,21 +29,20 @@ public static class EnergyReserveConfiguration
     //ctor
     static EnergyReserveConfiguration()
     {
-        var enumValues = Enum.GetValues(typeof(EnergyReserveLevels));
+        var enumValues = Enum.GetValues<EnergyReserveLevels>();
         var dictionary = new Dictionary<EnergyReserveLevels, EnergyReserveParameters>(enumValues.Length - 1);
         
         for (var i = 1; i < enumValues.Length; i++)
         {
-            var currentValue = (EnergyReserveLevels)enumValues.GetValue(i)!;
+            var currentValue = enumValues[i];
             var upgradeConditionArg = currentValue.GetUpgradeConditionArgument<int, EnergyReserveLevels>();
             dictionary.Add(currentValue, new EnergyReserveParameters
             {
                 MaxReserve = EnergyConstants.Level0EnergyReserve + (i * EnergyConstants.EnergyReserveMultiplierPerLevel),
                 NextLevelCost = currentValue.GetUpgradeCost(),
-                NextLevel = 
-                    i != enumValues.Length - 1 ? 
-                        (EnergyReserveLevels)enumValues.GetValue(i + 1)! :
-                        null,
+                NextLevel = enumValues.Length - 1 != i ? 
+                    enumValues[i + 1] : 
+                    null,
                 UpgradeCondition = upgradeConditionArg != 0 ? 
                     UpgradeCondition(upgradeConditionArg) : 
                     null
