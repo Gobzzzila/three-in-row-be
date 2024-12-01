@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
-using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.User;
 using MatchThree.Domain.Models;
 using MatchThree.Shared.Constants;

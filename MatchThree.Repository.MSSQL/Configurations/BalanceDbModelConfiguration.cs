@@ -17,6 +17,9 @@ public class BalanceDbModelConfiguration : EntityTypeConfigurationBase<BalanceDb
             .ValueGeneratedNever();
         
         builder
+            .HasIndex(x => x.OverallBalance);
+        
+        builder
             .HasOne(x => x.User)
             .WithOne(x => x.Balance)
             .HasForeignKey<BalanceDbModel>(x => x.Id)

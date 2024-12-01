@@ -45,13 +45,6 @@ public static class LeagueConfiguration
         return LeaguesParams[league];
     }
     
-    public static LeagueTypes GetNextLeagueLooped(LeagueTypes league)
-    {
-        return LeaguesParams.TryGetValue(league, out var leagueParams)
-            ? leagueParams.NextLeague ?? LeagueTypes.Shrimp
-            : LeagueTypes.Shrimp;
-    }
-    
     //ctor
     static LeagueConfiguration()
     {

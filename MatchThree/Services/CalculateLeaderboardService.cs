@@ -1,7 +1,7 @@
-﻿using MatchThree.BL.Configuration;
-using MatchThree.Domain.Interfaces;
-using MatchThree.Domain.Interfaces.LeaderboardMember;
+﻿using MatchThree.Domain.Interfaces.LeaderboardMember;
+using MatchThree.Repository.MSSQL;
 using MatchThree.Shared.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.API.Services;
 
@@ -9,10 +9,9 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
 {
     private Timer? _timer;
     private bool _disposed;
-    private LeagueTypes _lastProcessedLeague = 0;
 
     private readonly IServiceScope _scope;
-    private readonly ITransactionService _transactionService;
+    private readonly MatchThreeDbContext _context;
     private readonly ICreateLeaderboardMemberService _createLeaderboardMemberService;
     private readonly IDeleteLeaderboardMemberService _deleteLeaderboardMemberService;
     private readonly ILogger<CalculateLeaderboardService> _logger;
@@ -23,50 +22,49 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
         _logger = logger;
         _scope = serviceProvider.CreateScope();
         var provider = _scope.ServiceProvider;
-        _transactionService = provider.GetRequiredService<ITransactionService>();
+        _context = provider.GetRequiredService<MatchThreeDbContext>();
         _createLeaderboardMemberService = provider.GetRequiredService<ICreateLeaderboardMemberService>();
         _deleteLeaderboardMemberService = provider.GetRequiredService<IDeleteLeaderboardMemberService>();
     }
     
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(CancellationToken cancellationToken)
     {
-        await _deleteLeaderboardMemberService.DeleteAll();
-        foreach (int value in Enum.GetValues(typeof(LeagueTypes))) //TODO need to be refactored, cuz this method blocks app
-        {
-            if (value is 0 or 1)
-                continue;
-
-            await _createLeaderboardMemberService.CreateByLeagueTypeAsync((LeagueTypes)value);
-            await _transactionService.CommitAsync();
-            _transactionService.CleanChangeTracker();
-        }
-        
         _timer = new Timer(async state => await UpdateLeaderboard(state),
             null,
             TimeSpan.Zero,
-            TimeSpan.FromMinutes(2));   //TODO Move magic number to appsettings
+            TimeSpan.FromMinutes(5));   //TODO Move magic number to appsettings
+        
+        return Task.CompletedTask;
     }
 
     private async Task UpdateLeaderboard(object? state)
     {
-        try
-        {
-            var currentLeague = LeagueConfiguration.GetNextLeagueLooped(_lastProcessedLeague);
-            await UpdateLeaderboardByLeague(currentLeague);
-            _lastProcessedLeague = currentLeague;
-        }
-        catch (Exception)
-        {
-            _logger.LogError($"Cannot calculate leaderboard for {_lastProcessedLeague}");
-        }
+        await _context.Database.CreateExecutionStrategy().ExecuteAsync(CalculateLeaderboardInTransaction);
+        _context.ChangeTracker.Clear();  
     }
 
-    private async Task UpdateLeaderboardByLeague(LeagueTypes currentLeague)
+    private async Task CalculateLeaderboardInTransaction()
     {
-        await _deleteLeaderboardMemberService.DeleteByLeagueTypeAsync(currentLeague); //TODO think about it, this method not part of .Commit()
-        await _createLeaderboardMemberService.CreateByLeagueTypeAsync(currentLeague);
-        await _transactionService.CommitAsync();
-        _transactionService.CleanChangeTracker();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            await _deleteLeaderboardMemberService.DeleteAll();
+            foreach (var value in Enum.GetValues<LeagueTypes>())
+            {
+                if (value is LeagueTypes.Undefined)
+                    continue;
+
+                await _createLeaderboardMemberService.CreateByLeagueTypeAsync(value);
+            }
+            
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Cannot calculate leaderboard: {ex}");
+            await transaction.RollbackAsync();
+        }
     }
     
     public Task StopAsync(CancellationToken cancellationToken)

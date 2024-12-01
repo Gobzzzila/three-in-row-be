@@ -17,7 +17,6 @@ public class LeaderboardMemberDbModelConfiguration : EntityTypeConfigurationBase
             .ValueGeneratedNever();
 
         builder
-            .HasIndex(x => new { x.League })
-            .IsUnique(false);
+            .HasIndex(x => x.League);
     }
 }

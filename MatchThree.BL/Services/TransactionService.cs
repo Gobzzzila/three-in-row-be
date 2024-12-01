@@ -4,31 +4,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.BL.Services;
 
-public class TransactionService : ITransactionService
+public class TransactionService(MatchThreeDbContext context) : ITransactionService
 {
-    private MatchThreeDbContext Context { get; }
+    private readonly MatchThreeDbContext _context = context;
 
-    public TransactionService(MatchThreeDbContext context)
-    {
-        Context = context;
-    }
-
-    public async Task CommitAsync() => await Context.Database
+    public async Task CommitAsync() => await _context.Database
         .CreateExecutionStrategy()
         .ExecuteAsync(RunTransaction);
 
     public void CleanChangeTracker()
     {
-        Context.ChangeTracker.Clear();  
+        _context.ChangeTracker.Clear();  
     } 
 
     private async Task RunTransaction()
     {
-        await using var transaction = await Context.Database.BeginTransactionAsync();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
         try
         {
-            Context.ChangeTracker.DetectChanges();
-            await Context.SaveChangesAsync();
+            _context.ChangeTracker.DetectChanges();
+            await _context.SaveChangesAsync();
             await transaction.CommitAsync();
         }
         catch (DbUpdateException)
