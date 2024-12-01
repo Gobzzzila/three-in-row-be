@@ -33,12 +33,12 @@ public static class FieldElementsConfiguration
     {
         return [
             (CryptoTypes.Ton, ElementLevels.Level1),
+            (CryptoTypes.Jetton, ElementLevels.Level1),
             (CryptoTypes.Ston, ElementLevels.Level1),
             (CryptoTypes.Raff, ElementLevels.Level1),
-            (CryptoTypes.Fnz, ElementLevels.Level1),
-            (CryptoTypes.Usdt, ElementLevels.Level1),
-            (CryptoTypes.Jetton, ElementLevels.Undefined),
-            (CryptoTypes.Not, ElementLevels.Undefined),
+            (CryptoTypes.Not, ElementLevels.Level1),
+            (CryptoTypes.Usdt, ElementLevels.Undefined),
+            (CryptoTypes.Fnz, ElementLevels.Undefined),
             (CryptoTypes.Dogs, ElementLevels.Undefined),
             (CryptoTypes.Cati, ElementLevels.Undefined)
         ];
@@ -48,8 +48,8 @@ public static class FieldElementsConfiguration
     {
         return cryptoType switch
         {
-            CryptoTypes.Jetton => FieldLevels.Level12,
-            CryptoTypes.Not => FieldLevels.Level25,
+            CryptoTypes.Usdt => FieldLevels.Level12,
+            CryptoTypes.Fnz => FieldLevels.Level25,
             CryptoTypes.Dogs => FieldLevels.Level40,
             CryptoTypes.Cati => FieldLevels.Level57,
             _ => FieldLevels.Undefined
@@ -67,8 +67,8 @@ public static class FieldElementsConfiguration
 
         var multipliersAndSyllables = new Dictionary<CryptoTypes, MultiplierAndSyllable>
         {
-            { CryptoTypes.Jetton, new MultiplierAndSyllable(FieldElementsConstants.JettonUpgradeCostMultiplier, FieldElementsConstants.JettonProfitSyllable) },
-            { CryptoTypes.Not, new MultiplierAndSyllable(FieldElementsConstants.NotUpgradeCostMultiplier, FieldElementsConstants.NotProfitSyllable) },
+            { CryptoTypes.Usdt, new MultiplierAndSyllable(FieldElementsConstants.UsdtUpgradeCostMultiplier, FieldElementsConstants.UsdtProfitSyllable) },
+            { CryptoTypes.Fnz, new MultiplierAndSyllable(FieldElementsConstants.FnzUpgradeCostMultiplier, FieldElementsConstants.FnzProfitSyllable) },
             { CryptoTypes.Dogs, new MultiplierAndSyllable(FieldElementsConstants.DogsUpgradeCostMultiplier, FieldElementsConstants.DogsProfitSyllable) },
             { CryptoTypes.Cati, new MultiplierAndSyllable(FieldElementsConstants.CatiUpgradeCostMultiplier, FieldElementsConstants.CatiProfitSyllable) }
         };

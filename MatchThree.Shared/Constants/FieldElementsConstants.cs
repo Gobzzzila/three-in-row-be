@@ -2,11 +2,11 @@
 
 public class FieldElementsConstants
 {
-    public const double JettonUpgradeCostMultiplier = 1.1;
-    public const int JettonProfitSyllable = 5;
+    public const double UsdtUpgradeCostMultiplier = 1.1;
+    public const int UsdtProfitSyllable = 5;
     
-    public const double NotUpgradeCostMultiplier = 1.2;
-    public const int NotProfitSyllable = 10;
+    public const double FnzUpgradeCostMultiplier = 1.2;
+    public const int FnzProfitSyllable = 10;
     
     public const double DogsUpgradeCostMultiplier = 1.3;
     public const int DogsProfitSyllable = 15;
