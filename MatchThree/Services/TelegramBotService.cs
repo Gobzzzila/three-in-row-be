@@ -148,7 +148,6 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         if (payload is { UpgradeType: UpgradeTypes.EnergyDrink, UserId: > 0 })
         {
             var energyEntity = await _readEnergyService.GetByUserIdAsync(payload.UserId);
-            _transactionService.CleanChangeTracker();
             if (energyEntity.PurchasableEnergyDrinkAmount > 0)
                 await _bot.AnswerPreCheckoutQueryAsync(preCheckoutQuery.Id);
         }

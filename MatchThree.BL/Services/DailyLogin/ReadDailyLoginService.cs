@@ -18,7 +18,7 @@ public class ReadDailyLoginService(MatchThreeDbContext context,
     public async Task<DailyLoginEntity> GetDailyLoginInfoByUserIdAsync(long userId)
     {
         var dbModel = await _context.Set<DailyLoginDbModel>().AsNoTracking()
-            .SingleOrDefaultAsync(x => x.Id == userId);
+            .FirstOrDefaultAsync(x => x.Id == userId);
 
         if (dbModel is null)
             throw new NoDataFoundException();

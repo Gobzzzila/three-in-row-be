@@ -26,9 +26,7 @@ public class AutoMappingProfile : Profile
         CreateMap<DebugUserRequestDto, UserEntity>();
         
         //BalanceMapping
-        CreateMap<BalanceEntity, BalanceDto>()
-            .ForMember(x => x.League, 
-                o => o.MapFrom(s => LeagueConfiguration.CalculateLeague(s.OverallBalance)));
+        CreateMap<BalanceEntity, BalanceDto>();
 
         //LeaderboardMemberMapping
         CreateMap<LeaderboardMemberEntity, LeaderboardMemberDto>();

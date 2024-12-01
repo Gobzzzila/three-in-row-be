@@ -37,10 +37,10 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         };
     }
     
-    public async Task<int> GetTopSpotByUserId(long userId)
+    public async Task<int> GetTopSpotAsync(long userId, LeagueTypes league)
     {
         var dbModel = await _context.Set<LeaderboardMemberDbModel>().AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == userId);
+            .FirstOrDefaultAsync(x => x.Id == userId && x.League == league);
 
         return dbModel?.TopSpot ?? 1000;
     }

@@ -7,5 +7,5 @@ public interface IReadLeaderboardMemberService
 {
     Task<LeaderboardEntity> GetLeaderboardByLeagueAsync(LeagueTypes league);
     
-    Task<int> GetTopSpotByUserId(long userId);
+    Task<int> GetTopSpotAsync(long userId, LeagueTypes league);
 }

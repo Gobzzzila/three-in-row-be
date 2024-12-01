@@ -27,7 +27,7 @@ public class MoveService(MatchThreeDbContext context,
     {
         var userDbModel = await _context.Set<UserDbModel>()
             .Include(x => x!.Energy)
-            .SingleOrDefaultAsync(x => x.Id == userId);
+            .FirstOrDefaultAsync(x => x.Id == userId);
         
         if (userDbModel?.Energy is null)
             throw new NoDataFoundException();

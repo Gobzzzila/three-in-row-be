@@ -22,7 +22,7 @@ public class UpdateFieldElementService(MatchThreeDbContext context,
     public async Task UpgradeFieldElementAsync(long userId, CryptoTypes cryptoType)
     {
         var dbModel = await _context.Set<FieldElementDbModel>()
-            .SingleOrDefaultAsync(x => x.UserId == userId && x.Element == cryptoType);
+            .FirstOrDefaultAsync(x => x.UserId == userId && x.Element == cryptoType);
         
         if (dbModel is null)
             throw new NoDataFoundException();
@@ -50,7 +50,7 @@ public class UpdateFieldElementService(MatchThreeDbContext context,
     public async Task UnlockFieldElementAsync(long userId, CryptoTypes cryptoType)
     {
         var dbModel = await _context.Set<FieldElementDbModel>()
-            .SingleOrDefaultAsync(x => x.UserId == userId && x.Element == cryptoType);
+            .FirstOrDefaultAsync(x => x.UserId == userId && x.Element == cryptoType);
         
         if (dbModel is null)
             throw new NoDataFoundException();

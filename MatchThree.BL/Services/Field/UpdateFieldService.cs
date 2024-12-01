@@ -67,7 +67,7 @@ public class UpdateFieldService(MatchThreeDbContext context,
 
         var dbModel = await _context.Set<FieldDbModel>()
             .Include(x => x.FieldElements!.Where(y => y.Level != ElementLevels.Undefined))
-            .SingleOrDefaultAsync(x => x.Id == userId);
+            .FirstOrDefaultAsync(x => x.Id == userId);
         if (dbModel?.FieldElements is null)
             throw new NoDataFoundException();
 

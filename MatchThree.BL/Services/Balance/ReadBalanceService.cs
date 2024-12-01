@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
 using MatchThree.Domain.Models;
@@ -26,7 +27,8 @@ public class ReadBalanceService(MatchThreeDbContext context,
             throw new NoDataFoundException();
 
         var entity = _mapper.Map<BalanceEntity>(dbModel);
-        entity.TopSpot = await _readLeaderboardMemberService.GetTopSpotByUserId(entity.Id);
+        entity.League = LeagueConfiguration.CalculateLeague(entity.OverallBalance);
+        entity.TopSpot = await _readLeaderboardMemberService.GetTopSpotAsync(entity.Id, entity.League);
 
         return entity;
     }

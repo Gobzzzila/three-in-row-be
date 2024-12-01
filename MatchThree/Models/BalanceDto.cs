@@ -6,7 +6,7 @@ public class BalanceDto
 {
     public long Id { get; init; }
     public uint Balance { get; init; }
-    public ulong OverallBalance { get; set; }
+    public ulong OverallBalance { get; init; }
     public LeagueTypes League { get; init; }
     public int TopSpot { get; init; }
 }
