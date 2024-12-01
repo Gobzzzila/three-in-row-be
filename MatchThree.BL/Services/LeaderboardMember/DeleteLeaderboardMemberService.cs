@@ -10,7 +10,7 @@ public class DeleteLeaderboardMemberService(MatchThreeDbContext context)
  {
      private readonly MatchThreeDbContext _context = context;
      
-     public Task DeleteAll()
+     public Task ExecuteDeleteAllAsync()
      {
          return _context.Set<LeaderboardMemberDbModel>()
              .ExecuteDeleteAsync();

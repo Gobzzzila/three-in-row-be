@@ -29,7 +29,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
     
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _timer = new Timer(async state => await UpdateLeaderboard(state),
+        _timer = new Timer(async state => await UpdateLeaderboardAsync(state),
             null,
             TimeSpan.Zero,
             TimeSpan.FromMinutes(5));   //TODO Move magic number to appsettings
@@ -37,18 +37,18 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
         return Task.CompletedTask;
     }
 
-    private async Task UpdateLeaderboard(object? state)
+    private async Task UpdateLeaderboardAsync(object? state)
     {
-        await _context.Database.CreateExecutionStrategy().ExecuteAsync(CalculateLeaderboardInTransaction);
+        await _context.Database.CreateExecutionStrategy().ExecuteAsync(CalculateLeaderboardInTransactionAsync);
         _context.ChangeTracker.Clear();  
     }
 
-    private async Task CalculateLeaderboardInTransaction()
+    private async Task CalculateLeaderboardInTransactionAsync()
     {
         await using var transaction = await _context.Database.BeginTransactionAsync();
         try
         {
-            await _deleteLeaderboardMemberService.DeleteAll();
+            await _deleteLeaderboardMemberService.ExecuteDeleteAllAsync();
             foreach (var value in Enum.GetValues<LeagueTypes>())
             {
                 if (value is LeagueTypes.Undefined)

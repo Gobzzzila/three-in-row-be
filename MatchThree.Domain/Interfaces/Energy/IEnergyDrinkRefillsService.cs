@@ -2,5 +2,5 @@
 
 public interface IEnergyDrinkRefillsService
 {
-    Task RefillEnergyDrinks();
+    Task ExecuteRefillEnergyDrinksAsync();
 }

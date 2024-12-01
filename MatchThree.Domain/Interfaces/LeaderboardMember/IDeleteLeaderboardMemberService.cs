@@ -2,5 +2,5 @@
 
 public interface IDeleteLeaderboardMemberService
 {
-    Task DeleteAll();
+    Task ExecuteDeleteAllAsync();
 }

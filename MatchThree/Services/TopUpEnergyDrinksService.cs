@@ -16,6 +16,7 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         ILogger<CalculateLeaderboardService> logger)
     {
         _logger = logger;
+        
         _scope = serviceProvider.CreateScope();
         var provider = _scope.ServiceProvider;
         _timeProvider = provider.GetRequiredService<TimeProvider>();
@@ -28,7 +29,7 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         var nextMidnight = now.Date.AddDays(1);
         var initialDelay = nextMidnight - now;
         
-        _timer = new Timer(async state => await TopUpEnergyDrinks(state),
+        _timer = new Timer(async state => await TopUpEnergyDrinksAsync(state),
             null,
             initialDelay,
             TimeSpan.FromDays(1));
@@ -36,11 +37,11 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         return Task.CompletedTask;
     }
     
-    private async Task TopUpEnergyDrinks(object? state)
+    private async Task TopUpEnergyDrinksAsync(object? state)
     {
         try
         {
-            await _energyDrinkRefillsService.RefillEnergyDrinks();
+            await _energyDrinkRefillsService.ExecuteRefillEnergyDrinksAsync();
         }
         catch (Exception ex)
         {

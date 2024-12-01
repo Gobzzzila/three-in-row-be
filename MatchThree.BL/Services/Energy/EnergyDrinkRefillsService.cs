@@ -11,11 +11,14 @@ public class EnergyDrinkRefillsService (MatchThreeDbContext context)
 {
     private readonly MatchThreeDbContext _context = context;
 
-    public async Task RefillEnergyDrinks()
+    public async Task ExecuteRefillEnergyDrinksAsync() =>
+        await _context.Database.CreateExecutionStrategy().ExecuteAsync(RefillEnergyDrinksInTransactionAsync);
+
+    private async Task RefillEnergyDrinksInTransactionAsync()
     {
-        await using var transaction = await _context.Database.BeginTransactionAsync(); 
-        try 
-        { 
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
             await _context.Set<EnergyDbModel>()
                 .Where(x => x.AvailableEnergyDrinkAmount == 0)
                 .ExecuteUpdateAsync(x => 
@@ -28,7 +31,7 @@ public class EnergyDrinkRefillsService (MatchThreeDbContext context)
             
             await transaction.CommitAsync();
         }
-        catch (Exception)
+        catch
         {
             await transaction.RollbackAsync();
             throw;
