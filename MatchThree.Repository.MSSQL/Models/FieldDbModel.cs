@@ -11,4 +11,5 @@ public class FieldDbModel : DbModel
     public int[][] Field { get; set; } = [];
     public int MoveСounter { get; set; }
     public UserDbModel? User { get; set; }
+    public List<FieldElementDbModel>? FieldElements { get; set; } = [];
 }

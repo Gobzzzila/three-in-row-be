@@ -4,7 +4,9 @@ using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Enums;
 using MatchThree.Shared.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.BL.Services.Field;
 
@@ -63,10 +65,16 @@ public class UpdateFieldService(MatchThreeDbContext context,
         if (field.Length != 9 || field.Any(x => x.Length != 9))
             throw new ValidationException();
 
-        var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
-        if (dbModel is null)
+        var dbModel = await _context.Set<FieldDbModel>()
+            .Include(x => x.FieldElements!.Where(y => y.Level != ElementLevels.Undefined))
+            .SingleOrDefaultAsync(x => x.Id == userId);
+        if (dbModel?.FieldElements is null)
             throw new NoDataFoundException();
 
+        var currentCryptoTypesAsInt = dbModel.FieldElements.Select(x => (int)x.Element).ToList(); 
+        if (!field.All(x => x.All(y => y == 0 || currentCryptoTypesAsInt.Contains(y))))
+            throw new ValidationException();
+        
         var fieldParams = FieldConfiguration.GetParamsByLevel(dbModel.FieldLevel);
         if (field.Sum(x => x.Count(y => y != 0)) != fieldParams.AmountOfCells)
             throw new ValidationException();

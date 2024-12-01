@@ -10,9 +10,6 @@ public class FieldElementDbModelConfiguration : EntityTypeConfigurationBase<Fiel
     protected override void ConfigureEntityProperties(EntityTypeBuilder<FieldElementDbModel> builder)
     {
         builder
-            .HasKey(x => x.Id);
-
-        builder
             .HasIndex(x => x.UserId);
         
         builder
@@ -20,7 +17,7 @@ public class FieldElementDbModelConfiguration : EntityTypeConfigurationBase<Fiel
             .IsUnique();
 
         builder
-            .HasOne(x => x.User)
+            .HasOne(x => x.Field)
             .WithMany(x => x.FieldElements)
             .HasForeignKey(x => x.UserId)
             .IsRequired()

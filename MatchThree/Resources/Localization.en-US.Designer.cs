@@ -195,7 +195,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to process the request.
+        ///   Looks up a localized string similar to Failed to process the request. Please refresh the page and try again.
         /// </summary>
         internal static string ExceptionValidationTextKey {
             get {

@@ -12,5 +12,5 @@ public class FieldElementDbModel : IDbModel
     public CryptoTypes Element { get; set; }
     public ElementLevels Level { get; set; }
     
-    public UserDbModel? User { get; set; }
+    public FieldDbModel? Field { get; set; }
 }

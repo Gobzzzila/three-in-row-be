@@ -195,7 +195,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не удалось обработать запрос.
+        ///   Looks up a localized string similar to Не удалось обработать запрос. Пожалуйста, обновите страницу и попробуйте снова.
         /// </summary>
         internal static string ExceptionValidationTextKey {
             get {

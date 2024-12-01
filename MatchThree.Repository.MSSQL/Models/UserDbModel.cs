@@ -17,5 +17,4 @@ public class UserDbModel : DbModel
     public BalanceDbModel? Balance { get; set; }
     public EnergyDbModel? Energy { get; set; }
     public FieldDbModel? FieldElementLevel { get; set; }
-    public List<FieldElementDbModel>? FieldElements { get; set; } = [];
 }

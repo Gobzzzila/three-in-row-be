@@ -142,7 +142,7 @@
         <value>Увеличивает базовую стоимость {0} с {1} до {2}</value>
     </data>
     <data name="ExceptionValidationTextKey" xml:space="preserve">
-        <value>Не удалось обработать запрос</value>
+        <value>Не удалось обработать запрос. Пожалуйста, обновите страницу и попробуйте снова</value>
     </data>
     <data name="ExceptionDailyLoginCompletedTodayTextKey" xml:space="preserve">
         <value>Квест уже выполнен сегодня</value>

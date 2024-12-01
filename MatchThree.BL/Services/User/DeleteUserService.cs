@@ -41,8 +41,8 @@ public class DeleteUserService(
         await _deleteEnergyService.DeleteAsync(id);
         await _deleteReferralService.DeleteByUserIdAsync(id);
         await _deleteBalanceService.DeleteAsync(id);
-        await _deleteFieldService.DeleteAsync(id);
         await _deleteFieldElementService.DeleteByUserIdAsync(id);
+        await _deleteFieldService.DeleteAsync(id);
         await _deleteCompletedQuestsService.DeleteByUserIdAsync(id);
         await _deleteDailyLoginService.DeleteAsync(id);
         _context.Set<UserDbModel>().Remove(dbModel);
