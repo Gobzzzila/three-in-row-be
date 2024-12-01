@@ -4,12 +4,12 @@ public enum CryptoTypes
 {
     Undefined = 0,
     Ton = 1,
-    Ston = 2,
-    Raff = 3,
-    Fnz = 4, 
-    Usdt = 5,
-    Jetton = 6,
-    Not = 7,
+    Jetton = 2,
+    Ston = 3,
+    Raff = 4,
+    Not = 5,
+    Usdt = 6,
+    Fnz = 7, 
     Dogs = 8,
     Cati = 9
 }
