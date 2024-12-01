@@ -19,6 +19,7 @@ namespace MatchThree.API.Services;
 public class TelegramBotService : ITelegramBotService, IDisposable
 {
     private readonly TelegramBotClient _bot;
+    private readonly TelegramBotClient _helperBot;
     
     private readonly IStringLocalizer<Localization> _localizer;
     private readonly IServiceScope _scope;
@@ -39,6 +40,8 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         _bot.OnError += OnError;
         _bot.OnMessage += OnMessage;
         _bot.OnUpdate += OnUpdate;
+        
+        _helperBot = new TelegramBotClient(options.Value.HelperBotToken);
 #endif
 
         _localizer = localizer;
@@ -81,7 +84,7 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         {
             try
             {
-                var chatMember = await _bot.GetChatMemberAsync(chatId, userId);
+                var chatMember = await _helperBot.GetChatMemberAsync(chatId, userId);
 
                 if (chatMember.Status is ChatMemberStatus.Administrator or ChatMemberStatus.Member or ChatMemberStatus.Creator) 
                     return true;
