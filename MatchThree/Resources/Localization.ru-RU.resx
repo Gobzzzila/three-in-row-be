@@ -165,4 +165,28 @@
     <data name="ExceptionQuestOutdatedTextKey" xml:space="preserve">
         <value>Задание больше недоступно</value>
     </data>
+    <data name="LeagueShrimpFullNameTextKey" xml:space="preserve">
+        <value>Лига креветки</value>
+    </data>
+    <data name="LeagueCrabFullNameTextKey" xml:space="preserve">
+        <value>Лига краба</value>
+    </data>
+    <data name="LeagueOctopusFullNameTextKey" xml:space="preserve">
+        <value>Лига осьминога</value>
+    </data>
+    <data name="LeagueFishFullNameTextKey" xml:space="preserve">
+        <value>Лига рыбы</value>
+    </data>
+    <data name="LeagueDolphinFullNameTextKey" xml:space="preserve">
+        <value>Лига дельфина</value>
+    </data>
+    <data name="LeagueSharkFullNameTextKey" xml:space="preserve">
+        <value>Лига акулы</value>
+    </data>
+    <data name="LeagueWhaleFullNameTextKey" xml:space="preserve">
+        <value>Лига кита</value>
+    </data>
+    <data name="LeagueHumpbackFullNameTextKey" xml:space="preserve">
+        <value>Лига горбатого кита</value>
+    </data>
 </root>

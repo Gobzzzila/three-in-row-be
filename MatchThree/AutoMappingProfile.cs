@@ -34,9 +34,9 @@ public class AutoMappingProfile : Profile
         //LeaderboardMemberMapping
         CreateMap<LeaderboardMemberEntity, LeaderboardMemberDto>();
         CreateMap<LeaderboardEntity, LeaderboardDto>()
-            .ForMember(x => x.LeagueName,
-            o =>
-                o.MapFrom<EnumTranslationResolver<LeagueTypes>, LeagueTypes>(s => s.League));
+            .ForMember(x => x.LeagueFullName,
+                o =>
+                    o.MapFrom<TextKeyResolver, string>(s => s.LeagueFullNameTextKey));
         
         //Energy
         CreateMap<EnergyEntity, EnergyDto>()

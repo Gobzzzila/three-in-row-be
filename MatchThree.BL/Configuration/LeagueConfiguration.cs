@@ -53,6 +53,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Shrimp, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueShrimpFullNameTextKey,
                     MinValue = 0,
                     MaxValue = LeagueConstants.ShrimpMaxValue,
                     RewardForReferrer = 0,
@@ -63,6 +64,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Crab, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueCrabFullNameTextKey,
                     MinValue = LeagueConstants.ShrimpMaxValue,
                     MaxValue = LeagueConstants.CrabMaxValue,
                     RewardForReferrer = ReferralConstants.CrabLeagueReferrerReward,
@@ -73,6 +75,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Octopus, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueOctopusFullNameTextKey,
                     MinValue = LeagueConstants.CrabMaxValue,
                     MaxValue = LeagueConstants.OctopusMaxValue,
                     RewardForReferrer = ReferralConstants.OctopusLeagueReferrerReward,
@@ -83,6 +86,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Fish, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueFishFullNameTextKey,
                     MinValue = LeagueConstants.OctopusMaxValue,
                     MaxValue = LeagueConstants.FishMaxValue,
                     RewardForReferrer = ReferralConstants.FishLeagueReferrerReward,
@@ -93,6 +97,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Dolphin, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueDolphinFullNameTextKey,
                     MinValue = LeagueConstants.FishMaxValue,
                     MaxValue = LeagueConstants.DolphinMaxValue,
                     RewardForReferrer = ReferralConstants.DolphinLeagueReferrerReward,
@@ -103,6 +108,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Shark, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueSharkFullNameTextKey,
                     MinValue = LeagueConstants.DolphinMaxValue,
                     MaxValue = LeagueConstants.SharkMaxValue,
                     RewardForReferrer = ReferralConstants.SharkLeagueReferrerReward,
@@ -113,6 +119,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Whale, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueWhaleFullNameTextKey,
                     MinValue = LeagueConstants.SharkMaxValue,
                     MaxValue = LeagueConstants.WhaleMaxValue,
                     RewardForReferrer = ReferralConstants.WhaleLeagueReferrerReward,
@@ -123,6 +130,7 @@ public static class LeagueConfiguration
             {
                 LeagueTypes.Humpback, new LeagueParameters
                 {
+                    LeagueFullNameTextKey = TranslationConstants.LeagueHumpbackFullNameTextKey,
                     MinValue = LeagueConstants.WhaleMaxValue,
                     MaxValue = ulong.MaxValue,
                     RewardForReferrer = ReferralConstants.HumpbackLeagueReferrerReward,

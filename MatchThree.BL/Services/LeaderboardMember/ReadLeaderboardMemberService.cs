@@ -29,6 +29,7 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         return new LeaderboardEntity
         {
             League = league,
+            LeagueFullNameTextKey = leagueParams.LeagueFullNameTextKey,
             MinValue = leagueParams.MinValue,
             MaxValue = leagueParams.MaxValue,
             NextLeague = leagueParams.NextLeague,

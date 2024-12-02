@@ -195,11 +195,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лига краба.
+        /// </summary>
+        internal static string LeagueCrabFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueCrabFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Краб.
         /// </summary>
         internal static string LeagueCrabTextKey {
             get {
                 return ResourceManager.GetString("LeagueCrabTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лига дельфина.
+        /// </summary>
+        internal static string LeagueDolphinFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueDolphinFullNameTextKey", resourceCulture);
             }
         }
         
@@ -213,11 +231,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лига рыбы.
+        /// </summary>
+        internal static string LeagueFishFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueFishFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рыба.
         /// </summary>
         internal static string LeagueFishTextKey {
             get {
                 return ResourceManager.GetString("LeagueFishTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лига горбатого кита.
+        /// </summary>
+        internal static string LeagueHumpbackFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueHumpbackFullNameTextKey", resourceCulture);
             }
         }
         
@@ -231,11 +267,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лига осьминога.
+        /// </summary>
+        internal static string LeagueOctopusFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueOctopusFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Осьминог.
         /// </summary>
         internal static string LeagueOctopusTextKey {
             get {
                 return ResourceManager.GetString("LeagueOctopusTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лига акулы.
+        /// </summary>
+        internal static string LeagueSharkFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueSharkFullNameTextKey", resourceCulture);
             }
         }
         
@@ -249,11 +303,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лига креветки.
+        /// </summary>
+        internal static string LeagueShrimpFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueShrimpFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Креветка.
         /// </summary>
         internal static string LeagueShrimpTextKey {
             get {
                 return ResourceManager.GetString("LeagueShrimpTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лига кита.
+        /// </summary>
+        internal static string LeagueWhaleFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueWhaleFullNameTextKey", resourceCulture);
             }
         }
         

@@ -28,13 +28,28 @@ public static class TranslationConstants
     #region League types
 
     public const string LeagueShrimpTextKey = nameof(LeagueShrimpTextKey);
+    public const string LeagueShrimpFullNameTextKey = nameof(LeagueShrimpFullNameTextKey);
+    
     public const string LeagueCrabTextKey = nameof(LeagueCrabTextKey);
+    public const string LeagueCrabFullNameTextKey = nameof(LeagueCrabFullNameTextKey);
+    
     public const string LeagueOctopusTextKey = nameof(LeagueOctopusTextKey);
+    public const string LeagueOctopusFullNameTextKey = nameof(LeagueOctopusFullNameTextKey);
+    
     public const string LeagueFishTextKey = nameof(LeagueFishTextKey);
+    public const string LeagueFishFullNameTextKey = nameof(LeagueFishFullNameTextKey);
+    
     public const string LeagueDolphinTextKey = nameof(LeagueDolphinTextKey);
+    public const string LeagueDolphinFullNameTextKey = nameof(LeagueDolphinFullNameTextKey);
+    
     public const string LeagueSharkTextKey = nameof(LeagueSharkTextKey);
+    public const string LeagueSharkFullNameTextKey = nameof(LeagueSharkFullNameTextKey);
+    
     public const string LeagueWhaleTextKey = nameof(LeagueWhaleTextKey);
+    public const string LeagueWhaleFullNameTextKey = nameof(LeagueWhaleFullNameTextKey);
+    
     public const string LeagueHumpbackTextKey = nameof(LeagueHumpbackTextKey);
+    public const string LeagueHumpbackFullNameTextKey = nameof(LeagueHumpbackFullNameTextKey);
     
     #endregion
     

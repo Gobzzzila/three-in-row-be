@@ -195,11 +195,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crab league.
+        /// </summary>
+        internal static string LeagueCrabFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueCrabFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crab.
         /// </summary>
         internal static string LeagueCrabTextKey {
             get {
                 return ResourceManager.GetString("LeagueCrabTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dolphin league.
+        /// </summary>
+        internal static string LeagueDolphinFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueDolphinFullNameTextKey", resourceCulture);
             }
         }
         
@@ -213,6 +231,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fish league.
+        /// </summary>
+        internal static string LeagueFishFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueFishFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fish.
         /// </summary>
         internal static string LeagueFishTextKey {
@@ -222,11 +249,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Humpback.
+        ///   Looks up a localized string similar to Humpback whale league.
+        /// </summary>
+        internal static string LeagueHumpbackFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueHumpbackFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Humpback whale.
         /// </summary>
         internal static string LeagueHumpbackTextKey {
             get {
                 return ResourceManager.GetString("LeagueHumpbackTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Octopus league.
+        /// </summary>
+        internal static string LeagueOctopusFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueOctopusFullNameTextKey", resourceCulture);
             }
         }
         
@@ -240,6 +285,15 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shark league.
+        /// </summary>
+        internal static string LeagueSharkFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueSharkFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shark.
         /// </summary>
         internal static string LeagueSharkTextKey {
@@ -249,11 +303,29 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shrimp league.
+        /// </summary>
+        internal static string LeagueShrimpFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueShrimpFullNameTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shrimp.
         /// </summary>
         internal static string LeagueShrimpTextKey {
             get {
                 return ResourceManager.GetString("LeagueShrimpTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whale league.
+        /// </summary>
+        internal static string LeagueWhaleFullNameTextKey {
+            get {
+                return ResourceManager.GetString("LeagueWhaleFullNameTextKey", resourceCulture);
             }
         }
         

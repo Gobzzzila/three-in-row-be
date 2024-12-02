@@ -61,7 +61,7 @@
         <value>Whale</value>
     </data>
     <data name="LeagueHumpbackTextKey" xml:space="preserve">
-        <value>Humpback</value>
+        <value>Humpback whale</value>
     </data>
     <data name="UpgradeCategoryEnergyTextKey" xml:space="preserve">
         <value>Energy</value>
@@ -164,5 +164,29 @@
     </data>
     <data name="ExceptionQuestOutdatedTextKey" xml:space="preserve">
         <value>Quest is no longer available</value>
+    </data>
+    <data name="LeagueShrimpFullNameTextKey" xml:space="preserve">
+        <value>Shrimp league</value>
+    </data>
+    <data name="LeagueCrabFullNameTextKey" xml:space="preserve">
+        <value>Crab league</value>
+    </data>
+    <data name="LeagueOctopusFullNameTextKey" xml:space="preserve">
+        <value>Octopus league</value>
+    </data>
+    <data name="LeagueFishFullNameTextKey" xml:space="preserve">
+        <value>Fish league</value>
+    </data>
+    <data name="LeagueDolphinFullNameTextKey" xml:space="preserve">
+        <value>Dolphin league</value>
+    </data>
+    <data name="LeagueSharkFullNameTextKey" xml:space="preserve">
+        <value>Shark league</value>
+    </data>
+    <data name="LeagueWhaleFullNameTextKey" xml:space="preserve">
+        <value>Whale league</value>
+    </data>
+    <data name="LeagueHumpbackFullNameTextKey" xml:space="preserve">
+        <value>Humpback whale league</value>
     </data>
 </root>
