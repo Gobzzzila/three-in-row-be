@@ -26,7 +26,10 @@ public class AutoMappingProfile : Profile
         CreateMap<DebugUserRequestDto, UserEntity>();
         
         //BalanceMapping
-        CreateMap<BalanceEntity, BalanceDto>();
+        CreateMap<BalanceEntity, BalanceDto>()
+            .ForMember(x => x.LeagueName,
+                o =>
+                    o.MapFrom<EnumTranslationResolver<LeagueTypes>, LeagueTypes>(s => s.League));
 
         //LeaderboardMemberMapping
         CreateMap<LeaderboardMemberEntity, LeaderboardMemberDto>();
