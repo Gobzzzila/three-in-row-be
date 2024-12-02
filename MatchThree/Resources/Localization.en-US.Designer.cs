@@ -177,15 +177,6 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The referral link you clicked on is not working. Want to continue but without referral rewards?.
-        /// </summary>
-        internal static string ExceptionReferralLinkTextKey {
-            get {
-                return ResourceManager.GetString("ExceptionReferralLinkTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Upgrade conditions have not been met.
         /// </summary>
         internal static string ExceptionUpgradeConditionsTextKey {

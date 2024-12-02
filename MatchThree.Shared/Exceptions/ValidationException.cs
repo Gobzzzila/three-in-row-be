@@ -11,14 +11,7 @@ public class ValidationException(string messageKey = TranslationConstants.Except
     {
         MessageArgs = messageArgs;
     }
-    
-    public ValidationException(string messageKey, object?[] messageArgs, HttpStatusCode statusCode) 
-        : this(messageKey, messageArgs)
-    {
-        StatusCode = statusCode;
-    }
-    
+
     public string MessageKey { get; } = messageKey;
     public object?[] MessageArgs { get; } = [];
-    public HttpStatusCode StatusCode { get; } = HttpStatusCode.BadRequest;
 }

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
+﻿using AutoMapper;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Domain.Interfaces.Energy;
@@ -12,7 +11,6 @@ using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Constants;
-using MatchThree.Shared.Exceptions;
 
 namespace MatchThree.BL.Services.User;
 
@@ -50,14 +48,15 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     {
         CreateUser(userEntity);
 
+        uint referralReward = 0;
         var referrer = await _readUserService.FindByIdAsync(referrerId);
-        if (referrer is null)
-            throw new ValidationException(TranslationConstants.ExceptionReferralLinkTextKey, [], HttpStatusCode.FailedDependency);
-        
-        await _createReferralService.CreateAsync(referrerId, userEntity.Id, userEntity.IsPremium);
-        var referralReward = userEntity.IsPremium
-            ? ReferralConstants.RewardForInvitingPremiumUser
-            : ReferralConstants.RewardForInvitingRegularUser;
+        if (referrer is not null)
+        {
+            await _createReferralService.CreateAsync(referrerId, userEntity.Id, userEntity.IsPremium);
+            referralReward = userEntity.IsPremium
+                ? ReferralConstants.RewardForInvitingPremiumUser
+                : ReferralConstants.RewardForInvitingRegularUser;
+        }
         
         CreateSubEntities(userEntity.Id, referralReward);
     }

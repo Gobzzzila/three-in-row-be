@@ -156,9 +156,6 @@
     <data name="ExceptionAuthorizationTextKey" xml:space="preserve">
         <value>Failed to authorize. Please try again later. {0}</value>
     </data>
-    <data name="ExceptionReferralLinkTextKey" xml:space="preserve">
-        <value>The referral link you clicked on is not working. Want to continue but without referral rewards?</value>
-    </data>
     <data name="ExceptionBannedTextKey" xml:space="preserve">
         <value>You've been banned for {0} hour(s)</value>
     </data>

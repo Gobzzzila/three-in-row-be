@@ -177,15 +177,6 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Реферальная ссылка, по которой вы перешли, не работает. Хотите продолжить, но без реферальных наград?.
-        /// </summary>
-        internal static string ExceptionReferralLinkTextKey {
-            get {
-                return ResourceManager.GetString("ExceptionReferralLinkTextKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Условия улучшения не были выполнены.
         /// </summary>
         internal static string ExceptionUpgradeConditionsTextKey {

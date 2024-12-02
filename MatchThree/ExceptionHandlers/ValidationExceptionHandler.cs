@@ -1,4 +1,5 @@
-﻿using MatchThree.Shared.Exceptions;
+﻿using System.Net;
+using MatchThree.Shared.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -16,7 +17,7 @@ public class ValidationExceptionHandler(IStringLocalizer<Localization> localizat
         if (exception is not ValidationException validationException) 
             return false;
 
-        httpContext.Response.StatusCode = (int)validationException.StatusCode;
+        httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
         var localizedTittle = string.Format(_localization[validationException.MessageKey], validationException.MessageArgs);
         
         await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
