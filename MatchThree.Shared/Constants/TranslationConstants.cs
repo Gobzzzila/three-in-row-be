@@ -96,8 +96,14 @@ public static class TranslationConstants
     public const string QuestInvite5FriendTittleTextKey = nameof(QuestInvite5FriendTittleTextKey);
     public const string QuestInvite5FriendDescriptionTextKey = nameof(QuestInvite5FriendDescriptionTextKey);
     
-    public const string QuestSubscribeToNewsChannelHeaderTextKey = nameof(QuestSubscribeToNewsChannelHeaderTextKey);
+    public const string QuestSubscribeToNewsChannelTittleTextKey = nameof(QuestSubscribeToNewsChannelTittleTextKey);
     public const string QuestSubscribeToNewsChannelDescriptionTextKey = nameof(QuestSubscribeToNewsChannelDescriptionTextKey);
+    public const string LinkPingwinNewsChannelTextKey = nameof(LinkPingwinNewsChannelTextKey);
+    
+    public const string QuestSubscribeToGroupChatTittleTextKey = nameof(QuestSubscribeToGroupChatTittleTextKey);
+    public const string QuestSubscribeToGroupChatDescriptionTextKey = nameof(QuestSubscribeToGroupChatDescriptionTextKey);
+    public const string LinkGroupChatTextKey = nameof(LinkGroupChatTextKey);
+
     
     #endregion
 

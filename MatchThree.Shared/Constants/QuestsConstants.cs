@@ -11,6 +11,9 @@ public static class QuestsConstants
     public static readonly Guid QuestIdInvite5Friend = Guid.Parse("F5555555-908A-4619-8868-F8310EA7D2E3");
     public const uint QuestInvite5FriendReward = 10_000;
     
-    public static readonly Guid QuestIdNewsChannelSubscription = Guid.Parse("FCA11111-908A-4619-8868-F8310EA7D2E3");
-    public const uint QuestNewsChannelSubscriptionReward = 2_500;
+    public static readonly Guid QuestIdPingwinNewsChannelSubscription = Guid.Parse("FCA11111-908A-4619-8868-F8310EA7D2E3");
+    public const uint QuestPingwinNewsChannelSubscriptionReward = 2_500;
+    
+    public static readonly Guid QuestIdPingwinGroupChatSubscription = Guid.Parse("FCA22222-908A-4619-8868-F8310EA7D2E3");
+    public const uint QuestPingwinGroupChatSubscriptionReward = 2_500;
 }

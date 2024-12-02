@@ -76,7 +76,7 @@
         <value>Energy drink</value>
     </data>
     <data name="UpgradeEnergyDrinkBlockingTextKey" xml:space="preserve">
-        <value>Today's limit is reached</value>
+        <value>Daily limit is reached</value>
     </data>
     <data name="UpgradeEnergyReserveHeaderTextKey" xml:space="preserve">
         <value>Energy reserve</value>
@@ -103,7 +103,7 @@
         <value>Nice ping!</value>
     </data>
     <data name="UpgradeFieldHeaderTextKey" xml:space="preserve">
-        <value>Upgrade the field</value>
+        <value>Field size</value>
     </data>
     <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
         <value>Increases the field size by 1 cell</value>
@@ -119,12 +119,6 @@
     </data>
     <data name="QuestInvite5FriendDescriptionTextKey" xml:space="preserve">
         <value>Get extra rewards for the first five friends you invite</value>
-    </data>
-    <data name="LinkNewsChannelTextKey" xml:space="preserve">
-        <value>https://t.me/PingWinGame</value>
-    </data>
-    <data name="QuestSubscribeToNewsChannelHeaderTextKey" xml:space="preserve">
-        <value>Join our TG channel</value>
     </data>
     <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
         <value>Be one of the first to know the news</value>
@@ -188,5 +182,20 @@
     </data>
     <data name="LeagueHumpbackFullNameTextKey" xml:space="preserve">
         <value>Humpback whale league</value>
+    </data>
+    <data name="QuestSubscribeToNewsChannelTittleTextKey" xml:space="preserve">
+        <value>Join our TG channel</value>
+    </data>
+    <data name="QuestSubscribeToGroupChatTittleTextKey" xml:space="preserve">
+        <value>Join our TG chat</value>
+    </data>
+    <data name="QuestSubscribeToGroupChatDescriptionTextKey" xml:space="preserve">
+        <value>Support, communication, FAQ - all there</value>
+    </data>
+    <data name="LinkGroupChatTextKey" xml:space="preserve">
+        <value>https://t.me/PingWinGame_Chat</value>
+    </data>
+    <data name="LinkPingwinNewsChannelTextKey" xml:space="preserve">
+        <value>https://t.me/PingWinGame</value>
     </data>
 </root>

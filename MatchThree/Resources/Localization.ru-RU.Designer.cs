@@ -339,11 +339,20 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://t.me/PingWinGame_chat_ru.
+        /// </summary>
+        internal static string LinkGroupChatTextKey {
+            get {
+                return ResourceManager.GetString("LinkGroupChatTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://t.me/PingWinGame_ru.
         /// </summary>
-        internal static string LinkNewsChannelTextKey {
+        internal static string LinkPingwinNewsChannelTextKey {
             get {
-                return ResourceManager.GetString("LinkNewsChannelTextKey", resourceCulture);
+                return ResourceManager.GetString("LinkPingwinNewsChannelTextKey", resourceCulture);
             }
         }
         
@@ -402,6 +411,24 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поддержка, общение, FAQ - все там.
+        /// </summary>
+        internal static string QuestSubscribeToGroupChatDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestSubscribeToGroupChatDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вступай в наш ТГ чат.
+        /// </summary>
+        internal static string QuestSubscribeToGroupChatTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestSubscribeToGroupChatTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Узнавайте новости одним из первых.
         /// </summary>
         internal static string QuestSubscribeToNewsChannelDescriptionTextKey {
@@ -413,9 +440,9 @@ namespace MatchThree.API.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Подпишись на наш ТГ канал.
         /// </summary>
-        internal static string QuestSubscribeToNewsChannelHeaderTextKey {
+        internal static string QuestSubscribeToNewsChannelTittleTextKey {
             get {
-                return ResourceManager.GetString("QuestSubscribeToNewsChannelHeaderTextKey", resourceCulture);
+                return ResourceManager.GetString("QuestSubscribeToNewsChannelTittleTextKey", resourceCulture);
             }
         }
         
@@ -447,7 +474,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сегодняшний лимит исчерпан.
+        ///   Looks up a localized string similar to Дневной лимит исчерпан.
         /// </summary>
         internal static string UpgradeEnergyDrinkBlockingTextKey {
             get {
@@ -564,7 +591,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Улучшить поле.
+        ///   Looks up a localized string similar to Размер поля.
         /// </summary>
         internal static string UpgradeFieldHeaderTextKey {
             get {

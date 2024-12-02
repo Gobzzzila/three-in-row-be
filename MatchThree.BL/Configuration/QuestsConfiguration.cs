@@ -17,14 +17,14 @@ public static class QuestsConfiguration
     
     public static List<QuestEntity> GetUncompleted(List<Guid> completedQuestIds)
     {
-        return (from quest in Quests 
+        return (from quest in Quests.OrderBy(x => x.Value.Type)
             where !completedQuestIds.Contains(quest.Key) && !quest.Value.IsDeleted 
             select quest.Value).ToList();
     }
     
     public static List<QuestEntity> GetCompleted(List<Guid> completedQuestIds)
     {
-        return (from quest in Quests 
+        return (from quest in Quests.OrderBy(x => x.Value.Type)
             where completedQuestIds.Contains(quest.Key) 
             select quest.Value).ToList();
     }
@@ -76,16 +76,30 @@ public static class QuestsConfiguration
                 }
             },
             {
-                QuestsConstants.QuestIdNewsChannelSubscription, new QuestEntity
+                QuestsConstants.QuestIdPingwinNewsChannelSubscription, new QuestEntity
                 {
-                    Id = QuestsConstants.QuestIdNewsChannelSubscription,
+                    Id = QuestsConstants.QuestIdPingwinNewsChannelSubscription,
                     Type = QuestTypes.TelegramChannel,
-                    TittleKey = TranslationConstants.QuestSubscribeToNewsChannelHeaderTextKey,
+                    TittleKey = TranslationConstants.QuestSubscribeToNewsChannelTittleTextKey,
                     DescriptionKey = TranslationConstants.QuestSubscribeToNewsChannelDescriptionTextKey,
-                    Reward = QuestsConstants.QuestNewsChannelSubscriptionReward,
-                    ExternalLinkKey = ChatConstants.LinkNewsChannelTextKey,
+                    Reward = QuestsConstants.QuestPingwinNewsChannelSubscriptionReward,
+                    ExternalLinkKey = TranslationConstants.LinkPingwinNewsChannelTextKey,
                     SecretCode = null,
-                    VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.NewsChannelId, ChatConstants.NewsChannelIdRu),
+                    VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.PingwinNewsChannelId, ChatConstants.PingwinNewsChannelIdRu),
+                    IsDeleted = false
+                }
+            },
+            {
+                QuestsConstants.QuestIdPingwinGroupChatSubscription, new QuestEntity
+                {
+                    Id = QuestsConstants.QuestIdPingwinGroupChatSubscription,
+                    Type = QuestTypes.TelegramChannel,
+                    TittleKey = TranslationConstants.QuestSubscribeToGroupChatTittleTextKey,
+                    DescriptionKey = TranslationConstants.QuestSubscribeToGroupChatDescriptionTextKey,
+                    Reward = QuestsConstants.QuestPingwinGroupChatSubscriptionReward,
+                    ExternalLinkKey = TranslationConstants.LinkGroupChatTextKey,
+                    SecretCode = null,
+                    VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.PingwinGroupChatId, ChatConstants.PingwinGroupChatIdRu),
                     IsDeleted = false
                 }
             },

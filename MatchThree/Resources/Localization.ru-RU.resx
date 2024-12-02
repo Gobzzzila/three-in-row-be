@@ -76,7 +76,7 @@
         <value>Энергетик</value>
     </data>
     <data name="UpgradeEnergyDrinkBlockingTextKey" xml:space="preserve">
-        <value>Сегодняшний лимит исчерпан</value>
+        <value>Дневной лимит исчерпан</value>
     </data>
     <data name="UpgradeEnergyReserveHeaderTextKey" xml:space="preserve">
         <value>Запас энергии</value>
@@ -103,7 +103,7 @@
         <value>Ну пинганул</value>
     </data>
     <data name="UpgradeFieldHeaderTextKey" xml:space="preserve">
-        <value>Улучшить поле</value>
+        <value>Размер поля</value>
     </data>
     <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
         <value>Увеличивает размер поля на 1 клетку</value>
@@ -119,12 +119,6 @@
     </data>
     <data name="QuestInvite5FriendDescriptionTextKey" xml:space="preserve">
         <value>Получите дополнительную награду за первых пяти приглашенных друзей</value>
-    </data>
-    <data name="LinkNewsChannelTextKey" xml:space="preserve">
-        <value>https://t.me/PingWinGame_ru</value>
-    </data>
-    <data name="QuestSubscribeToNewsChannelHeaderTextKey" xml:space="preserve">
-        <value>Подпишись на наш ТГ канал</value>
     </data>
     <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
         <value>Узнавайте новости одним из первых</value>
@@ -188,5 +182,20 @@
     </data>
     <data name="LeagueHumpbackFullNameTextKey" xml:space="preserve">
         <value>Лига горбатого кита</value>
+    </data>
+    <data name="QuestSubscribeToNewsChannelTittleTextKey" xml:space="preserve">
+        <value>Подпишись на наш ТГ канал</value>
+    </data>
+    <data name="LinkGroupChatTextKey" xml:space="preserve">
+        <value>https://t.me/PingWinGame_chat_ru</value>
+    </data>
+    <data name="QuestSubscribeToGroupChatTittleTextKey" xml:space="preserve">
+        <value>Вступай в наш ТГ чат</value>
+    </data>
+    <data name="QuestSubscribeToGroupChatDescriptionTextKey" xml:space="preserve">
+        <value>Поддержка, общение, FAQ - все там</value>
+    </data>
+    <data name="LinkPingwinNewsChannelTextKey" xml:space="preserve">
+        <value>https://t.me/PingWinGame_ru</value>
     </data>
 </root>
