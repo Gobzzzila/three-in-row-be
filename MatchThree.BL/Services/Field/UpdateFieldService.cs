@@ -21,8 +21,10 @@ public class UpdateFieldService(MatchThreeDbContext context,
 
     public async Task UpgradeFieldAsync(long userId)
     {
-        var dbModel = await _context.Set<FieldDbModel>().FindAsync(userId);
-        if (dbModel is null)
+        var dbModel = await _context.Set<FieldDbModel>()
+            .Include(x => x.FieldElements!.Where(y => y.Level != ElementLevels.Undefined))
+            .FirstOrDefaultAsync(x => x.Id == userId);
+        if (dbModel?.FieldElements is null)
             throw new NoDataFoundException();
 
         var fieldParams = FieldConfiguration.GetParamsByLevel(dbModel!.FieldLevel);
@@ -34,16 +36,17 @@ public class UpdateFieldService(MatchThreeDbContext context,
 
         await _updateBalanceService.SpendBalanceAsync(userId, fieldParams.NextLevelCost!.Value);
 
-        dbModel.FieldLevel = fieldParams.NextLevel.Value;
+        var existedCryptoTypes = dbModel.FieldElements.Select(x => (int)x.Element).ToList(); 
         dbModel.Field[fieldParams.NextLevelCoordinates.Y][fieldParams.NextLevelCoordinates.X] = 
-            GetUniqueValue(dbModel.Field, fieldParams.NextLevelCoordinates.Y, fieldParams.NextLevelCoordinates.X);
+            GetUniqueValue(dbModel.Field, fieldParams.NextLevelCoordinates.Y, fieldParams.NextLevelCoordinates.X, existedCryptoTypes);
+        dbModel.FieldLevel = fieldParams.NextLevel.Value;
 
         _context.Set<FieldDbModel>().Update(dbModel);
     }
     
-    private static int GetUniqueValue(int[][] array, int y, int x)
+    private static int GetUniqueValue(int[][] array, int y, int x, List<int> cryptoTypes)
     {
-        var possibleValues = new HashSet<int> { 1, 2, 3, 4, 5 };
+        var possibleValues = new HashSet<int>(cryptoTypes);
         if (y > 0)
             possibleValues.Remove(array[y - 1][x]); 
         
