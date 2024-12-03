@@ -1,9 +1,9 @@
 using System.Reflection;
 using System.Text;
 using MatchThree.API.Authentication;
+using MatchThree.API.Authentication.Interfaces;
 using MatchThree.API.Authentication.Policies;
 using MatchThree.API.ExceptionHandlers;
-using MatchThree.API.Middleware;
 using MatchThree.API.Services;
 using MatchThree.BL.Extensions;
 using MatchThree.Domain.Interfaces;
@@ -52,10 +52,26 @@ namespace MatchThree.API
                             ValidAudience = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Audience)}"],
                             IssuerSigningKey = new SymmetricSecurityKey(
                                 Encoding.UTF8.GetBytes(
-                                    builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Key)}"]!))
+                                    builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Key)}"]!)),
                         };
                         options.MapInboundClaims = false;
+
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnChallenge = context =>
+                            {
+                                if (context.AuthenticateFailure is not SecurityTokenExpiredException)
+                                    return Task.CompletedTask;
+                                
+                                var handler = context.HttpContext.RequestServices.GetRequiredService<IJwtTokenExpiredHandler>(); 
+                                handler.HandleAsync(context.HttpContext);
+                                context.HandleResponse();
+                        
+                                return Task.CompletedTask;
+                            }
+                        };
                     });
+                
                 builder.Services.AddAuthorization(options =>
                 {
                     options.AddPolicy(AuthenticationConstants.UserIdPolicy, policy =>
@@ -79,6 +95,7 @@ namespace MatchThree.API
                 builder.Services.AddSingleton<ITelegramBotService, TelegramBotService>();
                 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
                 builder.Services.AddSingleton<IAuthorizationHandler, UserIdHandler>();
+                builder.Services.AddSingleton<IJwtTokenExpiredHandler, JwtTokenExpiredHandler>();
                 builder.Services.AddDomainServices();
 
                 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));

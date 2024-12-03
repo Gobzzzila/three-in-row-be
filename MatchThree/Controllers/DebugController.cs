@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MatchThree.API.Authentication.Interfaces;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;

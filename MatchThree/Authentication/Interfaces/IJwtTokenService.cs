@@ -1,4 +1,4 @@
-﻿namespace MatchThree.Domain.Interfaces;
+﻿namespace MatchThree.API.Authentication.Interfaces;
 
 public interface IJwtTokenService
 {

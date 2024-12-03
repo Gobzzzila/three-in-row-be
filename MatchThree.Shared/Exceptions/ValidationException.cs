@@ -1,5 +1,4 @@
-﻿using System.Net;
-using MatchThree.Shared.Constants;
+﻿using MatchThree.Shared.Constants;
 
 namespace MatchThree.Shared.Exceptions;
 

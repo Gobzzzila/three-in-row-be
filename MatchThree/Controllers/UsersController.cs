@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Web;
 using MatchThree.API.Attributes;
+using MatchThree.API.Authentication.Interfaces;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;

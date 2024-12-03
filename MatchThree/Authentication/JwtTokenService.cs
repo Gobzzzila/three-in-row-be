@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using MatchThree.Domain.Interfaces;
+using MatchThree.API.Authentication.Interfaces;
 using MatchThree.Domain.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
