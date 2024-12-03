@@ -48,7 +48,7 @@ public enum FieldLevels
     Level10 = 10,
     
     [UpgradeCost(FieldConstants.Level12FieldCost)]
-    [NextLevelFieldInfo(2, 5, CryptoTypes.Jetton)]
+    [NextLevelFieldInfo(2, 5, CryptoTypes.Usdt)]
     Level11 = 11,
     
     [UpgradeCost(FieldConstants.Level13FieldCost)]
@@ -100,7 +100,7 @@ public enum FieldLevels
     Level23 = 23,
     
     [UpgradeCost(FieldConstants.Level25FieldCost)]
-    [NextLevelFieldInfo(7, 6, CryptoTypes.Not)]
+    [NextLevelFieldInfo(7, 6, CryptoTypes.Fnz)]
     Level24 = 24,
     
     [UpgradeCost(FieldConstants.Level26FieldCost)]
