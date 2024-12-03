@@ -13,5 +13,6 @@ public sealed class QuestEntity
     public string? ExternalLinkKey { get; init; }
     public string? SecretCode { get; init; }
     public Func<IValidateQuestCompletionService, long, Task<bool>>? VerificationOfFulfillment { get; init; } 
+    public bool IsСompressible { get; init; }
     public bool IsDeleted { get; init; }
 }

@@ -17,9 +17,20 @@ public static class QuestsConfiguration
     
     public static List<QuestEntity> GetUncompleted(List<Guid> completedQuestIds)
     {
-        return (from quest in Quests.OrderBy(x => x.Value.Type)
-            where !completedQuestIds.Contains(quest.Key) && !quest.Value.IsDeleted 
+        var uncompletedQuest = (from quest in Quests
+            where !completedQuestIds.Contains(quest.Key) && !quest.Value.IsDeleted
             select quest.Value).ToList();
+
+        var compressibleQuests = uncompletedQuest.OrderBy(x => x.Reward)
+            .Where(x => x.IsСompressible)
+            .DistinctBy(x => x.Type)
+            .ToList(); 
+        
+        var nonCompressibleQuests = uncompletedQuest
+            .Where(x => !x.IsСompressible)
+            .ToList(); 
+        
+        return compressibleQuests.Concat(nonCompressibleQuests).OrderBy(x => x.Type).ToList();
     }
     
     public static List<QuestEntity> GetCompleted(List<Guid> completedQuestIds)
@@ -44,7 +55,8 @@ public static class QuestsConfiguration
                     ExternalLinkKey = null,
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(1),
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsСompressible = true
                 }
             },
             {
@@ -58,7 +70,8 @@ public static class QuestsConfiguration
                     ExternalLinkKey = null,
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(3),
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsСompressible = true
                 }
             },
             {
@@ -72,7 +85,8 @@ public static class QuestsConfiguration
                     ExternalLinkKey = null,
                     SecretCode = null,
                     VerificationOfFulfillment = IsEnoughReferralsAsync(5),
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsСompressible = true
                 }
             },
             {
@@ -86,7 +100,8 @@ public static class QuestsConfiguration
                     ExternalLinkKey = TranslationConstants.LinkPingwinNewsChannelTextKey,
                     SecretCode = null,
                     VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.PingwinNewsChannelId, ChatConstants.PingwinNewsChannelIdRu),
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsСompressible = false
                 }
             },
             {
@@ -100,7 +115,8 @@ public static class QuestsConfiguration
                     ExternalLinkKey = TranslationConstants.LinkGroupChatTextKey,
                     SecretCode = null,
                     VerificationOfFulfillment = IsSubscribedToChannel(ChatConstants.PingwinGroupChatId, ChatConstants.PingwinGroupChatIdRu),
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsСompressible = false
                 }
             },
         };
