@@ -8,8 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace MatchThree.API.Authentication;
 
-public class JwtTokenService(IOptions<JwtSettings> options) : IJwtTokenService
+public class JwtTokenService(TimeProvider timeProvider, IOptions<JwtSettings> options) : IJwtTokenService
 {
+    private readonly TimeProvider _timeProvider = timeProvider;
     private readonly JwtSettings _options = options.Value;
 
     public string GenerateJwtToken(long userId)
@@ -27,7 +28,7 @@ public class JwtTokenService(IOptions<JwtSettings> options) : IJwtTokenService
             issuer: _options.Issuer,
             audience: _options.Audience,
             claims: claims,
-            expires: DateTime.Now.AddMinutes(60),
+            expires: _timeProvider.GetLocalNow().DateTime.AddMinutes(60),
             signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);

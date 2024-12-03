@@ -46,6 +46,7 @@ namespace MatchThree.API
                             ValidateIssuer = true,
                             ValidateAudience = true,
                             ValidateLifetime = true,
+                            ClockSkew = TimeSpan.Zero,
                             ValidateIssuerSigningKey = true,
                             ValidIssuer = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Issuer)}"],
                             ValidAudience = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Audience)}"],
