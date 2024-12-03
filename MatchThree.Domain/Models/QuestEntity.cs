@@ -9,6 +9,7 @@ public sealed class QuestEntity
     public QuestTypes Type { get; init; }
     public string TittleKey { get; init; } = string.Empty;
     public string DescriptionKey { get; init; } = string.Empty;
+    public string PictureName { get; init; } = string.Empty;
     public uint Reward { get; init; }
     public string? ExternalLinkKey { get; init; }
     public string? SecretCode { get; init; }

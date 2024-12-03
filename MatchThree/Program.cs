@@ -196,7 +196,7 @@ namespace MatchThree.API
 
                 app.UseExceptionHandler(_ => { });
 
-                app.UseMiddleware<LoggingMiddleware>();
+                // app.UseMiddleware<LoggingMiddleware>();
                 
                 app.Services.GetRequiredService<ITelegramBotService>();
             }
