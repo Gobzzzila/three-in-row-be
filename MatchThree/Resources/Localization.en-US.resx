@@ -199,19 +199,19 @@
         <value>https://t.me/PingWinGame</value>
     </data>
     <data name="QuestWelcomeMysteryCodeTittleTextKey" xml:space="preserve">
-        <value>Hunting for secret code</value>
+        <value>Secret code hunt</value>
     </data>
     <data name="QuestWelcomeMysteryCodeDescriptionTextKey" xml:space="preserve">
-        <value>A starter bonus for the attentive. The secret code is hidden somewhere in the TG channel</value>
+        <value>Secret code is hidden somewhere in TG channel</value>
     </data>
     <data name="QuestPurchase1EnergyDrinkTittleTextKey" xml:space="preserve">
-        <value>Buy energy drink for stars</value>
+        <value>Buy energy drink</value>
     </data>
     <data name="QuestPurchase3EnergyDrinkTittleTextKey" xml:space="preserve">
-        <value>Buy 3 energy drinks for stars</value>
+        <value>Buy 3 energy drinks</value>
     </data>
     <data name="QuestPurchase5EnergyDrinkTittleTextKey" xml:space="preserve">
-        <value>Buy 5 energy drinks for stars</value>
+        <value>Buy 5 energy drinks</value>
     </data>
     <data name="QuestPurchaseEnergyDrinkDescriptionTextKey" xml:space="preserve">
         <value>Restore energy to level up faster</value>

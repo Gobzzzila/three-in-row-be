@@ -429,7 +429,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buy energy drink for stars.
+        ///   Looks up a localized string similar to Buy energy drink.
         /// </summary>
         internal static string QuestPurchase1EnergyDrinkTittleTextKey {
             get {
@@ -438,7 +438,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buy 3 energy drinks for stars.
+        ///   Looks up a localized string similar to Buy 3 energy drinks.
         /// </summary>
         internal static string QuestPurchase3EnergyDrinkTittleTextKey {
             get {
@@ -447,7 +447,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Buy 5 energy drinks for stars.
+        ///   Looks up a localized string similar to Buy 5 energy drinks.
         /// </summary>
         internal static string QuestPurchase5EnergyDrinkTittleTextKey {
             get {
@@ -501,7 +501,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A starter bonus for the attentive. The secret code is hidden somewhere in the TG channel.
+        ///   Looks up a localized string similar to Secret code is hidden somewhere in TG channel.
         /// </summary>
         internal static string QuestWelcomeMysteryCodeDescriptionTextKey {
             get {
@@ -510,7 +510,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hunting for secret code.
+        ///   Looks up a localized string similar to Secret code hunt.
         /// </summary>
         internal static string QuestWelcomeMysteryCodeTittleTextKey {
             get {

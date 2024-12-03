@@ -429,7 +429,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Купи энергетик за звезды.
+        ///   Looks up a localized string similar to Купи энергетик.
         /// </summary>
         internal static string QuestPurchase1EnergyDrinkTittleTextKey {
             get {
@@ -438,7 +438,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Купи 3 энергетика за звезды.
+        ///   Looks up a localized string similar to Купи 3 энергетика.
         /// </summary>
         internal static string QuestPurchase3EnergyDrinkTittleTextKey {
             get {
@@ -447,7 +447,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Купи 5 энергетиков за звезды.
+        ///   Looks up a localized string similar to Купи 5 энергетиков.
         /// </summary>
         internal static string QuestPurchase5EnergyDrinkTittleTextKey {
             get {
@@ -501,7 +501,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Стартовый бонус для внимательных. Секретный код спрятан где-то в TG канале.
+        ///   Looks up a localized string similar to Секретный код спрятан где-то в TG канале.
         /// </summary>
         internal static string QuestWelcomeMysteryCodeDescriptionTextKey {
             get {

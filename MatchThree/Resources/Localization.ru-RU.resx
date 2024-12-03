@@ -199,19 +199,19 @@
         <value>https://t.me/PingWinGame_ru</value>
     </data>
     <data name="QuestWelcomeMysteryCodeDescriptionTextKey" xml:space="preserve">
-        <value>Стартовый бонус для внимательных. Секретный код спрятан где-то в TG канале</value>
+        <value>Секретный код спрятан где-то в TG канале</value>
     </data>
     <data name="QuestWelcomeMysteryCodeTittleTextKey" xml:space="preserve">
         <value>Охота за секретным кодом</value>
     </data>
     <data name="QuestPurchase1EnergyDrinkTittleTextKey" xml:space="preserve">
-        <value>Купи энергетик за звезды</value>
+        <value>Купи энергетик</value>
     </data>
     <data name="QuestPurchase3EnergyDrinkTittleTextKey" xml:space="preserve">
-        <value>Купи 3 энергетика за звезды</value>
+        <value>Купи 3 энергетика</value>
     </data>
     <data name="QuestPurchase5EnergyDrinkTittleTextKey" xml:space="preserve">
-        <value>Купи 5 энергетиков за звезды</value>
+        <value>Купи 5 энергетиков</value>
     </data>
     <data name="QuestPurchaseEnergyDrinkDescriptionTextKey" xml:space="preserve">
         <value>Восстанавливай энергию, чтобы быстрее прокачиваться</value>
