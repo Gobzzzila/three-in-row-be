@@ -74,11 +74,11 @@ public class AutoMappingProfile : Profile
             .ForMember(x => x.Description,
                 o =>
                     o.MapFrom<TextKeyResolver, string>(s => s.DescriptionKey))
-            .ForMember(x => x.ExternalLink,
+            .ForMember(x => x.ActionLink,
                 o =>
                 {
-                    o.PreCondition(s => s.ExternalLinkKey is not null);
-                    o.MapFrom<TextKeyResolver, string>(s => s.ExternalLinkKey!);
+                    o.PreCondition(s => s.ActionLinkKey is not null);
+                    o.MapFrom<TextKeyResolver, string>(s => s.ActionLinkKey!);
                 })
             .ForMember(x => x.IsWithSecretCode, 
                 o => o.MapFrom(s => !string.IsNullOrEmpty(s.SecretCode)));

@@ -11,7 +11,8 @@ public sealed class QuestEntity
     public string DescriptionKey { get; init; } = string.Empty;
     public string PictureName { get; init; } = string.Empty;
     public uint Reward { get; init; }
-    public string? ExternalLinkKey { get; init; }
+    public string? ActionLinkKey { get; init; }
+    public bool? IsLinkInternal { get; init; }
     public string? SecretCode { get; init; }
     public Func<IValidateQuestCompletionService, long, Task<bool>>? VerificationOfFulfillment { get; init; } 
     public bool IsСompressible { get; init; }

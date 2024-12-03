@@ -8,5 +8,6 @@ public class QuestDto
     public string PictureName { get; init; } = string.Empty;
     public uint Reward { get; init; }
     public bool IsWithSecretCode { get; init; }
-    public string? ExternalLink { get; init; } = string.Empty;
+    public string? ActionLink { get; init; } = string.Empty;
+    public bool? IsLinkInternal { get; init; }
 }
