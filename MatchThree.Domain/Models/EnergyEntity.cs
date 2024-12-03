@@ -11,4 +11,5 @@ public class EnergyEntity
     public int AvailableEnergyDrinkAmount { get; set; }
     public int PurchasableEnergyDrinkAmount { get; set; }
     public DateTime? LastRecoveryStartTime { get; set; }
+    public int PurchasedEnergyDrinkCounter { get; init; }
 }

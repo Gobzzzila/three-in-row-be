@@ -357,6 +357,24 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Присоединяйтесь к клубу любителей кастомных эмодзи.
+        /// </summary>
+        internal static string QuestBePremiumUserDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestBePremiumUserDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Премиум клуб.
+        /// </summary>
+        internal static string QuestBePremiumUserTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestBePremiumUserTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Получи дополнительную награду за первого приглашенного друга.
         /// </summary>
         internal static string QuestInvite1FriendDescriptionTextKey {
@@ -411,6 +429,42 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Купи энергетик за звезды.
+        /// </summary>
+        internal static string QuestPurchase1EnergyDrinkTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchase1EnergyDrinkTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Купи 3 энергетика за звезды.
+        /// </summary>
+        internal static string QuestPurchase3EnergyDrinkTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchase3EnergyDrinkTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Купи 5 энергетиков за звезды.
+        /// </summary>
+        internal static string QuestPurchase5EnergyDrinkTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchase5EnergyDrinkTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Восстанавливай энергию, чтобы быстрее прокачиваться.
+        /// </summary>
+        internal static string QuestPurchaseEnergyDrinkDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchaseEnergyDrinkDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поддержка, общение, FAQ - все там.
         /// </summary>
         internal static string QuestSubscribeToGroupChatDescriptionTextKey {
@@ -443,6 +497,24 @@ namespace MatchThree.API.Resources {
         internal static string QuestSubscribeToNewsChannelTittleTextKey {
             get {
                 return ResourceManager.GetString("QuestSubscribeToNewsChannelTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Стартовый бонус для внимательных. Секретный код спрятан где-то в TG канале.
+        /// </summary>
+        internal static string QuestWelcomeMysteryCodeDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestWelcomeMysteryCodeDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Охота за секретным кодом.
+        /// </summary>
+        internal static string QuestWelcomeMysteryCodeTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestWelcomeMysteryCodeTittleTextKey", resourceCulture);
             }
         }
         
@@ -591,7 +663,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Размер поля.
+        ///   Looks up a localized string similar to Игровое поле.
         /// </summary>
         internal static string UpgradeFieldHeaderTextKey {
             get {

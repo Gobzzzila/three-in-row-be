@@ -103,7 +103,7 @@
         <value>Ну пинганул</value>
     </data>
     <data name="UpgradeFieldHeaderTextKey" xml:space="preserve">
-        <value>Размер поля</value>
+        <value>Игровое поле</value>
     </data>
     <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
         <value>Увеличивает размер поля на 1 клетку</value>
@@ -197,5 +197,29 @@
     </data>
     <data name="LinkPingwinNewsChannelTextKey" xml:space="preserve">
         <value>https://t.me/PingWinGame_ru</value>
+    </data>
+    <data name="QuestWelcomeMysteryCodeDescriptionTextKey" xml:space="preserve">
+        <value>Стартовый бонус для внимательных. Секретный код спрятан где-то в TG канале</value>
+    </data>
+    <data name="QuestWelcomeMysteryCodeTittleTextKey" xml:space="preserve">
+        <value>Охота за секретным кодом</value>
+    </data>
+    <data name="QuestPurchase1EnergyDrinkTittleTextKey" xml:space="preserve">
+        <value>Купи энергетик за звезды</value>
+    </data>
+    <data name="QuestPurchase3EnergyDrinkTittleTextKey" xml:space="preserve">
+        <value>Купи 3 энергетика за звезды</value>
+    </data>
+    <data name="QuestPurchase5EnergyDrinkTittleTextKey" xml:space="preserve">
+        <value>Купи 5 энергетиков за звезды</value>
+    </data>
+    <data name="QuestPurchaseEnergyDrinkDescriptionTextKey" xml:space="preserve">
+        <value>Восстанавливай энергию, чтобы быстрее прокачиваться</value>
+    </data>
+    <data name="QuestBePremiumUserTittleTextKey" xml:space="preserve">
+        <value>Премиум клуб</value>
+    </data>
+    <data name="QuestBePremiumUserDescriptionTextKey" xml:space="preserve">
+        <value>Присоединяйтесь к клубу любителей кастомных эмодзи</value>
     </data>
 </root>

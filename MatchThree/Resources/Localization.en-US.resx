@@ -103,7 +103,7 @@
         <value>Nice ping!</value>
     </data>
     <data name="UpgradeFieldHeaderTextKey" xml:space="preserve">
-        <value>Field size</value>
+        <value>Playing field</value>
     </data>
     <data name="UpgradeFieldDescriptionTextKey" xml:space="preserve">
         <value>Increases the field size by 1 cell</value>
@@ -197,5 +197,29 @@
     </data>
     <data name="LinkPingwinNewsChannelTextKey" xml:space="preserve">
         <value>https://t.me/PingWinGame</value>
+    </data>
+    <data name="QuestWelcomeMysteryCodeTittleTextKey" xml:space="preserve">
+        <value>Hunting for secret code</value>
+    </data>
+    <data name="QuestWelcomeMysteryCodeDescriptionTextKey" xml:space="preserve">
+        <value>A starter bonus for the attentive. The secret code is hidden somewhere in the TG channel</value>
+    </data>
+    <data name="QuestPurchase1EnergyDrinkTittleTextKey" xml:space="preserve">
+        <value>Buy energy drink for stars</value>
+    </data>
+    <data name="QuestPurchase3EnergyDrinkTittleTextKey" xml:space="preserve">
+        <value>Buy 3 energy drinks for stars</value>
+    </data>
+    <data name="QuestPurchase5EnergyDrinkTittleTextKey" xml:space="preserve">
+        <value>Buy 5 energy drinks for stars</value>
+    </data>
+    <data name="QuestPurchaseEnergyDrinkDescriptionTextKey" xml:space="preserve">
+        <value>Restore energy to level up faster</value>
+    </data>
+    <data name="QuestBePremiumUserTittleTextKey" xml:space="preserve">
+        <value>Premium сlub</value>
+    </data>
+    <data name="QuestBePremiumUserDescriptionTextKey" xml:space="preserve">
+        <value>Join the club of custom emoji lovers</value>
     </data>
 </root>

@@ -28,7 +28,7 @@ public class JwtTokenService(TimeProvider timeProvider, IOptions<JwtSettings> op
             issuer: _options.Issuer,
             audience: _options.Audience,
             claims: claims,
-            expires: _timeProvider.GetLocalNow().DateTime.AddMinutes(60),
+            expires: _timeProvider.GetLocalNow().DateTime.AddMinutes(30),       //TODO Move magic number to appsettings
             signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);

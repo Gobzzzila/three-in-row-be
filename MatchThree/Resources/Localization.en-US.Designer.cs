@@ -357,6 +357,24 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Join the club of custom emoji lovers.
+        /// </summary>
+        internal static string QuestBePremiumUserDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestBePremiumUserDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premium сlub.
+        /// </summary>
+        internal static string QuestBePremiumUserTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestBePremiumUserTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get an extra reward for the first friend you invite.
         /// </summary>
         internal static string QuestInvite1FriendDescriptionTextKey {
@@ -411,6 +429,42 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buy energy drink for stars.
+        /// </summary>
+        internal static string QuestPurchase1EnergyDrinkTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchase1EnergyDrinkTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy 3 energy drinks for stars.
+        /// </summary>
+        internal static string QuestPurchase3EnergyDrinkTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchase3EnergyDrinkTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy 5 energy drinks for stars.
+        /// </summary>
+        internal static string QuestPurchase5EnergyDrinkTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchase5EnergyDrinkTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore energy to level up faster.
+        /// </summary>
+        internal static string QuestPurchaseEnergyDrinkDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestPurchaseEnergyDrinkDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Support, communication, FAQ - all there.
         /// </summary>
         internal static string QuestSubscribeToGroupChatDescriptionTextKey {
@@ -443,6 +497,24 @@ namespace MatchThree.API.Resources {
         internal static string QuestSubscribeToNewsChannelTittleTextKey {
             get {
                 return ResourceManager.GetString("QuestSubscribeToNewsChannelTittleTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A starter bonus for the attentive. The secret code is hidden somewhere in the TG channel.
+        /// </summary>
+        internal static string QuestWelcomeMysteryCodeDescriptionTextKey {
+            get {
+                return ResourceManager.GetString("QuestWelcomeMysteryCodeDescriptionTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hunting for secret code.
+        /// </summary>
+        internal static string QuestWelcomeMysteryCodeTittleTextKey {
+            get {
+                return ResourceManager.GetString("QuestWelcomeMysteryCodeTittleTextKey", resourceCulture);
             }
         }
         
@@ -591,7 +663,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Field size.
+        ///   Looks up a localized string similar to Playing field.
         /// </summary>
         internal static string UpgradeFieldHeaderTextKey {
             get {
