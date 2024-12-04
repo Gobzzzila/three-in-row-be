@@ -28,7 +28,7 @@
         <value>Invite 1 friend</value>
     </data>
     <data name="QuestInvite1FriendDescriptionTextKey" xml:space="preserve">
-        <value>Get an extra reward for the first friend you invite</value>
+        <value>Get an extra reward for the first friend</value>
     </data>
     <data name="ExceptionNoDataFoundTextKey" xml:space="preserve">
         <value>Specified item does not exist</value>
@@ -112,13 +112,13 @@
         <value>Invite 3 friend</value>
     </data>
     <data name="QuestInvite3FriendDescriptionTextKey" xml:space="preserve">
-        <value>Get extra rewards for the first two friends you invite</value>
+        <value>Get extra rewards for the first two friends</value>
     </data>
     <data name="QuestInvite5FriendTittleTextKey" xml:space="preserve">
         <value>Invite 5 friend</value>
     </data>
     <data name="QuestInvite5FriendDescriptionTextKey" xml:space="preserve">
-        <value>Get extra rewards for the first five friends you invite</value>
+        <value>Get extra rewards for the first five friends</value>
     </data>
     <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
         <value>Be one of the first to know the news</value>

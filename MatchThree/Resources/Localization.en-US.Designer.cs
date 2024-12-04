@@ -375,7 +375,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get an extra reward for the first friend you invite.
+        ///   Looks up a localized string similar to Get an extra reward for the first friend.
         /// </summary>
         internal static string QuestInvite1FriendDescriptionTextKey {
             get {
@@ -393,7 +393,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get extra rewards for the first two friends you invite.
+        ///   Looks up a localized string similar to Get extra rewards for the first two friends.
         /// </summary>
         internal static string QuestInvite3FriendDescriptionTextKey {
             get {
@@ -411,7 +411,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get extra rewards for the first five friends you invite.
+        ///   Looks up a localized string similar to Get extra rewards for the first five friends.
         /// </summary>
         internal static string QuestInvite5FriendDescriptionTextKey {
             get {

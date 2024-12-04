@@ -375,7 +375,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получи дополнительную награду за первого приглашенного друга.
+        ///   Looks up a localized string similar to Получи дополнительную награду за первого друга.
         /// </summary>
         internal static string QuestInvite1FriendDescriptionTextKey {
             get {
@@ -393,7 +393,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получите дополнительную награду за первых двух приглашенных друзей.
+        ///   Looks up a localized string similar to Получите дополнительную награду за первых двух друзей.
         /// </summary>
         internal static string QuestInvite3FriendDescriptionTextKey {
             get {
@@ -411,7 +411,7 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Получите дополнительную награду за первых пяти приглашенных друзей.
+        ///   Looks up a localized string similar to Получите дополнительную награду за первых пяти друзей.
         /// </summary>
         internal static string QuestInvite5FriendDescriptionTextKey {
             get {

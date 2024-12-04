@@ -28,7 +28,7 @@
         <value>Пригласи 1 друга</value>
     </data>
     <data name="QuestInvite1FriendDescriptionTextKey" xml:space="preserve">
-        <value>Получи дополнительную награду за первого приглашенного друга</value>
+        <value>Получи дополнительную награду за первого друга</value>
     </data>
     <data name="ExceptionNoDataFoundTextKey" xml:space="preserve">
         <value>Указанный элемент не существует</value>
@@ -112,13 +112,13 @@
         <value>Пригласи 3 друга</value>
     </data>
     <data name="QuestInvite3FriendDescriptionTextKey" xml:space="preserve">
-        <value>Получите дополнительную награду за первых двух приглашенных друзей</value>
+        <value>Получите дополнительную награду за первых двух друзей</value>
     </data>
     <data name="QuestInvite5FriendTittleTextKey" xml:space="preserve">
         <value>Пригласи 5 друзей</value>
     </data>
     <data name="QuestInvite5FriendDescriptionTextKey" xml:space="preserve">
-        <value>Получите дополнительную награду за первых пяти приглашенных друзей</value>
+        <value>Получите дополнительную награду за первых пяти друзей</value>
     </data>
     <data name="QuestSubscribeToNewsChannelDescriptionTextKey" xml:space="preserve">
         <value>Узнавайте новости одним из первых</value>
