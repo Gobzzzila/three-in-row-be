@@ -15,7 +15,7 @@ public static class QuestsConstants
     public const uint QuestInvite5FriendReward = 10_000;
     
     //Tg Subscription Quests
-    public const string QuestTgSubscriptionPictureName = "tg_icon.png";
+    public const string QuestTgSubscriptionPictureName = "TgSubscriptionQuest.png";
 
     public static readonly Guid QuestIdPingwinNewsChannelSubscription = Guid.Parse("FCA11111-908A-4619-8868-F8310EA7D2E3");
     public const uint QuestPingwinNewsChannelSubscriptionReward = 2_500;
