@@ -6,14 +6,18 @@ using Microsoft.Extensions.Localization;
 
 namespace MatchThree.API.ExceptionHandlers;
 
-public class DefaultExceptionHandler(IStringLocalizer<Localization> localization) 
+public class DefaultExceptionHandler(ILogger<DefaultExceptionHandler> logger, 
+    IStringLocalizer<Localization> localization) 
     : IExceptionHandler
 {
+    private readonly ILogger<DefaultExceptionHandler> _logger = logger;
     private readonly IStringLocalizer<Localization> _localization = localization;
 
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception,
         CancellationToken cancellationToken)
     {
+        _logger.LogError(exception, $"Unhandled exception for path {httpContext.Request.Path}");
+        
         httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         var localizedTittle = _localization[TranslationConstants.ExceptionDefaultTextKey];
         

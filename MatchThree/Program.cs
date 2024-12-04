@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using static MatchThree.API.SwaggerConfiguration;
 
 namespace MatchThree.API
@@ -34,6 +35,12 @@ namespace MatchThree.API
             
             void ConfigureServices()
             {
+                Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(builder.Configuration)
+                    .CreateLogger(); 
+            
+                builder.Host.UseSerilog();
+                
                 builder.Services.AddAuthentication(options =>
                     {
                         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
