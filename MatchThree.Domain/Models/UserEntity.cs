@@ -8,7 +8,7 @@ public class UserEntity
     public required long Id { get; set; }
 
     [JsonPropertyName("username")]
-    public required string? Username { get; set; }
+    public string? Username { get; set; }
 
     [JsonPropertyName("first_name")]
     public required string FirstName { get; set; } = string.Empty;
