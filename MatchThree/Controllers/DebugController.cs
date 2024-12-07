@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
+#if DEBUG
+
 namespace MatchThree.API.Controllers;
 
 [ApiController]
@@ -59,7 +61,6 @@ public class DebugController(IMapper mapper,
         return Results.Ok(token);
     }
     
-#if DEBUG
     /// <summary>
     /// User deletion
     /// </summary>
@@ -75,5 +76,5 @@ public class DebugController(IMapper mapper,
         await _transactionService.CommitAsync();
         return Results.NoContent();
     }
-#endif
 }
+#endif

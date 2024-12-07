@@ -35,14 +35,20 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         IOptions<TelegramSettings> options,
         ILogger<TelegramBotService> logger)
     {
-#if !DEBUG
-        _bot = new TelegramBotClient(options.Value.BotToken);
+#if DEBUG
+        var botToken = options.Value.BotToken;
+        var helperBotToken = options.Value.BotToken;
+#else
+        var botToken = Environment.GetEnvironmentVariable("botToken")!;
+        var helperBotToken = Environment.GetEnvironmentVariable("helperBotToken")!;
+#endif
+        
+        _bot = new TelegramBotClient(botToken);
         _bot.OnError += OnError;
         _bot.OnMessage += OnMessage;
         _bot.OnUpdate += OnUpdate;
         
-        _helperBot = new TelegramBotClient(options.Value.HelperBotToken);
-#endif
+        _helperBot = new TelegramBotClient(helperBotToken);
 
         _localizer = localizer;
         _logger = logger;

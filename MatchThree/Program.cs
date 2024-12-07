@@ -48,6 +48,12 @@ namespace MatchThree.API
                     })
                     .AddJwtBearer(options =>
                     {
+#if DEBUG
+                        var jwtKey = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Key)}"];
+#else
+                        var jwtKey = Environment.GetEnvironmentVariable("jwtKey");
+#endif
+                        
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             ValidateIssuer = true,
@@ -57,9 +63,7 @@ namespace MatchThree.API
                             ValidateIssuerSigningKey = true,
                             ValidIssuer = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Issuer)}"],
                             ValidAudience = builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Audience)}"],
-                            IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(
-                                    builder.Configuration[$"{nameof(JwtSettings)}:{nameof(JwtSettings.Key)}"]!)),
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!)),
                         };
                         options.MapInboundClaims = false;
 
@@ -87,8 +91,13 @@ namespace MatchThree.API
                     });
                 });
                 
+#if DEBUG
+                var connectionString = builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext));
+#else
+                var connectionString = Environment.GetEnvironmentVariable("connectionString");
+#endif
                 builder.Services.AddDbContext<MatchThreeDbContext>(options =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(MatchThreeDbContext)),
+                    options.UseSqlServer(connectionString,
                         optionsBuilder =>
                         {
                             optionsBuilder.EnableRetryOnFailure(
@@ -175,10 +184,15 @@ namespace MatchThree.API
                     options.AddPolicy("AllowSpecificOrigin",
                         builder =>
                         {
+#if DEBUG
                             builder.WithOrigins("https://cryptofe-75961.web.app")
                                 .AllowAnyHeader()
-                                .AllowAnyMethod();                            
-                            
+                                .AllowAnyMethod();    
+#else
+                            builder.WithOrigins("https://pingwin-be08f.web.app")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();        
+#endif
                             builder.WithOrigins("http://localhost:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
