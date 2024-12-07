@@ -2,6 +2,6 @@
 
 public class TelegramSettings
 {
-    public required string BotToken { get; init; }
-    public required string HelperBotToken { get; init; }
+    public required string BotToken { get; set; }
+    public required string HelperBotToken { get; set; }
 }

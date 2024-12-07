@@ -15,13 +15,7 @@ public class JwtTokenService(TimeProvider timeProvider, IOptions<JwtSettings> op
 
     public string GenerateJwtToken(long userId)
     {
-#if DEBUG
-        var jwtKey = _options.Key;
-#else
-        var jwtKey = Environment.GetEnvironmentVariable("jwtKey")!;
-#endif
-        
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]

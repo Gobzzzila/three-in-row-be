@@ -39,7 +39,7 @@ namespace MatchThree.API
                     .ReadFrom.Configuration(builder.Configuration)
                     .CreateLogger(); 
             
-                builder.Host.UseSerilog();
+                builder.Host.UseSerilog(); 
                 
                 builder.Services.AddAuthentication(options =>
                     {
@@ -53,7 +53,6 @@ namespace MatchThree.API
 #else
                         var jwtKey = Environment.GetEnvironmentVariable("jwtKey");
 #endif
-                        
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             ValidateIssuer = true,
@@ -113,9 +112,23 @@ namespace MatchThree.API
                 builder.Services.AddSingleton<IAuthorizationHandler, UserIdHandler>();
                 builder.Services.AddSingleton<IJwtTokenExpiredHandler, JwtTokenExpiredHandler>();
                 builder.Services.AddDomainServices();
+                
+                builder.Services.Configure<JwtSettings>(options => 
+                { 
+                    builder.Configuration.GetSection(nameof(JwtSettings)).Bind(options); 
+#if RELEASE 
+                    options.Key = Environment.GetEnvironmentVariable(EnvConstants.JwtKeyEnvName)!; 
+#endif 
+                });
 
-                builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
-                builder.Services.Configure<TelegramSettings>(builder.Configuration.GetSection(nameof(TelegramSettings)));
+                builder.Services.Configure<TelegramSettings>(options => 
+                { 
+                    builder.Configuration.GetSection(nameof(TelegramSettings)).Bind(options); 
+#if RELEASE 
+                    options.BotToken = Environment.GetEnvironmentVariable(EnvConstants.BotTokenEnvName)!; 
+                    options.HelperBotToken = Environment.GetEnvironmentVariable(EnvConstants.HelperBotTokenEnvName)!; 
+#endif 
+                });
                 
                 var autoMapperProfileAssemblies =
                     new List<Assembly>
