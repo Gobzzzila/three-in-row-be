@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using MatchThree.Repository.MSSQL.Models.Base;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.Repository.MSSQL.Models;
 
-[Table("Energies")]
+[Table(EnergyConstants.EnergyTableName)]
 public class EnergyDbModel : DbModel
 {
     public int CurrentReserve { get; set; }

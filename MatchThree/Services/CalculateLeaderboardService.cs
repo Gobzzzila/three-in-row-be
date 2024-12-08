@@ -59,6 +59,7 @@ public class CalculateLeaderboardService : IHostedService, IDisposable
             
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
+            _logger.LogInformation($"Leaderboard recalculated");
         }
         catch (Exception ex)
         {

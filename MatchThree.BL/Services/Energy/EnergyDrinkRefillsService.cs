@@ -11,23 +11,25 @@ public class EnergyDrinkRefillsService (MatchThreeDbContext context)
 {
     private readonly MatchThreeDbContext _context = context;
 
-    public async Task ExecuteRefillEnergyDrinksAsync() =>
-        await _context.Database.CreateExecutionStrategy().ExecuteAsync(RefillEnergyDrinksInTransactionAsync);
-
-    private async Task RefillEnergyDrinksInTransactionAsync()
+    public async Task ExecuteRefillEnergyDrinksAsync()
     {
         await using var transaction = await _context.Database.BeginTransactionAsync();
         try
         {
-            await _context.Set<EnergyDbModel>()
-                .Where(x => x.AvailableEnergyDrinkAmount == 0)
-                .ExecuteUpdateAsync(x => 
-                    x.SetProperty(v => v.AvailableEnergyDrinkAmount, EnergyConstants.FreeEnergyDrinksPerDay));
-        
-            await _context.Set<EnergyDbModel>()
-                .Where(x => x.PurchasableEnergyDrinkAmount != EnergyConstants.PurchasableEnergyDrinksPerDay)
-                .ExecuteUpdateAsync(x => 
-                    x.SetProperty(v => v.PurchasableEnergyDrinkAmount, EnergyConstants.PurchasableEnergyDrinksPerDay));
+            await context.Database.ExecuteSqlRawAsync(
+                $"UPDATE [{EnergyConstants.EnergyTableName}] " +
+                    $"SET [{nameof(EnergyDbModel.AvailableEnergyDrinkAmount)}] = CASE " +
+                        $"WHEN [{nameof(EnergyDbModel.AvailableEnergyDrinkAmount)}] = '0' " +
+                            $"THEN '{EnergyConstants.FreeEnergyDrinksPerDay}' " +
+                        $"ELSE [{nameof(EnergyDbModel.AvailableEnergyDrinkAmount)}] " +
+                    $"END, " +
+                    $"[{nameof(EnergyDbModel.PurchasableEnergyDrinkAmount)}] = CASE " +
+                        $"WHEN [{nameof(EnergyDbModel.PurchasableEnergyDrinkAmount)}] <> '{EnergyConstants.PurchasableEnergyDrinksPerDay}' " +
+                            $"THEN '{EnergyConstants.PurchasableEnergyDrinksPerDay}' " +
+                        $"ELSE [{nameof(EnergyDbModel.PurchasableEnergyDrinkAmount)}] " +
+                    $"END " +
+                $"WHERE [{nameof(EnergyDbModel.AvailableEnergyDrinkAmount)}] = '0' " +
+                    $"OR [{nameof(EnergyDbModel.PurchasableEnergyDrinkAmount)}] <> '{EnergyConstants.PurchasableEnergyDrinksPerDay}';");
             
             await transaction.CommitAsync();
         }

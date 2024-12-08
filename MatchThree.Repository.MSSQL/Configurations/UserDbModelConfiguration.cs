@@ -17,12 +17,5 @@ public class UserDbModelConfiguration : EntityTypeConfigurationBase<UserDbModel>
             .Property(x => x.Id)
             .ValueGeneratedNever();
 
-        builder
-            .Property(x => x.FirstName)
-            .HasMaxLength(UserConstants.FirstNameMaxLength);
-
-        builder
-            .Property(x => x.Username)
-            .HasMaxLength(UserConstants.UsernameMaxLength);
     }
 }

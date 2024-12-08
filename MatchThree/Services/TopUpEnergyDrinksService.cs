@@ -7,25 +7,21 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
     private Timer? _timer;
     private bool _disposed;
     
-    private readonly IServiceScope _scope;
-    private readonly IEnergyDrinkRefillsService _energyDrinkRefillsService;
-    private readonly TimeProvider _timeProvider;
+    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<CalculateLeaderboardService> _logger;
     
     public TopUpEnergyDrinksService(IServiceProvider serviceProvider,
         ILogger<CalculateLeaderboardService> logger)
     {
         _logger = logger;
-        
-        _scope = serviceProvider.CreateScope();
-        var provider = _scope.ServiceProvider;
-        _timeProvider = provider.GetRequiredService<TimeProvider>();
-        _energyDrinkRefillsService = provider.GetRequiredService<IEnergyDrinkRefillsService>();
+        _serviceProvider = serviceProvider;
     }
     
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        var now = _timeProvider.GetUtcNow().DateTime;
+        using var scope = _serviceProvider.CreateScope();
+        var timeProvider = scope.ServiceProvider.GetRequiredService<TimeProvider>();
+        var now = timeProvider.GetUtcNow().DateTime;
         var nextMidnight = now.Date.AddDays(1);
         var initialDelay = nextMidnight - now;
         
@@ -41,7 +37,12 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
     {
         try
         {
-            await _energyDrinkRefillsService.ExecuteRefillEnergyDrinksAsync();
+            using var scope = _serviceProvider.CreateScope();
+            var energyDrinkRefillsService = scope.ServiceProvider.GetRequiredService<IEnergyDrinkRefillsService>();
+
+            await energyDrinkRefillsService.ExecuteRefillEnergyDrinksAsync();
+            
+            _logger.LogInformation($"Energy drinks top upped");
         }
         catch (Exception ex)
         {
@@ -67,10 +68,7 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         if (_disposed) return;
         
         if (disposing)
-        {
-            _scope.Dispose();
             _timer?.Dispose();
-        }
 
         _disposed = true;
     }

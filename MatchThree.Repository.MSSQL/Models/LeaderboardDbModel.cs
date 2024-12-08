@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using MatchThree.Repository.MSSQL.Models.Base;
+using MatchThree.Shared.Constants;
 using MatchThree.Shared.Enums;
 
 namespace MatchThree.Repository.MSSQL.Models;
 
-[Table("LeaderboardMembers")]
+[Table(LeaderBoardConstants.LeaderBoardTableName)]
 public class LeaderboardMemberDbModel : DbModel
 {
     public LeagueTypes League { get; set; }

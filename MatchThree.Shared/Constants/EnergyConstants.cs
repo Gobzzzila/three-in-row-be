@@ -2,6 +2,8 @@
 
 public static class EnergyConstants
 {
+    public const string EnergyTableName = "Energies";
+
     //Energy drinks
     public const int FreeEnergyDrinksPerDay = 1;
     public const int PurchasableEnergyDrinksPerDay = 5;
