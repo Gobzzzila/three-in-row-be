@@ -21,8 +21,8 @@ public class ReadLeaderboardMemberService(MatchThreeDbContext context,
         var dbModels = await _context.Set<LeaderboardMemberDbModel>()
             .AsNoTracking()
             .Where(x => x.League == league)
-            .Take(100)
             .OrderBy(x => x.TopSpot)
+            .Take(100)
             .ToListAsync();
 
         var leagueParams = LeagueConfiguration.GetParamsByType(league);

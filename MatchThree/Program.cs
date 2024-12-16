@@ -227,6 +227,7 @@ namespace MatchThree.API
                     dbContext.Database.Migrate();
                 }
 
+#if DEBUG
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
@@ -237,6 +238,7 @@ namespace MatchThree.API
                     c.DisplayOperationId();
                     c.DisplayRequestDuration();
                 });
+#endif
 
                 app.UseAuthentication(); 
                 app.UseAuthorization();

@@ -36,7 +36,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateFieldElementService _createFieldElementService = createFieldElementService;
     private readonly ICreateCompletedQuestsService _createCompletedQuestsService = createCompletedQuestsService;
     private readonly ICreateDailyLoginService _createDailyLoginService = createDailyLoginService;
-    private readonly TimeProvider _dateTimeProvider = timeProvider;
+    private readonly TimeProvider _timeProvider = timeProvider;
 
     public void Create(UserEntity userEntity)
     {
@@ -64,7 +64,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private void CreateUser(UserEntity userEntity)
     {
         var createDbModel = _mapper.Map<UserDbModel>(userEntity);
-        createDbModel.CreatedAt = _dateTimeProvider.GetUtcNow().DateTime;
+        createDbModel.CreatedAt = _timeProvider.GetUtcNow().DateTime;
         _context.Set<UserDbModel>().Add(createDbModel);
     }
     
