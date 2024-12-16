@@ -53,7 +53,7 @@ public class DebugController(IMapper mapper,
         else
         {
             var entity = _mapper.Map<UserEntity>(request);
-            await _updateUserService.SyncUserData(entity);
+            await _updateUserService.SyncUserDataAsync(entity);
         }
         
         var token = _jwtTokenService.GenerateJwtToken(request.Id);

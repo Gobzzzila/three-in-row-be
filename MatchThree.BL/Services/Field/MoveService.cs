@@ -39,7 +39,7 @@ public class MoveService(MatchThreeDbContext context,
         if (!calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
             throw new ValidationException();
 
-        await _updateEnergyService.SpendEnergy(userId);
+        await _updateEnergyService.SpendEnergyAsync(userId);
         await _updateFieldService.UpdateFieldAsync(userId, field);
         await _updateBalanceService.AddBalanceAsync(userId, reward);
     }

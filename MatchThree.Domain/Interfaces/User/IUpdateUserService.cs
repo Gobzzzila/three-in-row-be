@@ -4,5 +4,6 @@ namespace MatchThree.Domain.Interfaces.User;
 
 public interface IUpdateUserService
 {
-    Task SyncUserData(UserEntity entity);
+    Task SyncUserDataAsync(UserEntity entity);
+    Task RecordAdViewAsync(long userId);
 }

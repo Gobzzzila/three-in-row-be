@@ -63,6 +63,7 @@ public class FieldController(IUpdateFieldService updateFieldService,
     [Authorize(Policy = AuthenticationConstants.UserIdPolicy)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [SwaggerOperation(OperationId = "MakeMove", Tags = ["Field"])]
     public async Task<IResult> MakeMove([FromMultiSource]MakeMoveRequestDto request, 

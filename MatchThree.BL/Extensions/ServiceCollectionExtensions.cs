@@ -55,7 +55,7 @@ public static class ServiceCollectionExtensions
         
         //Energy
         services.AddScoped<ICreateEnergyService, CreateEnergyService>();
-        services.AddScoped<IEnergyDrinkRefillsService, EnergyDrinkRefillsService>();
+        services.AddScoped<IDailyRefillsService, DailyRefillsService>();
         services.AddScoped<IReadEnergyService, ReadEnergyService>();
         services.AddTransient<ISynchronizationEnergyService, SynchronizationEnergyService>();
         services.AddScoped<IUpdateEnergyService, UpdateEnergyService>();

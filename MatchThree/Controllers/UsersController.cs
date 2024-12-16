@@ -67,7 +67,7 @@ public class UsersController(IReadUserService readUserService,
         }
         else
         {
-            await _updateUserService.SyncUserData(userEntityFromRequest);
+            await _updateUserService.SyncUserDataAsync(userEntityFromRequest);
         }
         
         var token = _jwtTokenService.GenerateJwtToken(userEntityFromRequest.Id);

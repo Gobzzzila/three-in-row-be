@@ -1,15 +1,17 @@
 ﻿using MatchThree.Repository.MSSQL.Models.Base;
 using System.ComponentModel.DataAnnotations.Schema;
+using MatchThree.Shared.Constants;
 
 namespace MatchThree.Repository.MSSQL.Models;
 
-[Table("Users")]
+[Table(AuthenticationConstants.UserTableName)]
 public class UserDbModel : DbModel
 {
     public string? Username { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public bool IsPremium { get; set; }
     public string SessionHash { get; set; } = string.Empty;
+    public int DailyAdAmount { get; set; }
     public DateTime CreatedAt{ get; set; }
     public DateTime? BannedUntil { get; set; }
     public List<ReferralDbModel> Referrals { get; set; } = [];

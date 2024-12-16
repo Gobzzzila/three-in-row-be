@@ -1,8 +1,8 @@
-﻿using MatchThree.Domain.Interfaces.Energy;
+﻿using MatchThree.Domain.Interfaces;
 
 namespace MatchThree.API.Services;
 
-public class TopUpEnergyDrinksService : IHostedService, IDisposable
+public class DailyTopUpService : IHostedService, IDisposable
 {
     private Timer? _timer;
     private bool _disposed;
@@ -10,7 +10,7 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<CalculateLeaderboardService> _logger;
     
-    public TopUpEnergyDrinksService(IServiceProvider serviceProvider,
+    public DailyTopUpService(IServiceProvider serviceProvider,
         ILogger<CalculateLeaderboardService> logger)
     {
         _logger = logger;
@@ -35,18 +35,29 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
     
     private async Task TopUpEnergyDrinksAsync(object? state)
     {
+        using var scope = _serviceProvider.CreateScope();
+        var dailyRefillsService = scope.ServiceProvider.GetRequiredService<IDailyRefillsService>();
+        
         try
         {
-            using var scope = _serviceProvider.CreateScope();
-            var energyDrinkRefillsService = scope.ServiceProvider.GetRequiredService<IEnergyDrinkRefillsService>();
-
-            await energyDrinkRefillsService.ExecuteRefillEnergyDrinksAsync();
+            await dailyRefillsService.ExecuteRefillEnergyDrinksAsync();
             
             _logger.LogInformation($"Energy drinks top upped");
         }
         catch (Exception ex)
         {
             _logger.LogError($"Cannot top up energy drinks: {ex}");
+        }
+        
+        try
+        {
+            await dailyRefillsService.ExecuteRefillAdsAsync();
+            
+            _logger.LogInformation($"Ads refilled");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Cannot refill ads: {ex}");
         }
     }
 
@@ -73,7 +84,7 @@ public class TopUpEnergyDrinksService : IHostedService, IDisposable
         _disposed = true;
     }
 
-    ~TopUpEnergyDrinksService()
+    ~DailyTopUpService()
     {
         Dispose(false);
     }

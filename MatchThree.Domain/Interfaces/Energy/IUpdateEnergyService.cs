@@ -10,5 +10,7 @@ public interface IUpdateEnergyService
     
     Task PurchaseEnergyDrinkAsync(long userId);
     
-    Task SpendEnergy(long userId);
+    Task SpendEnergyAsync(long userId);
+
+    Task TopUpEnergyForAdAsync(long userId);
 }

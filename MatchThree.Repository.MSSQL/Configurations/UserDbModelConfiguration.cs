@@ -17,5 +17,8 @@ public class UserDbModelConfiguration : EntityTypeConfigurationBase<UserDbModel>
             .Property(x => x.Id)
             .ValueGeneratedNever();
 
+        builder
+            .Property(x => x.DailyAdAmount)
+            .HasDefaultValue(AdConstants.DailyAdAmountValue);
     }
 }

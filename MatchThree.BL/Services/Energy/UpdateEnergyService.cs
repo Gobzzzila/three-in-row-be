@@ -108,7 +108,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         await UseEnergyDrinkAsync(userId);
     }
     
-    public async Task SpendEnergy(long userId)
+    public async Task SpendEnergyAsync(long userId)
     {
         var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
         if (dbModel is null)
@@ -123,6 +123,22 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
         if (maxReserve > dbModel.CurrentReserve && dbModel.LastRecoveryStartTime is null)
             dbModel.LastRecoveryStartTime = _timeProvider.GetUtcNow().DateTime;
+        
+        _context.Set<EnergyDbModel>().Update(dbModel);
+    }
+    
+    public async Task TopUpEnergyForAdAsync(long userId)
+    {
+        var dbModel = await _context.Set<EnergyDbModel>().FindAsync(userId);
+        if (dbModel is null)
+            throw new NoDataFoundException();
+        
+        _synchronizationEnergyService.SynchronizeModel(dbModel);
+        dbModel.CurrentReserve += AdConstants.EnergyPerAd;
+        
+        var reserveMaxValue = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
+        if (dbModel.CurrentReserve >= reserveMaxValue)
+            dbModel.LastRecoveryStartTime = null;
         
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
