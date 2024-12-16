@@ -43,8 +43,8 @@ public class AdController(IReadUserService readUserService,
     [ProducesResponseType(StatusCodes.Status403Forbidden, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
-    [SwaggerOperation(OperationId = "GetAdsReward", Tags = ["Ad"])]
-    public async Task<IResult> GetAdsReward(long userId, CancellationToken cancellationToken = new())
+    [SwaggerOperation(OperationId = "EarnAdsReward", Tags = ["Ad"])]
+    public async Task<IResult> EarnAdsReward(long userId, CancellationToken cancellationToken = new())
     {
         await _updateUserService.RecordAdViewAsync(userId);
         await _transactionService.CommitAsync();
