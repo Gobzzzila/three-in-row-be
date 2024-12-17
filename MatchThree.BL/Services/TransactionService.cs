@@ -22,7 +22,7 @@ public class TransactionService(MatchThreeDbContext context) : ITransactionServi
         await using var transaction = await _context.Database.BeginTransactionAsync();
         try
         {
-            _context.ChangeTracker.DetectChanges();
+            _context.ChangeTracker.DetectChanges(); // Better safe than sorry c:
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
         }

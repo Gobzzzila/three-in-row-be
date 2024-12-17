@@ -13,6 +13,7 @@ using MatchThree.Shared.Constants;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -103,8 +104,12 @@ namespace MatchThree.API
                                 maxRetryCount: 5,
                                 maxRetryDelay: TimeSpan.FromSeconds(10),
                                 errorNumbersToAdd: null);
-                        }));
-
+                        })
+                        .ConfigureWarnings(w => w.Ignore(SqlServerEventId.SavepointsDisabledBecauseOfMARS)));
+                // Idk. I explicitly do not use MARS and SavePoints, because of the simplicity of the application 
+                // Here and now I'm solving the problem of logs which are full of warnings
+                // Although maybe I should have just changed the ConnectionString, I'll have to think about that at my leisure
+                
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<DailyTopUpService>();
                 builder.Services.AddSingleton<ITelegramBotService, TelegramBotService>();
