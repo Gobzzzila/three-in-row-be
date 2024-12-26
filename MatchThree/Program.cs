@@ -202,15 +202,10 @@ namespace MatchThree.API
                     options.AddPolicy("AllowSpecificOrigin",
                         builder =>
                         {
-#if DEBUG
-                            builder.WithOrigins("https://cryptofe-75961.web.app")
+                            builder.WithOrigins(LinksConstants.LinkToFrontEnd)
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();    
-#else
-                            builder.WithOrigins("https://pingwin-be08f.web.app")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();        
-#endif
+
                             builder.WithOrigins("http://localhost:5173")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();

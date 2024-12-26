@@ -13,6 +13,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.Payments;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MatchThree.API.Services;
 
@@ -60,7 +61,7 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         
         var invoiceLink = await _bot.CreateInvoiceLinkAsync(
             title: _localizer[upgradeInfo!.HeaderTextId],
-            description: _localizer[upgradeInfo!.DescriptionTextId],
+            description: _localizer[upgradeInfo.DescriptionTextId],
             payload: JsonSerializer.Serialize(payloadEntity),
             providerToken: null,
             currency: "XTR",
@@ -106,7 +107,18 @@ public class TelegramBotService : ITelegramBotService, IDisposable
     {
         if (msg.Text == "/start")
         {
-            await _bot.SendTextMessageAsync(msg.Chat, "Welcome to the club buddy!!");
+            var welcomeText = $"\ud83d\udc27 Hi {msg.Chat.FirstName}! \n\n" +
+                              "Welcome to the magical world of Pingwi. Match coins, invite your friends " +
+                                "and get ready to compete in leagues!\n\n" +
+                              "Try out PingWin Game!";
+
+            var replyMarkup = new InlineKeyboardMarkup();
+            replyMarkup.AddButton(InlineKeyboardButton.WithWebApp("Open App", LinksConstants.LinkToFrontEnd + "/threeInRow"));
+            replyMarkup.AddNewRow();
+            replyMarkup.AddButton(InlineKeyboardButton.WithUrl("En channel", LinksConstants.EnChannel));
+            replyMarkup.AddButton(InlineKeyboardButton.WithUrl("Ru channel", LinksConstants.RuChannel));
+            
+            await _bot.SendTextMessageAsync(msg.Chat, welcomeText, replyMarkup: replyMarkup);
             return;
         }
 
