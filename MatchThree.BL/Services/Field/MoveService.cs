@@ -5,8 +5,10 @@ using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
+using MatchThree.Shared.Enums;
 using MatchThree.Shared.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace MatchThree.BL.Services.Field;
 
@@ -14,7 +16,8 @@ public class MoveService(MatchThreeDbContext context,
     ISynchronizationEnergyService synchronizationEnergyService,
     IUpdateFieldService updateFieldService,
     IUpdateEnergyService updateEnergyService,
-    IUpdateBalanceService updateBalanceService) 
+    IUpdateBalanceService updateBalanceService,
+    ILogger<MoveService> logger) 
     : IMoveService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -22,11 +25,14 @@ public class MoveService(MatchThreeDbContext context,
     private readonly IUpdateFieldService _updateFieldService = updateFieldService;
     private readonly IUpdateEnergyService _updateEnergyService = updateEnergyService;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
+    private readonly ILogger<MoveService> _logger = logger;                     //DRAFT
 
     public async Task MakeMoveAsync(long userId, uint reward, int[][] field, string hash)
     {
         var userDbModel = await _context.Set<UserDbModel>()
-            .Include(x => x!.Energy)
+            .Include(x => x.FieldElementLevel)                                                      //DRAFT
+            .ThenInclude(x => x!.FieldElements!.Where(y => y.Level != ElementLevels.Undefined))     //DRAFT
+            .Include(x => x.Energy)
             .FirstOrDefaultAsync(x => x.Id == userId);
         
         if (userDbModel?.Energy is null)
@@ -38,7 +44,14 @@ public class MoveService(MatchThreeDbContext context,
 
         if (!calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
             throw new ValidationException();
-
+        
+        if (reward > 4_863)                             //DRAFT
+            throw new ValidationException();            //DRAFT
+        
+        _logger.LogInformation($"{userId},{reward}.{string.Join(',', 
+            userDbModel.FieldElementLevel!.FieldElements!
+                .Select(x => $"{(int)x.Element}:{(int)x.Level}"))}");           //DRAFT
+        
         await _updateEnergyService.SpendEnergyAsync(userId);
         await _updateFieldService.UpdateFieldAsync(userId, field);
         await _updateBalanceService.AddBalanceAsync(userId, reward);
