@@ -70,7 +70,7 @@ public class GetUpgradesService(IUpgradesRestrictionsService upgradesRestriction
             Price = condition 
                 ? 0 
                 : (uint)EnergyConstants.EnergyDrinkPrice,
-            IsStars = !condition,
+            IsStars = true,
             ExecutePathName = condition
                 ? EndpointsConstants.UseEnergyDrinkEndpoint
                 : EndpointsConstants.CreateInvoiceLinkEndpoint,
