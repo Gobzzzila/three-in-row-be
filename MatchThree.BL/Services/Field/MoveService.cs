@@ -45,12 +45,12 @@ public class MoveService(MatchThreeDbContext context,
         if (!calculatedHash.Equals(hash, StringComparison.OrdinalIgnoreCase))
             throw new ValidationException();
         
-        if (reward > 4_863)                             //DRAFT
-            throw new ValidationException();            //DRAFT
-        
         _logger.LogInformation($"{userId},{reward}.{string.Join(',', 
             userDbModel.FieldElementLevel!.FieldElements!
                 .Select(x => $"{(int)x.Element}:{(int)x.Level}"))}");           //DRAFT
+        
+        if (reward > 4_863)                             //DRAFT
+            throw new ValidationException();            //DRAFT
         
         await _updateEnergyService.SpendEnergyAsync(userId);
         await _updateFieldService.UpdateFieldAsync(userId, field);
