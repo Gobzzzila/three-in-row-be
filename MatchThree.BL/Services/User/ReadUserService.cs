@@ -33,4 +33,7 @@ public class ReadUserService(MatchThreeDbContext context,
         
         return dbModel.DailyAdAmount;
     }
+    
+    public async Task<int> GetUsersAmountAsync() 
+        => await _context.Set<UserDbModel>().CountAsync();
 }

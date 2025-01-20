@@ -6,4 +6,5 @@ public interface IReadUserService
 {
     Task<UserEntity?> FindByIdAsync(long userId);
     Task<int> GetDailyAdsAmountAsync(long userId);
+    Task<int> GetUsersAmountAsync();
 }
