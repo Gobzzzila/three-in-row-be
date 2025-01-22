@@ -31,5 +31,8 @@ public class AutoMappingProfile : Profile
         
         //FieldElement
         CreateMap<FieldElementDbModel, FieldElementEntity>();
+        
+        //UserSettings 
+        CreateMap<UserSettingsDbModel, UserSettingsEntity>();
     }
 }

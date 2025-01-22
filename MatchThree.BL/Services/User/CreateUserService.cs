@@ -7,6 +7,7 @@ using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
+using MatchThree.Domain.Interfaces.UserSettings;
 using MatchThree.Domain.Models;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
@@ -24,6 +25,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateFieldElementService createFieldElementService,
     ICreateCompletedQuestsService createCompletedQuestsService,
     ICreateDailyLoginService createDailyLoginService,
+    ICreateUserSettingsService createUserSettingsService,
     TimeProvider timeProvider) : ICreateUserService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -36,6 +38,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateFieldElementService _createFieldElementService = createFieldElementService;
     private readonly ICreateCompletedQuestsService _createCompletedQuestsService = createCompletedQuestsService;
     private readonly ICreateDailyLoginService _createDailyLoginService = createDailyLoginService;
+    private readonly ICreateUserSettingsService _createUserSettingsService = createUserSettingsService;
     private readonly TimeProvider _timeProvider = timeProvider;
 
     public void Create(UserEntity userEntity)
@@ -76,5 +79,6 @@ public sealed class CreateUserService(MatchThreeDbContext context,
         _createFieldElementService.Create(userId);
         _createCompletedQuestsService.Create(userId);
         _createDailyLoginService.Create(userId);
+        _createUserSettingsService.Create(userId);
     }
 }

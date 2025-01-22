@@ -85,5 +85,10 @@ public class AutoMappingProfile : Profile
         
         //Daily login
         CreateMap<DailyLoginEntity, DailyLoginDto>();
+        
+        //User settings 
+        CreateMap<UserSettingsEntity, UserSettingsDto>()
+            .ForMember(x => x.Culture, o => 
+                    o.MapFrom(s => s.Culture.ToString()));
     }
 }

@@ -9,6 +9,7 @@ using MatchThree.BL.Services.Quests;
 using MatchThree.BL.Services.Referral;
 using MatchThree.BL.Services.Upgrades;
 using MatchThree.BL.Services.User;
+using MatchThree.BL.Services.UserSettings;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.DailyLogin;
@@ -20,6 +21,7 @@ using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Domain.Interfaces.User;
+using MatchThree.Domain.Interfaces.UserSettings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MatchThree.BL.Extensions;
@@ -90,5 +92,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDeleteDailyLoginService, DeleteDailyLoginService>();
         services.AddScoped<IReadDailyLoginService, ReadDailyLoginService>();
         services.AddScoped<IExecuteDailyLoginService, ExecuteDailyLoginService>();
+        
+        //User settings 
+        services.AddScoped<ICreateUserSettingsService, CreateUserSettingsService>();
+        services.AddScoped<IReadUserSettingsService, ReadUserSettingsService>();
     }
 }
