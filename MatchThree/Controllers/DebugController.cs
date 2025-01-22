@@ -1,10 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Globalization;
+using AutoMapper;
 using MatchThree.API.Authentication.Interfaces;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
+using MatchThree.Domain.Interfaces.UserSettings;
 using MatchThree.Domain.Models;
 using MatchThree.Shared.Constants;
+using MatchThree.Shared.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -19,6 +22,7 @@ public class DebugController(IMapper mapper,
     IReadUserService readUserService,
     ICreateUserService createUserService,
     IUpdateUserService updateUserService,
+    IReadUserSettingsService readUserSettingsService,
     IDeleteUserService deleteUserService,
     IJwtTokenService jwtTokenService,
     ITransactionService transactionService)
@@ -27,6 +31,7 @@ public class DebugController(IMapper mapper,
     private readonly IReadUserService _readUserService = readUserService;
     private readonly ICreateUserService _createUserService = createUserService;
     private readonly IUpdateUserService _updateUserService = updateUserService;
+    private readonly IReadUserSettingsService _readUserSettingsService = readUserSettingsService;
     private readonly IDeleteUserService _deleteUserService = deleteUserService;
     private readonly IJwtTokenService _jwtTokenService = jwtTokenService;
     private readonly ITransactionService _transactionService = transactionService;
@@ -52,6 +57,11 @@ public class DebugController(IMapper mapper,
         }
         else
         {
+            var userSettings = await _readUserSettingsService.GetByUserIdAsync(request.Id);
+            var userAcceptLanguage = userSettings.Culture.ToAcceptLanguage();
+            CultureInfo.CurrentCulture = new CultureInfo(userAcceptLanguage);
+            CultureInfo.CurrentUICulture = new CultureInfo(userAcceptLanguage);
+            
             var entity = _mapper.Map<UserEntity>(request);
             await _updateUserService.SyncUserDataAsync(entity);
         }

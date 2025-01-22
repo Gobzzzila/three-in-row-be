@@ -96,5 +96,7 @@ public static class ServiceCollectionExtensions
         //User settings 
         services.AddScoped<ICreateUserSettingsService, CreateUserSettingsService>();
         services.AddScoped<IReadUserSettingsService, ReadUserSettingsService>();
+        services.AddScoped<IDeleteUserSettingsService, DeleteUserSettingsService>();
+        services.AddScoped<IUpdateUserSettingsService, UpdateUserSettingsService>();
     }
 }

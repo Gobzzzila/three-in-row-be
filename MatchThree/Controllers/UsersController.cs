@@ -1,14 +1,17 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text.Json;
 using System.Web;
 using MatchThree.API.Attributes;
 using MatchThree.API.Authentication.Interfaces;
 using MatchThree.API.Models.Users;
 using MatchThree.Domain.Interfaces;
 using MatchThree.Domain.Interfaces.User;
+using MatchThree.Domain.Interfaces.UserSettings;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Settings;
 using MatchThree.Shared.Constants;
 using MatchThree.Shared.Exceptions;
+using MatchThree.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,6 +24,7 @@ namespace MatchThree.API.Controllers;
 public class UsersController(IReadUserService readUserService,
     ICreateUserService createUserService,
     IUpdateUserService updateUserService,
+    IReadUserSettingsService readUserSettingsService,
     IJwtTokenService jwtTokenService,
     IOptions<TelegramSettings> settings,
     ITransactionService transactionService)
@@ -28,6 +32,7 @@ public class UsersController(IReadUserService readUserService,
     private readonly IReadUserService _readUserService = readUserService;
     private readonly ICreateUserService _createUserService = createUserService;
     private readonly IUpdateUserService _updateUserService = updateUserService;
+    private readonly IReadUserSettingsService _readUserSettingsService = readUserSettingsService;
     private readonly IJwtTokenService _jwtTokenService = jwtTokenService;
     private readonly TelegramSettings _settings = settings.Value;
     private readonly ITransactionService _transactionService = transactionService;
@@ -40,7 +45,7 @@ public class UsersController(IReadUserService readUserService,
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status424FailedDependency, Type = typeof(ProblemDetails))]
     [SwaggerOperation(OperationId = "SignUp", Tags = ["Users"])]
-    public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request,         //TODO There's a lot of logic here, mb implement service
+    public async Task<IResult> SignUp([FromMultiSource] UserRequestDto request,         //TODO There's a lot of logic here, need to implement service
         CancellationToken cancellationToken = new())
     {
         var parsedInitData = AuthHelpers.ParseValidateData(request.InitData, _settings.BotToken);
@@ -67,6 +72,11 @@ public class UsersController(IReadUserService readUserService,
         }
         else
         {
+            var userSettings = await _readUserSettingsService.GetByUserIdAsync(userEntityFromRequest.Id);
+            var userAcceptLanguage = userSettings.Culture.ToAcceptLanguage();
+            CultureInfo.CurrentCulture = new CultureInfo(userAcceptLanguage);
+            CultureInfo.CurrentUICulture = new CultureInfo(userAcceptLanguage);
+            
             await _updateUserService.SyncUserDataAsync(userEntityFromRequest);
         }
         

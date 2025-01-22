@@ -3,7 +3,6 @@ using MatchThree.Domain.Interfaces.UserSettings;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
 using MatchThree.Shared.Extensions;
-using CultureTypes = MatchThree.Shared.Enums.CultureTypes;
 
 namespace MatchThree.BL.Services.UserSettings;
 

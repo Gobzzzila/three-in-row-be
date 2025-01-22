@@ -1,6 +1,4 @@
-﻿using MatchThree.Shared.Enums;
-
-namespace MatchThree.API.Models;
+﻿namespace MatchThree.API.Models.UserSettings;
 
 public class UserSettingsDto
 {

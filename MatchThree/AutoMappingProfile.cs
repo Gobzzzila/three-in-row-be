@@ -5,6 +5,7 @@ using MatchThree.API.Models.Leaderboard;
 using MatchThree.API.Models.Referrals;
 using MatchThree.API.Models.Upgrades;
 using MatchThree.API.Models.Users;
+using MatchThree.API.Models.UserSettings;
 using MatchThree.BL.Configuration;
 using MatchThree.Domain.Models;
 using MatchThree.Domain.Models.Leaderboard;
