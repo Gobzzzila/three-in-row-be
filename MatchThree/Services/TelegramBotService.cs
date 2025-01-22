@@ -59,7 +59,7 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         if (payloadEntity.UpgradeType == UpgradeTypes.EnergyDrink)
             price = EnergyConstants.EnergyDrinkPrice;
         
-        var invoiceLink = await _bot.CreateInvoiceLinkAsync(
+        var invoiceLink = await _bot.CreateInvoiceLink(
             title: _localizer[upgradeInfo!.HeaderTextId],
             description: _localizer[upgradeInfo.DescriptionTextId],
             payload: JsonSerializer.Serialize(payloadEntity),
@@ -83,7 +83,7 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         {
             try
             {
-                var chatMember = await _helperBot.GetChatMemberAsync(chatId, userId);
+                var chatMember = await _helperBot.GetChatMember(chatId, userId);
 
                 if (chatMember.Status is ChatMemberStatus.Administrator or ChatMemberStatus.Member or ChatMemberStatus.Creator) 
                     return true;
@@ -118,13 +118,13 @@ public class TelegramBotService : ITelegramBotService, IDisposable
             replyMarkup.AddButton(InlineKeyboardButton.WithUrl("En channel", LinksConstants.EnChannel));
             replyMarkup.AddButton(InlineKeyboardButton.WithUrl("Ru channel", LinksConstants.RuChannel));
             
-            await _bot.SendTextMessageAsync(msg.Chat, welcomeText, replyMarkup: replyMarkup);
+            await _bot.SendMessage(msg.Chat, welcomeText, replyMarkup: replyMarkup);
             return;
         }
 
         if (msg is { Text: not null, Chat.Id: 126017510 or 273296652 } && msg.Text.StartsWith("/refund"))
         {
-            await _bot.SendTextMessageAsync(msg.Chat, "Refunding...");
+            await _bot.SendMessage(msg.Chat, "Refunding...");
             var invoiceId = msg.Text.Replace("/refund ", "");
             await _bot.RefundStarPayment(msg.Chat.Id, invoiceId);
             return;
@@ -162,10 +162,10 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         {
             var energyEntity = await _readEnergyService.GetByUserIdAsync(payload.UserId);
             if (energyEntity.PurchasableEnergyDrinkAmount > 0)
-                await _bot.AnswerPreCheckoutQueryAsync(preCheckoutQuery.Id);
+                await _bot.AnswerPreCheckoutQuery(preCheckoutQuery.Id);
         }
         
-        await _bot.AnswerPreCheckoutQueryAsync(preCheckoutQuery.Id, "Invalid data");
+        await _bot.AnswerPreCheckoutQuery(preCheckoutQuery.Id, "Invalid data");
     }
     
     public void Dispose()
