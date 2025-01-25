@@ -222,4 +222,10 @@
     <data name="QuestBePremiumUserDescriptionTextKey" xml:space="preserve">
         <value>Join the club of custom emoji lovers</value>
     </data>
+    <data name="NotificationsEnergyRecoveredTextKey" xml:space="preserve">
+        <value>🐧Your PingWi is rested and fully recovered! Hurry up and come spend some energy⚡️</value>
+    </data>
+    <data name="NotificationsSpendEnergyTextKey" xml:space="preserve">
+        <value>📱Spend energy</value>
+    </data>
 </root>

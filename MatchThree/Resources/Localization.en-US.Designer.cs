@@ -357,6 +357,24 @@ namespace MatchThree.API.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 🐧Your PingWi is rested and fully recovered! Hurry up and come spend some energy⚡️.
+        /// </summary>
+        internal static string NotificationsEnergyRecoveredTextKey {
+            get {
+                return ResourceManager.GetString("NotificationsEnergyRecoveredTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 📱Spend energy.
+        /// </summary>
+        internal static string NotificationsSpendEnergyTextKey {
+            get {
+                return ResourceManager.GetString("NotificationsSpendEnergyTextKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Join the club of custom emoji lovers.
         /// </summary>
         internal static string QuestBePremiumUserDescriptionTextKey {

@@ -2,7 +2,7 @@
 
 namespace MatchThree.API.Services;
 
-public class DailyTopUpService : IHostedService, IDisposable
+public sealed class DailyTopUpService : IHostedService, IDisposable
 {
     private Timer? _timer;
     private bool _disposed;

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MatchThree.API.Services;
 
-public class CalculateLeaderboardService : IHostedService, IDisposable
+public sealed class CalculateLeaderboardService : IHostedService, IDisposable
 {
     private Timer? _timer;
     private bool _disposed;

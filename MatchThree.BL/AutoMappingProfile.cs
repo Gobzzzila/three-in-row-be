@@ -34,5 +34,10 @@ public class AutoMappingProfile : Profile
         
         //UserSettings 
         CreateMap<UserSettingsDbModel, UserSettingsEntity>();
+        
+        //Notifications 
+        CreateMap<NotificationsDbModel, NotificationsEntity>()
+            .ForMember(x => x.Culture, o => 
+                o.MapFrom(s => s.User!.Settings!.Culture));;
     }
 }

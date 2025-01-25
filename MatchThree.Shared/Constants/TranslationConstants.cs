@@ -117,4 +117,10 @@ public static class TranslationConstants
     
     #endregion
 
+    #region Notifications
+
+    public const string NotificationsEnergyRecoveredTextKey = nameof(NotificationsEnergyRecoveredTextKey);
+    public const string NotificationsSpendEnergyTextKey = nameof(NotificationsSpendEnergyTextKey);
+
+    #endregion
 }

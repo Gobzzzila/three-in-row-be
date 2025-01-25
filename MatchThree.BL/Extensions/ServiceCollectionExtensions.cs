@@ -5,6 +5,7 @@ using MatchThree.BL.Services.Energy;
 using MatchThree.BL.Services.Field;
 using MatchThree.BL.Services.FieldElement;
 using MatchThree.BL.Services.LeaderboardMember;
+using MatchThree.BL.Services.Notifications;
 using MatchThree.BL.Services.Quests;
 using MatchThree.BL.Services.Referral;
 using MatchThree.BL.Services.Upgrades;
@@ -17,6 +18,7 @@ using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
 using MatchThree.Domain.Interfaces.LeaderboardMember;
+using MatchThree.Domain.Interfaces.Notifications;
 using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.Upgrades;
@@ -98,5 +100,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IReadUserSettingsService, ReadUserSettingsService>();
         services.AddScoped<IDeleteUserSettingsService, DeleteUserSettingsService>();
         services.AddScoped<IUpdateUserSettingsService, UpdateUserSettingsService>();
+        
+        //Notifications
+        services.AddScoped<ICreateNotificationsService, CreateNotificationsService>();
+        services.AddScoped<IDeleteNotificationsService, DeleteNotificationsService>();
+        services.AddScoped<IUpdateNotificationsService, UpdateNotificationsService>();
+        services.AddScoped<IReadNotificationsService, ReadNotificationsService>();
     }
 }

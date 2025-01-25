@@ -3,6 +3,7 @@ using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
+using MatchThree.Domain.Interfaces.Notifications;
 using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
@@ -22,7 +23,8 @@ public class DeleteUserService(
     IDeleteCompletedQuestsService deleteCompletedQuestsService,
     IDeleteFieldElementService deleteFieldElementService,
     IDeleteDailyLoginService deleteDailyLoginService,
-    IDeleteUserSettingsService deleteUserSettingsService)
+    IDeleteUserSettingsService deleteUserSettingsService,
+    IDeleteNotificationsService deleteNotificationsService)
     : IDeleteUserService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -34,6 +36,7 @@ public class DeleteUserService(
     private readonly IDeleteFieldElementService _deleteFieldElementService = deleteFieldElementService;
     private readonly IDeleteDailyLoginService _deleteDailyLoginService = deleteDailyLoginService;
     private readonly IDeleteUserSettingsService _deleteUserSettingsService = deleteUserSettingsService;
+    private readonly IDeleteNotificationsService _deleteNotificationsService = deleteNotificationsService;
 
     public async Task DeleteAsync(long id)
     {
@@ -49,6 +52,7 @@ public class DeleteUserService(
         await _deleteCompletedQuestsService.DeleteByUserIdAsync(id);
         await _deleteDailyLoginService.DeleteAsync(id);
         await _deleteUserSettingsService.DeleteAsync(id);
+        await _deleteNotificationsService.DeleteAsync(id);
         _context.Set<UserDbModel>().Remove(dbModel);
     }
 }

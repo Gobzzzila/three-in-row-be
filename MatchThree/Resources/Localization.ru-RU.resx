@@ -222,4 +222,10 @@
     <data name="QuestBePremiumUserDescriptionTextKey" xml:space="preserve">
         <value>Присоединяйтесь к клубу любителей кастомных эмодзи</value>
     </data>
+    <data name="NotificationsEnergyRecoveredTextKey" xml:space="preserve">
+        <value>🐧Твой PingWi отдохнул и полностью восстановился! Поторопись зайти потратить энергию⚡️</value>
+    </data>
+    <data name="NotificationsSpendEnergyTextKey" xml:space="preserve">
+        <value>📱Потратить энергию</value>
+    </data>
 </root>

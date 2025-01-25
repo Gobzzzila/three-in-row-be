@@ -17,7 +17,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace MatchThree.API.Services;
 
-public class TelegramBotService : ITelegramBotService, IDisposable
+public sealed class TelegramBotService : ITelegramBotService, IDisposable
 {
     private readonly TelegramBotClient _bot;
     private readonly TelegramBotClient _helperBot;
@@ -97,6 +97,17 @@ public class TelegramBotService : ITelegramBotService, IDisposable
         return false;
     }
 
+    public Task SendEnergyRecoveredNotification(long userId)
+    {
+        var notificationText = _localizer[TranslationConstants.NotificationsEnergyRecoveredTextKey];
+
+        var replyMarkup = new InlineKeyboardMarkup();
+        replyMarkup.AddButton(InlineKeyboardButton.WithWebApp(_localizer[TranslationConstants.NotificationsSpendEnergyTextKey], 
+            LinksConstants.LinkToFrontEnd + "/threeInRow"));
+        
+        return _bot.SendMessage(new ChatId(userId), notificationText, replyMarkup: replyMarkup);
+    }
+
     private Task OnError(Exception exception, HandleErrorSource source)
     {
         _logger.LogError($"Telegram error: {exception}");
@@ -113,10 +124,10 @@ public class TelegramBotService : ITelegramBotService, IDisposable
                               "Try out PingWin Game!";
 
             var replyMarkup = new InlineKeyboardMarkup();
-            replyMarkup.AddButton(InlineKeyboardButton.WithWebApp("Open App", LinksConstants.LinkToFrontEnd + "/threeInRow"));
+            replyMarkup.AddButton(InlineKeyboardButton.WithWebApp("\ud83d\udcf1 Open App", LinksConstants.LinkToFrontEnd + "/threeInRow"));
             replyMarkup.AddNewRow();
-            replyMarkup.AddButton(InlineKeyboardButton.WithUrl("En channel", LinksConstants.EnChannel));
-            replyMarkup.AddButton(InlineKeyboardButton.WithUrl("Ru channel", LinksConstants.RuChannel));
+            replyMarkup.AddButton(InlineKeyboardButton.WithUrl("\ud83c\uddfa\ud83c\uddf8 En channel", LinksConstants.EnChannel));
+            replyMarkup.AddButton(InlineKeyboardButton.WithUrl("\ud83c\uddf7\ud83c\uddfa Ru channel", LinksConstants.RuChannel));
             
             await _bot.SendMessage(msg.Chat, welcomeText, replyMarkup: replyMarkup);
             return;

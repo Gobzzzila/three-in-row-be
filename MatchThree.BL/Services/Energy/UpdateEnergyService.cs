@@ -1,6 +1,7 @@
 ﻿using MatchThree.BL.Configuration;
 using MatchThree.Domain.Interfaces.Balance;
 using MatchThree.Domain.Interfaces.Energy;
+using MatchThree.Domain.Interfaces.Notifications;
 using MatchThree.Domain.Interfaces.Upgrades;
 using MatchThree.Repository.MSSQL;
 using MatchThree.Repository.MSSQL.Models;
@@ -13,6 +14,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
     ISynchronizationEnergyService synchronizationEnergyService,
     IUpdateBalanceService updateBalanceService,
     IUpgradesRestrictionsService upgradesRestrictionsService,
+    IUpdateNotificationsService updateNotificationsService,
     TimeProvider timeProvider) 
     : IUpdateEnergyService
 {
@@ -20,6 +22,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
     private readonly ISynchronizationEnergyService _synchronizationEnergyService = synchronizationEnergyService;
     private readonly IUpdateBalanceService _updateBalanceService = updateBalanceService;
     private readonly IUpgradesRestrictionsService _upgradesRestrictionsService = upgradesRestrictionsService;
+    private readonly IUpdateNotificationsService _updateNotificationsService = updateNotificationsService;
     private readonly TimeProvider _timeProvider = timeProvider;
 
     public async Task UpgradeReserveAsync(long userId)
@@ -46,6 +49,8 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         var newMaxReserve = EnergyReserveConfiguration.GetReserveMaxValue(reserveParams.NextLevel.Value);
         dbModel.CurrentReserve += (newMaxReserve - reserveParams.MaxReserve);
         
+        await UpdateEnergyNotificationTime(dbModel);
+        
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
 
@@ -69,6 +74,8 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         dbModel.RecoveryLevel = recoveryParams.NextLevel.Value;
         _synchronizationEnergyService.SynchronizeModel(dbModel);
 
+        await UpdateEnergyNotificationTime(dbModel);
+        
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
 
@@ -81,13 +88,15 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         if (dbModel.AvailableEnergyDrinkAmount < 1)
             throw new NotEnoughBalanceException();
         
-        var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
+        var reserveMaxValue = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
         _synchronizationEnergyService.SynchronizeModel(dbModel);
-        dbModel.CurrentReserve += maxReserve;
+        dbModel.CurrentReserve += reserveMaxValue;
         dbModel.LastRecoveryStartTime = null;
         dbModel.AvailableEnergyDrinkAmount -= 1;
         dbModel.UsedEnergyDrinkCounter += 1;
         
+        await UpdateEnergyNotificationTime(dbModel);
+
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
     
@@ -104,7 +113,7 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         dbModel.PurchasableEnergyDrinkAmount -=1;
         dbModel.AvailableEnergyDrinkAmount += 1;
         dbModel.PurchasedEnergyDrinkCounter += 1;
-
+        
         await UseEnergyDrinkAsync(userId);
     }
     
@@ -120,9 +129,11 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         
         dbModel.CurrentReserve -=1;
         
-        var maxReserve = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
-        if (maxReserve > dbModel.CurrentReserve && dbModel.LastRecoveryStartTime is null)
+        var reserveMaxValue = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
+        if (reserveMaxValue > dbModel.CurrentReserve && dbModel.LastRecoveryStartTime is null)
             dbModel.LastRecoveryStartTime = _timeProvider.GetUtcNow().DateTime;
+        
+        await UpdateEnergyNotificationTime(dbModel);
         
         _context.Set<EnergyDbModel>().Update(dbModel);
     }
@@ -139,7 +150,21 @@ public class UpdateEnergyService(MatchThreeDbContext context,
         var reserveMaxValue = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
         if (dbModel.CurrentReserve >= reserveMaxValue)
             dbModel.LastRecoveryStartTime = null;
+
+        await UpdateEnergyNotificationTime(dbModel);
         
         _context.Set<EnergyDbModel>().Update(dbModel);
+    }
+
+    private async Task UpdateEnergyNotificationTime(EnergyDbModel dbModel)
+    {
+        if (dbModel.LastRecoveryStartTime is null)
+            await _updateNotificationsService.SetEnergyNotificationTimeAsync(dbModel.Id, null);
+        
+        var reserveMaxValue = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
+        var recoveryTime = EnergyRecoveryConfiguration.GetRecoveryTime(dbModel.RecoveryLevel);
+
+        var notificationTime = dbModel.LastRecoveryStartTime + (reserveMaxValue - dbModel.CurrentReserve) * recoveryTime;
+        await _updateNotificationsService.SetEnergyNotificationTimeAsync(dbModel.Id, notificationTime!.Value);
     }
 }

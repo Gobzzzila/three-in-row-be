@@ -20,4 +20,5 @@ public class UserDbModel : DbModel
     public EnergyDbModel? Energy { get; set; }
     public FieldDbModel? FieldElementLevel { get; set; }
     public UserSettingsDbModel? Settings { get; set; }
+    public NotificationsDbModel? Notifications { get; set; }
 }

@@ -4,6 +4,7 @@ using MatchThree.Domain.Interfaces.DailyLogin;
 using MatchThree.Domain.Interfaces.Energy;
 using MatchThree.Domain.Interfaces.Field;
 using MatchThree.Domain.Interfaces.FieldElement;
+using MatchThree.Domain.Interfaces.Notifications;
 using MatchThree.Domain.Interfaces.Quests;
 using MatchThree.Domain.Interfaces.Referral;
 using MatchThree.Domain.Interfaces.User;
@@ -26,6 +27,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     ICreateCompletedQuestsService createCompletedQuestsService,
     ICreateDailyLoginService createDailyLoginService,
     ICreateUserSettingsService createUserSettingsService,
+    ICreateNotificationsService createNotificationsService,
     TimeProvider timeProvider) : ICreateUserService
 {
     private readonly MatchThreeDbContext _context = context;
@@ -39,6 +41,7 @@ public sealed class CreateUserService(MatchThreeDbContext context,
     private readonly ICreateCompletedQuestsService _createCompletedQuestsService = createCompletedQuestsService;
     private readonly ICreateDailyLoginService _createDailyLoginService = createDailyLoginService;
     private readonly ICreateUserSettingsService _createUserSettingsService = createUserSettingsService;
+    private readonly ICreateNotificationsService _createNotificationsService = createNotificationsService;
     private readonly TimeProvider _timeProvider = timeProvider;
 
     public void Create(UserEntity userEntity)
@@ -80,5 +83,6 @@ public sealed class CreateUserService(MatchThreeDbContext context,
         _createCompletedQuestsService.Create(userId);
         _createDailyLoginService.Create(userId);
         _createUserSettingsService.Create(userId);
+        _createNotificationsService.Create(userId);
     }
 }

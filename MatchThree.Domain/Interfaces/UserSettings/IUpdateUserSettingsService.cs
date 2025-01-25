@@ -2,9 +2,9 @@
 
 public interface IUpdateUserSettingsService
 {
-    Task UpdateCultureAsync(long id, string newCulture);
+    Task UpdateCultureAsync(long userId, string newCulture);
 
-    Task TurnOnNotificationsAsync(long id);
+    Task TurnOnNotificationsAsync(long userId);
     
-    Task TurnOffNotificationsAsync(long id);
+    Task TurnOffNotificationsAsync(long userId);
 }

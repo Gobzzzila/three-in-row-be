@@ -112,6 +112,7 @@ namespace MatchThree.API
                 
                 builder.Services.AddHostedService<CalculateLeaderboardService>();
                 builder.Services.AddHostedService<DailyTopUpService>();
+                builder.Services.AddHostedService<NotificationService>();
                 builder.Services.AddSingleton<ITelegramBotService, TelegramBotService>();
                 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
                 builder.Services.AddSingleton<IAuthorizationHandler, UserIdHandler>();
@@ -250,8 +251,6 @@ namespace MatchThree.API
                 app.UseExceptionHandler(_ => { });
 
                 // app.UseMiddleware<LoggingMiddleware>();
-                
-                app.Services.GetRequiredService<ITelegramBotService>();
             }
         }
 
