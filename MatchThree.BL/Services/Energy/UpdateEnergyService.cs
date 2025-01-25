@@ -159,7 +159,10 @@ public class UpdateEnergyService(MatchThreeDbContext context,
     private async Task UpdateEnergyNotificationTime(EnergyDbModel dbModel)
     {
         if (dbModel.LastRecoveryStartTime is null)
+        {
             await _updateNotificationsService.SetEnergyNotificationTimeAsync(dbModel.Id, null);
+            return;            
+        }
         
         var reserveMaxValue = EnergyReserveConfiguration.GetReserveMaxValue(dbModel.MaxReserve);
         var recoveryTime = EnergyRecoveryConfiguration.GetRecoveryTime(dbModel.RecoveryLevel);
