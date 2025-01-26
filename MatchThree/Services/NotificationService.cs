@@ -57,12 +57,20 @@ public sealed class NotificationService : IHostedService, IDisposable
                 
                 foreach (var notificationTarget in notificationsTargetsGroup)
                 {
-                    await _telegramBotService.SendEnergyRecoveredNotification(notificationTarget.Id);
-                    await updateNotificationsService.ResetEnergyNotificationTimeAsync(notificationTarget.Id);
+                    try
+                    {
+                        await _telegramBotService.SendEnergyRecoveredNotification(notificationTarget.Id);
+                    }
+                    catch {}
+                    finally
+                    {
+                        await updateNotificationsService.ResetEnergyNotificationTimeAsync(notificationTarget.Id);
+                    }
                 }
             }
             
             await transactionsService.CommitAsync();
+            _logger.LogInformation($"{notificationsTargets.Count} notifications sent");
         }
         catch (Exception ex)
         {
